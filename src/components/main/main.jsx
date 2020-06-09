@@ -1,6 +1,8 @@
 import React from "react";
 
-const Main = () => {
+const Main = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const {genre, title, releaseDate} = props;
   return <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -28,15 +30,14 @@ const Main = () => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
-                 height="327"/>
+            <img src="img/the-grand-budapest-hotel-poster.jpg" alt={`${title} poster`} width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">Drama</span>
-              <span className="movie-card__year">2014</span>
+              <span className="movie-card__genre">{genre}</span>
+              <span className="movie-card__year">{releaseDate}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -98,8 +99,7 @@ const Main = () => {
         <div className="catalog__movies-list">
           <article className="small-movie-card catalog__movies-card">
             <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                   alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
+              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
             </div>
             <h3 className="small-movie-card__title">
               <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
@@ -137,8 +137,7 @@ const Main = () => {
 
           <article className="small-movie-card catalog__movies-card">
             <div className="small-movie-card__image">
-              <img src="img/we-need-to-talk-about-kevin.jpg" alt="We need to talk about Kevin" width="280"
-                   height="175"/>
+              <img src="img/we-need-to-talk-about-kevin.jpg" alt="We need to talk about Kevin" width="280" height="175"/>
             </div>
             <h3 className="small-movie-card__title">
               <a className="small-movie-card__link" href="movie-page.html">We need to talk about Kevin</a>
