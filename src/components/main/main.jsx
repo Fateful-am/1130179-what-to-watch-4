@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const convertToImageName = (movieName) => {
   return movieName.toLowerCase().split(` `).join(`-`).split(`:`).join(``);
 };
 
 const Main = (props) => {
-// eslint-disable-next-line react/prop-types
   const {movieCard, smallMovieCards} = props;
   return <React.Fragment>
     <section className="movie-card">
@@ -133,6 +133,15 @@ const Main = (props) => {
       </footer>
     </div>
   </React.Fragment>;
+};
+
+Main.propTypes = {
+  movieCard: PropTypes.shape({
+    genre: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired
+  }),
+  smallMovieCards: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
 export default Main;

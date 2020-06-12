@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./components/app/app.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/app/app.jsx';
 
 const movieCard = {
   genre: `Drama`,
   title: `The Grand Budapest Hotel`,
-  year: `2014`
+  year: 2014
 };
 
 const smallMovieCards = [
