@@ -15,6 +15,7 @@ it(`Render Main`, () => {
         `Macbeth`,
         `Aviator`
       ]}
+      onSmallMovieHeaderClick={() => {}}
     />)
     .toJSON();
 

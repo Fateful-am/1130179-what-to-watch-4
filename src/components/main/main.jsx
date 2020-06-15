@@ -6,7 +6,7 @@ const convertToImageName = (movieName) => {
 };
 
 const Main = (props) => {
-  const {movieCard, smallMovieCards} = props;
+  const {movieCard, smallMovieCards, onSmallMovieHeaderClick} = props;
   return <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -106,7 +106,10 @@ const Main = (props) => {
               <div className="small-movie-card__image">
                 <img src={`img/${convertToImageName(movieTitle)}.jpg`} alt={movieTitle} width="280" height="175"/>
               </div>
-              <h3 className="small-movie-card__title">
+              <h3
+                className="small-movie-card__title"
+                onClick={onSmallMovieHeaderClick}
+              >
                 <a className="small-movie-card__link" href="#">{movieTitle}</a>
               </h3>
             </article>;
@@ -141,7 +144,8 @@ Main.propTypes = {
     title: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
-  smallMovieCards: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  smallMovieCards: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onSmallMovieHeaderClick: PropTypes.func.isRequired,
 };
 
 export default Main;
