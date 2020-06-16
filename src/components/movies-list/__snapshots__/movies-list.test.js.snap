@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Movies List 1`] = `
+<div
+  className="catalog__movies-list"
+>
+  <article
+    className="small-movie-card catalog__movies-card"
+    id="mc-4"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Moonrise Kingdom"
+        height="175"
+        src="img/moonrise-kingdom.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+      >
+        Moonrise Kingdom
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    id="mc-5"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Seven Years in Tibet"
+        height="175"
+        src="img/seven-years-in-tibet.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+      >
+        Seven Years in Tibet
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    id="mc-6"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="Midnight Special"
+        height="175"
+        src="img/midnight-special.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+      >
+        Midnight Special
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    id="mc-7"
+    onMouseEnter={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="War of the Worlds"
+        height="175"
+        src="img/war-of-the-worlds.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+      >
+        War of the Worlds
+      </a>
+    </h3>
+  </article>
+</div>
+`;
