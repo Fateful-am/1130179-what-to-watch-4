@@ -2,27 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
-const smallMovieHeaderHandler = () => {
-};
-
-const App = (props) => {
-  const {movieCard, smallMovieCards} = props;
+const App = ({promoMovieCard, movieCards}) => {
   return (
     <Main
-      movieCard={movieCard}
-      smallMovieCards={smallMovieCards}
-      onSmallMovieHeaderClick={smallMovieHeaderHandler}
+      promoMovieCard={promoMovieCard}
+      movieCards={movieCards}
     />
   );
 };
 
 App.propTypes = {
-  movieCard: PropTypes.shape({
+  promoMovieCard: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
-  smallMovieCards: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  movieCards: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default App;

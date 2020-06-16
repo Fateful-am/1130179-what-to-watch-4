@@ -5,18 +5,29 @@ import Main from './main.jsx';
 it(`Render Main`, () => {
   const tree = renderer
     .create(<Main
-      movieCard={
+      promoMovieCard={
         {
           genre: `Drama`,
           title: `The Grand Budapest Hotel`,
           year: 2014
         }
       }
-      smallMovieCards={[`Fantastic Beasts: The Crimes of Grindelwald`,
-        `Bohemian Rhapsody`,
-        `Macbeth`,
-        `Aviator`
-      ]}
+      movieCards={[{
+        id: 4,
+        title: `Moonrise Kingdom`
+      },
+      {
+        id: 5,
+        title: `Seven Years in Tibet`
+      },
+      {
+        id: 6,
+        title: `Midnight Special`
+      },
+      {
+        id: 7,
+        title: `War of the Worlds`
+      }]}
       onSmallMovieHeaderClick={() => {
       }}
     />)

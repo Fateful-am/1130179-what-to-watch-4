@@ -1,4 +1,4 @@
-export default [
+export const mockMovieCards = [
   {
     id: 0,
     title: `Macbeth`

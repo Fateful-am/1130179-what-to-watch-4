@@ -1,29 +1,44 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {MovieCard} from '../movie-card/movie-card';
+import MovieCard from '../movie-card/movie-card.jsx';
+
+const extractId = (elementId) => {
+  return elementId.split(`-`).slice(1).join(`-`);
+};
 
 class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
 
+    this._onMovieCardMouseEnter = this._onMovieCardMouseEnter.bind(this);
+    this._onMovieCardHeaderClick = this._onMovieCardHeaderClick.bind(this);
+
     this.state = {
-      currentMovieId: -1
+      activeMovieId: `-1`,
+      clickedMovieId: `-1`
     };
   }
 
-  render() {
-    const {movieCards, onHeaderClick, onMovieCardMouseEnter} = this.props;
+  _onMovieCardMouseEnter(movieCardId) {
+    this.setState({activeMovieId: extractId(movieCardId)});
+  }
 
+  _onMovieCardHeaderClick(movieCardId) {
+    this.setState({clickedMovieId: extractId(movieCardId)});
+  }
+
+  render() {
+    const {movieCards} = this.props;
     return (
       <div className="catalog__movies-list">
         {movieCards.map((movieCard) => {
           return (
             <MovieCard
-              key={movieCard.id}
+              key={`mc-${movieCard.id}`}
               id={movieCard.id}
               title={movieCard.title}
-              onHeaderClick={onHeaderClick}
-              onMovieCardMouseEnter={onMovieCardMouseEnter}
+              onHeaderClick={this._onMovieCardHeaderClick}
+              onMouseEnter={this._onMovieCardMouseEnter}
             />
           );
         })}
@@ -36,9 +51,7 @@ MoviesList.propTypes = {
   movieCards: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    onHeaderClick: PropTypes.func.isRequired,
-    onMovieCardMouseEnter: PropTypes.func.isRequired
   })).isRequired,
-  onHeaderClick: PropTypes.func.isRequired,
-  onMovieCardMouseEnter: PropTypes.func.isRequired
 };
+
+export default MoviesList;
