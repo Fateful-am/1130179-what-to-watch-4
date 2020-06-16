@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {convertToImageName} from '../../utils/helpers';
 
-const MovieCard = ({id, title, onHeaderClick, onMovieCardMouseEnter}) => {
+export const MovieCard = ({id, title, onHeaderClick, onMovieCardMouseEnter}) => {
   return (
     <article
       className="small-movie-card catalog__movies-card"
