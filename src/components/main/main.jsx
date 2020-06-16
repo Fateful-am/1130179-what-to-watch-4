@@ -34,7 +34,8 @@ const Main = (props) => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src={`img/${convertToImageName(movieCard.title)}-poster.jpg`} alt={`${movieCard.title} poster`} width="218" height="327"/>
+            <img src={`img/${convertToImageName(movieCard.title)}-poster.jpg`} alt={`${movieCard.title} poster`}
+              width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">

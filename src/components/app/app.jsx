@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
-const smallMovieHeaderHandler = () => {};
+const smallMovieHeaderHandler = () => {
+};
 
 const App = (props) => {
   const {movieCard, smallMovieCards} = props;

@@ -1,6 +1,6 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import React from 'react';
+import Enzyme, {shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import Main from './main';
 
 Enzyme.configure({
@@ -13,9 +13,11 @@ it(`Should all movie headers be pressed`, () => {
   const mainScreen = shallow(
       <Main
         movieCard={
-          {genre: `Drama`,
+          {
+            genre: `Drama`,
             title: `The Grand Budapest Hotel`,
-            year: 2014}
+            year: 2014
+          }
         }
         smallMovieCards={[`Fantastic Beasts: The Crimes of Grindelwald`,
           `Bohemian Rhapsody`,
