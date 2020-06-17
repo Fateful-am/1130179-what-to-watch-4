@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import MovieCard from './movie-card';
 
-it(`Render Movie Card`, () => {
+it(`Render MovieCard`, () => {
   const tree = renderer
     .create(
         <MovieCard
@@ -10,7 +10,8 @@ it(`Render Movie Card`, () => {
           }}
           id={0}
           title={`Macbeth`}
-          onHeaderClick={() => {
+          imageSource={`img/macbeth.jpg`}
+          onTitleClick={() => {
           }}
         />
     )

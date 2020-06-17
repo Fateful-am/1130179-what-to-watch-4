@@ -16,7 +16,8 @@ it(`Should movie card mouse entered`, () => {
         onMouseEnter={movieCardMouseEnter}
         id={movieCardId}
         title={`Macbeth`}
-        onHeaderClick={() => {
+        imageSource={`img/macbeth.jpg`}
+        onTitleClick={() => {
         }}
       />
   );
@@ -25,8 +26,7 @@ it(`Should movie card mouse entered`, () => {
   const formSendPrevention = jest.fn();
 
   movieCard.simulate(`mouseenter`, {
-    preventDefault: formSendPrevention,
-    currentTarget: {id: `mc-${movieCardId}`}
+    preventDefault: formSendPrevention
   });
 
   expect(movieCardMouseEnter).toHaveBeenCalledTimes(1);

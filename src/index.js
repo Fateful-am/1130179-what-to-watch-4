@@ -1,20 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-import {mockMovieCards} from './mocks/films';
+import {mockMovies} from './mocks/films';
 
-const movieCards = mockMovieCards;
+// const movieCards = mockMovieCards;
 
-const promoMovieCard = {
+const promoMovie = {
   genre: `Drama`,
   title: `The Grand Budapest Hotel`,
+  posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
   year: 2014
 };
 
 ReactDOM.render(
     <App
-      promoMovieCard={promoMovieCard}
-      movieCards={movieCards}
+      promoMovie={promoMovie}
+      movies={mockMovies}
     />,
     document.querySelector(`#root`)
 );

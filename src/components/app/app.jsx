@@ -2,24 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
-const App = ({promoMovieCard, movieCards}) => {
+const App = ({promoMovie, movies}) => {
   return (
     <Main
-      promoMovieCard={promoMovieCard}
-      movieCards={movieCards}
+      promoMovie={promoMovie}
+      movies={movies}
     />
   );
 };
 
 App.propTypes = {
-  promoMovieCard: PropTypes.shape({
+  promoMovie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    posterSource: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
-  movieCards: PropTypes.arrayOf(PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    imageSource: PropTypes.string.isRequired,
   })).isRequired,
 };
 

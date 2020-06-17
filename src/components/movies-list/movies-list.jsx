@@ -2,43 +2,40 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 
-const extractId = (elementId) => {
-  return elementId.split(`-`).slice(1).join(`-`);
-};
-
 class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._onMovieCardMouseEnter = this._onMovieCardMouseEnter.bind(this);
-    this._onMovieCardHeaderClick = this._onMovieCardHeaderClick.bind(this);
+    this._handleMovieCardMouseEnter = this._handleMovieCardMouseEnter.bind(this);
+    this._handleMovieCardTitleClick = this._handleMovieCardTitleClick.bind(this);
 
     this.state = {
-      activeMovieId: `-1`,
-      clickedMovieId: `-1`
+      activeMovieId: null,
+      clickedMovieId: null
     };
   }
 
-  _onMovieCardMouseEnter(movieCardId) {
-    this.setState({activeMovieId: extractId(movieCardId)});
+  _handleMovieCardMouseEnter(movieId) {
+    this.setState({activeMovieId: movieId});
   }
 
-  _onMovieCardHeaderClick(movieCardId) {
-    this.setState({clickedMovieId: extractId(movieCardId)});
+  _handleMovieCardTitleClick(movieId) {
+    this.setState({clickedMovieId: movieId});
   }
 
   render() {
-    const {movieCards} = this.props;
+    const {movies} = this.props;
     return (
       <div className="catalog__movies-list">
-        {movieCards.map((movieCard) => {
+        {movies.map((movie) => {
           return (
             <MovieCard
-              key={`mc-${movieCard.id}`}
-              id={movieCard.id}
-              title={movieCard.title}
-              onHeaderClick={this._onMovieCardHeaderClick}
-              onMouseEnter={this._onMovieCardMouseEnter}
+              key={`mc-${movie.id}`}
+              id={movie.id}
+              title={movie.title}
+              imageSource={movie.imageSource}
+              onTitleClick={this._handleMovieCardTitleClick}
+              onMouseEnter={this._handleMovieCardMouseEnter}
             />
           );
         })}
@@ -48,9 +45,10 @@ class MoviesList extends PureComponent {
 }
 
 MoviesList.propTypes = {
-  movieCards: PropTypes.arrayOf(PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    imageSource: PropTypes.string.isRequired,
   })).isRequired,
 };
 

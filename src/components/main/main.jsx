@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movies-list/movies-list.jsx';
-import {convertToImageName} from '../../utils/helpers';
 
-const Main = ({promoMovieCard, movieCards}) => {
+const Main = ({promoMovie, movies}) => {
   return <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -31,16 +30,16 @@ const Main = ({promoMovieCard, movieCards}) => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src={`img/${convertToImageName(promoMovieCard.title)}-poster.jpg`}
-              alt={`${promoMovieCard.title} poster`}
+            <img src={promoMovie.posterSource}
+              alt={`${promoMovie.title} poster`}
               width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{promoMovieCard.title}</h2>
+            <h2 className="movie-card__title">{promoMovie.title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{promoMovieCard.genre}</span>
-              <span className="movie-card__year">{promoMovieCard.year}</span>
+              <span className="movie-card__genre">{promoMovie.genre}</span>
+              <span className="movie-card__year">{promoMovie.year}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -100,7 +99,7 @@ const Main = ({promoMovieCard, movieCards}) => {
         </ul>
 
         {<MoviesList
-          movieCards={movieCards}
+          movies={movies}
         />}
 
         <div className="catalog__more">
@@ -126,14 +125,16 @@ const Main = ({promoMovieCard, movieCards}) => {
 };
 
 Main.propTypes = {
-  promoMovieCard: PropTypes.shape({
+  promoMovie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    posterSource: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
-  movieCards: PropTypes.arrayOf(PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    imageSource: PropTypes.string.isRequired,
   })).isRequired,
 };
 
