@@ -10,7 +10,7 @@ it(`Render MovieCard`, () => {
           }}
           id={0}
           title={`Macbeth`}
-          imageSource={`img/macbeth.jpg`}
+          posterSource={`img/macbeth.jpg`}
           onTitleClick={() => {
           }}
         />

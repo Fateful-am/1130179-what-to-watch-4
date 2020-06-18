@@ -9,22 +9,22 @@ it(`Render Movies List`, () => {
           movies={[{
             id: 4,
             title: `Moonrise Kingdom`,
-            imageSource: `img/moonrise-kingdom.jpg`
+            posterSource: `img/moonrise-kingdom.jpg`
           },
           {
             id: 5,
             title: `Seven Years in Tibet`,
-            imageSource: `img/seven-years-in-tibet.jpg`
+            posterSource: `img/seven-years-in-tibet.jpg`
           },
           {
             id: 6,
             title: `Midnight Special`,
-            imageSource: `img/midnight-special.jpg`
+            posterSource: `img/midnight-special.jpg`
           },
           {
             id: 7,
             title: `War of the Worlds`,
-            imageSource: `img/war-of-the-worlds.jpg`
+            posterSource: `img/war-of-the-worlds.jpg`
           },
           ]}
         />

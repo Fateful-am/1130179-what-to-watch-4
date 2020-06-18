@@ -16,7 +16,7 @@ it(`Should movie card mouse entered`, () => {
         onMouseEnter={movieCardMouseEnter}
         id={movieCardId}
         title={`Macbeth`}
-        imageSource={`img/macbeth.jpg`}
+        posterSource={`img/macbeth.jpg`}
         onTitleClick={() => {
         }}
       />

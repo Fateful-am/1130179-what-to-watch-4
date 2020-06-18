@@ -33,7 +33,7 @@ class MoviesList extends PureComponent {
               key={`mc-${movie.id}`}
               id={movie.id}
               title={movie.title}
-              imageSource={movie.imageSource}
+              posterSource={movie.posterSource}
               onTitleClick={this._handleMovieCardTitleClick}
               onMouseEnter={this._handleMovieCardMouseEnter}
             />
@@ -48,7 +48,7 @@ MoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    imageSource: PropTypes.string.isRequired,
+    posterSource: PropTypes.string.isRequired,
   })).isRequired,
 };
 
