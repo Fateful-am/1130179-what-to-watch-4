@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
-const App = ({promoMovie, movies}) => {
-  return (
-    <Main
-      promoMovie={promoMovie}
-      movies={movies}
-    />
-  );
-};
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+
+  }
+  render() {
+    let {promoMovie, movies} = this.props;
+    return (
+      <Main
+        promoMovie={promoMovie}
+        movies={movies}
+      />
+    );
+  }
+}
 
 App.propTypes = {
   promoMovie: PropTypes.shape({
