@@ -15,6 +15,7 @@ it(`Should all movie headers be pressed and movie card mouse entered`, () => {
             genre: `Drama`,
             title: `The Grand Budapest Hotel`,
             posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
+            coverSource: `img/bg-the-grand-budapest-hotel.jpg`,
             year: 2014
           }
         }

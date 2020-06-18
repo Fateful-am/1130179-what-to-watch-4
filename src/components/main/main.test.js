@@ -11,6 +11,7 @@ it(`Render Main`, () => {
               genre: `Drama`,
               title: `The Grand Budapest Hotel`,
               posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
+              coverSource: `img/bg-the-grand-budapest-hotel.jpg`,
               year: 2014
             }
           }
