@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const MovieCard = ({id, title, imageSource, onTitleClick, onMouseEnter}) => {
+const MovieCard = ({id, title, imageSource, onTitleClick, onMouseEnter}) => {
   const handleMouseEnter = (evt) => {
     evt.preventDefault();
     onMouseEnter(id);
