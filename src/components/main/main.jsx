@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MoviesList from '../movies-list/movies-list.jsx';
 
 const Main = ({promoMovie, movies}) => {
-  return <React.Fragment>
+  return <>
     <section className="movie-card">
       <div className="movie-card__bg">
         <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
@@ -98,9 +98,9 @@ const Main = ({promoMovie, movies}) => {
           </li>
         </ul>
 
-        {<MoviesList
+        <MoviesList
           movies={movies}
-        />}
+        />
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -121,7 +121,7 @@ const Main = ({promoMovie, movies}) => {
         </div>
       </footer>
     </div>
-  </React.Fragment>;
+  </>;
 };
 
 Main.propTypes = {

@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 import {mockMovies} from './mocks/films';
 
-// const movieCards = mockMovieCards;
-
 const promoMovie = {
   genre: `Drama`,
   title: `The Grand Budapest Hotel`,
