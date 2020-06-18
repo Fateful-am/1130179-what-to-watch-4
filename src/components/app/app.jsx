@@ -1,19 +1,31 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from '../main/main.jsx';
+import MoviePage from '../movie-page/movie-page.jsx';
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
   }
+
   render() {
-    let {promoMovie, movies} = this.props;
+    const {promoMovie, movies} = this.props;
     return (
-      <Main
-        promoMovie={promoMovie}
-        movies={movies}
-      />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Main
+              promoMovie={promoMovie}
+              movies={movies}
+            />
+          </Route>
+          <Route exact path="/dev-film">
+            <MoviePage/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
