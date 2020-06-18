@@ -22,7 +22,9 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/dev-film">
-            <MoviePage/>
+            <MoviePage
+              movie={promoMovie}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

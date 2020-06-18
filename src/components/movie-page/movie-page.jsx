@@ -1,13 +1,13 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const MoviePage = () => {
+const MoviePage = ({movie}) => {
   return (
     <>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+            <img src={movie.coverSource} alt={movie.title}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -30,10 +30,10 @@ const MoviePage = () => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{movie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.year}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -58,7 +58,7 @@ const MoviePage = () => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+              <img src={movie.posterSource} alt={`${movie.title} poster`} width="218"
                 height="327"/>
             </div>
 
@@ -78,26 +78,25 @@ const MoviePage = () => {
               </nav>
 
               <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
+                <div className="movie-rating__score">{movie.rating.score}</div>
                 <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">240 ratings</span>
+                  <span className="movie-rating__level">{movie.rating.level}</span>
+                  <span className="movie-rating__count">{`${movie.rating.count} ratings`}</span>
                 </p>
               </div>
 
               <div className="movie-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                  Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.</p>
+                {
+                  movie.descriptions.map((description, i) => {
+                    return (
+                      <p key={`${description}-${i}`}>{description}</p>
+                    );
+                  })
+                }
 
-                <p>Gustave prides himself on providing first-class service to the hotel&apos;s guests, including satisfying
-                  the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies
-                  mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her
-                  murder.</p>
+                <p className="movie-card__director"><strong>{`Director: ${movie.director}`}</strong></p>
 
-                <p className="movie-card__director"><strong>Director: Wes Andreson</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
-                  and other</strong></p>
+                <p className="movie-card__starring"><strong>{`Starring: ${movie.starring}`}</strong></p>
               </div>
             </div>
           </div>
@@ -165,6 +164,32 @@ const MoviePage = () => {
       </div>
     </>
   );
+};
+
+MoviePage.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    posterSource: PropTypes.string.isRequired,
+    coverSource: PropTypes.string.isRequired,
+    rating: PropTypes.shape({
+      score: PropTypes.string.isRequired,
+      level: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+    }).isRequired,
+    descriptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.string.isRequired,
+    runTime: PropTypes.string.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      score: PropTypes.string.isRequired,
+    })).isRequired
+  }).isRequired
 };
 
 export default MoviePage;
