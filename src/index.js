@@ -1,40 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
+import {mockMovies} from './mocks/films';
 
-const movieCard = {
+const promoMovie = {
   genre: `Drama`,
   title: `The Grand Budapest Hotel`,
+  posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
   year: 2014
 };
 
-const smallMovieCards = [
-  `Fantastic Beasts: The Crimes of Grindelwald`,
-  `Bohemian Rhapsody`,
-  `Macbeth`,
-  `Aviator`,
-  `We need to talk about Kevin`,
-  `What We Do in the Shadows`,
-  `Revenant`,
-  `Johnny English`,
-  `Shutter Island`,
-  `Pulp Fiction`,
-  `No Country for Old Men`,
-  `Snatch`,
-  `Moonrise Kingdom`,
-  `Seven Years in Tibet`,
-  `Midnight Special`,
-  `War of the Worlds`,
-  `Dardjeeling Limited`,
-  `Orlando`,
-  `Mindhunter`,
-  `Midnight Special`
-];
-
 ReactDOM.render(
     <App
-      movieCard={movieCard}
-      smallMovieCards={smallMovieCards}
+      promoMovie={promoMovie}
+      movies={mockMovies}
     />,
     document.querySelector(`#root`)
 );

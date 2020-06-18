@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render MovieCard 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+  id="mc-0"
+  onMouseEnter={[Function]}
+>
+  <div
+    className="small-movie-card__image"
+  >
+    <img
+      alt="Macbeth"
+      height="175"
+      src="img/macbeth.jpg"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+    onClick={[Function]}
+  >
+    <a
+      className="small-movie-card__link"
+      href="#"
+    >
+      Macbeth
+    </a>
+  </h3>
+</article>
+`;
+
+exports[`Render MovieCard 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+  id="mc-0"
+  onMouseEnter={[Function]}
+>
+  <div
+    className="small-movie-card__image"
+  >
+    <img
+      alt="Macbeth"
+      height="175"
+      src="img/macbeth.jpg"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+    onClick={[Function]}
+  >
+    <a
+      className="small-movie-card__link"
+      href="#"
+    >
+      Macbeth
+    </a>
+  </h3>
+</article>
+`;

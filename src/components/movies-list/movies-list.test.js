@@ -1,19 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main.jsx';
+import MoviesList from './movies-list';
 
-it(`Render Main`, () => {
+it(`Render Movies List`, () => {
   const tree = renderer
     .create(
-        <Main
-          promoMovie={
-            {
-              genre: `Drama`,
-              title: `The Grand Budapest Hotel`,
-              posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
-              year: 2014
-            }
-          }
+        <MoviesList
           movies={[{
             id: 4,
             title: `Moonrise Kingdom`,
@@ -33,8 +25,10 @@ it(`Render Main`, () => {
             id: 7,
             title: `War of the Worlds`,
             imageSource: `img/war-of-the-worlds.jpg`
-          }]}
-        />)
+          },
+          ]}
+        />
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
