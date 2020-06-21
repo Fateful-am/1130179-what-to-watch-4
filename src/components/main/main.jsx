@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movies-list/movies-list.jsx';
 
-const Main = ({promoMovie, movies}) => {
+const Main = ({promoMovie, movies, onMovieCardClick}) => {
   return <>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -100,6 +100,7 @@ const Main = ({promoMovie, movies}) => {
 
         <MoviesList
           movies={movies}
+          onMovieCardClick={onMovieCardClick}
         />
 
         <div className="catalog__more">
@@ -137,6 +138,7 @@ Main.propTypes = {
     title: PropTypes.string.isRequired,
     previewSource: PropTypes.string.isRequired,
   })).isRequired,
+  onMovieCardClick: PropTypes.func.isRequired
 };
 
 export default Main;

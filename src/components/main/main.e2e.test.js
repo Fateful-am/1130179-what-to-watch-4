@@ -68,6 +68,7 @@ it(`Should all movie headers be pressed and movie card mouse entered`, () => {
           previewSource: `img/war-of-the-worlds.jpg`
         },
         ]}
+        onMovieCardClick={()=>{}}
       />
   );
 

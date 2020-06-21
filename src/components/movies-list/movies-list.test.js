@@ -27,6 +27,7 @@ it(`Render Movies List`, () => {
             previewSource: `img/war-of-the-worlds.jpg`
           },
           ]}
+          onMovieCardClick={()=>{}}
         />
     )
     .toJSON();

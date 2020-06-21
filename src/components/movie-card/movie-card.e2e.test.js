@@ -17,7 +17,7 @@ it(`Should movie card mouse entered`, () => {
         id={movieCardId}
         title={`Macbeth`}
         previewSource={`img/macbeth.jpg`}
-        onTitleClick={() => {
+        onClick={() => {
         }}
       />
   );

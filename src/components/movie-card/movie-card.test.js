@@ -11,7 +11,7 @@ it(`Render MovieCard`, () => {
           id={0}
           title={`Macbeth`}
           previewSource={`img/macbeth.jpg`}
-          onTitleClick={() => {
+          onClick={() => {
           }}
         />
     )

@@ -63,6 +63,7 @@ it(`Render App`, () => {
             title: `War of the Worlds`,
             previewSource: `img/war-of-the-worlds.jpg`
           }]}
+          onMovieCardClick={()=>{}}
         />)
     .toJSON();
 
