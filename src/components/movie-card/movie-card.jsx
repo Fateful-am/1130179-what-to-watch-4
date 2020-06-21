@@ -11,6 +11,7 @@ const MovieCard = ({id, title, previewSource, onTitleClick, onMouseEnter}) => {
     evt.preventDefault();
     onTitleClick(id);
   };
+
   return (
     <article
       className="small-movie-card catalog__movies-card"
