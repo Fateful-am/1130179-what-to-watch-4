@@ -7,7 +7,8 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should all movie headers be pressed and movie card mouse entered`, () => {
+it(`Should all movie cards be pressed and movie card mouse entered`, () => {
+  const handleMovieCardClick = jest.fn();
   const mainScreen = mount(
       <Main
         promoMovie={
@@ -68,29 +69,24 @@ it(`Should all movie headers be pressed and movie card mouse entered`, () => {
           previewSource: `img/war-of-the-worlds.jpg`
         },
         ]}
-        onMovieCardClick={()=>{}}
+        onMovieCardClick={handleMovieCardClick}
       />
   );
 
   const formSendPrevention1 = jest.fn();
-  const movieHeaders = mainScreen.find(`.small-movie-card__title`);
-
-  movieHeaders.forEach((movieHeader) => {
-    movieHeader.simulate(`click`, {
-      preventDefault: formSendPrevention1,
-    });
-  });
-
-  expect(formSendPrevention1).toHaveBeenCalledTimes(movieHeaders.length);
-
   const formSendPrevention2 = jest.fn();
   const movieCards = mainScreen.find(`.small-movie-card`);
 
   movieCards.forEach((movieCard) => {
+    movieCard.simulate(`click`, {
+      preventDefault: formSendPrevention1,
+    });
     movieCard.simulate(`mouseenter`, {
       preventDefault: formSendPrevention2,
     });
   });
 
-  expect(formSendPrevention2).toHaveBeenCalledTimes(movieHeaders.length);
+  expect(formSendPrevention1).toHaveBeenCalledTimes(movieCards.length);
+  expect(formSendPrevention2).toHaveBeenCalledTimes(movieCards.length);
+  expect(handleMovieCardClick).toHaveBeenCalledTimes(movieCards.length);
 });
