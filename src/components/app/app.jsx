@@ -14,6 +14,12 @@ class App extends PureComponent {
       currentId: null
     };
 
+    const {movies} = this.props;
+    this.movieIndexMap = new Map();
+    movies.forEach((movie, i) =>{
+      this.movieIndexMap.set(i, movie.id);
+    });
+
     this._handleMovieCardClick = this._handleMovieCardClick.bind(this);
   }
 
@@ -39,7 +45,7 @@ class App extends PureComponent {
       case PageKind.MOVIE_PAGE:
         return (
           <MoviePage
-            movie={movies[currentId]}
+            movie={movies[this.movieIndexMap.get(currentId)]}
           />
         );
     }
