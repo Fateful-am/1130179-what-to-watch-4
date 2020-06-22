@@ -1,28 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const MovieCard = ({id, title, imageSource, onTitleClick, onMouseEnter}) => {
-  const handleMouseEnter = (evt) => {
+const MovieCard = ({id, title, previewSource, onClick, onHover}) => {
+  const handleHover = (evt) => {
     evt.preventDefault();
-    onMouseEnter(id);
+    onHover(id);
   };
 
-  const handleTitleClick = (evt) => {
+  const handleClick = (evt) => {
     evt.preventDefault();
-    onTitleClick(id);
+    onClick(id);
   };
+
   return (
     <article
       className="small-movie-card catalog__movies-card"
       id={`mc-${id}`}
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={handleHover}
+      onClick={handleClick}
     >
       <div className="small-movie-card__image">
-        <img src={imageSource} alt={title} width="280" height="175"/>
+        <img src={previewSource} alt={title} width="280" height="175"/>
       </div>
       <h3
         className="small-movie-card__title"
-        onClick={handleTitleClick}
       >
         <a className="small-movie-card__link" href="#">{title}</a>
       </h3>
@@ -33,9 +34,9 @@ export const MovieCard = ({id, title, imageSource, onTitleClick, onMouseEnter}) 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  imageSource: PropTypes.string.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-  onMouseEnter: PropTypes.func.isRequired
+  previewSource: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onHover: PropTypes.func.isRequired
 };
 
 export default MovieCard;

@@ -6,12 +6,12 @@ it(`Render MovieCard`, () => {
   const tree = renderer
     .create(
         <MovieCard
-          onMouseEnter={() => {
+          onHover={() => {
           }}
           id={0}
           title={`Macbeth`}
-          imageSource={`img/macbeth.jpg`}
-          onTitleClick={() => {
+          previewSource={`img/macbeth.jpg`}
+          onClick={() => {
           }}
         />
     )

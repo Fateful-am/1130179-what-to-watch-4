@@ -9,16 +9,16 @@ Enzyme.configure({
 const movieCardId = 0;
 
 it(`Should movie card mouse entered`, () => {
-  const movieCardMouseEnter = jest.fn();
+  const movieCardHover = jest.fn();
+  const movieCardClick = jest.fn();
 
   const movieCardScreen = shallow(
       <MovieCard
-        onMouseEnter={movieCardMouseEnter}
+        onHover={movieCardHover}
         id={movieCardId}
         title={`Macbeth`}
-        imageSource={`img/macbeth.jpg`}
-        onTitleClick={() => {
-        }}
+        previewSource={`img/macbeth.jpg`}
+        onClick={movieCardClick}
       />
   );
 
@@ -29,6 +29,11 @@ it(`Should movie card mouse entered`, () => {
     preventDefault: formSendPrevention
   });
 
-  expect(movieCardMouseEnter).toHaveBeenCalledTimes(1);
+  movieCard.simulate(`click`, {
+    preventDefault: formSendPrevention
+  });
+
+  expect(movieCardHover).toHaveBeenCalledTimes(1);
+  expect(movieCardClick).toHaveBeenCalledTimes(1);
 
 });

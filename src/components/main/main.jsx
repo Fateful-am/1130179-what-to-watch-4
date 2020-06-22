@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MoviesList from '../movies-list/movies-list.jsx';
 
-const Main = ({promoMovie, movies}) => {
+const Main = ({promoMovie, movies, onMovieCardClick}) => {
   return <>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+        <img src={promoMovie.coverSource} alt={promoMovie.title}/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -100,6 +100,7 @@ const Main = ({promoMovie, movies}) => {
 
         <MoviesList
           movies={movies}
+          onMovieCardClick={onMovieCardClick}
         />
 
         <div className="catalog__more">
@@ -129,13 +130,15 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     posterSource: PropTypes.string.isRequired,
+    coverSource: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    imageSource: PropTypes.string.isRequired,
+    previewSource: PropTypes.string.isRequired,
   })).isRequired,
+  onMovieCardClick: PropTypes.func.isRequired
 };
 
 export default Main;
