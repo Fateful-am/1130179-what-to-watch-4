@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {PageKind} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
+import {getMovieById} from '../../utils/helpers';
 
 class App extends PureComponent {
   constructor(props) {
@@ -13,12 +14,6 @@ class App extends PureComponent {
       currentPage: PageKind.MAIN,
       currentId: null
     };
-
-    const {movies} = this.props;
-    this.movieIndexMap = new Map();
-    movies.forEach((movie, i) =>{
-      this.movieIndexMap.set(i, movie.id);
-    });
 
     this._handleMovieCardClick = this._handleMovieCardClick.bind(this);
   }
@@ -30,7 +25,7 @@ class App extends PureComponent {
     });
   }
 
-  _render() {
+  _stateRender() {
     const {promoMovie, movies} = this.props;
     const {currentPage, currentId} = this.state;
     switch (currentPage) {
@@ -45,7 +40,7 @@ class App extends PureComponent {
       case PageKind.MOVIE_PAGE:
         return (
           <MoviePage
-            movie={movies[this.movieIndexMap.get(currentId)]}
+            movie={getMovieById(movies, currentId)}
           />
         );
     }
@@ -58,7 +53,7 @@ class App extends PureComponent {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {this._render()}
+            {this._stateRender()}
           </Route>
           <Route exact path="/dev-film">
             <MoviePage

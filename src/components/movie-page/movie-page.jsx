@@ -94,9 +94,9 @@ const MoviePage = ({movie}) => {
                   })
                 }
 
-                <p className="movie-card__director"><strong>{`Director: ${movie.director}`}</strong></p>
+                <p className="movie-card__director"><strong>Director: {movie.director}</strong></p>
 
-                <p className="movie-card__starring"><strong>{`Starring: ${movie.starring}`}</strong></p>
+                <p className="movie-card__starring"><strong>Starring: {movie.starring}</strong></p>
               </div>
             </div>
           </div>

@@ -6,7 +6,7 @@ it(`Render MovieCard`, () => {
   const tree = renderer
     .create(
         <MovieCard
-          onMouseEnter={() => {
+          onHover={() => {
           }}
           id={0}
           title={`Macbeth`}

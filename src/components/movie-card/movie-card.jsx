@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MovieCard = ({id, title, previewSource, onClick, onMouseEnter}) => {
-  const handleMouseEnter = (evt) => {
+const MovieCard = ({id, title, previewSource, onClick, onHover}) => {
+  const handleHover = (evt) => {
     evt.preventDefault();
-    onMouseEnter(id);
+    onHover(id);
   };
 
   const handleClick = (evt) => {
@@ -16,7 +16,7 @@ const MovieCard = ({id, title, previewSource, onClick, onMouseEnter}) => {
     <article
       className="small-movie-card catalog__movies-card"
       id={`mc-${id}`}
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={handleHover}
       onClick={handleClick}
     >
       <div className="small-movie-card__image">
@@ -36,7 +36,7 @@ MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
   previewSource: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  onMouseEnter: PropTypes.func.isRequired
+  onHover: PropTypes.func.isRequired
 };
 
 export default MovieCard;
