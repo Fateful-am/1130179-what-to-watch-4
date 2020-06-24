@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import VideoPlayer from '../video-player/video-player.jsx';
 
-const MovieCard = ({id, title, previewSource, onClick, onHover}) => {
+const MovieCard = ({id, title, previewSource, previewMovie, onClick, onHover, isPlaying}) => {
   const handleHover = (evt) => {
     evt.preventDefault();
     onHover(id);
@@ -19,9 +20,11 @@ const MovieCard = ({id, title, previewSource, onClick, onHover}) => {
       onMouseEnter={handleHover}
       onClick={handleClick}
     >
-      <div className="small-movie-card__image">
-        <img src={previewSource} alt={title} width="280" height="175"/>
-      </div>
+      <VideoPlayer
+        isPlaying={isPlaying}
+        previewSource={previewSource}
+        src={previewMovie}
+      />
       <h3
         className="small-movie-card__title"
       >
@@ -37,7 +40,8 @@ MovieCard.propTypes = {
   previewSource: PropTypes.string.isRequired,
   previewMovie: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  onHover: PropTypes.func.isRequired
+  onHover: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 export default MovieCard;

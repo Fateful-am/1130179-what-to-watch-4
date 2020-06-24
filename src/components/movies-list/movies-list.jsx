@@ -17,6 +17,7 @@ class MoviesList extends PureComponent {
 
   _handleMovieCardHover(movieId) {
     this.setState({activeMovieId: movieId});
+
   }
 
   _handleMovieCardClick(movieId) {
@@ -38,6 +39,7 @@ class MoviesList extends PureComponent {
               previewMovie={movie.previewMovie}
               onClick={this._handleMovieCardClick}
               onHover={this._handleMovieCardHover}
+              isPlaying={movie.id === this.state.activeMovieId}
             />
           );
         })}
