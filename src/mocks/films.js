@@ -7,6 +7,7 @@ export const mockMovies = [
     posterSource: `img/macbeth.jpg`,
     coverSource: `img/macbeth.jpg`,
     previewSource: `img/macbeth.jpg`,
+    previewMovie: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -42,6 +43,7 @@ export const mockMovies = [
     posterSource: `img/aviator.jpg`,
     coverSource: `img/aviator.jpg`,
     previewSource: `img/aviator.jpg`,
+    previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -78,6 +80,7 @@ export const mockMovies = [
     posterSource: `img/we-need-to-talk-about-kevin.jpg`,
     coverSource: `img/we-need-to-talk-about-kevin.jpg`,
     previewSource: `img/we-need-to-talk-about-kevin.jpg`,
+    previewMovie: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -114,6 +117,7 @@ export const mockMovies = [
     posterSource: `img/what-we-do-in-the-shadows.jpg`,
     coverSource: `img/what-we-do-in-the-shadows.jpg`,
     previewSource: `img/what-we-do-in-the-shadows.jpg`,
+    previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -150,6 +154,7 @@ export const mockMovies = [
     posterSource: `img/moonrise-kingdom.jpg`,
     coverSource: `img/moonrise-kingdom.jpg`,
     previewSource: `img/moonrise-kingdom.jpg`,
+    previewMovie: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -186,6 +191,7 @@ export const mockMovies = [
     posterSource: `img/seven-years-in-tibet.jpg`,
     coverSource: `img/seven-years-in-tibet.jpg`,
     previewSource: `img/seven-years-in-tibet.jpg`,
+    previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -222,6 +228,7 @@ export const mockMovies = [
     posterSource: `img/midnight-special.jpg`,
     coverSource: `img/midnight-special.jpg`,
     previewSource: `img/midnight-special.jpg`,
+    previewMovie: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -258,6 +265,7 @@ export const mockMovies = [
     posterSource: `img/war-of-the-worlds.jpg`,
     coverSource: `img/war-of-the-worlds.jpg`,
     previewSource: `img/war-of-the-worlds.jpg`,
+    previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     rating: {
       score: `8,9`,
       level: `Very good`,
@@ -294,6 +302,7 @@ export const mockMovies = [
     posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
     coverSource: `img/bg-the-grand-budapest-hotel.jpg`,
     previewSource: `img/the-grand-budapest-hotel-poster.jpg`,
+    previewMovie: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     rating: {
       score: `8,9`,
       level: `Very good`,

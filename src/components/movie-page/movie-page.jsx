@@ -173,6 +173,7 @@ MoviePage.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     posterSource: PropTypes.string.isRequired,
+    previewMovie: PropTypes.string.isRequired,
     coverSource: PropTypes.string.isRequired,
     rating: PropTypes.shape({
       score: PropTypes.string.isRequired,

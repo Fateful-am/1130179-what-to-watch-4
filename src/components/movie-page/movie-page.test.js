@@ -14,6 +14,7 @@ it(`Render MoviePage Overview`, () => {
             posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
             coverSource: `img/bg-the-grand-budapest-hotel.jpg`,
             previewSource: `img/the-grand-budapest-hotel-poster.jpg`,
+            previewMovie: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
             rating: {
               score: `8,9`,
               level: `Very good`,

@@ -18,6 +18,7 @@ it(`Should movie card mouse entered`, () => {
         id={movieCardId}
         title={`Macbeth`}
         previewSource={`img/macbeth.jpg`}
+        previewMovie={`https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`}
         onClick={movieCardClick}
       />
   );
