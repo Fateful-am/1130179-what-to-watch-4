@@ -1,9 +1,12 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
+import {PREVIEW_MOVIE_DELAY} from '../../consts.js';
 
 export default class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._playMovie = this._playMovie.bind(this);
 
     this._videoRef = createRef();
 
@@ -14,53 +17,40 @@ export default class VideoPlayer extends PureComponent {
 
   }
 
-
-  componentDidMount() {
-    const {previewSource, src} = this.props;
-    const video = this._videoRef.current;
-
-    video.src = src;
-    video.poster = previewSource;
-    video.width = 280;
-    video.height = 175;
-    video.muted = true;
-
-
-    video.oncanplaythrough = () => this.setState({
-      isLoading: false,
-    });
-
-    video.onplay = () => this.setState({
-      isPlaying: true,
-    });
-
-  }
-
-
   componentWillUnmount() {
     const video = this._videoRef.current;
 
-    video.oncanplaythrough = null;
-    video.onplay = null;
     video.src = ``;
+  }
+
+  _playMovie() {
+    const video = this._videoRef.current;
+    if (this.props.isPlaying) {
+      video.play();
+    }
   }
 
   componentDidUpdate() {
     const video = this._videoRef.current;
 
     if (this.props.isPlaying) {
-
-      video.play();
+      const {src} = this.props;
+      video.src = src;
+      setTimeout(this._playMovie, PREVIEW_MOVIE_DELAY);
     } else {
-      video.pause();
+      video.src = ``;
     }
   }
 
   render() {
+    const {previewSource, src} = this.props;
     return (
       <div className="small-movie-card__image">
-        <video
+        <video width="280" height="175" preload="none"
           ref={this._videoRef}
+          muted={true}
+          src={src}
+          poster={previewSource}
         />
       </div>
     );

@@ -262,14 +262,17 @@ Array [
           id="mc-4"
           onClick={[Function]}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Moonrise Kingdom"
+            <video
               height="175"
-              src="img/moonrise-kingdom.jpg"
+              muted={true}
+              poster="img/moonrise-kingdom.jpg"
+              preload="none"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
               width="280"
             />
           </div>
@@ -289,14 +292,17 @@ Array [
           id="mc-5"
           onClick={[Function]}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Seven Years in Tibet"
+            <video
               height="175"
-              src="img/seven-years-in-tibet.jpg"
+              muted={true}
+              poster="img/seven-years-in-tibet.jpg"
+              preload="none"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
               width="280"
             />
           </div>
@@ -316,14 +322,17 @@ Array [
           id="mc-6"
           onClick={[Function]}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Midnight Special"
+            <video
               height="175"
-              src="img/midnight-special.jpg"
+              muted={true}
+              poster="img/midnight-special.jpg"
+              preload="none"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
               width="280"
             />
           </div>
@@ -343,14 +352,17 @@ Array [
           id="mc-7"
           onClick={[Function]}
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="War of the Worlds"
+            <video
               height="175"
-              src="img/war-of-the-worlds.jpg"
+              muted={true}
+              poster="img/war-of-the-worlds.jpg"
+              preload="none"
+              src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
               width="280"
             />
           </div>

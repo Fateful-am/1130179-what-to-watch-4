@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render MovieCard 1`] = `
+<div
+  className="small-movie-card__image"
+>
+  <video
+    height="175"
+    muted={true}
+    poster="img/macbeth.jpg"
+    preload="none"
+    src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+    width="280"
+  />
+</div>
+`;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MovieCard from './movie-card';
 
@@ -9,16 +9,14 @@ Enzyme.configure({
 const movieCardId = 0;
 
 it(`Should movie card mouse entered`, () => {
-  const movieCardHover = jest.fn();
   const movieCardClick = jest.fn();
 
-  const movieCardScreen = shallow(
+  const movieCardScreen = mount(
       <MovieCard
-        onHover={movieCardHover}
         id={movieCardId}
         title={`Macbeth`}
         previewSource={`img/macbeth.jpg`}
-        previewMovie={`https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`}
+        previewMovie={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
         onClick={movieCardClick}
       />
   );
@@ -26,15 +24,11 @@ it(`Should movie card mouse entered`, () => {
   const movieCard = movieCardScreen.find(`.small-movie-card`);
   const formSendPrevention = jest.fn();
 
-  movieCard.simulate(`mouseenter`, {
-    preventDefault: formSendPrevention
-  });
-
   movieCard.simulate(`click`, {
     preventDefault: formSendPrevention
   });
 
-  expect(movieCardHover).toHaveBeenCalledTimes(1);
+  expect(formSendPrevention).toHaveBeenCalledTimes(1);
   expect(movieCardClick).toHaveBeenCalledTimes(1);
 
 });
