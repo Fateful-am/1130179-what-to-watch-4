@@ -7,7 +7,7 @@ export const PageKind = {
   MOVIE_PAGE: `moviePage`
 };
 
-export const MoviePageTabs = {
+export const MoviePageTabNames = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
   REVIEWS: `Reviews`

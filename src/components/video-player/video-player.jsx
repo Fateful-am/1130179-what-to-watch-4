@@ -44,9 +44,11 @@ export default class VideoPlayer extends PureComponent {
     const {isPlaying} = this.state;
 
     if (isPlaying) {
-      const {src} = this.props;
-      video.src = src;
-      video.play();
+      if (video) {
+        const {src} = this.props;
+        video.src = src;
+        video.play();
+      }
     }
   }
 

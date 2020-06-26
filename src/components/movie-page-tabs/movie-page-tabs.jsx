@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 const MoviePageTabs = ({tabs, activeTab, onTabClick}) => {
   const handleTabClick = (evt) =>{
     evt.preventDefault();
-    onTabClick();
+    if (evt.target.tagName === `A`) {
+      onTabClick(evt.target.outerText);
+    }
   };
 
   return (
@@ -16,7 +18,7 @@ const MoviePageTabs = ({tabs, activeTab, onTabClick}) => {
           return (
             <li
               key={`tab-${tab}-${i}`}
-              className={`movie-nav__item ${tab === activeTab ? `movie-nav__item--active` : ``}`}
+              className={`movie-nav__item${tab === activeTab ? ` movie-nav__item--active` : ``}`}
             >
               <a href="#" className="movie-nav__link">{tab}</a>
             </li>
