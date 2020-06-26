@@ -6,3 +6,9 @@ export const PageKind = {
   MAIN: `main`,
   MOVIE_PAGE: `moviePage`
 };
+
+export const MoviePageTabs = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`
+};
