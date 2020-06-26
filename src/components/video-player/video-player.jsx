@@ -11,31 +11,50 @@ export default class VideoPlayer extends PureComponent {
     this._videoRef = createRef();
 
     this.state = {
-      isLoading: true,
-      isPlaying: props.isPlaying,
+      isPlaying: false,
+    };
+  }
+
+  componentDidMount() {
+    const video = this._videoRef.current;
+
+    video.onabort = () => {
+      if (video.paused && this.props.onPause) {
+        this.props.onPause();
+      }
     };
 
+    video.onplay = () => {
+      if (this.props.onPlay) {
+        this.props.onPlay();
+      }
+    };
   }
 
   componentWillUnmount() {
     const video = this._videoRef.current;
 
+    video.onplay = null;
+    video.onabort = null;
     video.src = ``;
   }
 
   _playMovie() {
     const video = this._videoRef.current;
-    if (this.props.isPlaying) {
+    const {isPlaying} = this.state;
+
+    if (isPlaying) {
+      const {src} = this.props;
+      video.src = src;
       video.play();
     }
   }
 
   componentDidUpdate() {
     const video = this._videoRef.current;
+    const {isPlaying} = this.state;
 
-    if (this.props.isPlaying) {
-      const {src} = this.props;
-      video.src = src;
+    if (isPlaying) {
       setTimeout(this._playMovie, PREVIEW_MOVIE_DELAY);
     } else {
       video.src = ``;
@@ -43,13 +62,30 @@ export default class VideoPlayer extends PureComponent {
   }
 
   render() {
-    const {previewSource, src} = this.props;
+    const {previewSource} = this.props;
+
+    const handleLeave = (evt) => {
+      evt.preventDefault();
+      this.setState({
+        isPlaying: false
+      });
+    };
+
+    const handleHover = (evt) => {
+      evt.preventDefault();
+      this.setState({
+        isPlaying: true
+      });
+    };
+
     return (
-      <div className="small-movie-card__image">
+      <div className="small-movie-card__image"
+        onMouseEnter={handleHover}
+        onMouseLeave={handleLeave}
+      >
         <video width="280" height="175" preload="none"
           ref={this._videoRef}
           muted={true}
-          src={src}
           poster={previewSource}
         />
       </div>
@@ -58,7 +94,8 @@ export default class VideoPlayer extends PureComponent {
 }
 
 VideoPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
   previewSource: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
+  onPause: PropTypes.func,
+  onPlay: PropTypes.func,
 };

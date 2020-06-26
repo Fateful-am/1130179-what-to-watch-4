@@ -8,7 +8,7 @@ Enzyme.configure({
 });
 const movieCardId = 0;
 
-it(`Should movie card mouse entered`, () => {
+it(`Should movie card clicked`, () => {
   const movieCardClick = jest.fn();
 
   const movieCardScreen = mount(

@@ -32,7 +32,11 @@ it(`Render Movies List`, () => {
           },
           ]}
           onMovieCardClick={()=>{}}
-        />
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
 

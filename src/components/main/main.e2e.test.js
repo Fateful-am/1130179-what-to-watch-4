@@ -7,7 +7,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should all movie cards be pressed and movie card mouse entered`, () => {
+it(`Should all movie cards be pressed`, () => {
   const handleMovieCardClick = jest.fn();
   const mainScreen = mount(
       <Main
@@ -79,19 +79,14 @@ it(`Should all movie cards be pressed and movie card mouse entered`, () => {
   );
 
   const formSendPrevention1 = jest.fn();
-  const formSendPrevention2 = jest.fn();
   const movieCards = mainScreen.find(`.small-movie-card`);
 
   movieCards.forEach((movieCard) => {
     movieCard.simulate(`click`, {
       preventDefault: formSendPrevention1,
     });
-    movieCard.simulate(`mouseenter`, {
-      preventDefault: formSendPrevention2,
-    });
   });
 
   expect(formSendPrevention1).toHaveBeenCalledTimes(movieCards.length);
-  expect(formSendPrevention2).toHaveBeenCalledTimes(movieCards.length);
   expect(handleMovieCardClick).toHaveBeenCalledTimes(movieCards.length);
 });

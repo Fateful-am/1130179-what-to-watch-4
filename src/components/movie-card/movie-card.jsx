@@ -1,57 +1,30 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '../video-player/video-player.jsx';
 
-class MovieCard extends PureComponent {
-  constructor(props) {
-    super(props);
+function MovieCard(props) {
+  const {id, title, previewSource, previewMovie, onClick} = props;
 
-    this.state = {
-      isPlaying: false
-    };
-  }
+  const handleClick = (evt) => {
+    evt.preventDefault();
+    onClick(id);
+  };
 
-  render() {
-    const {id, title, previewSource, previewMovie, onClick} = this.props;
-
-    const handleHover = (evt) => {
-      evt.preventDefault();
-      this.setState({
-        isPlaying: true
-      });
-    };
-
-    const handleLeave = (evt) => {
-      evt.preventDefault();
-      this.setState({
-        isPlaying: false
-      });
-    };
-
-    const handleClick = (evt) => {
-      evt.preventDefault();
-      onClick(id);
-    };
-
-    return (
-      <article
-        className="small-movie-card catalog__movies-card"
-        id={`mc-${id}`}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleLeave}
-        onClick={handleClick}
-      >
-        <VideoPlayer
-          isPlaying={this.state.isPlaying}
-          previewSource={previewSource}
-          src={previewMovie}
-        />
-        <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="#">{title}</a>
-        </h3>
-      </article>
-    );
-  }
+  return (
+    <article
+      className="small-movie-card catalog__movies-card"
+      id={`mc-${id}`}
+      onClick={handleClick}
+    >
+      <VideoPlayer
+        previewSource={previewSource}
+        src={previewMovie}
+      />
+      <h3 className="small-movie-card__title">
+        <a className="small-movie-card__link" href="#">{title}</a>
+      </h3>
+    </article>
+  );
 }
 
 MovieCard.propTypes = {
