@@ -130,6 +130,7 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     posterSource: PropTypes.string.isRequired,
+    previewMovie: PropTypes.string.isRequired,
     coverSource: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
@@ -137,6 +138,7 @@ Main.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     previewSource: PropTypes.string.isRequired,
+    previewMovie: PropTypes.string.isRequired,
   })).isRequired,
   onMovieCardClick: PropTypes.func.isRequired
 };

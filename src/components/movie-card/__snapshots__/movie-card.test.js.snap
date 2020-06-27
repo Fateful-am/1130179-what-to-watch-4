@@ -5,15 +5,17 @@ exports[`Render MovieCard 1`] = `
   className="small-movie-card catalog__movies-card"
   id="mc-0"
   onClick={[Function]}
-  onMouseEnter={[Function]}
 >
   <div
     className="small-movie-card__image"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <img
-      alt="Macbeth"
+    <video
       height="175"
-      src="img/macbeth.jpg"
+      muted={true}
+      poster="img/macbeth.jpg"
+      preload="none"
       width="280"
     />
   </div>

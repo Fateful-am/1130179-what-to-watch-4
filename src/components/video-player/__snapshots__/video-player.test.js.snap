@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render MovieCard 1`] = `
+<div
+  className="small-movie-card__image"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <video
+    height="175"
+    muted={true}
+    poster="img/macbeth.jpg"
+    preload="none"
+    width="280"
+  />
+</div>
+`;

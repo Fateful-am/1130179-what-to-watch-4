@@ -1,17 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCard from './movie-card';
+import VideoPlayer from './video-player';
 
 it(`Render MovieCard`, () => {
   const tree = renderer
     .create(
-        <MovieCard
-          id={0}
-          title={`Macbeth`}
+        <VideoPlayer
           previewSource={`img/macbeth.jpg`}
-          previewMovie={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
-          onClick={() => {
-          }}
+          src={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
         />, {
           createNodeMock: () => {
             return {};

@@ -7,7 +7,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should all movie cards be pressed and movie card mouse entered`, () => {
+it(`Should all movie cards be pressed`, () => {
   const handleMovieCardClick = jest.fn();
   const mainScreen = mount(
       <Main
@@ -20,6 +20,7 @@ it(`Should all movie cards be pressed and movie card mouse entered`, () => {
             posterSource: `img/the-grand-budapest-hotel-poster.jpg`,
             coverSource: `img/bg-the-grand-budapest-hotel.jpg`,
             previewSource: `img/macbeth.jpg`,
+            previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
             rating: {
               score: `8,9`,
               level: `Very good`,
@@ -51,22 +52,26 @@ it(`Should all movie cards be pressed and movie card mouse entered`, () => {
         movies={[{
           id: 4,
           title: `Moonrise Kingdom`,
-          previewSource: `img/moonrise-kingdom.jpg`
+          previewSource: `img/moonrise-kingdom.jpg`,
+          previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
         },
         {
           id: 5,
           title: `Seven Years in Tibet`,
-          previewSource: `img/seven-years-in-tibet.jpg`
+          previewSource: `img/seven-years-in-tibet.jpg`,
+          previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
         },
         {
           id: 6,
           title: `Midnight Special`,
-          previewSource: `img/midnight-special.jpg`
+          previewSource: `img/midnight-special.jpg`,
+          previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
         },
         {
           id: 7,
           title: `War of the Worlds`,
-          previewSource: `img/war-of-the-worlds.jpg`
+          previewSource: `img/war-of-the-worlds.jpg`,
+          previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
         },
         ]}
         onMovieCardClick={handleMovieCardClick}
@@ -74,19 +79,14 @@ it(`Should all movie cards be pressed and movie card mouse entered`, () => {
   );
 
   const formSendPrevention1 = jest.fn();
-  const formSendPrevention2 = jest.fn();
   const movieCards = mainScreen.find(`.small-movie-card`);
 
   movieCards.forEach((movieCard) => {
     movieCard.simulate(`click`, {
       preventDefault: formSendPrevention1,
     });
-    movieCard.simulate(`mouseenter`, {
-      preventDefault: formSendPrevention2,
-    });
   });
 
   expect(formSendPrevention1).toHaveBeenCalledTimes(movieCards.length);
-  expect(formSendPrevention2).toHaveBeenCalledTimes(movieCards.length);
   expect(handleMovieCardClick).toHaveBeenCalledTimes(movieCards.length);
 });

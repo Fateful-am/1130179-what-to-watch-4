@@ -8,15 +8,17 @@ exports[`Render Movies List 1`] = `
     className="small-movie-card catalog__movies-card"
     id="mc-4"
     onClick={[Function]}
-    onMouseEnter={[Function]}
   >
     <div
       className="small-movie-card__image"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <img
-        alt="Moonrise Kingdom"
+      <video
         height="175"
-        src="img/moonrise-kingdom.jpg"
+        muted={true}
+        poster="img/moonrise-kingdom.jpg"
+        preload="none"
         width="280"
       />
     </div>
@@ -35,15 +37,17 @@ exports[`Render Movies List 1`] = `
     className="small-movie-card catalog__movies-card"
     id="mc-5"
     onClick={[Function]}
-    onMouseEnter={[Function]}
   >
     <div
       className="small-movie-card__image"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <img
-        alt="Seven Years in Tibet"
+      <video
         height="175"
-        src="img/seven-years-in-tibet.jpg"
+        muted={true}
+        poster="img/seven-years-in-tibet.jpg"
+        preload="none"
         width="280"
       />
     </div>
@@ -62,15 +66,17 @@ exports[`Render Movies List 1`] = `
     className="small-movie-card catalog__movies-card"
     id="mc-6"
     onClick={[Function]}
-    onMouseEnter={[Function]}
   >
     <div
       className="small-movie-card__image"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <img
-        alt="Midnight Special"
+      <video
         height="175"
-        src="img/midnight-special.jpg"
+        muted={true}
+        poster="img/midnight-special.jpg"
+        preload="none"
         width="280"
       />
     </div>
@@ -89,15 +95,17 @@ exports[`Render Movies List 1`] = `
     className="small-movie-card catalog__movies-card"
     id="mc-7"
     onClick={[Function]}
-    onMouseEnter={[Function]}
   >
     <div
       className="small-movie-card__image"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      <img
-        alt="War of the Worlds"
+      <video
         height="175"
-        src="img/war-of-the-worlds.jpg"
+        muted={true}
+        poster="img/war-of-the-worlds.jpg"
+        preload="none"
         width="280"
       />
     </div>

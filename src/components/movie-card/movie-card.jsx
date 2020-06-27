@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import VideoPlayer from '../video-player/video-player.jsx';
 
-const MovieCard = ({id, title, previewSource, onClick, onHover}) => {
-  const handleHover = (evt) => {
-    evt.preventDefault();
-    onHover(id);
-  };
+function MovieCard(props) {
+  const {id, title, previewSource, previewMovie, onClick} = props;
 
   const handleClick = (evt) => {
     evt.preventDefault();
@@ -16,27 +14,25 @@ const MovieCard = ({id, title, previewSource, onClick, onHover}) => {
     <article
       className="small-movie-card catalog__movies-card"
       id={`mc-${id}`}
-      onMouseEnter={handleHover}
       onClick={handleClick}
     >
-      <div className="small-movie-card__image">
-        <img src={previewSource} alt={title} width="280" height="175"/>
-      </div>
-      <h3
-        className="small-movie-card__title"
-      >
+      <VideoPlayer
+        previewSource={previewSource}
+        src={previewMovie}
+      />
+      <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="#">{title}</a>
       </h3>
     </article>
   );
-};
+}
 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   previewSource: PropTypes.string.isRequired,
+  previewMovie: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  onHover: PropTypes.func.isRequired
 };
 
-export default MovieCard;
+export default React.memo(MovieCard);
