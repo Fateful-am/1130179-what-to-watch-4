@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MoviePage from './movie-page';
+import MoviePageReviews from './movie-page-reviews';
 
-it(`Render MoviePage with Overview tab`, () => {
+it(`Render MoviePageReviews`, () => {
   const tree = renderer
     .create(
-        <MoviePage
+        <MoviePageReviews
           movie={{
             id: 8,
             title: `The Grand Budapest Hotel`,

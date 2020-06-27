@@ -34,7 +34,7 @@ export const MoviePropTypes = {
     descriptions: PropTypes.arrayOf(PropTypes.string).isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.string.isRequired,
-    runTime: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
     reviews: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,

@@ -26,7 +26,7 @@ it(`Render Main`, () => {
                 `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!`
               ],
               director: `Wes Andreson`,
-              starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other`,
+              starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson, Adrien Brody, Ralph Fiennes, Jeff Goldblum`,
               runTime: 99,
               reviews: [
                 {
