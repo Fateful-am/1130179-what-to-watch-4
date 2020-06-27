@@ -32,7 +32,7 @@ it(`Should all movie cards be pressed`, () => {
             ],
             director: `Wes Andreson`,
             starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other`,
-            runTime: `1h 39m`,
+            runTime: 99,
             reviews: [
               {
                 text: `Aspernatur cum excepturi maiores obcaecati voluptates`,

@@ -19,7 +19,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
@@ -55,7 +55,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
@@ -92,7 +92,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
@@ -129,7 +129,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
@@ -166,7 +166,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
@@ -203,7 +203,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
@@ -240,7 +240,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson, Adrien Brody`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
@@ -277,7 +277,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson, Adrien Brody, Ralph Fiennes`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
@@ -314,7 +314,7 @@ export const mockMovies = [
     ],
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson, Adrien Brody, Ralph Fiennes, Jeff Goldblum`,
-    runTime: `1h 39m`,
+    runTime: 99,
     reviews: [
       {
         text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,

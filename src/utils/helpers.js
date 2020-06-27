@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const convertToImageName = (movieName) => {
   return movieName.toLowerCase().split(` `).join(`-`).split(`:`).join(``);
 };
@@ -9,6 +11,14 @@ export const getMovieById = (movies, id) => {
   }
   return null;
 };
+
+export const formatDuration = (duration) => {
+  if (duration < 60) {
+    return moment.utc(moment.duration(duration, `minutes`).asMilliseconds()).format(`m[m]`);
+  }
+  return moment.utc(moment.duration(duration, `minutes`).asMilliseconds()).format(`H[h] m[m]`);
+};
+
 
 export const smallMovieCards = [
   `Fantastic Beasts: The Crimes of Grindelwald`,

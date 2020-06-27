@@ -1,5 +1,6 @@
 import React from 'react';
 import {MOVIE_REVIEWS_COLUMN_COUNT, MoviePropTypes} from '../../consts';
+import moment from 'moment';
 
 const MoviePageReviews = ({movie}) => {
 
@@ -31,7 +32,7 @@ const MoviePageReviews = ({movie}) => {
 
               <footer className="review__details">
                 <cite className="review__author">{review.author}</cite>
-                <time className="review__date" dateTime="2016-12-24">{review.title}</time>
+                <time className="review__date" dateTime={moment(review.date).format(`YYYY-MM-DD`)}>{moment(review.date).format(`MMMM DD, YYYY`)}</time>
               </footer>
             </blockquote>
 

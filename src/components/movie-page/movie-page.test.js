@@ -26,7 +26,7 @@ it(`Render MoviePage Overview`, () => {
             ],
             director: `Wes Andreson`,
             starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other`,
-            runTime: `1h 39m`,
+            runTime: 99,
             reviews: [
               {
                 text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,

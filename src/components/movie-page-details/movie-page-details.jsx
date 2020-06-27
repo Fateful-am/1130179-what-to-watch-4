@@ -1,5 +1,6 @@
 import React from 'react';
 import {MoviePropTypes} from '../../consts';
+import {formatDuration} from '../../utils/helpers.js';
 
 const MoviePageDetails = ({movie}) => {
   const actors = movie.starring.split(`, `).map((actor, i, array) => {
@@ -29,7 +30,7 @@ const MoviePageDetails = ({movie}) => {
       <div className="movie-card__text-col">
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Run Time</strong>
-          <span className="movie-card__details-value">{movie.runTime}</span>
+          <span className="movie-card__details-value">{formatDuration(movie.runTime)}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Genre</strong>
