@@ -2,7 +2,7 @@ export const mockMovies = [
   {
     id: 0,
     title: `Macbeth`,
-    genre: `Drama`,
+    genre: `Comedy`,
     year: 2014,
     posterSource: `img/macbeth.jpg`,
     coverSource: `img/macbeth.jpg`,
@@ -75,7 +75,7 @@ export const mockMovies = [
   {
     id: 2,
     title: `We need to talk about Kevin`,
-    genre: `Drama`,
+    genre: `Comedy`,
     year: 2016,
     posterSource: `img/we-need-to-talk-about-kevin.jpg`,
     coverSource: `img/we-need-to-talk-about-kevin.jpg`,
@@ -149,7 +149,7 @@ export const mockMovies = [
   {
     id: 4,
     title: `Moonrise Kingdom`,
-    genre: `Drama`,
+    genre: `Comedy`,
     year: 2018,
     posterSource: `img/moonrise-kingdom.jpg`,
     coverSource: `img/moonrise-kingdom.jpg`,
