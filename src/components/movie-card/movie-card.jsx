@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '../video-player/video-player.jsx';
 
-function MovieCard(props) {
+const MovieCard = (props) => {
   const {id, title, previewSource, previewMovie, onClick} = props;
 
   const handleClick = (evt) => {
@@ -25,7 +25,7 @@ function MovieCard(props) {
       </h3>
     </article>
   );
-}
+};
 
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,

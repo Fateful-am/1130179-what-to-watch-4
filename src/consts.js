@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const START_MOVIE_COUNT = 8;
 export const PROMO_MOCK_INDEX = 8;
 export const PREVIEW_MOVIE_DELAY = 1000;
@@ -13,4 +15,31 @@ export const MoviePageTabNames = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
   REVIEWS: `Reviews`
+};
+
+export const MoviePropTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    posterSource: PropTypes.string.isRequired,
+    previewMovie: PropTypes.string.isRequired,
+    coverSource: PropTypes.string.isRequired,
+    rating: PropTypes.shape({
+      score: PropTypes.string.isRequired,
+      level: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+    }).isRequired,
+    descriptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.string.isRequired,
+    runTime: PropTypes.string.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      score: PropTypes.string.isRequired,
+    })).isRequired
+  }).isRequired
 };

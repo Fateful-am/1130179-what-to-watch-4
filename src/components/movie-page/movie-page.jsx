@@ -1,7 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {MoviePageTabNames, SHORT_ACTORS_LIST_COUNT, MOVIE_REVIEWS_COLUMN_COUNT} from '../../consts.js';
+import {MoviePageTabNames, MoviePropTypes} from '../../consts.js';
 import MoviePageTabs from '../movie-page-tabs/movie-page-tabs.jsx';
+import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
+import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
+import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
 
 class MoviePage extends React.Component {
   constructor(props) {
@@ -10,7 +12,7 @@ class MoviePage extends React.Component {
     this._handleTabClick = this._handleTabClick.bind(this);
 
     this.state = {
-      activeTab: `Overview`,
+      activeTab: MoviePageTabNames.OVERVIEW,
     };
   }
 
@@ -20,148 +22,22 @@ class MoviePage extends React.Component {
     });
   }
 
-  _getOverviewMarkup() {
-    const {movie} = this.props;
-    const actors = movie.starring.split(`, `);
-    const shortActors = actors.length > SHORT_ACTORS_LIST_COUNT ? `${actors.slice(0, SHORT_ACTORS_LIST_COUNT).join(`, `)} and other` : movie.starring;
-
-    return (
-      <>
-      <div className="movie-rating">
-        <div className="movie-rating__score">{movie.rating.score}</div>
-        <p className="movie-rating__meta">
-          <span className="movie-rating__level">{movie.rating.level}</span>
-          <span className="movie-rating__count">{`${movie.rating.count} ratings`}</span>
-        </p>
-      </div>
-      <div className="movie-card__text">
-        {
-          movie.descriptions.map((description, i) => {
-            return (
-              <p key={`${description}-${i}`}>{description}</p>
-            );
-          })
-        }
-        <p className="movie-card__director"><strong>Director: {movie.director}</strong></p>
-        <p className="movie-card__starring"><strong>Starring: {shortActors}</strong></p>
-      </div>
-      </>
-    );
-  }
-  _getDetailsMarkup() {
+  _getCurrentMoviePageMarkup() {
     const {movie} = this.props;
 
-    const actors = movie.starring.split(`, `).map((actor, i, array) => {
-      return (
-        <React.Fragment key={`actor-${i}-${movie.title}`}>
-          {i < array.length - 1 ? `${actor},` : actor}
-          {(() => i === array.length - 1 ? null : <br/>)()}
-        </React.Fragment>
-      );
-    });
-
-    return (
-      <div className="movie-card__text movie-card__row">
-        <div className="movie-card__text-col">
-          <p className="movie-card__details-item">
-            <strong className="movie-card__details-name">Director</strong>
-            <span className="movie-card__details-value">{movie.director}</span>
-          </p>
-          <p className="movie-card__details-item">
-            <strong className="movie-card__details-name">Starring</strong>
-            <span className="movie-card__details-value">
-              {actors}
-            </span>
-          </p>
-        </div>
-
-        <div className="movie-card__text-col">
-          <p className="movie-card__details-item">
-            <strong className="movie-card__details-name">Run Time</strong>
-            <span className="movie-card__details-value">{movie.runTime}</span>
-          </p>
-          <p className="movie-card__details-item">
-            <strong className="movie-card__details-name">Genre</strong>
-            <span className="movie-card__details-value">{movie.genre}</span>
-          </p>
-          <p className="movie-card__details-item">
-            <strong className="movie-card__details-name">Released</strong>
-            <span className="movie-card__details-value">{movie.year}</span>
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  _getReviewsMarkup() {
-    const {movie} = this.props;
-
-    const renderReviews = (columnNum, reviews) => {
-      return (
-        reviews.map((review, i) => {
-          return (
-            <div
-              key={`review-${columnNum}-${i}-${movie.title}`}
-              className="review"
-            >
-              <blockquote className="review__quote">
-                <p className="review__text">{review.text}</p>
-
-                <footer className="review__details">
-                  <cite className="review__author">{review.author}</cite>
-                  <time className="review__date" dateTime="2016-12-24">{review.date}</time>
-                </footer>
-              </blockquote>
-
-              <div className="review__rating">{review.score}</div>
-            </div>
-          );
-        })
-      );
-    };
-
-    const renderColumns = (columns) => {
-      return (
-        columns.map((column, i) => {
-          return (
-            <div
-              key={`column-${i}-${movie.title}`}
-              className="movie-card__reviews-col"
-            >
-              {renderReviews(i, column)}
-            </div>
-          );
-        })
-      );
-    };
-
-    const columns = [];
-    const reviewsPerColumn = Math.ceil(movie.reviews.length / MOVIE_REVIEWS_COLUMN_COUNT);
-    for (let i = 0; i < MOVIE_REVIEWS_COLUMN_COUNT; i++) {
-      columns.push(movie.reviews.slice(i * reviewsPerColumn, (i + 1) * reviewsPerColumn));
+    switch (this.state.activeTab) {
+      case MoviePageTabNames.DETAILS:
+        return <MoviePageDetails movie={movie} />;
+      case MoviePageTabNames.REVIEWS:
+        return <MoviePageReviews movie={movie} />;
+      default:
+        return <MoviePageOverview movie={movie} />;
     }
-
-    return (
-      <div className="movie-card__reviews movie-card__row">
-        {renderColumns(columns)}
-      </div>
-    );
   }
 
   render() {
     const {movie} = this.props;
     const tabs = Object.values(MoviePageTabNames);
-    let movieCardMarkup;
-    switch (this.state.activeTab) {
-      case MoviePageTabNames.REVIEWS:
-        movieCardMarkup = this._getReviewsMarkup();
-        break;
-      case MoviePageTabNames.OVERVIEW:
-        movieCardMarkup = this._getOverviewMarkup();
-        break;
-      default:
-        movieCardMarkup = this._getDetailsMarkup();
-    }
 
     return (
       <>
@@ -229,7 +105,7 @@ class MoviePage extends React.Component {
                   tabs={tabs}
                   onTabClick={this._handleTabClick}
                 />
-                {movieCardMarkup}
+                {this._getCurrentMoviePageMarkup()}
               </div>
             </div>
           </div>
@@ -299,31 +175,6 @@ class MoviePage extends React.Component {
   }
 }
 
-MoviePage.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    posterSource: PropTypes.string.isRequired,
-    previewMovie: PropTypes.string.isRequired,
-    coverSource: PropTypes.string.isRequired,
-    rating: PropTypes.shape({
-      score: PropTypes.string.isRequired,
-      level: PropTypes.string.isRequired,
-      count: PropTypes.number.isRequired,
-    }).isRequired,
-    descriptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.string.isRequired,
-    runTime: PropTypes.string.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      score: PropTypes.string.isRequired,
-    })).isRequired
-  }).isRequired
-};
+MoviePage.propTypes = MoviePropTypes;
 
 export default MoviePage;
