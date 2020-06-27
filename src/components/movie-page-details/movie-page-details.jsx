@@ -4,7 +4,7 @@ import {MoviePropTypes} from '../../consts';
 const MoviePageDetails = ({movie}) => {
   const actors = movie.starring.split(`, `).map((actor, i, array) => {
     return (
-      <React.Fragment key={`actor-${i}-${movie.title}`}>
+      <React.Fragment key={`actor-${i}-${movie.id}`}>
         {i < array.length - 1 ? `${actor},` : actor}
         {(() => i === array.length - 1 ? null : <br/>)()}
       </React.Fragment>

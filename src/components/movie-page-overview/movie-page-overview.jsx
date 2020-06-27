@@ -18,7 +18,7 @@ const MoviePageOverview = ({movie}) => {
         {
           movie.descriptions.map((description, i) => {
             return (
-              <p key={`${description}-${i}`}>{description}</p>
+              <p key={`desc-${i}-${movie.id}`}>{description}</p>
             );
           })
         }

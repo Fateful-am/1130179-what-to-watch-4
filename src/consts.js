@@ -38,7 +38,7 @@ export const MoviePropTypes = {
     reviews: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
+      date: PropTypes.instanceOf(Date),
       score: PropTypes.string.isRequired,
     })).isRequired
   }).isRequired

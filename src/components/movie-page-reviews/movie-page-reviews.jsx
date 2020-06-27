@@ -2,12 +2,13 @@ import React from 'react';
 import {MOVIE_REVIEWS_COLUMN_COUNT, MoviePropTypes} from '../../consts';
 
 const MoviePageReviews = ({movie}) => {
+
   const renderColumns = (columns) => {
     return (
       columns.map((column, i) => {
         return (
           <div
-            key={`column-${i}-${movie.title}`}
+            key={`column-${i}-${movie.id}`}
             className="movie-card__reviews-col"
           >
             {renderReviews(i, column)}
@@ -22,7 +23,7 @@ const MoviePageReviews = ({movie}) => {
       reviews.map((review, i) => {
         return (
           <div
-            key={`review-${columnNum}-${i}-${movie.title}`}
+            key={`review-${columnNum}-${i}-${movie.id}`}
             className="review"
           >
             <blockquote className="review__quote">
@@ -30,7 +31,7 @@ const MoviePageReviews = ({movie}) => {
 
               <footer className="review__details">
                 <cite className="review__author">{review.author}</cite>
-                <time className="review__date" dateTime="2016-12-24">{review.date}</time>
+                <time className="review__date" dateTime="2016-12-24">{review.title}</time>
               </footer>
             </blockquote>
 

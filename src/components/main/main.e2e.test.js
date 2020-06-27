@@ -37,13 +37,13 @@ it(`Should all movie cards be pressed`, () => {
               {
                 text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
                 author: `Kate Muir`,
-                date: `December 24, 2016`,
+                date: new Date(`2016-12-24`),
                 score: `8,9`,
               },
               {
                 text: `ut vero? Dolores in incidunt ipsa soluta!`,
                 author: `Matthew Lickona`,
-                date: `December 20, 2016`,
+                date: new Date(`2016-12-20`),
                 score: `7,2`,
               },
             ],

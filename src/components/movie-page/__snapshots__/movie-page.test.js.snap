@@ -159,6 +159,7 @@ Array [
           >
             <ul
               className="movie-nav__list"
+              onClick={[Function]}
             >
               <li
                 className="movie-nav__item movie-nav__item--active"
