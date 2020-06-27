@@ -12,34 +12,26 @@ const MoviePageDetails = ({movie}) => {
     );
   });
 
+  const renderMovieCardDetailsItem = (name, value) => {
+    return (
+      <p className="movie-card__details-item">
+        <strong className="movie-card__details-name">{name}</strong>
+        <span className="movie-card__details-value">{value}</span>
+      </p>
+    );
+  };
+
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
-        <p className="movie-card__details-item">
-          <strong className="movie-card__details-name">Director</strong>
-          <span className="movie-card__details-value">{movie.director}</span>
-        </p>
-        <p className="movie-card__details-item">
-          <strong className="movie-card__details-name">Starring</strong>
-          <span className="movie-card__details-value">
-            {actors}
-          </span>
-        </p>
+        {renderMovieCardDetailsItem(`Director`, movie.director)}
+        {renderMovieCardDetailsItem(`Starring`, actors)}
       </div>
 
       <div className="movie-card__text-col">
-        <p className="movie-card__details-item">
-          <strong className="movie-card__details-name">Run Time</strong>
-          <span className="movie-card__details-value">{formatDuration(movie.runTime)}</span>
-        </p>
-        <p className="movie-card__details-item">
-          <strong className="movie-card__details-name">Genre</strong>
-          <span className="movie-card__details-value">{movie.genre}</span>
-        </p>
-        <p className="movie-card__details-item">
-          <strong className="movie-card__details-name">Released</strong>
-          <span className="movie-card__details-value">{movie.year}</span>
-        </p>
+        {renderMovieCardDetailsItem(`Run Time`, formatDuration(movie.runTime))}
+        {renderMovieCardDetailsItem(`Genre`, formatDuration(movie.genre))}
+        {renderMovieCardDetailsItem(`Released`, formatDuration(movie.year))}
       </div>
     </div>
   );
