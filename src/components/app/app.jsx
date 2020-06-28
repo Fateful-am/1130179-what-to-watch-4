@@ -1,52 +1,35 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import {PageKind, START_MOVIE_COUNT, MOVIE_LIKE_THIS_COUNT} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import {getMovieById} from '../../utils/helpers';
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentPage: PageKind.MAIN,
-      currentId: null
-    };
-
-    this._handleMovieCardClick = this._handleMovieCardClick.bind(this);
-  }
-
-  _handleMovieCardClick(movieId) {
-    this.setState({
-      currentPage: PageKind.MOVIE_PAGE,
-      currentId: movieId
-    });
-  }
-
   _stateRender() {
-    const {promoMovie, movies} = this.props;
-    const {currentPage, currentId} = this.state;
+    const {promoMovie, movies, currentPage, currentMovieId, onMovieCardClick} = this.props;
     switch (currentPage) {
       case PageKind.MAIN:
         return (
           <Main
             promoMovie={promoMovie}
             movies={movies.slice(0, START_MOVIE_COUNT)}
-            onMovieCardClick={this._handleMovieCardClick}
+            onMovieCardClick={onMovieCardClick}
           />
         );
       case PageKind.MOVIE_PAGE:
-        const currentMovie = getMovieById(movies, currentId);
+        const currentMovie = getMovieById(movies, currentMovieId);
         const currentGenre = currentMovie.genre;
-        const moviesLikeThis = movies.filter((movie) => movie.genre === currentGenre && movie.id !== currentId)
+        const moviesLikeThis = movies.filter((movie) => movie.genre === currentGenre && movie.id !== currentMovieId)
           .slice(0, MOVIE_LIKE_THIS_COUNT);
         return (
           <MoviePage
             movie={currentMovie}
             moviesLikeThis={moviesLikeThis}
-            onMovieCardClick={this._handleMovieCardClick}
+            onMovieCardClick={onMovieCardClick}
           />
         );
     }
@@ -54,7 +37,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {movies, promoMovie} = this.props;
+    const {movies, promoMovie, onMovieCardClick} = this.props;
     const promoGenre = promoMovie.genre;
     const moviesLikeThis = movies.filter((movie) => movie.genre === promoGenre).slice(0, MOVIE_LIKE_THIS_COUNT);
     return (
@@ -67,7 +50,7 @@ class App extends PureComponent {
             <MoviePage
               movie={promoMovie}
               moviesLikeThis={moviesLikeThis}
-              onMovieCardClick={this._handleMovieCardClick}
+              onMovieCardClick={onMovieCardClick}
             />
           </Route>
         </Switch>
@@ -77,6 +60,9 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  currentPage: PropTypes.string.isRequired,
+  currentMovieId: PropTypes.number,
+  onMovieCardClick: PropTypes.func.isRequired,
   promoMovie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -93,4 +79,16 @@ App.propTypes = {
   })).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  currentPage: state.currentPage,
+  currentMovieId: state.currentMovieId,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onMovieCardClick(movieId) {
+    dispatch(ActionCreator.showMovieDetail(movieId));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
