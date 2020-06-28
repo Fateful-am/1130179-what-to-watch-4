@@ -43,11 +43,16 @@ const MoviePageReviews = ({movie}) => {
     );
   };
 
-  const columns = [];
-  const reviewsPerColumn = Math.ceil(movie.reviews.length / MOVIE_REVIEWS_COLUMN_COUNT);
-  for (let i = 0; i < MOVIE_REVIEWS_COLUMN_COUNT; i++) {
-    columns.push(movie.reviews.slice(i * reviewsPerColumn, (i + 1) * reviewsPerColumn));
-  }
+  const divideReviewsIntoColumns = (reviews, columnCount) => {
+    const columns = [];
+    const reviewsPerColumn = Math.ceil(reviews.length / columnCount);
+    for (let i = 0; i < columnCount; i++) {
+      columns.push(reviews.slice(i * reviewsPerColumn, (i + 1) * reviewsPerColumn));
+    }
+    return columns;
+  };
+
+  const columns = divideReviewsIntoColumns(movie.reviews, MOVIE_REVIEWS_COLUMN_COUNT);
 
   return (
     <div className="movie-card__reviews movie-card__row">

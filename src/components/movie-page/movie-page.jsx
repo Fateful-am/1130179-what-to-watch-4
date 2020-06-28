@@ -24,7 +24,7 @@ class MoviePage extends React.Component {
     });
   }
 
-  _getCurrentMoviePageMarkup() {
+  _renderCurrentMoviePage() {
     const {movie} = this.props;
 
     switch (this.state.activeTab) {
@@ -110,7 +110,7 @@ class MoviePage extends React.Component {
                     onTabClick={this._handleTabClick}
                   />
                 </nav>
-                {this._getCurrentMoviePageMarkup()}
+                {this._renderCurrentMoviePage()}
               </div>
             </div>
           </div>
