@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MoviePageTabs = ({tabs, activeTab, className, onTabClick}) => {
+const Tabs = ({tabs, activeTab, className, onTabClick}) => {
   const handleTabClick = (evt) =>{
     evt.preventDefault();
     if (evt.target.tagName === `A`) {
@@ -27,7 +27,7 @@ const MoviePageTabs = ({tabs, activeTab, className, onTabClick}) => {
   );
 };
 
-MoviePageTabs.propTypes = {
+Tabs.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
   className: PropTypes.shape({
     list: PropTypes.string.isRequired,
@@ -39,4 +39,4 @@ MoviePageTabs.propTypes = {
   onTabClick: PropTypes.func.isRequired,
 };
 
-export default MoviePageTabs;
+export default Tabs;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoviePageTabs component render correctly with Details tab 1`] = `
+exports[`Tabs component render correctly with Details tab 1`] = `
 <ul
   className="movie-nav__list"
   onClick={[Function]}
@@ -38,7 +38,7 @@ exports[`MoviePageTabs component render correctly with Details tab 1`] = `
 </ul>
 `;
 
-exports[`MoviePageTabs component render correctly with Overview tab 1`] = `
+exports[`Tabs component render correctly with Overview tab 1`] = `
 <ul
   className="movie-nav__list"
   onClick={[Function]}
@@ -76,7 +76,7 @@ exports[`MoviePageTabs component render correctly with Overview tab 1`] = `
 </ul>
 `;
 
-exports[`MoviePageTabs component render correctly with Reviews tab 1`] = `
+exports[`Tabs component render correctly with Reviews tab 1`] = `
 <ul
   className="movie-nav__list"
   onClick={[Function]}

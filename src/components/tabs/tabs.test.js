@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MoviePageTabs from './movie-page-tabs';
+import Tabs from './tabs';
 
-describe(`MoviePageTabs component render correctly`, () => {
+describe(`Tabs component render correctly`, () => {
   const mockClassNames = {
     list: `movie-nav__list`,
     item: `movie-nav__item`,
@@ -13,7 +13,7 @@ describe(`MoviePageTabs component render correctly`, () => {
   it(`with Overview tab`, () => {
     const tree = renderer
     .create(
-        <MoviePageTabs
+        <Tabs
           tabs={[`Overview`, `Details`, `Reviews`]}
           className={mockClassNames}
           activeTab={`Overview`}
@@ -28,7 +28,7 @@ describe(`MoviePageTabs component render correctly`, () => {
   it(`with Details tab`, () => {
     const tree = renderer
       .create(
-          <MoviePageTabs
+          <Tabs
             tabs={[`Overview`, `Details`, `Reviews`]}
             className={mockClassNames}
             activeTab={`Details`}
@@ -43,7 +43,7 @@ describe(`MoviePageTabs component render correctly`, () => {
   it(`with Reviews tab`, () => {
     const tree = renderer
       .create(
-          <MoviePageTabs
+          <Tabs
             tabs={[`Overview`, `Details`, `Reviews`]}
             className={mockClassNames}
             activeTab={`Reviews`}

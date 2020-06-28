@@ -1,6 +1,6 @@
 import React from 'react';
 import {MoviePageTabNames, MoviePropTypes, MoviePageTabClassNames} from '../../consts.js';
-import MoviePageTabs from '../movie-page-tabs/movie-page-tabs.jsx';
+import Tabs from '../tabs/tabs.jsx';
 import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
 import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
 import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
@@ -103,7 +103,7 @@ class MoviePage extends React.Component {
 
               <div className="movie-card__desc">
                 <nav className="movie-nav movie-card__nav">
-                  <MoviePageTabs
+                  <Tabs
                     activeTab={this.state.activeTab}
                     tabs={tabs}
                     className={MoviePageTabClassNames}

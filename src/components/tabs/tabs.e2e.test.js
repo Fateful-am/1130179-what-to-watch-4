@@ -1,13 +1,13 @@
 import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import MoviePageTabs from './movie-page-tabs';
+import Tabs from './tabs';
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should moviePageTabs clicked`, () => {
+it(`Should all Tabs clicked`, () => {
   const mockClassNames = {
     list: `movie-nav__list`,
     item: `movie-nav__item`,
@@ -18,7 +18,7 @@ it(`Should moviePageTabs clicked`, () => {
   const tabClick = jest.fn();
 
   const moviePageTabsScreen = mount(
-      <MoviePageTabs
+      <Tabs
         tabs={[`Overview`, `Details`, `Reviews`]}
         className={mockClassNames}
         activeTab={`Overview`}
