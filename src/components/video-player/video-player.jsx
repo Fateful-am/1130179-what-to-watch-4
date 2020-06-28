@@ -18,6 +18,12 @@ export default class VideoPlayer extends PureComponent {
   componentDidMount() {
     const video = this._videoRef.current;
 
+    video.muted = true;
+    video.width = 280;
+    video.height = 175;
+    video.preload = `none`;
+    video.poster = this.props.previewSource;
+
     video.onabort = () => {
       if (video.paused && this.props.onPause) {
         this.props.onPause();
@@ -64,8 +70,6 @@ export default class VideoPlayer extends PureComponent {
   }
 
   render() {
-    const {previewSource} = this.props;
-
     const handleLeave = (evt) => {
       evt.preventDefault();
       this.setState({
@@ -85,10 +89,8 @@ export default class VideoPlayer extends PureComponent {
         onMouseEnter={handleHover}
         onMouseLeave={handleLeave}
       >
-        <video width="280" height="175" preload="none"
+        <video
           ref={this._videoRef}
-          muted={true}
-          poster={previewSource}
         />
       </div>
     );

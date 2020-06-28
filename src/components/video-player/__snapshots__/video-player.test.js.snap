@@ -6,12 +6,6 @@ exports[`Render MovieCard 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <video
-    height="175"
-    muted={true}
-    poster="img/macbeth.jpg"
-    preload="none"
-    width="280"
-  />
+  <video />
 </div>
 `;
