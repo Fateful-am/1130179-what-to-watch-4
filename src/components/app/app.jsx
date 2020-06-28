@@ -40,7 +40,8 @@ class App extends PureComponent {
       case PageKind.MOVIE_PAGE:
         const currentMovie = getMovieById(movies, currentId);
         const currentGenre = currentMovie.genre;
-        const moviesLikeThis = movies.filter((movie) => movie.genre === currentGenre && movie.id !== currentId).slice(0, MOVIE_LIKE_THIS_COUNT);
+        const moviesLikeThis = movies.filter((movie) => movie.genre === currentGenre && movie.id !== currentId)
+          .slice(0, MOVIE_LIKE_THIS_COUNT);
         return (
           <MoviePage
             movie={currentMovie}

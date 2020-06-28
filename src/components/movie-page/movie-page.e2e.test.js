@@ -9,6 +9,7 @@ Enzyme.configure({
 
 it(`Should moviePageTabs clicked and correct state established`, () => {
 
+  const tabs = [`Overview`, `Details`, `Reviews`];
   const moviePageScreen = mount(
       <MoviePage
         movie={{
@@ -104,33 +105,15 @@ it(`Should moviePageTabs clicked and correct state established`, () => {
   const tabLinks = moviePageScreen.find(`.movie-nav__link`);
   const formSendPrevention = jest.fn();
 
-  tabLinks.at(0).simulate(`click`, {
-    preventDefault: formSendPrevention,
-    target: {
-      outerText: `Overview`,
-      tagName: `A`
-    }
+  tabLinks.forEach((tabLink, i) => {
+    tabLink.simulate(`click`, {
+      preventDefault: formSendPrevention,
+      target: {
+        outerText: tabLink.props().children,
+        tagName: tabLink.type().toUpperCase()
+      }
+    });
+
+    expect(moviePageScreen.state()).toMatchObject({activeTab: tabs[i]});
   });
-
-  expect(moviePageScreen.state()).toMatchObject({activeTab: `Overview`});
-
-  tabLinks.at(1).simulate(`click`, {
-    preventDefault: formSendPrevention,
-    target: {
-      outerText: `Details`,
-      tagName: `A`
-    }
-  });
-
-  expect(moviePageScreen.state()).toMatchObject({activeTab: `Details`});
-
-  tabLinks.at(2).simulate(`click`, {
-    preventDefault: formSendPrevention,
-    target: {
-      outerText: `Reviews`,
-      tagName: `A`
-    }
-  });
-
-  expect(moviePageScreen.state()).toMatchObject({activeTab: `Reviews`});
 });
