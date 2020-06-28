@@ -31,19 +31,19 @@ it(`Should all movie cards be pressed`, () => {
               `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!`
             ],
             director: `Wes Andreson`,
-            starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other`,
-            runTime: `1h 39m`,
+            starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson, Adrien Brody, Ralph Fiennes, Jeff Goldblum`,
+            runTime: 99,
             reviews: [
               {
                 text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
                 author: `Kate Muir`,
-                date: `December 24, 2016`,
+                date: new Date(`2016-12-24`),
                 score: `8,9`,
               },
               {
                 text: `ut vero? Dolores in incidunt ipsa soluta!`,
                 author: `Matthew Lickona`,
-                date: `December 20, 2016`,
+                date: new Date(`2016-12-20`),
                 score: `7,2`,
               },
             ],

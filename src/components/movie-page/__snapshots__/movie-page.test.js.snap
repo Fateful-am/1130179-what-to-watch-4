@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render MoviePage Overview 1`] = `
+exports[`Render MoviePage with Overview tab 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
@@ -159,6 +159,7 @@ Array [
           >
             <ul
               className="movie-nav__list"
+              onClick={[Function]}
             >
               <li
                 className="movie-nav__item movie-nav__item--active"
@@ -261,16 +262,15 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          id="mc-4"
+          onClick={[Function]}
         >
           <div
             className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
+            <video />
           </div>
           <h3
             className="small-movie-card__title"
@@ -279,22 +279,21 @@ Array [
               className="small-movie-card__link"
               href="#"
             >
-              Fantastic Beasts: The Crimes of Grindelwald
+              Moonrise Kingdom
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          id="mc-5"
+          onClick={[Function]}
         >
           <div
             className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="img/bohemian-rhapsody.jpg"
-              width="280"
-            />
+            <video />
           </div>
           <h3
             className="small-movie-card__title"
@@ -303,22 +302,21 @@ Array [
               className="small-movie-card__link"
               href="#"
             >
-              Bohemian Rhapsody
+              Seven Years in Tibet
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          id="mc-6"
+          onClick={[Function]}
         >
           <div
             className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="img/macbeth.jpg"
-              width="280"
-            />
+            <video />
           </div>
           <h3
             className="small-movie-card__title"
@@ -327,22 +325,21 @@ Array [
               className="small-movie-card__link"
               href="#"
             >
-              Macbeth
+              Midnight Special
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          id="mc-7"
+          onClick={[Function]}
         >
           <div
             className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
-            <img
-              alt="Aviator"
-              height="175"
-              src="img/aviator.jpg"
-              width="280"
-            />
+            <video />
           </div>
           <h3
             className="small-movie-card__title"
@@ -351,7 +348,7 @@ Array [
               className="small-movie-card__link"
               href="#"
             >
-              Aviator
+              War of the Worlds
             </a>
           </h3>
         </article>

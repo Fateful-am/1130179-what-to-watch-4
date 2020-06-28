@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {PageKind} from '../../consts';
+import {PageKind, START_MOVIE_COUNT, MOVIE_LIKE_THIS_COUNT} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import {getMovieById} from '../../utils/helpers';
@@ -33,14 +33,20 @@ class App extends PureComponent {
         return (
           <Main
             promoMovie={promoMovie}
-            movies={movies}
+            movies={movies.slice(0, START_MOVIE_COUNT)}
             onMovieCardClick={this._handleMovieCardClick}
           />
         );
       case PageKind.MOVIE_PAGE:
+        const currentMovie = getMovieById(movies, currentId);
+        const currentGenre = currentMovie.genre;
+        const moviesLikeThis = movies.filter((movie) => movie.genre === currentGenre && movie.id !== currentId)
+          .slice(0, MOVIE_LIKE_THIS_COUNT);
         return (
           <MoviePage
-            movie={getMovieById(movies, currentId)}
+            movie={currentMovie}
+            moviesLikeThis={moviesLikeThis}
+            onMovieCardClick={this._handleMovieCardClick}
           />
         );
     }
@@ -48,7 +54,9 @@ class App extends PureComponent {
   }
 
   render() {
-    const {promoMovie} = this.props;
+    const {movies, promoMovie} = this.props;
+    const promoGenre = promoMovie.genre;
+    const moviesLikeThis = movies.filter((movie) => movie.genre === promoGenre).slice(0, MOVIE_LIKE_THIS_COUNT);
     return (
       <BrowserRouter>
         <Switch>
@@ -58,6 +66,8 @@ class App extends PureComponent {
           <Route exact path="/dev-film">
             <MoviePage
               movie={promoMovie}
+              moviesLikeThis={moviesLikeThis}
+              onMovieCardClick={this._handleMovieCardClick}
             />
           </Route>
         </Switch>
