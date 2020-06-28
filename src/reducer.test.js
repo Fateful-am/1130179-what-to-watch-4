@@ -1,4 +1,4 @@
-import {reducer, ActionType} from "./reducer.js";
+import {reducer, ActionType, ActionCreator} from "./reducer.js";
 
 const movies = [
   {
@@ -362,6 +362,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     genre: `All genres`,
     movies,
+    genreMovies: movies
   });
 });
 
@@ -369,11 +370,144 @@ it(`Reducer should change genre to given value`, () => {
   expect(reducer({
     genre: `All genres`,
     movies,
-  }, {
-    type: ActionType.CHANGE_GENRE,
-    payload: `Comedy`
-  })).toEqual({
-    genre: `Comedy`,
+    genreMovies: movies
+  }, ActionCreator.changeGenre(`Comedy`)))
+    .toEqual({
+      genre: `Comedy`,
+      movies,
+      genreMovies: [
+        {
+          id: 0,
+          title: `Macbeth`,
+          genre: `Comedy`,
+          year: 2014,
+          posterSource: `img/macbeth.jpg`,
+          coverSource: `img/macbeth.jpg`,
+          previewSource: `img/macbeth.jpg`,
+          previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+          rating: {
+            score: `8,9`,
+            level: `Very good`,
+            count: 240,
+          },
+          descriptions: [
+            `Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur cum excepturi maiores obcaecati voluptates.Aliquid culpa harum ipsum numquam voluptates!`,
+            `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!`
+          ],
+          director: `Wes Andreson`,
+          starring: `Bill Murray, Edward Norton, Jude Law`,
+          runTime: 99,
+          reviews: [
+            {
+              text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
+              author: `Kate Muir`,
+              date: new Date(`2016-12-24`),
+              score: `8,9`,
+            },
+            {
+              text: `ut vero? Dolores in incidunt ipsa soluta!`,
+              author: `Matthew Lickona`,
+              date: new Date(`2016-12-20`),
+              score: `7,2`,
+            },
+          ],
+        },
+        {
+          id: 2,
+          title: `We need to talk about Kevin`,
+          genre: `Comedy`,
+          year: 2016,
+          posterSource: `img/we-need-to-talk-about-kevin.jpg`,
+          coverSource: `img/we-need-to-talk-about-kevin.jpg`,
+          previewSource: `img/we-need-to-talk-about-kevin.jpg`,
+          previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+          rating: {
+            score: `8,9`,
+            level: `Very good`,
+            count: 240,
+          },
+          descriptions: [
+            `Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur cum excepturi maiores obcaecati voluptates.Aliquid culpa harum ipsum numquam voluptates!`,
+            `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!`
+          ],
+          director: `Wes Andreson`,
+          starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru`,
+          runTime: 99,
+          reviews: [
+            {
+              text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
+              author: `Kate Muir`,
+              date: new Date(`2016-12-24`),
+              score: `8,9`,
+            },
+            {
+              text: `ut vero? Dolores in incidunt ipsa soluta!`,
+              author: `Matthew Lickona`,
+              date: new Date(`2016-12-20`),
+              score: `7,2`,
+            },
+          ],
+
+        },
+        {
+          id: 4,
+          title: `Moonrise Kingdom`,
+          genre: `Comedy`,
+          year: 2018,
+          posterSource: `img/moonrise-kingdom.jpg`,
+          coverSource: `img/moonrise-kingdom.jpg`,
+          previewSource: `img/moonrise-kingdom.jpg`,
+          previewMovie: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+          rating: {
+            score: `8,9`,
+            level: `Very good`,
+            count: 240,
+          },
+          descriptions: [
+            `Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur cum excepturi maiores obcaecati voluptates.Aliquid culpa harum ipsum numquam voluptates!`,
+            `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!`
+          ],
+          director: `Wes Andreson`,
+          starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson`,
+          runTime: 99,
+          reviews: [
+            {
+              text: `Aspernatur cum excepturi maiores obcaecati voluptates`,
+              author: `Kate Muir`,
+              date: new Date(`2016-12-24`),
+              score: `8,9`,
+            },
+            {
+              text: `ut vero? Dolores in incidunt ipsa soluta!`,
+              author: `Matthew Lickona`,
+              date: new Date(`2016-12-20`),
+              score: `7,2`,
+            },
+          ],
+
+        },
+      ],
+    });
+});
+
+it(`Reducer should set to initial value`, () => {
+  expect(reducer({
+    genre: `All genres`,
     movies,
+    genreMovies: movies
+  }, ActionCreator.changeGenre(`All genres`)))
+    .toEqual({
+      genre: `All genres`,
+      movies,
+      genreMovies: movies,
+    });
+});
+
+describe(`Action creators work correctly.`, () => {
+  it(`Action creator for changing genre returns correct action`, () => {
+    expect(ActionCreator.changeGenre(`Comedy`)).toEqual({
+      type: ActionType.CHANGE_GENRE,
+      payload: `Comedy`,
+    });
   });
 });
