@@ -19,6 +19,10 @@ export const formatDuration = (duration) => {
   return moment.utc(moment.duration(duration, `minutes`).asMilliseconds()).format(`H[h] m[m]`);
 };
 
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
 
 export const smallMovieCards = [
   `Fantastic Beasts: The Crimes of Grindelwald`,

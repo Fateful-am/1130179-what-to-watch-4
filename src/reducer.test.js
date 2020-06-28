@@ -1,4 +1,6 @@
-export const mockMovies = [
+import {reducer, ActionType} from "./reducer.js";
+
+const movies = [
   {
     id: 0,
     title: `Macbeth`,
@@ -355,3 +357,23 @@ export const mockMovies = [
     ],
   },
 ];
+
+it(`Reducer without additional parameters should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    genre: `All genres`,
+    movies,
+  });
+});
+
+it(`Reducer should change genre to given value`, () => {
+  expect(reducer({
+    genre: `All genres`,
+    movies,
+  }, {
+    type: ActionType.CHANGE_GENRE,
+    payload: `Comedy`
+  })).toEqual({
+    genre: `Comedy`,
+    movies,
+  });
+});
