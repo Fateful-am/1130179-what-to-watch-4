@@ -3,11 +3,19 @@ import renderer from 'react-test-renderer';
 import MoviePageTabs from './movie-page-tabs';
 
 describe(`MoviePageTabs component render correctly`, () => {
+  const mockClassNames = {
+    list: `movie-nav__list`,
+    item: `movie-nav__item`,
+    activeItem: `movie-nav__item--active`,
+    link: `movie-nav__link`
+  };
+
   it(`with Overview tab`, () => {
     const tree = renderer
     .create(
         <MoviePageTabs
           tabs={[`Overview`, `Details`, `Reviews`]}
+          className={mockClassNames}
           activeTab={`Overview`}
           onTabClick={()=>{}}
         />
@@ -22,6 +30,7 @@ describe(`MoviePageTabs component render correctly`, () => {
       .create(
           <MoviePageTabs
             tabs={[`Overview`, `Details`, `Reviews`]}
+            className={mockClassNames}
             activeTab={`Details`}
             onTabClick={()=>{}}
           />
@@ -36,6 +45,7 @@ describe(`MoviePageTabs component render correctly`, () => {
       .create(
           <MoviePageTabs
             tabs={[`Overview`, `Details`, `Reviews`]}
+            className={mockClassNames}
             activeTab={`Reviews`}
             onTabClick={()=>{}}
           />

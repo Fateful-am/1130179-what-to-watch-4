@@ -8,11 +8,19 @@ Enzyme.configure({
 });
 
 it(`Should moviePageTabs clicked`, () => {
+  const mockClassNames = {
+    list: `movie-nav__list`,
+    item: `movie-nav__item`,
+    activeItem: `movie-nav__item--active`,
+    link: `movie-nav__link`
+  };
+
   const tabClick = jest.fn();
 
   const moviePageTabsScreen = mount(
       <MoviePageTabs
         tabs={[`Overview`, `Details`, `Reviews`]}
+        className={mockClassNames}
         activeTab={`Overview`}
         onTabClick={tabClick}
       />

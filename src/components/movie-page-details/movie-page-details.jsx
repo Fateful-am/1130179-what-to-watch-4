@@ -3,11 +3,17 @@ import {MoviePropTypes} from '../../consts';
 import {formatDuration} from '../../utils/helpers.js';
 
 const MoviePageDetails = ({movie}) => {
+  const renderActorName = (actor, isLast) => {
+    if (isLast) {
+      return <>{actor}</>;
+    }
+    return <>{`${actor},`}<br/></>;
+  };
+
   const actors = movie.starring.split(`, `).map((actor, i, array) => {
     return (
       <React.Fragment key={`actor-${i}-${movie.id}`}>
-        {i < array.length - 1 ? `${actor},` : actor}
-        {(() => i === array.length - 1 ? null : <br/>)()}
+        {renderActorName(actor, i === array.length - 1)}
       </React.Fragment>
     );
   });

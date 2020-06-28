@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MoviePageTabs = ({tabs, activeTab, onTabClick}) => {
+const MoviePageTabs = ({tabs, activeTab, className, onTabClick}) => {
   const handleTabClick = (evt) =>{
     evt.preventDefault();
     if (evt.target.tagName === `A`) {
@@ -10,28 +10,31 @@ const MoviePageTabs = ({tabs, activeTab, onTabClick}) => {
   };
 
   return (
-    <nav className="movie-nav movie-card__nav">
-      <ul className="movie-nav__list"
-        onClick={handleTabClick}
-      >
-        {tabs.map((tab, i) => {
-          return (
-            <li
-              key={`tab-${tab}-${i}`}
-              className={`movie-nav__item${tab === activeTab ? ` movie-nav__item--active` : ``}`}
-            >
-              <a href="#" className="movie-nav__link">{tab}</a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-
+    <ul className={className.list}
+      onClick={handleTabClick}
+    >
+      {tabs.map((tab, i) => {
+        return (
+          <li
+            key={`tab-${tab}-${i}`}
+            className={`${className.item}${tab === activeTab ? ` ${className.activeItem}` : ``}`}
+          >
+            <a href="#" className={className.link}>{tab}</a>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
 MoviePageTabs.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  className: PropTypes.shape({
+    list: PropTypes.string.isRequired,
+    item: PropTypes.string.isRequired,
+    activeItem: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+  }).isRequired,
   activeTab: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
 };

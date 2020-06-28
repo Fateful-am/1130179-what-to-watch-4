@@ -18,6 +18,13 @@ export const MoviePageTabNames = {
   REVIEWS: `Reviews`
 };
 
+export const MoviePageTabClassNames = {
+  list: `movie-nav__list`,
+  item: `movie-nav__item`,
+  activeItem: `movie-nav__item--active`,
+  link: `movie-nav__link`
+};
+
 export const MoviePropTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
