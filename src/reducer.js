@@ -1,9 +1,9 @@
 import {extend} from "./utils/helpers.js";
 import {mockMovies} from './mocks/films';
-import {PageKind} from './consts';
+import {PageKind, ALL_GENRES} from './consts';
 
 const initialState = {
-  genre: `All genres`,
+  genre: ALL_GENRES,
   currentPage: PageKind.MAIN,
   currentMovieId: null,
   movies: mockMovies,
@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
       let genreMovies;
-      if (action.payload === `All genres`) {
+      if (action.payload === ALL_GENRES) {
         genreMovies = state.movies.slice();
       } else {
         genreMovies = state.movies.filter((movie) => movie.genre === action.payload);

@@ -1,5 +1,5 @@
 import {reducer, ActionType, ActionCreator} from "./reducer.js";
-import {PageKind} from './consts';
+import {PageKind, ALL_GENRES} from './consts';
 
 const movies = [
   {
@@ -361,7 +361,7 @@ const movies = [
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
-    genre: `All genres`,
+    genre: ALL_GENRES,
     currentPage: PageKind.MAIN,
     currentMovieId: null,
     movies,
@@ -371,7 +371,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
 
 it(`Reducer should change genre to given value`, () => {
   expect(reducer({
-    genre: `All genres`,
+    genre: ALL_GENRES,
     currentPage: PageKind.MAIN,
     currentMovieId: null,
     movies,
@@ -499,14 +499,14 @@ it(`Reducer should change genre to given value`, () => {
 
 it(`Reducer should set to initial value`, () => {
   expect(reducer({
-    genre: `All genres`,
+    genre: ALL_GENRES,
     currentPage: PageKind.MAIN,
     currentMovieId: null,
     movies,
     genreMovies: movies
-  }, ActionCreator.changeGenre(`All genres`)))
+  }, ActionCreator.changeGenre(ALL_GENRES)))
     .toEqual({
-      genre: `All genres`,
+      genre: ALL_GENRES,
       currentPage: PageKind.MAIN,
       currentMovieId: null,
       movies,
@@ -516,14 +516,14 @@ it(`Reducer should set to initial value`, () => {
 
 it(`Reducer should set to currentMovieId value`, () => {
   expect(reducer({
-    genre: `All genres`,
+    genre: ALL_GENRES,
     currentPage: PageKind.MAIN,
     currentMovieId: null,
     movies,
     genreMovies: movies
   }, ActionCreator.showMovieDetail(0)))
     .toEqual({
-      genre: `All genres`,
+      genre: ALL_GENRES,
       currentPage: PageKind.MOVIE_PAGE,
       currentMovieId: 0,
       movies,
@@ -546,4 +546,5 @@ describe(`Action creators work correctly.`, () => {
       payload: 0,
     });
   });
+
 });
