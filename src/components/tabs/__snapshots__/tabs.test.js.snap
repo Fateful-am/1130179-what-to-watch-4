@@ -1,6 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tabs component render correctly with Details tab 1`] = `
+exports[`Tabs component for Main render correctly: with "All genres" tab 1`] = `
+<ul
+  className="catalog__genres-list"
+  onClick={[Function]}
+>
+  <li
+    className="catalog__genres-item catalog__genres-item--active"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      All genres
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Comedy
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Drama
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Tabs component for Main render correctly: with "Comedy" tab 1`] = `
+<ul
+  className="catalog__genres-list"
+  onClick={[Function]}
+>
+  <li
+    className="catalog__genres-item"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      All genres
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item catalog__genres-item--active"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Comedy
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Drama
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Tabs component for Main render correctly: with "Drama" tab 1`] = `
+<ul
+  className="catalog__genres-list"
+  onClick={[Function]}
+>
+  <li
+    className="catalog__genres-item"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      All genres
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Comedy
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item catalog__genres-item--active"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Drama
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Tabs component for MoviePage render correctly: with Details tab 1`] = `
 <ul
   className="movie-nav__list"
   onClick={[Function]}
@@ -38,7 +152,7 @@ exports[`Tabs component render correctly with Details tab 1`] = `
 </ul>
 `;
 
-exports[`Tabs component render correctly with Overview tab 1`] = `
+exports[`Tabs component for MoviePage render correctly: with Overview tab 1`] = `
 <ul
   className="movie-nav__list"
   onClick={[Function]}
@@ -76,7 +190,7 @@ exports[`Tabs component render correctly with Overview tab 1`] = `
 </ul>
 `;
 
-exports[`Tabs component render correctly with Reviews tab 1`] = `
+exports[`Tabs component for MoviePage render correctly: with Reviews tab 1`] = `
 <ul
   className="movie-nav__list"
   onClick={[Function]}

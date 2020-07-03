@@ -61,3 +61,4 @@ export const MoviePropTypes = {
     })).isRequired
   }).isRequired
 };
+

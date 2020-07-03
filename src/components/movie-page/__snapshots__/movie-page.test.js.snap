@@ -12,8 +12,8 @@ Array [
         className="movie-card__bg"
       >
         <img
-          alt="The Grand Budapest Hotel"
-          src="img/bg-the-grand-budapest-hotel.jpg"
+          alt="Macbeth"
+          src="img/macbeth.jpg"
         />
       </div>
       <h1
@@ -72,7 +72,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Macbeth
           </h2>
           <p
             className="movie-card__meta"
@@ -80,7 +80,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Drama
+              Comedy
             </span>
             <span
               className="movie-card__year"
@@ -145,9 +145,9 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Macbeth poster"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="img/macbeth.jpg"
             width="218"
           />
         </div>
@@ -220,10 +220,10 @@ Array [
             className="movie-card__text"
           >
             <p>
-              In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur cum excepturi maiores obcaecati voluptates.Aliquid culpa harum ipsum numquam voluptates!
             </p>
             <p>
-              Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!
             </p>
             <p
               className="movie-card__director"
@@ -238,7 +238,7 @@ Array [
             >
               <strong>
                 Starring: 
-                Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+                Bill Murray, Edward Norton, Jude Law
               </strong>
             </p>
           </div>
@@ -262,6 +262,29 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          id="mc-2"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              We need to talk about Kevin
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
           id="mc-4"
           onClick={[Function]}
         >
@@ -280,75 +303,6 @@ Array [
               href="#"
             >
               Moonrise Kingdom
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          id="mc-5"
-          onClick={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Seven Years in Tibet
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          id="mc-6"
-          onClick={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Midnight Special
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          id="mc-7"
-          onClick={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              War of the Worlds
             </a>
           </h3>
         </article>

@@ -7,12 +7,7 @@ import {ALL_GENRES, MAX_GENRE_COUNT, GenreTabClassNames} from '../../consts';
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator} from '../../reducer';
 
-const Main = ({promoMovie, movies, genre, onMovieCardClick, onGenreTabClick}) => {
-  const genres = getSortedUniqueObjectValues(movies, `genre`)
-    .slice(0, MAX_GENRE_COUNT);
-  genres.unshift(ALL_GENRES);
-
-
+const Main = ({promoMovie, allGenres, activeGenre, onGenreTabClick}) => {
   return <>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -76,16 +71,13 @@ const Main = ({promoMovie, movies, genre, onMovieCardClick, onGenreTabClick}) =>
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <Tabs
-          activeTab={genre}
-          tabs={genres}
+          activeTab={activeGenre}
+          tabs={allGenres}
           onTabClick={onGenreTabClick}
           className={GenreTabClassNames}
         />
 
-        <MoviesList
-          movies={movies}
-          onMovieCardClick={onMovieCardClick}
-        />
+        <MoviesList />
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -118,20 +110,24 @@ Main.propTypes = {
     coverSource: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
-  movies: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    previewSource: PropTypes.string.isRequired,
-    previewMovie: PropTypes.string.isRequired,
-  })).isRequired,
-  genre: PropTypes.string.isRequired,
-  onMovieCardClick: PropTypes.func.isRequired,
+  allGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeGenre: PropTypes.string.isRequired,
+
   onGenreTabClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  genre: state.genre,
-});
+const mapStateToProps = (state) => {
+  const allGenres = getSortedUniqueObjectValues(state.movies, `genre`)
+    .slice(0, MAX_GENRE_COUNT);
+  allGenres.unshift(ALL_GENRES);
+
+  return ({
+    promoMovie: state.promoMovie,
+    allGenres,
+    activeGenre: state.genre,
+    renderMovies: state.genreMovies.slice(0, state.renderedMovieCount),
+  });
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {

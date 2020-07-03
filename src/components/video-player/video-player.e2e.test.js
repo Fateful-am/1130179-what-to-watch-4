@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import VideoPlayer from './video-player';
+import {testMovieCard} from '../../utils/test-data';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -13,8 +14,8 @@ it(`Should preview movie played`, () => {
 
   const videoPlayerScreen = mount(
       <VideoPlayer
-        previewSource={`img/macbeth.jpg`}
-        src={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
+        previewSource={testMovieCard.previewSource}
+        src={testMovieCard.previewMovie}
         onPlay={moviePlay}
         onPause={moviePause}
       />

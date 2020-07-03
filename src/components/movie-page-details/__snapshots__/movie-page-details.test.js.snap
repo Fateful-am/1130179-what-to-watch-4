@@ -36,25 +36,7 @@ exports[`Render MoviePageDetails 1`] = `
         <br />
         Edward Norton,
         <br />
-        Jude Law,
-        <br />
-        Willem Dafoe,
-        <br />
-        Saoirse Ronan,
-        <br />
-        Tony Revoloru,
-        <br />
-        Tilda Swinton,
-        <br />
-        Tom Wilkinson,
-        <br />
-        Owen Wilkinson,
-        <br />
-        Adrien Brody,
-        <br />
-        Ralph Fiennes,
-        <br />
-        Jeff Goldblum
+        Jude Law
       </span>
     </p>
   </div>
@@ -86,7 +68,7 @@ exports[`Render MoviePageDetails 1`] = `
       <span
         className="movie-card__details-value"
       >
-        Drama
+        Comedy
       </span>
     </p>
     <p

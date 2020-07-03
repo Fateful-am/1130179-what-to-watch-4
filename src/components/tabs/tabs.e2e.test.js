@@ -7,35 +7,69 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should all Tabs clicked`, () => {
-  const mockClassNames = {
-    list: `movie-nav__list`,
-    item: `movie-nav__item`,
-    activeItem: `movie-nav__item--active`,
-    link: `movie-nav__link`
-  };
+describe(`Should all Tabs clicked:`, () => {
+  it(`for MoviePage component`, () => {
+    const mockClassNames = {
+      list: `movie-nav__list`,
+      item: `movie-nav__item`,
+      activeItem: `movie-nav__item--active`,
+      link: `movie-nav__link`
+    };
 
-  const tabClick = jest.fn();
+    const tabClick = jest.fn();
 
-  const moviePageTabsScreen = mount(
-      <Tabs
-        tabs={[`Overview`, `Details`, `Reviews`]}
-        className={mockClassNames}
-        activeTab={`Overview`}
-        onTabClick={tabClick}
-      />
-  );
+    const tabsScreen = mount(
+        <Tabs
+          tabs={[`Overview`, `Details`, `Reviews`]}
+          className={mockClassNames}
+          activeTab={`Overview`}
+          onTabClick={tabClick}
+        />
+    );
 
-  const tabLinks = moviePageTabsScreen.find(`.movie-nav__link`);
-  const formSendPrevention = jest.fn();
+    const tabLinks = tabsScreen.find(`.${mockClassNames.link}`);
+    const formSendPrevention = jest.fn();
 
-  tabLinks.forEach((tabLink) => {
-    tabLink.simulate(`click`, {
-      preventDefault: formSendPrevention
+    tabLinks.forEach((tabLink) => {
+      tabLink.simulate(`click`, {
+        preventDefault: formSendPrevention
+      });
     });
+
+    expect(formSendPrevention).toHaveBeenCalledTimes(3);
+    expect(tabClick).toHaveBeenCalledTimes(3);
   });
 
-  expect(formSendPrevention).toHaveBeenCalledTimes(3);
-  expect(tabClick).toHaveBeenCalledTimes(3);
+  it(`for Main component`, () => {
+    const mockClassNames = {
+      list: `catalog__genres-list`,
+      item: `catalog__genres-item`,
+      activeItem: `catalog__genres-item--active`,
+      link: `catalog__genres-link`
+    };
+
+    const tabClick = jest.fn();
+
+    const tabsScreen = mount(
+        <Tabs
+          tabs={[`All genres`, `Comedy`, `Drama`]}
+          className={mockClassNames}
+          activeTab={`All genres`}
+          onTabClick={tabClick}
+        />
+    );
+
+    const tabLinks = tabsScreen.find(`.${mockClassNames.link}`);
+    const formSendPrevention = jest.fn();
+
+    tabLinks.forEach((tabLink) => {
+      tabLink.simulate(`click`, {
+        preventDefault: formSendPrevention
+      });
+    });
+
+    expect(formSendPrevention).toHaveBeenCalledTimes(3);
+    expect(tabClick).toHaveBeenCalledTimes(3);
+  });
 
 });

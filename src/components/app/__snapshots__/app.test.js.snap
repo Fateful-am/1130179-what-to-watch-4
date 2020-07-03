@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App Render MainScreen 1`] = `
+exports[`Render App component: render default AppScreen 1`] = `
 Array [
   <section
     className="movie-card"
@@ -152,6 +152,7 @@ Array [
       </h2>
       <ul
         className="catalog__genres-list"
+        onClick={[Function]}
       >
         <li
           className="catalog__genres-item catalog__genres-item--active"
@@ -170,7 +171,7 @@ Array [
             className="catalog__genres-link"
             href="#"
           >
-            Comedies
+            Comedy
           </a>
         </li>
         <li
@@ -180,83 +181,105 @@ Array [
             className="catalog__genres-link"
             href="#"
           >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Documentary
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Horror
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Kids & Family
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Romance
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Sci-Fi
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Thrillers
+            Drama
           </a>
         </li>
       </ul>
       <div
         className="catalog__movies-list"
       >
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-0"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              Macbeth
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-1"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              Aviator
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-2"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              We need to talk about Kevin
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-3"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              What We Do in the Shadows
+            </a>
+          </h3>
+        </article>
         <article
           className="small-movie-card catalog__movies-card"
           id="mc-4"
@@ -369,353 +392,6 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-        >
-          <span
-            className="logo__letter logo__letter--1"
-          >
-            W
-          </span>
-          <span
-            className="logo__letter logo__letter--2"
-          >
-            T
-          </span>
-          <span
-            className="logo__letter logo__letter--3"
-          >
-            W
-          </span>
-        </a>
-      </div>
-      <div
-        className="copyright"
-      >
-        <p>
-          © 2019 What to watch Ltd.
-        </p>
-      </div>
-    </footer>
-  </div>,
-]
-`;
-
-exports[`Render App Render MovieDetailScreen 1`] = `
-Array [
-  <section
-    className="movie-card movie-card--full"
-  >
-    <div
-      className="movie-card__hero"
-    >
-      <div
-        className="movie-card__bg"
-      >
-        <img
-          alt="War of the Worlds"
-          src="img/war-of-the-worlds.jpg"
-        />
-      </div>
-      <h1
-        className="visually-hidden"
-      >
-        WTW
-      </h1>
-      <header
-        className="page-header movie-card__head"
-      >
-        <div
-          className="logo"
-        >
-          <a
-            className="logo__link"
-            href="#"
-          >
-            <span
-              className="logo__letter logo__letter--1"
-            >
-              W
-            </span>
-            <span
-              className="logo__letter logo__letter--2"
-            >
-              T
-            </span>
-            <span
-              className="logo__letter logo__letter--3"
-            >
-              W
-            </span>
-          </a>
-        </div>
-        <div
-          className="user-block"
-        >
-          <div
-            className="user-block__avatar"
-          >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
-          </div>
-        </div>
-      </header>
-      <div
-        className="movie-card__wrap"
-      >
-        <div
-          className="movie-card__desc"
-        >
-          <h2
-            className="movie-card__title"
-          >
-            War of the Worlds
-          </h2>
-          <p
-            className="movie-card__meta"
-          >
-            <span
-              className="movie-card__genre"
-            >
-              Drama
-            </span>
-            <span
-              className="movie-card__year"
-            >
-              2021
-            </span>
-          </p>
-          <div
-            className="movie-card__buttons"
-          >
-            <button
-              className="btn btn--play movie-card__button"
-              type="button"
-            >
-              <svg
-                height="19"
-                viewBox="0 0 19 19"
-                width="19"
-              >
-                <use
-                  xlinkHref="#play-s"
-                />
-              </svg>
-              <span>
-                Play
-              </span>
-            </button>
-            <button
-              className="btn btn--list movie-card__button"
-              type="button"
-            >
-              <svg
-                height="20"
-                viewBox="0 0 19 20"
-                width="19"
-              >
-                <use
-                  xlinkHref="#add"
-                />
-              </svg>
-              <span>
-                My list
-              </span>
-            </button>
-            <a
-              className="btn movie-card__button"
-              href="#"
-            >
-              Add review
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="movie-card__wrap movie-card__translate-top"
-    >
-      <div
-        className="movie-card__info"
-      >
-        <div
-          className="movie-card__poster movie-card__poster--big"
-        >
-          <img
-            alt="War of the Worlds poster"
-            height="327"
-            src="img/war-of-the-worlds.jpg"
-            width="218"
-          />
-        </div>
-        <div
-          className="movie-card__desc"
-        >
-          <nav
-            className="movie-nav movie-card__nav"
-          >
-            <ul
-              className="movie-nav__list"
-              onClick={[Function]}
-            >
-              <li
-                className="movie-nav__item movie-nav__item--active"
-              >
-                <a
-                  className="movie-nav__link"
-                  href="#"
-                >
-                  Overview
-                </a>
-              </li>
-              <li
-                className="movie-nav__item"
-              >
-                <a
-                  className="movie-nav__link"
-                  href="#"
-                >
-                  Details
-                </a>
-              </li>
-              <li
-                className="movie-nav__item"
-              >
-                <a
-                  className="movie-nav__link"
-                  href="#"
-                >
-                  Reviews
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div
-            className="movie-rating"
-          >
-            <div
-              className="movie-rating__score"
-            >
-              8,9
-            </div>
-            <p
-              className="movie-rating__meta"
-            >
-              <span
-                className="movie-rating__level"
-              >
-                Very good
-              </span>
-              <span
-                className="movie-rating__count"
-              >
-                240 ratings
-              </span>
-            </p>
-          </div>
-          <div
-            className="movie-card__text"
-          >
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur cum excepturi maiores obcaecati voluptates.Aliquid culpa harum ipsum numquam voluptates!
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!
-            </p>
-            <p
-              className="movie-card__director"
-            >
-              <strong>
-                Director: 
-                Wes Andreson
-              </strong>
-            </p>
-            <p
-              className="movie-card__starring"
-            >
-              <strong>
-                Starring: 
-                Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
-              </strong>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>,
-  <div
-    className="page-content"
-  >
-    <section
-      className="catalog catalog--like-this"
-    >
-      <h2
-        className="catalog__title"
-      >
-        More like this
-      </h2>
-      <div
-        className="catalog__movies-list"
-      >
-        <article
-          className="small-movie-card catalog__movies-card"
-          id="mc-5"
-          onClick={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Seven Years in Tibet
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          id="mc-6"
-          onClick={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <video />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="#"
-            >
-              Midnight Special
-            </a>
-          </h3>
-        </article>
-      </div>
-    </section>
-    <footer
-      className="page-footer"
-    >
-      <div
-        className="logo"
-      >
-        <a
-          className="logo__link logo__link--light"
-          href="#"
         >
           <span
             className="logo__letter logo__letter--1"

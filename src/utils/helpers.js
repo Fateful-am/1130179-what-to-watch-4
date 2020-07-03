@@ -28,7 +28,6 @@ export const getSortedUniqueObjectValues = (arrayOfObjects, key) => {
     .sort();
 };
 
-
 export const smallMovieCards = [
   `Fantastic Beasts: The Crimes of Grindelwald`,
   `Bohemian Rhapsody`,

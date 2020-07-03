@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import App from './components/app/app.jsx';
-import {mockMovies} from './mocks/films';
-import {PROMO_MOCK_INDEX} from './consts.js';
 import {reducer} from "./reducer.js";
 
 const store = createStore(
@@ -14,10 +12,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        promoMovie={mockMovies[PROMO_MOCK_INDEX]}
-        movies={mockMovies}
-      />
+      <App />
     </Provider>,
     document.querySelector(`#root`)
 );
