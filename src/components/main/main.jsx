@@ -6,8 +6,9 @@ import {getSortedUniqueObjectValues} from '../../utils/helpers';
 import {ALL_GENRES, MAX_GENRE_COUNT, GenreTabClassNames} from '../../consts';
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator} from '../../reducer';
+import ShowMoreButton from '../show-more-button/show-more-button.jsx';
 
-const Main = ({promoMovie, allGenres, activeGenre, onGenreTabClick}) => {
+const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTabClick, onShowMoreButtonClick}) => {
   return <>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -79,9 +80,7 @@ const Main = ({promoMovie, allGenres, activeGenre, onGenreTabClick}) => {
 
         <MoviesList />
 
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
+        {needShowMoreButton ? <ShowMoreButton onButtonClick={onShowMoreButtonClick}/> : null}
       </section>
 
       <footer className="page-footer">
@@ -112,8 +111,10 @@ Main.propTypes = {
   }),
   allGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeGenre: PropTypes.string.isRequired,
+  needShowMoreButton: PropTypes.bool.isRequired,
 
   onGenreTabClick: PropTypes.func.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -125,13 +126,17 @@ const mapStateToProps = (state) => {
     promoMovie: state.promoMovie,
     allGenres,
     activeGenre: state.genre,
-    renderMovies: state.genreMovies.slice(0, state.renderedMovieCount),
+    needShowMoreButton: state.genreMovies.length > state.renderedMovieCount,
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
     dispatch(ActionCreator.changeGenre(genre));
+  },
+
+  onShowMoreButtonClick() {
+    dispatch(ActionCreator.showMoreMovies());
   },
 });
 

@@ -378,6 +378,7 @@ Array [
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more
@@ -679,16 +680,6 @@ Array [
             </a>
           </h3>
         </article>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer
@@ -1055,16 +1046,6 @@ Array [
             </a>
           </h3>
         </article>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer

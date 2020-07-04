@@ -1,5 +1,5 @@
 import {reducer, ActionType, ActionCreator} from "./reducer.js";
-import {PageKind, ALL_GENRES, MOVIE_LIKE_THIS_COUNT} from './consts';
+import {PageKind, ALL_GENRES, MOVIE_LIKE_THIS_COUNT, START_MOVIE_COUNT} from './consts';
 import {TEST_DATA} from './utils/test-data';
 import {extend} from './utils/helpers';
 
@@ -54,6 +54,14 @@ describe(`Reducer work correctly:`, () => {
     expect(reducer(TEST_DATA.initialStoreState, ActionCreator.showMovieDetail()))
       .toEqual(TEST_DATA.initialStoreState);
   });
+
+  it(`reducer should increment renderedMovieCount state`, () => {
+    expect(reducer(TEST_DATA.initialStoreState, ActionCreator.showMoreMovies()))
+      .toEqual(extend(TEST_DATA.initialStoreState, {
+        renderedMovieCount: 16,
+      }));
+  });
+
 });
 
 
@@ -69,6 +77,13 @@ describe(`Action creators work correctly:`, () => {
     expect(ActionCreator.showMovieDetail(0)).toEqual({
       type: ActionType.SHOW_MOVIE_DETAIL,
       payload: 0,
+    });
+  });
+
+  it(`Action creator for showing more movies returns correct action`, () => {
+    expect(ActionCreator.showMoreMovies()).toEqual({
+      type: ActionType.SHOW_MORE_MOVIES,
+      payload: START_MOVIE_COUNT,
     });
   });
 });

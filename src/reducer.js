@@ -8,14 +8,14 @@ const initialState = {
   currentMovieId: null,
   promoMovie: mockMovies[PROMO_MOCK_INDEX],
   movies: mockMovies,
-  genreMovies: mockMovies.slice(0, START_MOVIE_COUNT),
+  genreMovies: [...mockMovies],
   renderedMovieCount: START_MOVIE_COUNT,
 };
 
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   SHOW_MOVIE_DETAIL: `SHOW_MOVIE_DETAIL`,
-  GET_GENRE_MOVIES: `GET_GENRE_MOVIES`,
+  SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
 };
 
 const ActionCreator = {
@@ -28,6 +28,11 @@ const ActionCreator = {
     type: ActionType.SHOW_MOVIE_DETAIL,
     payload: movieId === undefined ? null : movieId,
   }),
+
+  showMoreMovies: () => ({
+    type: ActionType.SHOW_MORE_MOVIES,
+    payload: START_MOVIE_COUNT,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,7 +41,7 @@ const reducer = (state = initialState, action) => {
       let genreMovies;
       let genre;
       if (action.payload === ALL_GENRES || action.payload === undefined || action.payload === null) {
-        genreMovies = state.movies.slice(0, START_MOVIE_COUNT);
+        genreMovies = [...state.movies];
         genre = ALL_GENRES;
       } else {
         genreMovies = state.movies.filter((movie) => movie.genre === action.payload);
@@ -55,12 +60,14 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentPage: pageKind,
         currentMovieId: action.payload,
-        genreMovies: state.genreMovies.filter((movie) => movie.id !== action.payload).slice(0, renderedMovieCount),
+        genreMovies: state.genreMovies.filter((movie) => movie.id !== action.payload),
         renderedMovieCount
       });
 
-    case ActionType.GET_GENRE_MOVIES:
-      return state;
+    case ActionType.SHOW_MORE_MOVIES:
+      return extend(state, {
+        renderedMovieCount: state.renderedMovieCount + action.payload
+      });
   }
 
   return state;
