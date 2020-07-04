@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 import {MoviePageTabNames, MoviePropTypes, MoviePageTabClassNames} from '../../consts.js';
 import Tabs from '../tabs/tabs.jsx';
 import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
 import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
 import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
-import PropTypes from 'prop-types';
 import MoviesList from '../movies-list/movies-list.jsx';
+import {getMovieById} from '../../utils/helpers';
 
-class MoviePage extends React.Component {
+class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -38,7 +39,7 @@ class MoviePage extends React.Component {
   }
 
   render() {
-    const {movie, moviesLikeThis, onMovieCardClick} = this.props;
+    const {movie} = this.props;
     const tabs = Object.values(MoviePageTabNames);
 
     return (
@@ -119,10 +120,9 @@ class MoviePage extends React.Component {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <MoviesList
-              movies={moviesLikeThis}
-              onMovieCardClick={onMovieCardClick}
-            />
+
+            <MoviesList />
+
           </section>
 
           <footer className="page-footer">
@@ -146,13 +146,13 @@ class MoviePage extends React.Component {
 
 MoviePage.propTypes = {
   movie: MoviePropTypes.movie,
-  moviesLikeThis: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    previewSource: PropTypes.string.isRequired,
-    previewMovie: PropTypes.string.isRequired,
-  })).isRequired,
-  onMovieCardClick: PropTypes.func.isRequired,
 };
 
-export default MoviePage;
+const mapStateToProps = (state) => {
+  return ({
+    movie: getMovieById(state.movies, state.currentMovieId),
+  });
+};
+
+export {MoviePage};
+export default connect(mapStateToProps)(MoviePage);

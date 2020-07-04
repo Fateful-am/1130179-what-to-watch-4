@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App 1`] = `
+exports[`Render App component: render default AppScreen 1`] = `
 Array [
   <section
     className="movie-card"
@@ -152,6 +152,7 @@ Array [
       </h2>
       <ul
         className="catalog__genres-list"
+        onClick={[Function]}
       >
         <li
           className="catalog__genres-item catalog__genres-item--active"
@@ -170,7 +171,7 @@ Array [
             className="catalog__genres-link"
             href="#"
           >
-            Comedies
+            Comedy
           </a>
         </li>
         <li
@@ -180,83 +181,105 @@ Array [
             className="catalog__genres-link"
             href="#"
           >
-            Crime
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Documentary
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Dramas
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Horror
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Kids & Family
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Romance
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Sci-Fi
-          </a>
-        </li>
-        <li
-          className="catalog__genres-item"
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-          >
-            Thrillers
+            Drama
           </a>
         </li>
       </ul>
       <div
         className="catalog__movies-list"
       >
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-0"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              Macbeth
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-1"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              Aviator
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-2"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              We need to talk about Kevin
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          id="mc-3"
+          onClick={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <video />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              What We Do in the Shadows
+            </a>
+          </h3>
+        </article>
         <article
           className="small-movie-card catalog__movies-card"
           id="mc-4"

@@ -2,21 +2,22 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MovieCard from './movie-card';
+import {testMovieCard} from '../../utils/test-data';
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
-const movieCardId = 0;
 
 it(`Should movie card clicked`, () => {
   const movieCardClick = jest.fn();
 
   const movieCardScreen = mount(
       <MovieCard
-        id={movieCardId}
-        title={`Macbeth`}
-        previewSource={`img/macbeth.jpg`}
-        previewMovie={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
+        id={testMovieCard.id}
+        title={testMovieCard.title}
+        genre={testMovieCard.genre}
+        previewSource={testMovieCard.previewSource}
+        previewMovie={testMovieCard.previewMovie}
         onClick={movieCardClick}
       />
   );

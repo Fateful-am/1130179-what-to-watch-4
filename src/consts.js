@@ -6,6 +6,8 @@ export const PREVIEW_MOVIE_DELAY = 1000;
 export const SHORT_ACTORS_LIST_COUNT = 4;
 export const MOVIE_REVIEWS_COLUMN_COUNT = 2;
 export const MOVIE_LIKE_THIS_COUNT = 4;
+export const ALL_GENRES = `All genres`;
+export const MAX_GENRE_COUNT = 9;
 
 export const PageKind = {
   MAIN: `main`,
@@ -24,6 +26,14 @@ export const MoviePageTabClassNames = {
   activeItem: `movie-nav__item--active`,
   link: `movie-nav__link`
 };
+
+export const GenreTabClassNames = {
+  list: `catalog__genres-list`,
+  item: `catalog__genres-item`,
+  activeItem: `catalog__genres-item--active`,
+  link: `catalog__genres-link`
+};
+
 
 export const MoviePropTypes = {
   movie: PropTypes.shape({
@@ -51,3 +61,4 @@ export const MoviePropTypes = {
     })).isRequired
   }).isRequired
 };
+

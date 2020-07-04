@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import VideoPlayer from '../video-player/video-player.jsx';
 
 const MovieCard = (props) => {
-  const {id, title, previewSource, previewMovie, onClick} = props;
+  const {id, title, genre, previewSource, previewMovie, onClick} = props;
 
   const handleClick = (evt) => {
     evt.preventDefault();
-    onClick(id);
+    onClick(id, genre);
   };
 
   return (
@@ -30,6 +30,7 @@ const MovieCard = (props) => {
 MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
   previewSource: PropTypes.string.isRequired,
   previewMovie: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
