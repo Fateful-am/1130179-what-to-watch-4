@@ -9,6 +9,7 @@ it(`Render MovieCard`, () => {
         <MovieCard
           id={testMovieCard.id}
           title={testMovieCard.title}
+          genre={testMovieCard.genre}
           previewSource={testMovieCard.previewSource}
           previewMovie={testMovieCard.previewMovie}
           onClick={() => {}}
