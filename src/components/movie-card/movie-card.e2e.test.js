@@ -15,6 +15,7 @@ it(`Should movie card clicked`, () => {
       <MovieCard
         id={testMovieCard.id}
         title={testMovieCard.title}
+        genre={testMovieCard.genre}
         previewSource={testMovieCard.previewSource}
         previewMovie={testMovieCard.previewMovie}
         onClick={movieCardClick}
