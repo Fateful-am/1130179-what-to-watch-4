@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '../video-player/video-player.jsx';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
+const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
 const MovieCard = (props) => {
   const {id, title, genre, previewSource, previewMovie, onClick} = props;
 
@@ -16,7 +18,7 @@ const MovieCard = (props) => {
       id={`mc-${id}`}
       onClick={handleClick}
     >
-      <VideoPlayer
+      <VideoPlayerWrapped
         previewSource={previewSource}
         src={previewMovie}
       />

@@ -9,7 +9,11 @@ it(`Render VideoPlayer`, () => {
         <VideoPlayer
           previewSource={testMovieCard.previewSource}
           src={testMovieCard.previewMovie}
-        />, {
+          onMouseHover={()=>{}}
+          onMouseLeave={()=>{}}
+        >
+          <video />
+        </VideoPlayer>, {
           createNodeMock: () => {
             return {};
           }

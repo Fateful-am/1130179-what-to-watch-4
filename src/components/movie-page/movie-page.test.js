@@ -19,7 +19,10 @@ it(`Render MoviePage with Overview tab`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MoviePage />
+          <MoviePage
+            activeTab={`Overview`}
+            onTabClick={()=>{}}
+          />
         </Provider>, {
           createNodeMock: () => {
             return {};
