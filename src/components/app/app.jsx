@@ -5,6 +5,9 @@ import {connect} from "react-redux";
 import {PageKind} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
+import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
+
+const MoviePageWrapped = withMoviePage(MoviePage);
 
 class App extends PureComponent {
   _stateRender() {
@@ -16,7 +19,7 @@ class App extends PureComponent {
 
       case PageKind.MOVIE_PAGE:
         return (
-          <MoviePage />
+          <MoviePageWrapped />
         );
     }
 
@@ -31,7 +34,7 @@ class App extends PureComponent {
             {this._stateRender()}
           </Route>
           <Route exact path="/dev-film">
-            <MoviePage />
+            <MoviePageWrapped />
           </Route>
         </Switch>
       </BrowserRouter>
