@@ -428,7 +428,7 @@ export const TEST_DATA = {
     currentMovieId: null,
     promoMovie: PROMO_MOVIE,
     movies: [...MOVIES],
-    genreMovies: MOVIES.slice(0, START_MOVIE_COUNT),
+    genreMovies: [...MOVIES],
     renderedMovieCount: START_MOVIE_COUNT,
   },
   comedyMovies: [

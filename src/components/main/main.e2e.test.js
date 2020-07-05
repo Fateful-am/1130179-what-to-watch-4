@@ -6,6 +6,7 @@ import configureStore from "redux-mock-store";
 import ConnectedMain, {Main} from './main';
 import {TEST_DATA} from '../../utils/test-data';
 import {ALL_GENRES} from '../../consts';
+import {extend} from '../../utils/helpers';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -19,6 +20,7 @@ const testObject = {
 
 describe(`Interactive with Main component: `, () => {
   const handleGenreTabClick = jest.fn();
+  const handleShowMoreButtonClick = jest.fn();
 
   let store;
   let wrapper;
@@ -31,24 +33,24 @@ describe(`Interactive with Main component: `, () => {
             promoMovie={TEST_DATA.initialStoreState.promoMovie}
             allGenres={testObject.allGenres}
             activeGenre={ALL_GENRES}
+            needShowMoreButton={true}
             onGenreTabClick={handleGenreTabClick}
+            onShowMoreButtonClick={handleShowMoreButtonClick}
           />
         </Provider>);
   });
 
-  // it(`should all movie cards be pressed`, () => {
-  //   const formSendPrevention = jest.fn();
-  //   const movieCards = wrapper.find(`.small-movie-card`);
-  //
-  //   movieCards.forEach((movieCard) => {
-  //     movieCard.simulate(`click`, {
-  //       preventDefault: formSendPrevention,
-  //     });
-  //   });
-  //
-  //   expect(formSendPrevention).toHaveBeenCalledTimes(movieCards.length);
-  //   expect(handleMovieCardClick).toHaveBeenCalledTimes(movieCards.length);
-  // });
+  it(`should "Show more" button be pressed`, () => {
+    const formSendPrevention = jest.fn();
+    const showMoreButton = wrapper.find(`.catalog__button`);
+
+    showMoreButton.simulate(`click`, {
+      preventDefault: formSendPrevention,
+    });
+
+    expect(formSendPrevention).toHaveBeenCalledTimes(1);
+    expect(handleShowMoreButtonClick).toHaveBeenCalledTimes(1);
+  });
 
   it(`should all genre menu items be pressed`, () => {
     const formSendPrevention = jest.fn();
@@ -88,6 +90,33 @@ describe(`Main component with Redux:`, () => {
 
     expect(main.prop(`allGenres`)).toEqual(testObject.allGenres);
     expect(main.prop(`activeGenre`)).toEqual(ALL_GENRES);
+    expect(main.prop(`needShowMoreButton`)).toEqual(true);
+  });
+
+});
+
+describe(`Main component with Redux with "Comedy" tab active:`, () => {
+  let store;
+  let wrapper;
+  const genre = `Comedy`;
+  beforeEach(() => {
+    store = mockStore(extend(TEST_DATA.initialStoreState, {
+      genre,
+      genreMovies: TEST_DATA.comedyMovies,
+    }));
+    wrapper = mount(
+        <Provider store={store}>
+          <ConnectedMain/>
+        </Provider>
+    );
+  });
+
+  it(`check Prop matches with "Comedy"`, () => {
+    const main = wrapper.find(Main);
+
+    expect(main.prop(`allGenres`)).toEqual(testObject.allGenres);
+    expect(main.prop(`activeGenre`)).toEqual(genre);
+    expect(main.prop(`needShowMoreButton`)).toEqual(false);
   });
 
 });
