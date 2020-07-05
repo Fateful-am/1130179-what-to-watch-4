@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_GENRE:
       let genreMovies;
       let genre;
-      if (action.payload === ALL_GENRES || action.payload === undefined || action.payload === null) {
+      if (action.payload === ALL_GENRES || !action.payload) {
         genreMovies = [...state.movies];
         genre = ALL_GENRES;
       } else {

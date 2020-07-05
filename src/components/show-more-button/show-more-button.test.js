@@ -6,7 +6,7 @@ it(`"Render "Show more button" component`, () => {
   const tree = renderer
     .create(
         <ShowMoreButton
-          onButtonClick={() => {}}
+          onClick={() => {}}
         />
     )
     .toJSON();

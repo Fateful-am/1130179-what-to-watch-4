@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ShowMoreButton = ({onButtonClick}) =>{
+const ShowMoreButton = ({onClick}) =>{
   const handleClick = (evt) => {
     evt.preventDefault();
-    onButtonClick();
+    onClick();
   };
 
   return (
@@ -19,7 +19,7 @@ const ShowMoreButton = ({onButtonClick}) =>{
 };
 
 ShowMoreButton.propTypes = {
-  onButtonClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ShowMoreButton;

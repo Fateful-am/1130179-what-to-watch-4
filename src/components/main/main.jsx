@@ -80,7 +80,7 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTa
 
         <MoviesList />
 
-        {needShowMoreButton ? <ShowMoreButton onButtonClick={onShowMoreButtonClick}/> : null}
+        {needShowMoreButton && <ShowMoreButton onClick={onShowMoreButtonClick}/>}
       </section>
 
       <footer className="page-footer">
