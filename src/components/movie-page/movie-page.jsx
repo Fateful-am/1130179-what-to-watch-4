@@ -23,6 +23,12 @@ class MoviePage extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
+      this.props.setDefaultTab();
+    }
+  }
+
   render() {
     const {movie, activeTab, onTabClick} = this.props;
     const tabs = Object.values(MoviePageTabNames);
@@ -132,7 +138,8 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   movie: MoviePropTypes.movie,
   activeTab: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired
+  onTabClick: PropTypes.func.isRequired,
+  setDefaultTab: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

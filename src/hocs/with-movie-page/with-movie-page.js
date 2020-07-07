@@ -7,6 +7,7 @@ const withMoviePage = (Component) => {
       super(props);
 
       this._handleTabClick = this._handleTabClick.bind(this);
+      this._setDefaultTab = this._setDefaultTab.bind(this);
 
       this.state = {
         activeTab: MoviePageTabNames.OVERVIEW,
@@ -19,6 +20,14 @@ const withMoviePage = (Component) => {
       });
     }
 
+    _setDefaultTab() {
+      if (this.state.activeTab !== MoviePageTabNames.OVERVIEW) {
+        this.setState({
+          activeTab: MoviePageTabNames.OVERVIEW,
+        });
+      }
+    }
+
     render() {
       const {activeTab} = this.state;
       return (
@@ -26,6 +35,7 @@ const withMoviePage = (Component) => {
           {...this.props}
           activeTab={activeTab}
           onTabClick={this._handleTabClick}
+          setDefaultTab={this._setDefaultTab}
         />
       );
     }
