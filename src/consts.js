@@ -11,7 +11,8 @@ export const MAX_GENRE_COUNT = 9;
 
 export const PageKind = {
   MAIN: `main`,
-  MOVIE_PAGE: `moviePage`
+  MOVIE_PAGE: `moviePage`,
+  PLAYER: `player`,
 };
 
 export const MoviePageTabNames = {

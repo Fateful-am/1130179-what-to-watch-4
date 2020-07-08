@@ -6,6 +6,7 @@ import {PageKind} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
+import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 
@@ -21,6 +22,15 @@ class App extends PureComponent {
         return (
           <MoviePageWrapped />
         );
+
+      case PageKind.PLAYER:
+        return (
+          <BigVideoPlayer
+            src={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
+            posterSource={`img/macbeth.jpg`}
+            playProgress={0}
+          />
+        );
     }
 
     return null;
@@ -35,6 +45,13 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-film">
             <MoviePageWrapped />
+          </Route>
+          <Route exact path="/dev-player">
+            <BigVideoPlayer
+              src={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
+              posterSource={`img/macbeth.jpg`}
+              playProgress={25}
+            />
           </Route>
         </Switch>
       </BrowserRouter>

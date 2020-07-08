@@ -16,6 +16,7 @@ const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   SHOW_MOVIE_DETAIL: `SHOW_MOVIE_DETAIL`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
+  PLAY_MOVIE: `PLAY_MOVIE`,
 };
 
 const ActionCreator = {
@@ -32,6 +33,11 @@ const ActionCreator = {
   showMoreMovies: () => ({
     type: ActionType.SHOW_MORE_MOVIES,
     payload: START_MOVIE_COUNT,
+  }),
+
+  playMovie: () => ({
+    type: ActionType.SHOW_MORE_MOVIES,
+    payload: null,
   }),
 };
 
@@ -67,6 +73,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.SHOW_MORE_MOVIES:
       return extend(state, {
         renderedMovieCount: state.renderedMovieCount + action.payload
+      });
+
+    case ActionType.PLAY_MOVIE:
+      return extend(state, {
+        currentPage: PageKind.PLAYER,
       });
   }
 
