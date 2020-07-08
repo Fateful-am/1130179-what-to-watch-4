@@ -426,7 +426,7 @@ export const TEST_DATA = {
     genre: ALL_GENRES,
     currentPage: PageKind.MAIN,
     currentMovieId: null,
-    promoMovie: PROMO_MOVIE,
+    promoMovieId: 8,
     movies: [...MOVIES],
     genreMovies: [...MOVIES],
     renderedMovieCount: START_MOVIE_COUNT,
@@ -788,5 +788,6 @@ export const TEST_DATA = {
       ],
     },
   ],
+  promoMovie: PROMO_MOVIE,
 };
 

@@ -6,7 +6,7 @@ const initialState = {
   genre: ALL_GENRES,
   currentPage: PageKind.MAIN,
   currentMovieId: null,
-  promoMovie: mockMovies[PROMO_MOCK_INDEX],
+  promoMovieId: PROMO_MOCK_INDEX,
   movies: mockMovies,
   genreMovies: [...mockMovies],
   renderedMovieCount: START_MOVIE_COUNT,

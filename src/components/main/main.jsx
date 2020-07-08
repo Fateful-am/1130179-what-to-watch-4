@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
-import {getSortedUniqueObjectValues} from '../../utils/helpers';
-import {ALL_GENRES, MAX_GENRE_COUNT, GenreTabClassNames} from '../../consts';
+import {getMovieById, getSortedUniqueObjectValues} from '../../utils/helpers';
+import {ALL_GENRES, MAX_GENRE_COUNT, EMPTY_PROMO_MOVIE, GenreTabClassNames} from '../../consts';
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator} from '../../reducer';
 import ShowMoreButton from '../show-more-button/show-more-button.jsx';
@@ -123,7 +123,7 @@ const mapStateToProps = (state) => {
   allGenres.unshift(ALL_GENRES);
 
   return ({
-    promoMovie: state.promoMovie,
+    promoMovie: state.promoMovieId ? getMovieById(state.movies, state.promoMovieId) : EMPTY_PROMO_MOVIE,
     allGenres,
     activeGenre: state.genre,
     needShowMoreButton: state.genreMovies.length > state.renderedMovieCount,

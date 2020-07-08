@@ -9,6 +9,14 @@ export const MOVIE_LIKE_THIS_COUNT = 4;
 export const ALL_GENRES = `All genres`;
 export const MAX_GENRE_COUNT = 9;
 
+export const EMPTY_PROMO_MOVIE = {
+  coverSource: ``,
+  title: ``,
+  posterSource: ``,
+  genre: ``,
+  year: ``,
+};
+
 export const PageKind = {
   MAIN: `main`,
   MOVIE_PAGE: `moviePage`,
