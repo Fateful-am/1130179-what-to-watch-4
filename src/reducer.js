@@ -36,7 +36,7 @@ const ActionCreator = {
   }),
 
   playMovie: () => ({
-    type: ActionType.SHOW_MORE_MOVIES,
+    type: ActionType.PLAY_MOVIE,
     payload: null,
   }),
 };
@@ -78,6 +78,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.PLAY_MOVIE:
       return extend(state, {
         currentPage: PageKind.PLAYER,
+        currentMovieId: state.currentMovieId === 0 || state.currentMovieId ? state.currentMovieId : state.promoMovieId,
       });
   }
 

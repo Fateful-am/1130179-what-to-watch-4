@@ -62,6 +62,24 @@ describe(`Reducer work correctly:`, () => {
       }));
   });
 
+  it(`reducer should switch to Play mode from Main mode`, () => {
+    expect(reducer(TEST_DATA.initialStoreState, ActionCreator.playMovie()))
+      .toEqual(extend(TEST_DATA.initialStoreState, {
+        currentPage: PageKind.PLAYER,
+        currentMovieId: TEST_DATA.initialStoreState.promoMovieId,
+      }));
+  });
+
+  it(`reducer should switch to Play mode from MoviePage mode`, () => {
+    expect(reducer(extend(TEST_DATA.initialStoreState, {
+      currentPage: PageKind.MOVIE_PAGE,
+      currentMovieId: 0,
+    }), ActionCreator.playMovie()))
+      .toEqual(extend(TEST_DATA.initialStoreState, {
+        currentPage: PageKind.PLAYER,
+        currentMovieId: 0,
+      }));
+  });
 });
 
 
@@ -84,6 +102,13 @@ describe(`Action creators work correctly:`, () => {
     expect(ActionCreator.showMoreMovies()).toEqual({
       type: ActionType.SHOW_MORE_MOVIES,
       payload: START_MOVIE_COUNT,
+    });
+  });
+
+  it(`Action creator for play movie returns correct action`, () => {
+    expect(ActionCreator.playMovie()).toEqual({
+      type: ActionType.PLAY_MOVIE,
+      payload: null,
     });
   });
 });
