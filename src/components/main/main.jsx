@@ -46,7 +46,7 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTa
             <h2 className="movie-card__title">{promoMovie.title}</h2>
             <p className="movie-card__meta">
               <span className="movie-card__genre">{promoMovie.genre}</span>
-              <span className="movie-card__year">{promoMovie.year}</span>
+              <span className="movie-card__year">{promoMovie.released}</span>
             </p>
 
             <MovieCardButtons />
@@ -96,7 +96,7 @@ Main.propTypes = {
     posterImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired
+    released: PropTypes.number.isRequired
   }),
   allGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeGenre: PropTypes.string.isRequired,

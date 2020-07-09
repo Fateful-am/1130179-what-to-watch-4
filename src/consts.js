@@ -14,7 +14,7 @@ export const EMPTY_PROMO_MOVIE = {
   title: ``,
   posterImage: ``,
   genre: ``,
-  year: ``,
+  released: ``,
 };
 
 export const PageKind = {
@@ -49,7 +49,7 @@ export const MoviePropTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
+    released: PropTypes.number.isRequired,
     posterImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,

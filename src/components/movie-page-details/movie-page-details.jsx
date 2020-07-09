@@ -37,7 +37,7 @@ const MoviePageDetails = ({movie}) => {
       <div className="movie-card__text-col">
         {renderMovieCardDetailsItem(`Run Time`, formatDuration(movie.runTime))}
         {renderMovieCardDetailsItem(`Genre`, movie.genre)}
-        {renderMovieCardDetailsItem(`Released`, movie.year)}
+        {renderMovieCardDetailsItem(`Released`, movie.released)}
       </div>
     </div>
   );

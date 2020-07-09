@@ -24,6 +24,6 @@ export const getMoviePromoMode = (sourceMovies, index) => {
     genre: movie.genre,
     posterImage: movie.posterImage,
     backgroundImage: movie.backgroundImage,
-    year: movie.year
+    released: movie.released
   };
 };
