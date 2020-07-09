@@ -39,7 +39,7 @@ class MoviePage extends PureComponent {
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
             <div className="movie-card__bg">
-              <img src={movie.coverSource} alt={movie.title}/>
+              <img src={movie.backgroundImage} alt={movie.title}/>
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -90,7 +90,7 @@ class MoviePage extends PureComponent {
           <div className="movie-card__wrap movie-card__translate-top">
             <div className="movie-card__info">
               <div className="movie-card__poster movie-card__poster--big">
-                <img src={movie.posterSource} alt={`${movie.title} poster`} width="218"
+                <img src={movie.posterImage} alt={`${movie.title} poster`} width="218"
                   height="327"/>
               </div>
 

@@ -10,9 +10,9 @@ export const ALL_GENRES = `All genres`;
 export const MAX_GENRE_COUNT = 9;
 
 export const EMPTY_PROMO_MOVIE = {
-  coverSource: ``,
+  backgroundImage: ``,
   title: ``,
-  posterSource: ``,
+  posterImage: ``,
   genre: ``,
   year: ``,
 };
@@ -50,9 +50,9 @@ export const MoviePropTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    posterSource: PropTypes.string.isRequired,
-    previewMovie: PropTypes.string.isRequired,
-    coverSource: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
     rating: PropTypes.shape({
       score: PropTypes.string.isRequired,
       level: PropTypes.string.isRequired,

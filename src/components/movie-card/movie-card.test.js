@@ -11,7 +11,7 @@ it(`Render MovieCard`, () => {
           title={testMovieCard.title}
           genre={testMovieCard.genre}
           previewSource={testMovieCard.previewSource}
-          previewMovie={testMovieCard.previewMovie}
+          previewVideoLink={testMovieCard.previewVideoLink}
           onClick={() => {}}
         />, {
           createNodeMock: () => {

@@ -28,8 +28,8 @@ class App extends PureComponent {
       case PageKind.PLAYER:
         return (
           <BigVideoPlayer
-            src={movieForPlay.previewMovie}
-            posterSource={movieForPlay.posterSource}
+            src={movieForPlay.previewVideoLink}
+            posterImage={movieForPlay.posterImage}
             playProgress={0}
           />
         );
@@ -51,7 +51,7 @@ class App extends PureComponent {
           <Route exact path="/dev-player">
             <BigVideoPlayer
               src={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
-              posterSource={`img/macbeth.jpg`}
+              posterImage={`img/macbeth.jpg`}
               playProgress={25}
             />
           </Route>
@@ -64,16 +64,16 @@ class App extends PureComponent {
 App.propTypes = {
   currentPage: PropTypes.string.isRequired,
   movieForPlay: PropTypes.shape({
-    previewMovie: PropTypes.string.isRequired,
-    posterSource: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
   }),
 };
 
 const mapStateToProps = (state) => {
   const movieForPlay = state.currentMovieId === 0 || state.currentMovieId
     ? getMovieById(state.movies, state.currentMovieId)
-    : {previewMovie: ``,
-      posterSource: ``};
+    : {previewVideoLink: ``,
+      posterImage: ``};
   return ({
     currentPage: state.currentPage,
     movieForPlay,

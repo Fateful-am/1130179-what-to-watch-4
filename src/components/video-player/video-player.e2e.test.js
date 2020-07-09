@@ -15,7 +15,7 @@ it(`Should preview movie played`, () => {
   const videoPlayerScreen = mount(
       <VideoPlayer
         previewSource={testMovieCard.previewSource}
-        src={testMovieCard.previewMovie}
+        src={testMovieCard.previewVideoLink}
         onMouseHover={mouseHover}
         onMouseLeave={mouseLeave}
       >

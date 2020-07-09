@@ -11,7 +11,7 @@ export const getMovies = (sourceMovies, sliceFrom, count) => {
     return {
       id: movie.id,
       title: movie.title,
-      posterSource: movie.posterSource,
+      posterImage: movie.posterImage,
     };
   });
 };
@@ -22,8 +22,8 @@ export const getMoviePromoMode = (sourceMovies, index) => {
     id: movie.id,
     title: movie.title,
     genre: movie.genre,
-    posterSource: movie.posterSource,
-    coverSource: movie.coverSource,
+    posterImage: movie.posterImage,
+    backgroundImage: movie.backgroundImage,
     year: movie.year
   };
 };

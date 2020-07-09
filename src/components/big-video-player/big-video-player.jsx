@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BigVideoPlayer = (props) => {
-  const {src, posterSource, playProgress} = props;
+  const {src, posterImage, playProgress} = props;
   return (
     <div className="player">
-      <video src={src} className="player__video" poster={posterSource}/>
+      <video src={src} className="player__video" poster={posterImage}/>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -41,7 +41,7 @@ const BigVideoPlayer = (props) => {
 
 BigVideoPlayer.propTypes = {
   src: PropTypes.string.isRequired,
-  posterSource: PropTypes.string.isRequired,
+  posterImage: PropTypes.string.isRequired,
   playProgress: PropTypes.number.isRequired,
 };
 

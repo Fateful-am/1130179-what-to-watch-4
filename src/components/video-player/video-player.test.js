@@ -8,7 +8,7 @@ it(`Render VideoPlayer`, () => {
     .create(
         <VideoPlayer
           previewSource={testMovieCard.previewSource}
-          src={testMovieCard.previewMovie}
+          src={testMovieCard.previewVideoLink}
           onMouseHover={()=>{}}
           onMouseLeave={()=>{}}
         >

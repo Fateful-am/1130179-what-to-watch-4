@@ -13,7 +13,7 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTa
   return <>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src={promoMovie.coverSource} alt={promoMovie.title}/>
+        <img src={promoMovie.backgroundImage} alt={promoMovie.title}/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -37,7 +37,7 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTa
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src={promoMovie.posterSource}
+            <img src={promoMovie.posterImage}
               alt={`${promoMovie.title} poster`}
               width="218" height="327"/>
           </div>
@@ -93,9 +93,9 @@ Main.propTypes = {
   promoMovie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    posterSource: PropTypes.string.isRequired,
-    previewMovie: PropTypes.string.isRequired,
-    coverSource: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }),
   allGenres: PropTypes.arrayOf(PropTypes.string).isRequired,

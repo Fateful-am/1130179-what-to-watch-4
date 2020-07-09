@@ -17,7 +17,7 @@ it(`Should movie card clicked`, () => {
         title={testMovieCard.title}
         genre={testMovieCard.genre}
         previewSource={testMovieCard.previewSource}
-        previewMovie={testMovieCard.previewMovie}
+        previewVideoLink={testMovieCard.previewVideoLink}
         onClick={movieCardClick}
       />
   );
