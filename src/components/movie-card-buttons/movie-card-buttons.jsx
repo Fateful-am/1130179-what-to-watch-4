@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer';
 
 const MovieCardButtons = (props) => {
-  const {onPlayClick, onMyListClick} = props;
+  const {onPlayClick} = props;
+  const onMyListClick = ()=>{};
   return (
     <div className="movie-card__buttons">
       <button className="btn btn--play movie-card__button" type="button"
