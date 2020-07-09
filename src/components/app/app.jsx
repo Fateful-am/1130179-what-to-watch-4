@@ -7,12 +7,14 @@ import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
 import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
+import {getMovieById} from '../../utils/helpers';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 
 class App extends PureComponent {
   _stateRender() {
-    switch (this.props.currentPage) {
+    const {currentPage, movieForPlay} = this.props;
+    switch (currentPage) {
       case PageKind.MAIN:
         return (
           <Main />
@@ -26,8 +28,8 @@ class App extends PureComponent {
       case PageKind.PLAYER:
         return (
           <BigVideoPlayer
-            src={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
-            posterSource={`img/macbeth.jpg`}
+            src={movieForPlay.previewMovie}
+            posterSource={movieForPlay.posterSource}
             playProgress={0}
           />
         );
@@ -61,11 +63,22 @@ class App extends PureComponent {
 
 App.propTypes = {
   currentPage: PropTypes.string.isRequired,
+  movieForPlay: PropTypes.shape({
+    previewMovie: PropTypes.string.isRequired,
+    posterSource: PropTypes.string.isRequired,
+  }),
 };
 
-const mapStateToProps = (state) => ({
-  currentPage: state.currentPage,
-});
+const mapStateToProps = (state) => {
+  const movieForPlay = state.currentMovieId === 0 || state.currentMovieId
+    ? getMovieById(state.movies, state.currentMovieId)
+    : {previewMovie: ``,
+      posterSource: ``};
+  return ({
+    currentPage: state.currentPage,
+    movieForPlay,
+  });
+};
 
 export {App};
 export default connect(mapStateToProps)(App);

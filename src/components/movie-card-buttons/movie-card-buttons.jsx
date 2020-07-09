@@ -29,7 +29,7 @@ const MovieCardButtons = (props) => {
 
 MovieCardButtons.propTypes = {
   onPlayClick: PropTypes.func.isRequired,
-  onMyListClick: PropTypes.func.isRequired,
+  onMyListClick: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({

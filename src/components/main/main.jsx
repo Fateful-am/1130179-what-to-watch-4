@@ -7,6 +7,7 @@ import {ALL_GENRES, MAX_GENRE_COUNT, EMPTY_PROMO_MOVIE, GenreTabClassNames} from
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator} from '../../reducer';
 import ShowMoreButton from '../show-more-button/show-more-button.jsx';
+import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
 
 const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTabClick, onShowMoreButtonClick}) => {
   return <>
@@ -48,20 +49,8 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTa
               <span className="movie-card__year">{promoMovie.year}</span>
             </p>
 
-            <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"/>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"/>
-                </svg>
-                <span>My list</span>
-              </button>
-            </div>
+            <MovieCardButtons />
+
           </div>
         </div>
       </div>
