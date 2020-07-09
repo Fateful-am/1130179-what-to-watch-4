@@ -23,7 +23,7 @@ const withVideoPlayer = (Component) => {
       video.width = 280;
       video.height = 175;
       video.preload = `none`;
-      video.poster = this.props.previewSource;
+      video.poster = this.props.previewImage;
 
       video.onabort = () => {
         if (video.paused && this.props.onPause) {
@@ -52,8 +52,8 @@ const withVideoPlayer = (Component) => {
 
       if (isPlaying) {
         if (video) {
-          const {src} = this.props;
-          video.src = src;
+          const {previewVideoLink} = this.props;
+          video.src = previewVideoLink;
           video.play();
         }
       }
@@ -100,8 +100,8 @@ const withVideoPlayer = (Component) => {
   }
 
   WithVideoPlayer.propTypes = {
-    previewSource: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     onPause: PropTypes.func,
     onPlay: PropTypes.func,
   };

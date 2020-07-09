@@ -16,7 +16,7 @@ function MoviesList(props) {
             id={movie.id}
             title={movie.title}
             genre={movie.genre}
-            previewSource={movie.previewSource}
+            previewImage={movie.previewImage}
             previewVideoLink={movie.previewVideoLink}
             onClick={onMovieCardClick}
           />

@@ -5,7 +5,7 @@ import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
 const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
 const MovieCard = (props) => {
-  const {id, title, genre, previewSource, previewVideoLink, onClick} = props;
+  const {id, title, genre, previewImage, previewVideoLink, onClick} = props;
 
   const handleClick = (evt) => {
     evt.preventDefault();
@@ -19,8 +19,8 @@ const MovieCard = (props) => {
       onClick={handleClick}
     >
       <VideoPlayerWrapped
-        previewSource={previewSource}
-        src={previewVideoLink}
+        previewImage={previewImage}
+        previewVideoLink={previewVideoLink}
       />
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="#">{title}</a>
@@ -33,7 +33,7 @@ MovieCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
-  previewSource: PropTypes.string.isRequired,
+  previewImage: PropTypes.string.isRequired,
   previewVideoLink: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };

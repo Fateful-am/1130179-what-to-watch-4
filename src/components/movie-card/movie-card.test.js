@@ -10,7 +10,7 @@ it(`Render MovieCard`, () => {
           id={testMovieCard.id}
           title={testMovieCard.title}
           genre={testMovieCard.genre}
-          previewSource={testMovieCard.previewSource}
+          previewImage={testMovieCard.previewImage}
           previewVideoLink={testMovieCard.previewVideoLink}
           onClick={() => {}}
         />, {

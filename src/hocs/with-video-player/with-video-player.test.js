@@ -25,8 +25,8 @@ const MockComponentWrapped = withVideoPlayer(MockComponent);
 it(`withVideo is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      previewSource={``}
-      src={``}
+      previewImage={``}
+      previewVideoLink={``}
     />
   ), {
     createNodeMock() {

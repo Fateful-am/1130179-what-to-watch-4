@@ -2,7 +2,6 @@ import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import VideoPlayer from './video-player';
-import {testMovieCard} from '../../utils/test-data';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -14,8 +13,6 @@ it(`Should preview movie played`, () => {
 
   const videoPlayerScreen = mount(
       <VideoPlayer
-        previewSource={testMovieCard.previewSource}
-        src={testMovieCard.previewVideoLink}
         onMouseHover={mouseHover}
         onMouseLeave={mouseLeave}
       >

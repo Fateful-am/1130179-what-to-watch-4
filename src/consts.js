@@ -51,7 +51,9 @@ export const MoviePropTypes = {
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
     posterImage: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
     rating: PropTypes.shape({
       score: PropTypes.string.isRequired,
