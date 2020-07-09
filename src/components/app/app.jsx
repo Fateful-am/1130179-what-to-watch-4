@@ -8,8 +8,10 @@ import MoviePage from '../movie-page/movie-page.jsx';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
 import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
 import {getMovieById} from '../../utils/helpers';
+import withBigVideoPlayer from '../../hocs/with_big_video_player/with_big_video_player';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
+const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
 
 class App extends PureComponent {
   _stateRender() {
@@ -27,10 +29,9 @@ class App extends PureComponent {
 
       case PageKind.PLAYER:
         return (
-          <BigVideoPlayer
+          <BigPlayerWrapped
             videoLink={movieForPlay.videoLink}
-            previewImage={movieForPlay.previewImage}
-            playProgress={0}
+            previewImage={`img/player-poster.jpg`}
           />
         );
     }
@@ -49,10 +50,9 @@ class App extends PureComponent {
             <MoviePageWrapped />
           </Route>
           <Route exact path="/dev-player">
-            <BigVideoPlayer
+            <BigPlayerWrapped
               videoLink={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
               previewImage={`img/macbeth.jpg`}
-              playProgress={25}
             />
           </Route>
         </Switch>
