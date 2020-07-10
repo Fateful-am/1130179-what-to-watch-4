@@ -12,12 +12,17 @@ export const getMovieById = (movies, id) => {
   return null;
 };
 
-export const formatDuration = (duration) => {
+export const formatDurationInMinutes = (duration) => {
   if (duration < 60) {
     return moment.utc(moment.duration(duration, `minutes`).asMilliseconds()).format(`m[m]`);
   }
   return moment.utc(moment.duration(duration, `minutes`).asMilliseconds()).format(`H[h] m[m]`);
 };
+
+export const formatDurationInSeconds = (duration) => {
+  return moment.utc(moment.duration(duration, `seconds`).asMilliseconds()).format(`H:mm:ss`);
+};
+
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);

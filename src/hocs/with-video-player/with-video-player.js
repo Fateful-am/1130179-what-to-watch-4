@@ -92,6 +92,7 @@ const withVideoPlayer = (Component) => {
           onMouseLeave={handleLeave}
         >
           <video
+            className="player__video"
             ref={this._videoRef}
           />
         </Component>

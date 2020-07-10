@@ -24,6 +24,7 @@ const MovieCardButtons = (props) => {
         </svg>
         <span>My list</span>
       </button>
+      {props.children}
     </div>
   );
 };
@@ -31,7 +32,10 @@ const MovieCardButtons = (props) => {
 MovieCardButtons.propTypes = {
   onPlayClick: PropTypes.func.isRequired,
   onMyListClick: PropTypes.func,
-};
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ])};
 
 const mapDispatchToProps = (dispatch) => ({
   onPlayClick() {

@@ -8,7 +8,7 @@ import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
 import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import {getMovieById} from '../../utils/helpers';
-// import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
+import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
 
 class MoviePage extends PureComponent {
   _renderCurrentMoviePage() {
@@ -68,21 +68,10 @@ class MoviePage extends PureComponent {
                   <span className="movie-card__year">{movie.released}</span>
                 </p>
 
-                <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"/>
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"/>
-                    </svg>
-                    <span>My list</span>
-                  </button>
+                <MovieCardButtons>
                   <a href="#" className="btn movie-card__button">Add review</a>
-                </div>
+                </MovieCardButtons>
+
               </div>
             </div>
           </div>

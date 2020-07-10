@@ -1,5 +1,6 @@
 import React, {createRef, PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {formatDurationInSeconds} from '../../utils/helpers';
 
 const withBigVideoPlayer = (Component) => {
   class WithBigAudioPlayer extends PureComponent {
@@ -10,11 +11,13 @@ const withBigVideoPlayer = (Component) => {
 
       this.state = {
         progress: 0,
+        duration: 0,
         isLoading: true,
         isPlaying: false,
       };
 
       this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
+      this._switchToFullScreen = this._switchToFullScreen.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +34,7 @@ const withBigVideoPlayer = (Component) => {
       video.onplay = () => {
         this.setState({
           isPlaying: true,
+          duration: Math.floor(video.duration),
         });
       };
 
@@ -38,14 +42,24 @@ const withBigVideoPlayer = (Component) => {
         isPlaying: false,
       });
 
-      video.ontimeupdate = () => this.setState({
-        progress: Math.floor(video.currentTime),
-      });
+      video.ontimeupdate = () => {
+        const progress = Math.floor(video.currentTime);
+        if (progress === this.state.duration) {
+          video.currentTime = 0;
+          this.setState({
+            isPlaying: false,
+          });
+
+          return;
+        }
+        this.setState({
+          progress: Math.floor(video.currentTime),
+        });
+      };
     }
 
     componentDidUpdate() {
       const video = this._videoRef.current;
-
       if (this.state.isPlaying) {
         video.play();
       } else {
@@ -68,18 +82,28 @@ const withBigVideoPlayer = (Component) => {
       this.setState({isPlaying: !isPlaying});
     }
 
-    render() {
-      const {isLoading, isPlaying} = this.state;
+    _switchToFullScreen() {
+      const video = this._videoRef.current;
+      video.requestFullscreen();
+    }
 
+    render() {
+      const {isLoading, isPlaying, progress: currentTime, duration} = this.state;
+      const {title} = this.props;
+      const progress = duration ? 100 * currentTime / duration : 0;
       return (
         <Component
           {...this.props}
           isLoading={isLoading}
           isPlaying={isPlaying}
-          progress={30}
+          progress={progress}
+          title={title}
+          timeElapsed={formatDurationInSeconds(duration - currentTime)}
           onPlayButtonClick={this._handlePlayButtonClick}
+          onFullScreenButtonClick={this._switchToFullScreen}
         >
           <video
+            className="player__video"
             ref={this._videoRef}
           />
         </Component>
@@ -90,6 +114,7 @@ const withBigVideoPlayer = (Component) => {
   WithBigAudioPlayer.propTypes = {
     videoLink: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
   };
 
   return WithBigAudioPlayer;

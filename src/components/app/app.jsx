@@ -31,7 +31,8 @@ class App extends PureComponent {
         return (
           <BigPlayerWrapped
             videoLink={movieForPlay.videoLink}
-            previewImage={`img/player-poster.jpg`}
+            previewImage={movieForPlay.previewImage}
+            title={movieForPlay.title}
           />
         );
     }
@@ -52,7 +53,8 @@ class App extends PureComponent {
           <Route exact path="/dev-player">
             <BigPlayerWrapped
               videoLink={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
-              previewImage={`img/macbeth.jpg`}
+              previewImage={`img/player-poster.jpg`}
+              title={`Transpotting`}
             />
           </Route>
         </Switch>
@@ -66,6 +68,7 @@ App.propTypes = {
   movieForPlay: PropTypes.shape({
     videoLink: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
   }),
 };
 
@@ -73,7 +76,8 @@ const mapStateToProps = (state) => {
   const movieForPlay = state.currentMovieId === 0 || state.currentMovieId
     ? getMovieById(state.movies, state.currentMovieId)
     : {videoLink: ``,
-      previewImage: ``};
+      previewImage: ``,
+      title: ``};
   return ({
     currentPage: state.currentPage,
     movieForPlay,

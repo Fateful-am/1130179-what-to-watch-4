@@ -45,13 +45,13 @@ const BigVideoPlayer = (props) => {
   };
 
 
-  const {children, progress} = props;
+  const {title, children, progress, timeElapsed, onFullScreenButtonClick} = props;
 
   return (
     <div className="player">
       {children}
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit" onClick={()=>{}}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -59,15 +59,15 @@ const BigVideoPlayer = (props) => {
             <progress className="player__progress" value={progress} max="100"/>
             <div className="player__toggler" style={{left: `${progress}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{timeElapsed}</div>
         </div>
 
         <div className="player__controls-row">
           {renderPlayButton()}
 
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{title}</div>
 
-          <button type="button" className="player__full-screen">
+          <button type="button" className="player__full-screen" onClick={onFullScreenButtonClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"/>
             </svg>
@@ -80,10 +80,13 @@ const BigVideoPlayer = (props) => {
 };
 
 BigVideoPlayer.propTypes = {
+  title: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
+  onFullScreenButtonClick: PropTypes.func.isRequired,
   progress: PropTypes.number.isRequired,
+  timeElapsed: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
