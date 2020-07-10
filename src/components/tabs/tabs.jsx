@@ -2,22 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Tabs = ({tabs, activeTab, className, onTabClick}) => {
-  const handleTabClick = (evt) =>{
+  const handleTabClick = (tab) => (evt) =>{
     evt.preventDefault();
-    if (evt.target.tagName === `A`) {
-      onTabClick(evt.target.outerText);
-    }
+    onTabClick(tab);
   };
 
   return (
     <ul className={className.list}
-      onClick={handleTabClick}
     >
       {tabs.map((tab, i) => {
         return (
           <li
             key={`tab-${tab}-${i}`}
             className={`${className.item}${tab === activeTab ? ` ${className.activeItem}` : ``}`}
+            onClick={handleTabClick(tab)}
           >
             <a href="#" className={className.link}>{tab}</a>
           </li>

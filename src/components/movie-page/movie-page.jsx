@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from "prop-types";
 import {MoviePageTabNames, MoviePropTypes, MoviePageTabClassNames} from '../../consts.js';
 import Tabs from '../tabs/tabs.jsx';
 import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
@@ -9,26 +10,10 @@ import MoviesList from '../movies-list/movies-list.jsx';
 import {getMovieById} from '../../utils/helpers';
 
 class MoviePage extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this._handleTabClick = this._handleTabClick.bind(this);
-
-    this.state = {
-      activeTab: MoviePageTabNames.OVERVIEW,
-    };
-  }
-
-  _handleTabClick(tab) {
-    this.setState({
-      activeTab: tab,
-    });
-  }
-
   _renderCurrentMoviePage() {
-    const {movie} = this.props;
+    const {movie, activeTab} = this.props;
 
-    switch (this.state.activeTab) {
+    switch (activeTab) {
       case MoviePageTabNames.DETAILS:
         return <MoviePageDetails movie={movie} />;
       case MoviePageTabNames.REVIEWS:
@@ -38,8 +23,14 @@ class MoviePage extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
+      this.props.setDefaultTab();
+    }
+  }
+
   render() {
-    const {movie} = this.props;
+    const {movie, activeTab, onTabClick} = this.props;
     const tabs = Object.values(MoviePageTabNames);
 
     return (
@@ -105,10 +96,10 @@ class MoviePage extends PureComponent {
               <div className="movie-card__desc">
                 <nav className="movie-nav movie-card__nav">
                   <Tabs
-                    activeTab={this.state.activeTab}
+                    activeTab={activeTab}
                     tabs={tabs}
                     className={MoviePageTabClassNames}
-                    onTabClick={this._handleTabClick}
+                    onTabClick={onTabClick}
                   />
                 </nav>
                 {this._renderCurrentMoviePage()}
@@ -146,6 +137,9 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   movie: MoviePropTypes.movie,
+  activeTab: PropTypes.string.isRequired,
+  onTabClick: PropTypes.func.isRequired,
+  setDefaultTab: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

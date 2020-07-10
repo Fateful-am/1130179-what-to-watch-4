@@ -13,18 +13,20 @@ Enzyme.configure({
 
 const mockStore = configureStore([]);
 
-it(`Should moviePageTabs clicked and correct state established`, () => {
+it(`Should all moviePageTabs clicked`, () => {
   const testMovieId = 0;
   const store = mockStore(extend(TEST_DATA.initialStoreState, {
     currentMovieId: testMovieId,
     genreMovies: TEST_DATA.comedyMovies.filter((movie) => movie.id !== testMovieId),
   }));
 
-  // const tabs = [`Overview`, `Details`, `Reviews`];
+  const handleTabClick = jest.fn();
   const moviePageScreen = mount(
       <Provider store={store}>
         <MoviePage
+          activeTab={`Overview`}
           movie={testMovieCard}
+          onTabClick={handleTabClick}
         />
       </Provider>
   );
@@ -40,9 +42,8 @@ it(`Should moviePageTabs clicked and correct state established`, () => {
         tagName: tabLink.type().toUpperCase()
       }
     });
-
-    // expect(moviePageScreen.state()).toMatchObject({activeTab: tabs[i]});
   });
 
+  expect(handleTabClick).toHaveBeenCalledTimes(tabLinks.length);
   expect(formSendPrevention).toHaveBeenCalledTimes(tabLinks.length);
 });

@@ -9,32 +9,28 @@ Enzyme.configure({
 });
 
 it(`Should preview movie played`, () => {
-  const moviePlay = jest.fn();
-  const moviePause = jest.fn();
+  const mouseHover = jest.fn();
+  const mouseLeave = jest.fn();
 
   const videoPlayerScreen = mount(
       <VideoPlayer
         previewSource={testMovieCard.previewSource}
         src={testMovieCard.previewMovie}
-        onPlay={moviePlay}
-        onPause={moviePause}
-      />
+        onMouseHover={mouseHover}
+        onMouseLeave={mouseLeave}
+      >
+        <video />
+      </VideoPlayer>
   );
 
   const videoContainer = videoPlayerScreen.find(`.small-movie-card__image`);
-  const formSendPrevention = jest.fn();
 
   videoContainer.simulate(`mouseenter`, {
-    preventDefault: formSendPrevention
   });
-
-  expect(videoPlayerScreen.state()).toMatchObject({isPlaying: true});
 
   videoContainer.simulate(`mouseleave`, {
-    preventDefault: formSendPrevention
   });
 
-  expect(videoPlayerScreen.state()).toMatchObject({isPlaying: false});
-
-  expect(formSendPrevention).toHaveBeenCalledTimes(2);
+  expect(mouseHover).toHaveBeenCalledTimes(1);
+  expect(mouseLeave).toHaveBeenCalledTimes(1);
 });

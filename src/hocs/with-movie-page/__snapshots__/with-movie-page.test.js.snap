@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render MoviePage with Overview tab 1`] = `
+exports[`withMoviePage is rendered correctly:  with "Overview" tab 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
