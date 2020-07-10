@@ -8,6 +8,8 @@ const withVideoPlayer = (Component) => {
       super(props);
 
       this._playMovie = this._playMovie.bind(this);
+      this._handleLeave = this._handleLeave.bind(this);
+      this._handleHover = this._handleHover.bind(this);
 
       this._videoRef = createRef();
 
@@ -70,26 +72,26 @@ const withVideoPlayer = (Component) => {
       }
     }
 
+    _handleLeave(evt) {
+      evt.preventDefault();
+      this.setState({
+        isPlaying: false
+      });
+    }
+
+    _handleHover(evt) {
+      evt.preventDefault();
+      this.setState({
+        isPlaying: true
+      });
+    }
+
     render() {
-      const handleLeave = (evt) => {
-        evt.preventDefault();
-        this.setState({
-          isPlaying: false
-        });
-      };
-
-      const handleHover = (evt) => {
-        evt.preventDefault();
-        this.setState({
-          isPlaying: true
-        });
-      };
-
       return (
         <Component
           {...this.props}
-          onMouseHover={handleHover}
-          onMouseLeave={handleLeave}
+          onMouseHover={this._handleHover}
+          onMouseLeave={this._handleLeave}
         >
           <video
             className="player__video"
