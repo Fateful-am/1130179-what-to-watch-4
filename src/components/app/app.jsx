@@ -8,7 +8,7 @@ import MoviePage from '../movie-page/movie-page.jsx';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
 import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
 import {getMovieById} from '../../utils/helpers';
-import withBigVideoPlayer from '../../hocs/with_big_video_player/with_big_video_player';
+import withBigVideoPlayer from '../../hocs/with-big-video-player/with-big-video-player';
 import {ActionCreator} from '../../reducer';
 
 const MoviePageWrapped = withMoviePage(MoviePage);

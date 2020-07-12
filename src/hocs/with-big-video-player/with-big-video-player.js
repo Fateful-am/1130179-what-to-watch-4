@@ -13,7 +13,7 @@ const withBigVideoPlayer = (Component) => {
         progress: 0,
         duration: 0,
         isLoading: true,
-        isPlaying: false,
+        isPlaying: true,
       };
 
       this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
