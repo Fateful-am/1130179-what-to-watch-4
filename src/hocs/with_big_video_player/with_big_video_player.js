@@ -89,7 +89,7 @@ const withBigVideoPlayer = (Component) => {
 
     render() {
       const {isLoading, isPlaying, progress: currentTime, duration} = this.state;
-      const {title} = this.props;
+      const {title, onExitButtonClick} = this.props;
       const progress = duration ? 100 * currentTime / duration : 0;
       return (
         <Component
@@ -101,6 +101,7 @@ const withBigVideoPlayer = (Component) => {
           timeElapsed={formatDurationInSeconds(duration - currentTime)}
           onPlayButtonClick={this._handlePlayButtonClick}
           onFullScreenButtonClick={this._switchToFullScreen}
+          onExitButtonClick={onExitButtonClick}
         >
           <video
             className="player__video"
@@ -115,6 +116,7 @@ const withBigVideoPlayer = (Component) => {
     videoLink: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    onExitButtonClick: PropTypes.func.isRequired,
   };
 
   return WithBigAudioPlayer;

@@ -45,13 +45,13 @@ const BigVideoPlayer = (props) => {
   };
 
 
-  const {title, children, progress, timeElapsed, onFullScreenButtonClick} = props;
+  const {title, children, progress, timeElapsed, onFullScreenButtonClick, onExitButtonClick} = props;
 
   return (
     <div className="player">
       {children}
 
-      <button type="button" className="player__exit" onClick={()=>{}}>Exit</button>
+      <button type="button" className="player__exit" onClick={onExitButtonClick}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -85,6 +85,7 @@ BigVideoPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onFullScreenButtonClick: PropTypes.func.isRequired,
+  onExitButtonClick: PropTypes.func.isRequired,
   progress: PropTypes.number.isRequired,
   timeElapsed: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([

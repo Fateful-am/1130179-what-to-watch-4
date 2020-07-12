@@ -9,6 +9,7 @@ import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
 import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
 import {getMovieById} from '../../utils/helpers';
 import withBigVideoPlayer from '../../hocs/with_big_video_player/with_big_video_player';
+import {ActionCreator} from '../../reducer';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
@@ -33,6 +34,7 @@ class App extends PureComponent {
             videoLink={movieForPlay.videoLink}
             previewImage={movieForPlay.previewImage}
             title={movieForPlay.title}
+            onExitButtonClick={this.props.onPlayerExitButtonClick}
           />
         );
     }
@@ -55,6 +57,7 @@ class App extends PureComponent {
               videoLink={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
               previewImage={`img/player-poster.jpg`}
               title={`Transpotting`}
+              onExitButtonClick={this.props.onPlayerExitButtonClick}
             />
           </Route>
         </Switch>
@@ -70,6 +73,7 @@ App.propTypes = {
     previewImage: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }),
+  onPlayerExitButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -84,5 +88,11 @@ const mapStateToProps = (state) => {
   });
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onPlayerExitButtonClick() {
+    dispatch(ActionCreator.exitPlayer());
+  },
+});
+
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

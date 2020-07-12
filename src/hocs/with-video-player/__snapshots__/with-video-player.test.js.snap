@@ -2,6 +2,8 @@
 
 exports[`withVideo is rendered correctly 1`] = `
 <div>
-  <video />
+  <video
+    className="player__video"
+  />
 </div>
 `;

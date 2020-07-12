@@ -17,6 +17,7 @@ const ActionType = {
   SHOW_MOVIE_DETAIL: `SHOW_MOVIE_DETAIL`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   PLAY_MOVIE: `PLAY_MOVIE`,
+  EXIT_PLAYER: `EXIT_PLAYER`,
 };
 
 const ActionCreator = {
@@ -37,6 +38,11 @@ const ActionCreator = {
 
   playMovie: () => ({
     type: ActionType.PLAY_MOVIE,
+    payload: null,
+  }),
+
+  exitPlayer: () => ({
+    type: ActionType.EXIT_PLAYER,
     payload: null,
   }),
 };
@@ -79,6 +85,12 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentPage: PageKind.PLAYER,
         currentMovieId: state.currentMovieId === 0 || state.currentMovieId ? state.currentMovieId : state.promoMovieId,
+      });
+
+    case ActionType.EXIT_PLAYER:
+      return extend(state, {
+        currentPage: state.promoMovieId === state.currentMovieId ? PageKind.MAIN : PageKind.MOVIE_PAGE,
+        currentMovieId: state.promoMovieId === state.currentMovieId ? null : state.currentMovieId,
       });
   }
 

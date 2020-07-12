@@ -80,6 +80,27 @@ describe(`Reducer work correctly:`, () => {
         currentMovieId: 0,
       }));
   });
+
+  it(`reducer should switch to Main mode after play promo movie`, () => {
+    expect(reducer(extend(TEST_DATA.initialStoreState, {
+      currentPage: PageKind.PLAYER,
+      currentMovieId: 8,
+      promoMovieId: 8,
+    }), ActionCreator.exitPlayer()))
+      .toEqual(TEST_DATA.initialStoreState);
+  });
+
+  it(`reducer should switch to MoviePage mode after play movie`, () => {
+    expect(reducer(extend(TEST_DATA.initialStoreState, {
+      currentPage: PageKind.PLAYER,
+      currentMovieId: 0,
+      promoMovieId: 8,
+    }), ActionCreator.exitPlayer()))
+      .toEqual(extend(TEST_DATA.initialStoreState, {
+        currentPage: PageKind.MOVIE_PAGE,
+        currentMovieId: 0,
+      }));
+  });
 });
 
 
@@ -108,6 +129,13 @@ describe(`Action creators work correctly:`, () => {
   it(`Action creator for play movie returns correct action`, () => {
     expect(ActionCreator.playMovie()).toEqual({
       type: ActionType.PLAY_MOVIE,
+      payload: null,
+    });
+  });
+
+  it(`Action creator for exit player returns correct action`, () => {
+    expect(ActionCreator.exitPlayer()).toEqual({
+      type: ActionType.EXIT_PLAYER,
       payload: null,
     });
   });
