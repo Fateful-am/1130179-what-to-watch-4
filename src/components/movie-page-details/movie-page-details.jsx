@@ -1,6 +1,6 @@
 import React from 'react';
 import {MoviePropTypes} from '../../consts';
-import {formatDuration} from '../../utils/helpers.js';
+import {formatDurationInMinutes} from '../../utils/helpers.js';
 
 const MoviePageDetails = ({movie}) => {
   const renderActorName = (actor, isLast) => {
@@ -35,9 +35,9 @@ const MoviePageDetails = ({movie}) => {
       </div>
 
       <div className="movie-card__text-col">
-        {renderMovieCardDetailsItem(`Run Time`, formatDuration(movie.runTime))}
+        {renderMovieCardDetailsItem(`Run Time`, formatDurationInMinutes(movie.runTime))}
         {renderMovieCardDetailsItem(`Genre`, movie.genre)}
-        {renderMovieCardDetailsItem(`Released`, movie.year)}
+        {renderMovieCardDetailsItem(`Released`, movie.released)}
       </div>
     </div>
   );

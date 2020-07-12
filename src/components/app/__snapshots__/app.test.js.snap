@@ -102,6 +102,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -119,6 +120,7 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -200,7 +202,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -223,7 +227,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -246,7 +252,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -269,7 +277,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -292,7 +302,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -315,7 +327,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -338,7 +352,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"
@@ -361,7 +377,9 @@ Array [
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <video />
+            <video
+              className="player__video"
+            />
           </div>
           <h3
             className="small-movie-card__title"

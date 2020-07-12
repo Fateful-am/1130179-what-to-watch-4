@@ -14,7 +14,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -37,7 +39,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -60,7 +64,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -83,7 +89,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -106,7 +114,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -129,7 +139,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -152,7 +164,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -175,7 +189,9 @@ exports[`Render Movies List 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
-      <video />
+      <video
+        className="player__video"
+      />
     </div>
     <h3
       className="small-movie-card__title"

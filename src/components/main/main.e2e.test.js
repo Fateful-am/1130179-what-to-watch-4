@@ -30,7 +30,7 @@ describe(`Interactive with Main component: `, () => {
     wrapper = mount(
         <Provider store={store}>
           <Main
-            promoMovie={TEST_DATA.initialStoreState.promoMovie}
+            promoMovie={TEST_DATA.promoMovie}
             allGenres={testObject.allGenres}
             activeGenre={ALL_GENRES}
             needShowMoreButton={true}

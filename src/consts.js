@@ -9,9 +9,18 @@ export const MOVIE_LIKE_THIS_COUNT = 4;
 export const ALL_GENRES = `All genres`;
 export const MAX_GENRE_COUNT = 9;
 
+export const EMPTY_PROMO_MOVIE = {
+  backgroundImage: ``,
+  title: ``,
+  posterImage: ``,
+  genre: ``,
+  released: ``,
+};
+
 export const PageKind = {
   MAIN: `main`,
-  MOVIE_PAGE: `moviePage`
+  MOVIE_PAGE: `moviePage`,
+  PLAYER: `player`,
 };
 
 export const MoviePageTabNames = {
@@ -40,10 +49,12 @@ export const MoviePropTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    posterSource: PropTypes.string.isRequired,
-    previewMovie: PropTypes.string.isRequired,
-    coverSource: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
     rating: PropTypes.shape({
       score: PropTypes.string.isRequired,
       level: PropTypes.string.isRequired,

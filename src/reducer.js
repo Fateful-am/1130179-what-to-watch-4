@@ -6,7 +6,7 @@ const initialState = {
   genre: ALL_GENRES,
   currentPage: PageKind.MAIN,
   currentMovieId: null,
-  promoMovie: mockMovies[PROMO_MOCK_INDEX],
+  promoMovieId: PROMO_MOCK_INDEX,
   movies: mockMovies,
   genreMovies: [...mockMovies],
   renderedMovieCount: START_MOVIE_COUNT,
@@ -16,6 +16,8 @@ const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   SHOW_MOVIE_DETAIL: `SHOW_MOVIE_DETAIL`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
+  PLAY_MOVIE: `PLAY_MOVIE`,
+  EXIT_PLAYER: `EXIT_PLAYER`,
 };
 
 const ActionCreator = {
@@ -32,6 +34,16 @@ const ActionCreator = {
   showMoreMovies: () => ({
     type: ActionType.SHOW_MORE_MOVIES,
     payload: START_MOVIE_COUNT,
+  }),
+
+  playMovie: () => ({
+    type: ActionType.PLAY_MOVIE,
+    payload: null,
+  }),
+
+  exitPlayer: () => ({
+    type: ActionType.EXIT_PLAYER,
+    payload: null,
   }),
 };
 
@@ -67,6 +79,18 @@ const reducer = (state = initialState, action) => {
     case ActionType.SHOW_MORE_MOVIES:
       return extend(state, {
         renderedMovieCount: state.renderedMovieCount + action.payload
+      });
+
+    case ActionType.PLAY_MOVIE:
+      return extend(state, {
+        currentPage: PageKind.PLAYER,
+        currentMovieId: state.currentMovieId === 0 || state.currentMovieId ? state.currentMovieId : state.promoMovieId,
+      });
+
+    case ActionType.EXIT_PLAYER:
+      return extend(state, {
+        currentPage: state.promoMovieId === state.currentMovieId ? PageKind.MAIN : PageKind.MOVIE_PAGE,
+        currentMovieId: state.promoMovieId === state.currentMovieId ? null : state.currentMovieId,
       });
   }
 

@@ -1,7 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import React from 'react';
+import renderer from 'react-test-renderer';
 import PropTypes from "prop-types";
-import withVideoPlayer from './with-video-player';
+import withBigVideoPlayer from './with-big-video-player';
 
 const MockComponent = (props) => {
   const {children} = props;
@@ -20,13 +20,15 @@ MockComponent.propTypes = {
   ]).isRequired,
 };
 
-const MockComponentWrapped = withVideoPlayer(MockComponent);
+const MockComponentWrapped = withBigVideoPlayer(MockComponent);
 
-it(`withVideo is rendered correctly`, () => {
+it(`withBigVideoPlayer is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
+      videoLink={``}
       previewImage={``}
-      previewVideoLink={``}
+      title={``}
+      onExitButtonClick={() => {}}
     />
   ), {
     createNodeMock() {
@@ -36,3 +38,4 @@ it(`withVideo is rendered correctly`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
