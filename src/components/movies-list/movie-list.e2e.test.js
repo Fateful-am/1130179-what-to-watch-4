@@ -16,7 +16,7 @@ describe(`Interactive with MovieList component: `, () => {
   beforeEach(() => {
     wrapper = mount(
         <MoviesList
-          renderMovies={TEST_DATA.initialStoreState.genreMovies.slice(0, TEST_DATA.initialStoreState.renderedMovieCount)}
+          renderMovies={TEST_DATA.initialStoreMovieState.genreMovies.slice(0, TEST_DATA.initialStoreMovieState.renderedMovieCount)}
           onMovieCardClick={handleMovieCardClick}
         />
     );

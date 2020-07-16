@@ -5,7 +5,7 @@ import MoviesList from '../movies-list/movies-list.jsx';
 import {getMovieById, getSortedUniqueObjectValues} from '../../utils/helpers';
 import {ALL_GENRES, MAX_GENRE_COUNT, EMPTY_PROMO_MOVIE, GenreTabClassNames} from '../../consts';
 import Tabs from '../tabs/tabs.jsx';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/movie/movie';
 import ShowMoreButton from '../show-more-button/show-more-button.jsx';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
 

@@ -8,7 +8,7 @@ import {TEST_DATA} from '../../utils/test-data';
 const mockStore = configureStore([]);
 
 it(`Render Movies List`, () => {
-  const store = mockStore(TEST_DATA.initialStoreState);
+  const store = mockStore(TEST_DATA.initialStoreMovieState);
   const tree = renderer
     .create(
         <Provider store={store}>

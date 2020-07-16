@@ -10,7 +10,7 @@ const mockStore = configureStore([]);
 
 describe(`Render Main component: `, () => {
   it(`"All genres" MainScreen`, () => {
-    const store = mockStore(TEST_DATA.initialStoreState);
+    const store = mockStore(TEST_DATA.initialStoreMovieState);
 
     const tree = renderer
       .create(
@@ -27,7 +27,7 @@ describe(`Render Main component: `, () => {
   });
 
   it(`"Comedy" MainScreen`, () => {
-    const store = mockStore(extend(TEST_DATA.initialStoreState, {
+    const store = mockStore(extend(TEST_DATA.initialStoreMovieState, {
       genre: `Comedy`,
       genreMovies: TEST_DATA.comedyMovies
     }));
@@ -47,7 +47,7 @@ describe(`Render Main component: `, () => {
   });
 
   it(`"Drama" MainScreen`, () => {
-    const store = mockStore(extend(TEST_DATA.initialStoreState, {
+    const store = mockStore(extend(TEST_DATA.initialStoreMovieState, {
       genre: `Drama`,
       genreMovies: TEST_DATA.dramaMovies
     }));

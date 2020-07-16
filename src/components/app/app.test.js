@@ -9,7 +9,7 @@ const mockStore = configureStore([]);
 
 describe(`Render App component:`, () => {
   it(`render default AppScreen`, () => {
-    const store = mockStore(TEST_DATA.initialStoreState);
+    const store = mockStore(TEST_DATA.initialStoreMovieState);
 
     const tree = renderer
     .create(

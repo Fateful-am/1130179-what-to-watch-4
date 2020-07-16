@@ -1,6 +1,6 @@
 import {ALL_GENRES, PageKind, START_MOVIE_COUNT} from '../consts';
 
-const MOVIES = [
+export const MOVIES = [
   {
     id: 0,
     title: `Macbeth`,
@@ -432,13 +432,11 @@ const PROMO_MOVIE = {
 export const testMovieCard = MOVIES[0];
 
 export const TEST_DATA = {
-  initialStoreState: {
+  initialStoreMovieState: {
     genre: ALL_GENRES,
     currentPage: PageKind.MAIN,
     currentMovieId: null,
-    promoMovieId: 8,
-    movies: [...MOVIES],
-    genreMovies: [...MOVIES],
+    genreMovies: [],
     renderedMovieCount: START_MOVIE_COUNT,
   },
   comedyMovies: [

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import {MoviePropTypes} from '../../consts';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/movie/movie';
 
 function MoviesList(props) {
   const {renderMovies, onMovieCardClick} = props;
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(movieId, genre) {
-    dispatch(ActionCreator.changeGenre(genre));
+    dispatch(ActionCreator.changeGenre(genre, movies));
     dispatch(ActionCreator.showMovieDetail(movieId));
   },
 });

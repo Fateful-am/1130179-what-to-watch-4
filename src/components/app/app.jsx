@@ -9,7 +9,7 @@ import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
 import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
 import {getMovieById} from '../../utils/helpers';
 import withBigVideoPlayer from '../../hocs/with-big-video-player/with-big-video-player';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/movie/movie';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);

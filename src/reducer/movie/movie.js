@@ -1,19 +1,17 @@
-import {extend} from "./utils/helpers.js";
-import {mockMovies} from './mocks/films';
-import {PageKind, ALL_GENRES, PROMO_MOCK_INDEX, START_MOVIE_COUNT, MOVIE_LIKE_THIS_COUNT} from './consts';
+import {extend} from "../../utils/helpers.js";
+import {PageKind, ALL_GENRES, START_MOVIE_COUNT, MOVIE_LIKE_THIS_COUNT} from '../../consts';
 
 const initialState = {
   genre: ALL_GENRES,
   currentPage: PageKind.MAIN,
   currentMovieId: null,
-  promoMovieId: PROMO_MOCK_INDEX,
-  movies: mockMovies,
-  genreMovies: [...mockMovies],
+  genreMovies: [],
   renderedMovieCount: START_MOVIE_COUNT,
 };
 
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
+  CHANGE_GENRE_MOVIES: `CHANGE_GENRE_MOVIES`,
   SHOW_MOVIE_DETAIL: `SHOW_MOVIE_DETAIL`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   PLAY_MOVIE: `PLAY_MOVIE`,
@@ -24,6 +22,11 @@ const ActionCreator = {
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
     payload: genre,
+  }),
+
+  changeGenreMovies: (genreMovies) => ({
+    type: ActionType.CHANGE_GENRE_MOVIES,
+    payload: genreMovies,
   }),
 
   showMovieDetail: (movieId) => ({
@@ -64,6 +67,11 @@ const reducer = (state = initialState, action) => {
         genre,
         renderedMovieCount: START_MOVIE_COUNT,
         genreMovies
+      });
+
+    case ActionType.CHANGE_GENRE_MOVIES:
+      return extend(state, {
+        genreMovies: action.payload,
       });
 
     case ActionType.SHOW_MOVIE_DETAIL:

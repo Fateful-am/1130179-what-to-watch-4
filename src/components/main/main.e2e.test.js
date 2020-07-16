@@ -26,7 +26,7 @@ describe(`Interactive with Main component: `, () => {
   let wrapper;
 
   beforeEach(() => {
-    store = mockStore(TEST_DATA.initialStoreState);
+    store = mockStore(TEST_DATA.initialStoreMovieState);
     wrapper = mount(
         <Provider store={store}>
           <Main
@@ -73,7 +73,7 @@ describe(`Main component with Redux:`, () => {
   let wrapper;
 
   beforeEach(() => {
-    store = mockStore(TEST_DATA.initialStoreState);
+    store = mockStore(TEST_DATA.initialStoreMovieState);
     wrapper = mount(
         <Provider store={store}>
           <ConnectedMain/>
@@ -100,7 +100,7 @@ describe(`Main component with Redux with "Comedy" tab active:`, () => {
   let wrapper;
   const genre = `Comedy`;
   beforeEach(() => {
-    store = mockStore(extend(TEST_DATA.initialStoreState, {
+    store = mockStore(extend(TEST_DATA.initialStoreMovieState, {
       genre,
       genreMovies: TEST_DATA.comedyMovies,
     }));

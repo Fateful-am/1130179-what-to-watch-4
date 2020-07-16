@@ -8,7 +8,7 @@ import MovieCardButtons from './movie-card-buttons';
 const mockStore = configureStore([]);
 
 it(`Render MovieCardButtons`, () => {
-  const store = mockStore(TEST_DATA.initialStoreState);
+  const store = mockStore(TEST_DATA.initialStoreMovieState);
   const tree = renderer
     .create(
         <Provider store={store}>
@@ -25,7 +25,7 @@ it(`Render MovieCardButtons`, () => {
 });
 
 it(`Render MovieCardButtons with AddReviewButton`, () => {
-  const store = mockStore(TEST_DATA.initialStoreState);
+  const store = mockStore(TEST_DATA.initialStoreMovieState);
   const tree = renderer
     .create(
         <Provider store={store}>

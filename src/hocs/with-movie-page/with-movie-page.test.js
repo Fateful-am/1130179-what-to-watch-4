@@ -11,7 +11,7 @@ import {MOVIE_LIKE_THIS_COUNT} from '../../consts';
 
 const mockStore = configureStore([]);
 
-const store = mockStore(extend(TEST_DATA.initialStoreState, {
+const store = mockStore(extend(TEST_DATA.initialStoreMovieState, {
   genre: `Comedy`,
   currentPage: `moviePage`,
   currentMovieId: 1,

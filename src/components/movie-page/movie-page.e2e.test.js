@@ -15,7 +15,7 @@ const mockStore = configureStore([]);
 
 it(`Should all moviePageTabs clicked`, () => {
   const testMovieId = 0;
-  const store = mockStore(extend(TEST_DATA.initialStoreState, {
+  const store = mockStore(extend(TEST_DATA.initialStoreMovieState, {
     currentMovieId: testMovieId,
     genreMovies: TEST_DATA.comedyMovies.filter((movie) => movie.id !== testMovieId),
   }));
