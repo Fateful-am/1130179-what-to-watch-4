@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
 import {MoviePropTypes} from '../../consts';
 import {ActionCreator} from '../../reducer/movie/movie';
+import {getGenreMovies} from '../../reducer/movie/selectors';
 
 function MoviesList(props) {
-  const {renderMovies, onMovieCardClick} = props;
+  const {renderedMovies, onMovieCardClick} = props;
   return (
     <div className="catalog__movies-list">
-      {renderMovies.map((movie) => {
+      {renderedMovies.map((movie) => {
         return (
           <MovieCard
             key={`mc-${movie.id}`}
@@ -27,19 +28,19 @@ function MoviesList(props) {
 }
 
 MoviesList.propTypes = {
-  renderMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
+  renderedMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
   onMovieCardClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
   return ({
-    renderMovies: state.genreMovies.slice(0, state.renderedMovieCount),
+    renderedMovies: getGenreMovies(state),
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onMovieCardClick(movieId, genre) {
-    dispatch(ActionCreator.changeGenre(genre, movies));
+    dispatch(ActionCreator.changeGenre(genre));
     dispatch(ActionCreator.showMovieDetail(movieId));
   },
 });

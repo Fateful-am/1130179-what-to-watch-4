@@ -7,8 +7,8 @@ import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
 import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
 import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
-import {getMovieById} from '../../utils/helpers';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
+import {getCurrentMovie} from '../../reducer/data/selectors';
 
 class MoviePage extends PureComponent {
   _renderCurrentMoviePage() {
@@ -134,7 +134,7 @@ MoviePage.propTypes = {
 
 const mapStateToProps = (state) => {
   return ({
-    movie: getMovieById(state.movies, state.currentMovieId),
+    movie: getCurrentMovie(state),
   });
 };
 

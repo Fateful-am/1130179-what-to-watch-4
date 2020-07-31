@@ -4,14 +4,14 @@ import {PageKind, ALL_GENRES, START_MOVIE_COUNT, MOVIE_LIKE_THIS_COUNT} from '..
 const initialState = {
   genre: ALL_GENRES,
   currentPage: PageKind.MAIN,
-  currentMovieId: null,
-  genreMovies: [],
+  currentMovieId: -1,
+  previousPage: PageKind.MAIN,
+  previousMovieId: -1,
   renderedMovieCount: START_MOVIE_COUNT,
 };
 
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
-  CHANGE_GENRE_MOVIES: `CHANGE_GENRE_MOVIES`,
   SHOW_MOVIE_DETAIL: `SHOW_MOVIE_DETAIL`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   PLAY_MOVIE: `PLAY_MOVIE`,
@@ -24,24 +24,19 @@ const ActionCreator = {
     payload: genre,
   }),
 
-  changeGenreMovies: (genreMovies) => ({
-    type: ActionType.CHANGE_GENRE_MOVIES,
-    payload: genreMovies,
-  }),
-
   showMovieDetail: (movieId) => ({
     type: ActionType.SHOW_MOVIE_DETAIL,
-    payload: movieId === undefined ? null : movieId,
+    payload: movieId,
   }),
 
-  showMoreMovies: () => ({
+  showMoreMovies: (renderedMovieCount) => ({
     type: ActionType.SHOW_MORE_MOVIES,
-    payload: START_MOVIE_COUNT,
+    payload: renderedMovieCount + START_MOVIE_COUNT,
   }),
 
-  playMovie: () => ({
+  playMovie: (movieIdForPlay) => ({
     type: ActionType.PLAY_MOVIE,
-    payload: null,
+    payload: movieIdForPlay,
   }),
 
   exitPlayer: () => ({
@@ -53,52 +48,39 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_GENRE:
-      let genreMovies;
-      let genre;
-      if (action.payload === ALL_GENRES || !action.payload) {
-        genreMovies = [...state.movies];
-        genre = ALL_GENRES;
-      } else {
-        genreMovies = state.movies.filter((movie) => movie.genre === action.payload);
-        genre = action.payload;
-      }
-
       return extend(state, {
-        genre,
+        genre: action.payload,
         renderedMovieCount: START_MOVIE_COUNT,
-        genreMovies
-      });
-
-    case ActionType.CHANGE_GENRE_MOVIES:
-      return extend(state, {
-        genreMovies: action.payload,
       });
 
     case ActionType.SHOW_MOVIE_DETAIL:
-      const pageKind = action.payload === undefined || action.payload === null ? PageKind.MAIN : PageKind.MOVIE_PAGE;
-      const renderedMovieCount = pageKind === PageKind.MAIN ? START_MOVIE_COUNT : MOVIE_LIKE_THIS_COUNT;
       return extend(state, {
-        currentPage: pageKind,
+        previousPage: state.currentPage,
+        previousMovieId: state.currentMovieId,
+        currentPage: PageKind.MOVIE_PAGE,
         currentMovieId: action.payload,
-        genreMovies: state.genreMovies.filter((movie) => movie.id !== action.payload),
-        renderedMovieCount
+        renderedMovieCount: MOVIE_LIKE_THIS_COUNT,
       });
 
     case ActionType.SHOW_MORE_MOVIES:
       return extend(state, {
-        renderedMovieCount: state.renderedMovieCount + action.payload
+        renderedMovieCount: action.payload
       });
 
     case ActionType.PLAY_MOVIE:
       return extend(state, {
+        previousPage: state.currentPage,
+        previousMovieId: state.currentMovieId,
         currentPage: PageKind.PLAYER,
-        currentMovieId: state.currentMovieId === 0 || state.currentMovieId ? state.currentMovieId : state.promoMovieId,
+        currentMovieId: action.payload,
       });
 
     case ActionType.EXIT_PLAYER:
       return extend(state, {
-        currentPage: state.promoMovieId === state.currentMovieId ? PageKind.MAIN : PageKind.MOVIE_PAGE,
-        currentMovieId: state.promoMovieId === state.currentMovieId ? null : state.currentMovieId,
+        previousPage: state.currentPage,
+        previousMovieId: state.currentMovieId,
+        currentPage: state.previousPage,
+        currentMovieId: state.previousMovieId,
       });
   }
 

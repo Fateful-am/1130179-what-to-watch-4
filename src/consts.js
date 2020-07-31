@@ -15,6 +15,8 @@ export const EMPTY_PROMO_MOVIE = {
   posterImage: ``,
   genre: ``,
   released: ``,
+  videoLink: ``,
+  previewImage: ``,
 };
 
 export const PageKind = {

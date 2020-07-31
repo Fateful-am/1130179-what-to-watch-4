@@ -1,8 +1,9 @@
 import {extend} from '../../utils/helpers.js';
+import {mockMovies} from '../../mocks/films';
 
 const initialState = {
-  promoMovieId: null,
-  movies: [],
+  promoMovieId: 8,
+  movies: mockMovies,
 };
 
 const ActionType = {
