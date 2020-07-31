@@ -435,9 +435,14 @@ export const TEST_DATA = {
   initialStoreMovieState: {
     genre: ALL_GENRES,
     currentPage: PageKind.MAIN,
-    currentMovieId: null,
-    genreMovies: [],
+    currentMovieId: -1,
+    previousPage: PageKind.MAIN,
+    previousMovieId: -1,
     renderedMovieCount: START_MOVIE_COUNT,
+  },
+  initialStoreDataState: {
+    promoMovieId: 8,
+    movies: MOVIES,
   },
   comedyMovies: [
     {

@@ -6,6 +6,7 @@ import configureStore from "redux-mock-store";
 import {MoviePage} from './movie-page';
 import {TEST_DATA, testMovieCard} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
+import NameSpace from '../../reducer/name-space';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -15,10 +16,12 @@ const mockStore = configureStore([]);
 
 it(`Should all moviePageTabs clicked`, () => {
   const testMovieId = 0;
-  const store = mockStore(extend(TEST_DATA.initialStoreMovieState, {
-    currentMovieId: testMovieId,
-    genreMovies: TEST_DATA.comedyMovies.filter((movie) => movie.id !== testMovieId),
-  }));
+  const store = mockStore({
+    [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
+      currentMovieId: testMovieId,
+    }),
+    [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+  });
 
   const handleTabClick = jest.fn();
   const moviePageScreen = mount(

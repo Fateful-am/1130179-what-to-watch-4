@@ -1,7 +1,6 @@
 import {reducer, ActionType, ActionCreator} from "./movie.js";
-import {PageKind, ALL_GENRES, MOVIE_LIKE_THIS_COUNT, START_MOVIE_COUNT} from '../../consts';
-import {TEST_DATA, MOVIES} from '../../utils/test-data';
-import {extend} from '../../utils/helpers';
+import {PageKind, MOVIE_LIKE_THIS_COUNT, START_MOVIE_COUNT} from '../../consts';
+import {TEST_DATA} from '../../utils/test-data';
 
 describe(`Reducer work correctly:`, () => {
   it(`reducer without additional parameters should return initial state`, () => {
@@ -10,99 +9,104 @@ describe(`Reducer work correctly:`, () => {
   });
 
   it(`reducer should change genre to "Comedy"`, () => {
-    expect(reducer(extend(TEST_DATA.initialStoreMovieState, {
-      movies: MOVIES,
-    }), ActionCreator.changeGenre(`Comedy`)))
-      .toEqual(
-          extend(TEST_DATA.initialStoreMovieState, {
-            movies: MOVIES,
-            genre: `Comedy`,
-            genreMovies: TEST_DATA.comedyMovies,
-          }));
-  });
-
-  it(`reducer should change genre to "All Genres"`, () => {
-    expect(reducer(extend(TEST_DATA.initialStoreMovieState, {
-      genre: `Comedy`,
-      genreMovies: TEST_DATA.comedyMovies,
-    }), ActionCreator.changeGenre(ALL_GENRES)))
-      .toEqual(TEST_DATA.initialStoreMovieState);
-  });
-
-  it(`reducer should change genre to "All Genres" when value is undefined`, () => {
-    expect(reducer(extend(TEST_DATA.initialStoreMovieState, {
-      genre: `Comedy`,
-      genreMovies: TEST_DATA.comedyMovies,
-    }), ActionCreator.changeGenre()))
-      .toEqual(TEST_DATA.initialStoreMovieState);
-  });
-
-
-  it(`reducer should set to currentMovieId value and genreMovies`, () => {
-    expect(reducer(extend(TEST_DATA.initialStoreMovieState, {
-      genre: `Comedy`,
-      genreMovies: TEST_DATA.initialStoreMovieState.movies.filter((movie) => movie.genre === `Comedy`),
-    }),
-    ActionCreator.showMovieDetail(0)))
-      .toEqual(extend(TEST_DATA.initialStoreMovieState, {
-        currentPage: PageKind.MOVIE_PAGE,
+    expect(reducer({}, ActionCreator.changeGenre(`Comedy`)))
+      .toEqual({
         genre: `Comedy`,
+        renderedMovieCount: START_MOVIE_COUNT,
+      });
+  });
+
+
+  it(`reducer should set to currentMovieId value - 1`, () => {
+    expect(reducer({
+      currentPage: PageKind.MAIN,
+      currentMovieId: -1,
+    }, ActionCreator.showMovieDetail(0)))
+      .toEqual({
+        previousPage: PageKind.MAIN,
+        previousMovieId: -1,
+        currentPage: PageKind.MOVIE_PAGE,
         currentMovieId: 0,
         renderedMovieCount: MOVIE_LIKE_THIS_COUNT,
-        genreMovies: TEST_DATA.comedyMovies.filter((movie) => movie.id !== 0),
-      }));
+      });
   });
 
-  it(`reducer should set to InitialState when MovieId is undefined`, () => {
-    expect(reducer(TEST_DATA.initialStoreMovieState, ActionCreator.showMovieDetail()))
-      .toEqual(TEST_DATA.initialStoreMovieState);
+  it(`reducer should set to currentMovieId value - 2`, () => {
+    expect(reducer({
+      currentPage: PageKind.MOVIE_PAGE,
+      currentMovieId: 0,
+    }, ActionCreator.showMovieDetail(4)))
+      .toEqual({
+        previousPage: PageKind.MOVIE_PAGE,
+        previousMovieId: 0,
+        currentPage: PageKind.MOVIE_PAGE,
+        currentMovieId: 4,
+        renderedMovieCount: MOVIE_LIKE_THIS_COUNT,
+      });
   });
+
 
   it(`reducer should increment renderedMovieCount state`, () => {
-    expect(reducer(TEST_DATA.initialStoreMovieState, ActionCreator.showMoreMovies()))
-      .toEqual(extend(TEST_DATA.initialStoreMovieState, {
-        renderedMovieCount: 16,
-      }));
+    expect(reducer({renderedMovieCount: 8}, ActionCreator.showMoreMovies(8)))
+      .toEqual({renderedMovieCount: 16});
   });
 
   it(`reducer should switch to Play mode from Main mode`, () => {
-    expect(reducer(TEST_DATA.initialStoreMovieState, ActionCreator.playMovie()))
-      .toEqual(extend(TEST_DATA.initialStoreMovieState, {
+    expect(reducer({
+      currentPage: PageKind.MAIN,
+      currentMovieId: -1,
+    }
+    , ActionCreator.playMovie(8)))
+      .toEqual({
+        previousPage: PageKind.MAIN,
+        previousMovieId: -1,
         currentPage: PageKind.PLAYER,
-        currentMovieId: TEST_DATA.initialStoreMovieState.promoMovieId,
-      }));
+        currentMovieId: 8,
+      });
   });
 
   it(`reducer should switch to Play mode from MoviePage mode`, () => {
-    expect(reducer(extend(TEST_DATA.initialStoreMovieState, {
+    expect(reducer({
       currentPage: PageKind.MOVIE_PAGE,
-      currentMovieId: 0,
-    }), ActionCreator.playMovie()))
-      .toEqual(extend(TEST_DATA.initialStoreMovieState, {
+      currentMovieId: 4,
+    }
+    , ActionCreator.playMovie(4)))
+      .toEqual({
+        previousPage: PageKind.MOVIE_PAGE,
+        previousMovieId: 4,
         currentPage: PageKind.PLAYER,
-        currentMovieId: 0,
-      }));
+        currentMovieId: 4,
+      });
   });
 
   it(`reducer should switch to Main mode after play promo movie`, () => {
-    expect(reducer(extend(TEST_DATA.initialStoreMovieState, {
+    expect(reducer({
+      previousPage: PageKind.MAIN,
+      previousMovieId: -1,
       currentPage: PageKind.PLAYER,
       currentMovieId: 8,
-      promoMovieId: 8,
-    }), ActionCreator.exitPlayer()))
-      .toEqual(TEST_DATA.initialStoreMovieState);
+    }, ActionCreator.exitPlayer()))
+      .toEqual({
+        previousPage: PageKind.PLAYER,
+        previousMovieId: 8,
+        currentPage: PageKind.MAIN,
+        currentMovieId: -1,
+      });
   });
 
   it(`reducer should switch to MoviePage mode after play movie`, () => {
-    expect(reducer(extend(TEST_DATA.initialStoreMovieState, {
+    expect(reducer({
+      previousPage: PageKind.MOVIE_PAGE,
+      previousMovieId: 5,
       currentPage: PageKind.PLAYER,
-      currentMovieId: 0,
-      promoMovieId: 8,
-    }), ActionCreator.exitPlayer()))
-      .toEqual(extend(TEST_DATA.initialStoreMovieState, {
+      currentMovieId: 5,
+    }, ActionCreator.exitPlayer()))
+      .toEqual({
+        previousPage: PageKind.PLAYER,
+        previousMovieId: 5,
         currentPage: PageKind.MOVIE_PAGE,
-        currentMovieId: 0,
-      }));
+        currentMovieId: 5,
+      });
   });
 });
 
@@ -123,16 +127,16 @@ describe(`Action creators work correctly:`, () => {
   });
 
   it(`Action creator for showing more movies returns correct action`, () => {
-    expect(ActionCreator.showMoreMovies()).toEqual({
+    expect(ActionCreator.showMoreMovies(8)).toEqual({
       type: ActionType.SHOW_MORE_MOVIES,
-      payload: START_MOVIE_COUNT,
+      payload: 16,
     });
   });
 
   it(`Action creator for play movie returns correct action`, () => {
-    expect(ActionCreator.playMovie()).toEqual({
+    expect(ActionCreator.playMovie(4)).toEqual({
       type: ActionType.PLAY_MOVIE,
-      payload: null,
+      payload: 4,
     });
   });
 

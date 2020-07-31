@@ -6,15 +6,21 @@ import configureStore from "redux-mock-store";
 import MoviePage from './movie-page';
 import {TEST_DATA} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
+import NameSpace from '../../reducer/name-space';
+import {PageKind} from '../../consts';
 
 const mockStore = configureStore([]);
 
 it(`Render MoviePage with Overview tab`, () => {
   const testMovieId = 0;
-  const store = mockStore(extend(TEST_DATA.initialStoreMovieState, {
-    currentMovieId: testMovieId,
-    genreMovies: TEST_DATA.comedyMovies.filter((movie) => movie.id !== testMovieId),
-  }));
+  const store = mockStore({
+    [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
+      currentPage: PageKind.MOVIE_PAGE,
+      genre: `Comedy`,
+      currentMovieId: testMovieId,
+    }),
+    [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+  });
 
   const tree = renderer
     .create(

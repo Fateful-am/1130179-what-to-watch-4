@@ -1,11 +1,11 @@
 import {MOVIES} from '../../utils/test-data';
-import {reducer, ActionType} from './data';
+import {reducer, ActionType, ActionCreator} from './data';
 
 describe(`Data-reducer work correctly:`, () => {
   it(`reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {}))
       .toEqual({
-        promoMovieId: null,
+        promoMovieId: -1,
         movies: [],
       });
   });
@@ -24,14 +24,28 @@ describe(`Data-reducer work correctly:`, () => {
 
   it(`Reducer should update promoMovieId by load promoMovie`, () => {
     expect(reducer({
-      promoMovieId: null,
-      movies: [],
+      promoMovieId: -1,
     }, {
       type: ActionType.LOAD_PROMO,
       payload: MOVIES[8],
     })).toEqual({
       promoMovieId: 8,
-      movies: [],
+    });
+  });
+});
+
+describe(`Action creators work correctly`, () => {
+  it(`ActionCreator for load movies returns correct action`, ()=>{
+    expect(ActionCreator.loadMovies(MOVIES)).toEqual({
+      type: ActionType.LOAD_MOVIES,
+      payload: MOVIES,
+    });
+  });
+
+  it(`ActionCreator for load promo returns correct action`, ()=>{
+    expect(ActionCreator.loadPromo(MOVIES[8])).toEqual({
+      type: ActionType.LOAD_PROMO,
+      payload: MOVIES[8],
     });
   });
 });
