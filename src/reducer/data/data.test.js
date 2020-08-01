@@ -1,5 +1,9 @@
 import {MOVIES} from '../../utils/test-data';
-import {reducer, ActionType, ActionCreator} from './data';
+import {reducer, ActionType, ActionCreator, Operation, convertToLocalMovieData} from './data';
+import MockAdapter from 'axios-mock-adapter';
+import {createAPI} from "../../api.js";
+
+const api = createAPI(() => {});
 
 describe(`Data-reducer work correctly:`, () => {
   it(`reducer without additional parameters should return initial state`, () => {
@@ -47,5 +51,27 @@ describe(`Action creators work correctly`, () => {
       type: ActionType.LOAD_PROMO,
       payload: MOVIES[8],
     });
+  });
+});
+
+describe(`Data operation work correctly`, () => {
+  it(`Should make a correct API call to /films`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const moviesLoader = Operation.loadMovies();
+    const request = {starring: []};
+
+    apiMock
+      .onGet(`/films`)
+      .reply(200, [request]);
+
+    return moviesLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_MOVIES,
+          payload: [convertToLocalMovieData(request)],
+        });
+      });
   });
 });
