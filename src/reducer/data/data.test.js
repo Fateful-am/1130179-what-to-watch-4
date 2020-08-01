@@ -74,4 +74,24 @@ describe(`Data operation work correctly`, () => {
         });
       });
   });
+
+  it(`Should make a correct API call to /films/promo`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const promoLoader = Operation.loadPromo();
+    const request = {id: 1, starring: []};
+
+    apiMock
+      .onGet(`/films/promo`)
+      .reply(200, request);
+
+    return promoLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_PROMO,
+          payload: convertToLocalMovieData(request),
+        });
+      });
+  });
 });

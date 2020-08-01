@@ -83,6 +83,13 @@ const Operation = {
         dispatch(ActionCreator.loadMovies(movies));
       });
   },
+  loadPromo: () => (dispatch, getState, api) => {
+    return api.get(`/films/promo`)
+      .then((response) => {
+        const promoMovie = convertToLocalMovieData(response.data);
+        dispatch(ActionCreator.loadPromo(promoMovie));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
