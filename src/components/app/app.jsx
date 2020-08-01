@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import {PageKind} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
@@ -11,6 +11,7 @@ import withBigVideoPlayer from '../../hocs/with-big-video-player/with-big-video-
 import {ActionCreator} from '../../reducer/movie/movie.js';
 import {getCurrentPage} from '../../reducer/movie/selectors.js';
 import {getCurrentMovie} from '../../reducer/data/selectors.js';
+import SignIn from '../sign-in/sign-in';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
@@ -21,12 +22,12 @@ class App extends PureComponent {
     switch (currentPage) {
       case PageKind.MAIN:
         return (
-          <Main />
+          <Main/>
         );
 
       case PageKind.MOVIE_PAGE:
         return (
-          <MoviePageWrapped />
+          <MoviePageWrapped/>
         );
 
       case PageKind.PLAYER:
@@ -51,7 +52,7 @@ class App extends PureComponent {
             {this._stateRender()}
           </Route>
           <Route exact path="/dev-film">
-            <MoviePageWrapped />
+            <MoviePageWrapped/>
           </Route>
           <Route exact path="/dev-player">
             <BigPlayerWrapped
@@ -59,6 +60,11 @@ class App extends PureComponent {
               previewImage={`img/player-poster.jpg`}
               title={`Transpotting`}
               onExitButtonClick={this.props.onPlayerExitButtonClick}
+            />
+          </Route>
+          <Route exact path="/dev-signIn">
+            <SignIn
+              onSubmit={() => {}}
             />
           </Route>
         </Switch>
