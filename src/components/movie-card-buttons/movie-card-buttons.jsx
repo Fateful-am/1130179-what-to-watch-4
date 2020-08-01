@@ -8,14 +8,14 @@ const MovieCardButtons = (props) => {
   const {movieIdForPlay, onPlayClick} = props;
   const onMyListClick = ()=>{};
 
-  const onPlayButtonClick = () => {
+  const handlePlayButtonClick = () => {
     onPlayClick(movieIdForPlay);
   };
 
   return (
     <div className="movie-card__buttons">
       <button className="btn btn--play movie-card__button" type="button"
-        onClick={onPlayButtonClick}
+        onClick={handlePlayButtonClick}
       >
         <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
           <path fillRule="evenodd" clipRule="evenodd" d="M0 0L19 9.5L0 19V0Z" fill="#EEE5B5"/>
