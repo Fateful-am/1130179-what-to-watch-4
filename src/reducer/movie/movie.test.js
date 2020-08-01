@@ -108,6 +108,26 @@ describe(`Reducer work correctly:`, () => {
         currentMovieId: 5,
       });
   });
+
+  it(`reducer should switch to Sign In mode`, () => {
+    expect(reducer({
+      currentPage: PageKind.MAIN,
+    }, ActionCreator.signIn()))
+      .toEqual({
+        previousPage: PageKind.MAIN,
+        currentPage: PageKind.SIGN_IN,
+      });
+  });
+
+  it(`reducer should switch to MainPage`, () => {
+    expect(reducer({
+      currentPage: PageKind.SIGN_IN,
+    }, ActionCreator.gotoMain()))
+      .toEqual({
+        previousPage: PageKind.SIGN_IN,
+        currentPage: PageKind.MAIN,
+      });
+  });
 });
 
 
@@ -143,6 +163,20 @@ describe(`Action creators work correctly:`, () => {
   it(`Action creator for exit player returns correct action`, () => {
     expect(ActionCreator.exitPlayer()).toEqual({
       type: ActionType.EXIT_PLAYER,
+      payload: null,
+    });
+  });
+
+  it(`Action creator for sign in returns correct action`, () => {
+    expect(ActionCreator.signIn()).toEqual({
+      type: ActionType.SIGN_IN,
+      payload: null,
+    });
+  });
+
+  it(`Action creator for Goto Main returns correct action`, () => {
+    expect(ActionCreator.gotoMain()).toEqual({
+      type: ActionType.GOTO_MAIN,
       payload: null,
     });
   });

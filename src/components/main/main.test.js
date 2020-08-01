@@ -14,6 +14,7 @@ describe(`Render Main component: `, () => {
     const store = mockStore({
       [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+      [NameSpace.USER]: TEST_DATA.initialStoreUserState,
     });
 
     const tree = renderer
@@ -36,6 +37,7 @@ describe(`Render Main component: `, () => {
         genre: `Comedy`,
       }),
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+      [NameSpace.USER]: TEST_DATA.initialStoreUserState,
     });
 
     const tree = renderer
@@ -58,6 +60,7 @@ describe(`Render Main component: `, () => {
         genre: `Drama`,
       }),
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+      [NameSpace.USER]: TEST_DATA.initialStoreUserState,
     });
 
     const tree = renderer

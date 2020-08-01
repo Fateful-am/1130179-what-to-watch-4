@@ -1,4 +1,5 @@
 import {ALL_GENRES, PageKind, START_MOVIE_COUNT} from '../consts';
+import {AuthorizationStatus} from '../reducer/user/user';
 
 export const MOVIES = [
   {
@@ -444,6 +445,11 @@ export const TEST_DATA = {
     promoMovieId: 8,
     movies: MOVIES,
   },
+  initialStoreUserState: {
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
+    userData: {},
+  },
+
   comedyMovies: [
     {
       id: 0,

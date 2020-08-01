@@ -1,5 +1,4 @@
 import {extend} from '../../utils/helpers.js';
-// import {mockMovies} from '../../mocks/films';
 
 const initialState = {
   promoMovieId: -1,
@@ -39,15 +38,6 @@ const getRatingLevel = (score) => {
   }
   return `Awesome`;
 };
-
-// const convertToLocalReviewData = (serverReviewData) => {
-//   return {
-//     text: serverReviewData[`comment`],
-//     author: serverReviewData[`user`][`name`],
-//     date: new Date(serverReviewData[`date`]),
-//     score: serverReviewData.rating,
-//   };
-// };
 
 export const convertToLocalMovieData = (serverMovieData) => {
   const score = parseFloat(serverMovieData[`rating`]);

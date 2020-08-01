@@ -1,4 +1,5 @@
 import axios from "axios";
+import {HOST_NAME} from './consts';
 
 const Error = {
   UNAUTHORIZED: 401
@@ -6,7 +7,7 @@ const Error = {
 
 export const createAPI = (onUnauthorized) => {
   const api = axios.create({
-    baseURL: `https://4.react.pages.academy/wtw`,
+    baseURL: `${HOST_NAME}/wtw`,
     timeout: 5000,
     withCredentials: true,
   });

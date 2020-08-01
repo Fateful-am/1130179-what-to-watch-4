@@ -16,6 +16,8 @@ const ActionType = {
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   PLAY_MOVIE: `PLAY_MOVIE`,
   EXIT_PLAYER: `EXIT_PLAYER`,
+  SIGN_IN: `SIGN_IN`,
+  GOTO_MAIN: `GOTO_MAIN`
 };
 
 const ActionCreator = {
@@ -41,6 +43,16 @@ const ActionCreator = {
 
   exitPlayer: () => ({
     type: ActionType.EXIT_PLAYER,
+    payload: null,
+  }),
+
+  signIn: () => ({
+    type: ActionType.SIGN_IN,
+    payload: null,
+  }),
+
+  gotoMain: () => ({
+    type: ActionType.GOTO_MAIN,
     payload: null,
   }),
 };
@@ -81,6 +93,18 @@ const reducer = (state = initialState, action) => {
         previousMovieId: state.currentMovieId,
         currentPage: state.previousPage,
         currentMovieId: state.previousMovieId,
+      });
+
+    case ActionType.SIGN_IN:
+      return extend(state, {
+        previousPage: state.currentPage,
+        currentPage: PageKind.SIGN_IN,
+      });
+
+    case ActionType.GOTO_MAIN:
+      return extend(state, {
+        previousPage: state.currentPage,
+        currentPage: PageKind.MAIN,
       });
   }
 

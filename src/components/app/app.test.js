@@ -13,6 +13,7 @@ describe(`Render App component:`, () => {
     const store = mockStore({
       [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+      [NameSpace.USER]: TEST_DATA.initialStoreUserState,
     });
 
     const tree = renderer
