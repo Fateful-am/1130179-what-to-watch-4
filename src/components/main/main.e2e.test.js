@@ -7,6 +7,7 @@ import ConnectedMain, {Main} from './main';
 import {TEST_DATA} from '../../utils/test-data';
 import {ALL_GENRES} from '../../consts';
 import {extend} from '../../utils/helpers';
+import NameSpace from '../../reducer/name-space';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -26,7 +27,10 @@ describe(`Interactive with Main component: `, () => {
   let wrapper;
 
   beforeEach(() => {
-    store = mockStore(TEST_DATA.initialStoreState);
+    store = mockStore({
+      [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
+      [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    });
     wrapper = mount(
         <Provider store={store}>
           <Main
@@ -36,6 +40,7 @@ describe(`Interactive with Main component: `, () => {
             needShowMoreButton={true}
             onGenreTabClick={handleGenreTabClick}
             onShowMoreButtonClick={handleShowMoreButtonClick}
+            renderedMovieCount={8}
           />
         </Provider>);
   });
@@ -73,7 +78,10 @@ describe(`Main component with Redux:`, () => {
   let wrapper;
 
   beforeEach(() => {
-    store = mockStore(TEST_DATA.initialStoreState);
+    store = mockStore({
+      [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
+      [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    });
     wrapper = mount(
         <Provider store={store}>
           <ConnectedMain/>
@@ -100,10 +108,13 @@ describe(`Main component with Redux with "Comedy" tab active:`, () => {
   let wrapper;
   const genre = `Comedy`;
   beforeEach(() => {
-    store = mockStore(extend(TEST_DATA.initialStoreState, {
-      genre,
-      genreMovies: TEST_DATA.comedyMovies,
-    }));
+    store = mockStore({
+      [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
+        genre,
+      }),
+      [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    });
+
     wrapper = mount(
         <Provider store={store}>
           <ConnectedMain/>

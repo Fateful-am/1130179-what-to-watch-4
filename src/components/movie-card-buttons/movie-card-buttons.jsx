@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/movie/movie';
+import {getMovieIdForPlay} from '../../reducer/movie/selectors';
 
 const MovieCardButtons = (props) => {
-  const {onPlayClick} = props;
+  const {movieIdForPlay, onPlayClick} = props;
   const onMyListClick = ()=>{};
+
+  const onPlayButtonClick = () => {
+    onPlayClick(movieIdForPlay);
+  };
+
   return (
     <div className="movie-card__buttons">
       <button className="btn btn--play movie-card__button" type="button"
-        onClick={onPlayClick}
+        onClick={onPlayButtonClick}
       >
-        <svg viewBox="0 0 19 19" width="19" height="19">
-          <use xlinkHref="#play-s"/>
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
+          <path fillRule="evenodd" clipRule="evenodd" d="M0 0L19 9.5L0 19V0Z" fill="#EEE5B5"/>
         </svg>
         <span>Play</span>
       </button>
@@ -30,6 +36,7 @@ const MovieCardButtons = (props) => {
 };
 
 MovieCardButtons.propTypes = {
+  movieIdForPlay: PropTypes.number.isRequired,
   onPlayClick: PropTypes.func.isRequired,
   onMyListClick: PropTypes.func,
   children: PropTypes.oneOfType([
@@ -37,11 +44,17 @@ MovieCardButtons.propTypes = {
     PropTypes.node,
   ])};
 
+const mapStateToProps = (state) => {
+  return ({
+    movieIdForPlay: getMovieIdForPlay(state),
+  });
+};
+
 const mapDispatchToProps = (dispatch) => ({
-  onPlayClick() {
-    dispatch(ActionCreator.playMovie());
+  onPlayClick(movieIdForPlay) {
+    dispatch(ActionCreator.playMovie(movieIdForPlay));
   },
 
 });
 export {MovieCardButtons};
-export default connect(null, mapDispatchToProps)(MovieCardButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCardButtons);

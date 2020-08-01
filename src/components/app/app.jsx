@@ -7,9 +7,10 @@ import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
 import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
-import {getMovieById} from '../../utils/helpers';
-import withBigVideoPlayer from '../../hocs/with-big-video-player/with-big-video-player';
-import {ActionCreator} from '../../reducer';
+import withBigVideoPlayer from '../../hocs/with-big-video-player/with-big-video-player.js';
+import {ActionCreator} from '../../reducer/movie/movie.js';
+import {getCurrentPage} from '../../reducer/movie/selectors.js';
+import {getCurrentMovie} from '../../reducer/data/selectors.js';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
@@ -77,14 +78,9 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const movieForPlay = state.currentMovieId === 0 || state.currentMovieId
-    ? getMovieById(state.movies, state.currentMovieId)
-    : {videoLink: ``,
-      previewImage: ``,
-      title: ``};
   return ({
-    currentPage: state.currentPage,
-    movieForPlay,
+    currentPage: getCurrentPage(state),
+    movieForPlay: getCurrentMovie(state),
   });
 };
 

@@ -5,12 +5,16 @@ import configureStore from "redux-mock-store";
 import Main from './main.jsx';
 import {TEST_DATA} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
+import NameSpace from '../../reducer/name-space';
 
 const mockStore = configureStore([]);
 
 describe(`Render Main component: `, () => {
   it(`"All genres" MainScreen`, () => {
-    const store = mockStore(TEST_DATA.initialStoreState);
+    const store = mockStore({
+      [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
+      [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    });
 
     const tree = renderer
       .create(
@@ -27,10 +31,12 @@ describe(`Render Main component: `, () => {
   });
 
   it(`"Comedy" MainScreen`, () => {
-    const store = mockStore(extend(TEST_DATA.initialStoreState, {
-      genre: `Comedy`,
-      genreMovies: TEST_DATA.comedyMovies
-    }));
+    const store = mockStore({
+      [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
+        genre: `Comedy`,
+      }),
+      [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    });
 
     const tree = renderer
       .create(
@@ -47,10 +53,12 @@ describe(`Render Main component: `, () => {
   });
 
   it(`"Drama" MainScreen`, () => {
-    const store = mockStore(extend(TEST_DATA.initialStoreState, {
-      genre: `Drama`,
-      genreMovies: TEST_DATA.dramaMovies
-    }));
+    const store = mockStore({
+      [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
+        genre: `Drama`,
+      }),
+      [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    });
 
     const tree = renderer
       .create(

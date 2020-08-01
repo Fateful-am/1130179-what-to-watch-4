@@ -14,7 +14,10 @@ export const EMPTY_PROMO_MOVIE = {
   title: ``,
   posterImage: ``,
   genre: ``,
-  released: ``,
+  released: 0,
+  videoLink: ``,
+  previewImage: ``,
+  previewVideoLink: ``,
 };
 
 export const PageKind = {
@@ -56,7 +59,7 @@ export const MoviePropTypes = {
     previewImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
     rating: PropTypes.shape({
-      score: PropTypes.string.isRequired,
+      score: PropTypes.number.isRequired,
       level: PropTypes.string.isRequired,
       count: PropTypes.number.isRequired,
     }).isRequired,
@@ -68,7 +71,7 @@ export const MoviePropTypes = {
       text: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
       date: PropTypes.instanceOf(Date),
-      score: PropTypes.string.isRequired,
+      score: PropTypes.number.isRequired,
     })).isRequired
   }).isRequired
 };

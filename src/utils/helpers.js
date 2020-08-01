@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {EMPTY_PROMO_MOVIE} from '../consts';
 
 export const convertToImageName = (movieName) => {
   return movieName.toLowerCase().split(` `).join(`-`).split(`:`).join(``);
@@ -9,7 +10,7 @@ export const getMovieById = (movies, id) => {
   if (movieIndex > -1) {
     return movies[movieIndex];
   }
-  return null;
+  return EMPTY_PROMO_MOVIE;
 };
 
 export const formatDurationInMinutes = (duration) => {

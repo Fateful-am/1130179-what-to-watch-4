@@ -37,7 +37,7 @@ exports[`Render MoviePageReviews 1`] = `
       <div
         className="review__rating"
       >
-        8,9
+        8.9
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@ exports[`Render MoviePageReviews 1`] = `
       <div
         className="review__rating"
       >
-        7,2
+        7.2
       </div>
     </div>
   </div>

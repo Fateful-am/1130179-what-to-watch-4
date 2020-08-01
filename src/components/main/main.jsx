@@ -2,14 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
-import {getMovieById, getSortedUniqueObjectValues} from '../../utils/helpers';
-import {ALL_GENRES, MAX_GENRE_COUNT, EMPTY_PROMO_MOVIE, GenreTabClassNames} from '../../consts';
+import {GenreTabClassNames} from '../../consts';
 import Tabs from '../tabs/tabs.jsx';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/movie/movie';
 import ShowMoreButton from '../show-more-button/show-more-button.jsx';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
+import {getActiveGenre, getNeedShowMoreButton, getRenderedMovieCount} from '../../reducer/movie/selectors';
+import {getAllGenres, getPromoMovie} from '../../reducer/data/selectors';
 
-const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTabClick, onShowMoreButtonClick}) => {
+const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, renderedMovieCount, onGenreTabClick, onShowMoreButtonClick}) => {
+  const handleShowMoreButtonClick = () => {
+    onShowMoreButtonClick(renderedMovieCount);
+  };
+
   return <>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -69,7 +74,7 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, onGenreTa
 
         <MoviesList />
 
-        {needShowMoreButton && <ShowMoreButton onClick={onShowMoreButtonClick}/>}
+        {needShowMoreButton && <ShowMoreButton onClick={handleShowMoreButtonClick}/>}
       </section>
 
       <footer className="page-footer">
@@ -96,26 +101,24 @@ Main.propTypes = {
     posterImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired
+    released: PropTypes.number.isRequired,
   }),
   allGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeGenre: PropTypes.string.isRequired,
   needShowMoreButton: PropTypes.bool.isRequired,
+  renderedMovieCount: PropTypes.number.isRequired,
 
   onGenreTabClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const allGenres = getSortedUniqueObjectValues(state.movies, `genre`)
-    .slice(0, MAX_GENRE_COUNT);
-  allGenres.unshift(ALL_GENRES);
-
   return ({
-    promoMovie: state.promoMovieId ? getMovieById(state.movies, state.promoMovieId) : EMPTY_PROMO_MOVIE,
-    allGenres,
-    activeGenre: state.genre,
-    needShowMoreButton: state.genreMovies.length > state.renderedMovieCount,
+    promoMovie: getPromoMovie(state),
+    allGenres: getAllGenres(state),
+    activeGenre: getActiveGenre(state),
+    needShowMoreButton: getNeedShowMoreButton(state),
+    renderedMovieCount: getRenderedMovieCount(state),
   });
 };
 
@@ -124,8 +127,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeGenre(genre));
   },
 
-  onShowMoreButtonClick() {
-    dispatch(ActionCreator.showMoreMovies());
+  onShowMoreButtonClick(renderedMovieCount) {
+    dispatch(ActionCreator.showMoreMovies(renderedMovieCount));
   },
 });
 
