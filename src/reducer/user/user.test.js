@@ -144,7 +144,7 @@ describe(`User operation work correctly`, () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: MovieActionType.GOTO_MAIN,
+          type: MovieActionType.GOTO_PREVIOUS_PAGE,
           payload: null,
         });
       });

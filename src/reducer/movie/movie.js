@@ -111,6 +111,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         previousPage: state.currentPage,
         currentPage: PageKind.MAIN,
+        genre: ALL_GENRES,
+        renderedMovieCount: START_MOVIE_COUNT,
       });
 
     case ActionType.GOTO_PREVIOUS_PAGE:

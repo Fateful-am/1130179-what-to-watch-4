@@ -1,5 +1,5 @@
 import {reducer, ActionType, ActionCreator} from "./movie.js";
-import {PageKind, MOVIE_LIKE_THIS_COUNT, START_MOVIE_COUNT} from '../../consts';
+import {PageKind, MOVIE_LIKE_THIS_COUNT, START_MOVIE_COUNT, ALL_GENRES} from '../../consts';
 import {TEST_DATA} from '../../utils/test-data';
 
 describe(`Reducer work correctly:`, () => {
@@ -126,6 +126,8 @@ describe(`Reducer work correctly:`, () => {
       .toEqual({
         previousPage: PageKind.SIGN_IN,
         currentPage: PageKind.MAIN,
+        genre: ALL_GENRES,
+        renderedMovieCount: START_MOVIE_COUNT,
       });
   });
 
