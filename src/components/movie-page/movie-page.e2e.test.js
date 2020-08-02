@@ -21,6 +21,7 @@ it(`Should all moviePageTabs clicked`, () => {
       currentMovieId: testMovieId,
     }),
     [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    [NameSpace.USER]: TEST_DATA.initialStoreUserState,
   });
 
   const handleTabClick = jest.fn();

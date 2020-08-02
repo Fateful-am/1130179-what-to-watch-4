@@ -20,6 +20,7 @@ const store = mockStore({
     renderedMovieCount: MOVIE_LIKE_THIS_COUNT
   }),
   [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+  [NameSpace.USER]: TEST_DATA.initialStoreUserState,
 });
 
 const MockComponent = () => {

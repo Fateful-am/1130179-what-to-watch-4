@@ -20,6 +20,7 @@ it(`Render MoviePage with Overview tab`, () => {
       currentMovieId: testMovieId,
     }),
     [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    [NameSpace.USER]: TEST_DATA.initialStoreUserState,
   });
 
   const tree = renderer

@@ -9,6 +9,7 @@ import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
 import {getCurrentMovie} from '../../reducer/data/selectors';
+import UserStatus from '../user-status/user-status.jsx';
 
 class MoviePage extends PureComponent {
   _renderCurrentMoviePage() {
@@ -53,11 +54,8 @@ class MoviePage extends PureComponent {
                 </a>
               </div>
 
-              <div className="user-block">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </div>
+              <UserStatus/>
+
             </header>
 
             <div className="movie-card__wrap">

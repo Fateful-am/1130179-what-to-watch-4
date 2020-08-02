@@ -2,53 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
-import {GenreTabClassNames, HOST_NAME} from '../../consts';
+import {GenreTabClassNames} from '../../consts';
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator} from '../../reducer/movie/movie';
 import ShowMoreButton from '../show-more-button/show-more-button.jsx';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
 import {getActiveGenre, getNeedShowMoreButton, getRenderedMovieCount} from '../../reducer/movie/selectors';
 import {getAllGenres, getPromoMovie} from '../../reducer/data/selectors';
-import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
-import {AuthorizationStatus} from '../../reducer/user/user';
+import UserStatus from '../user-status/user-status.jsx';
 
-const Main = ({authorizationStatus, promoMovie, allGenres, activeGenre, needShowMoreButton, renderedMovieCount,
-  onGenreTabClick, onShowMoreButtonClick, onSignInClick, avatarUrl}) => {
-  const renderAvatar = (src, onClick) => {
-    return (
-      <div
-        className="user-block__avatar"
-        onClick={onClick}
-      >
-        <img src={src} alt="User avatar" width="63" height="63"/>
-      </div>
-    );
-  };
-
-  const renderSignIn = (onClick) => {
-    const handleLinkClick = (evt) => {
-      evt.preventDefault();
-      onClick();
-    };
-
-    return (
-      <a
-        href="#"
-        className="user-block__link"
-        onClick={handleLinkClick}
-      >
-        Sign in
-      </a>
-    );
-  };
+const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, renderedMovieCount,
+  onGenreTabClick, onShowMoreButtonClick}) => {
 
   const handleShowMoreButtonClick = () => {
     onShowMoreButtonClick(renderedMovieCount);
   };
-
-  const userLoginState = authorizationStatus === AuthorizationStatus.AUTH
-    ? renderAvatar(`${HOST_NAME}${avatarUrl}`, ()=>{})
-    : renderSignIn(onSignInClick);
 
   return <>
     <section className="movie-card">
@@ -67,9 +35,8 @@ const Main = ({authorizationStatus, promoMovie, allGenres, activeGenre, needShow
           </a>
         </div>
 
-        <div className="user-block">
-          {userLoginState}
-        </div>
+        <UserStatus/>
+
       </header>
 
       <div className="movie-card__wrap">
@@ -128,8 +95,6 @@ const Main = ({authorizationStatus, promoMovie, allGenres, activeGenre, needShow
 };
 
 Main.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string,
   promoMovie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -145,13 +110,10 @@ Main.propTypes = {
 
   onGenreTabClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return ({
-    authorizationStatus: getAuthorizationStatus(state),
-    avatarUrl: getUserData(state).avatarUrl,
     promoMovie: getPromoMovie(state),
     allGenres: getAllGenres(state),
     activeGenre: getActiveGenre(state),
@@ -168,10 +130,6 @@ const mapDispatchToProps = (dispatch) => ({
   onShowMoreButtonClick(renderedMovieCount) {
     dispatch(ActionCreator.showMoreMovies(renderedMovieCount));
   },
-
-  onSignInClick() {
-    dispatch(ActionCreator.signIn());
-  }
 });
 
 export {Main};
