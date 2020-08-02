@@ -17,7 +17,8 @@ const ActionType = {
   PLAY_MOVIE: `PLAY_MOVIE`,
   EXIT_PLAYER: `EXIT_PLAYER`,
   SIGN_IN: `SIGN_IN`,
-  GOTO_MAIN: `GOTO_MAIN`
+  GOTO_MAIN: `GOTO_MAIN`,
+  GOTO_PREVIOUS_PAGE: `GOTO_PREVIOUS_PAGE`,
 };
 
 const ActionCreator = {
@@ -53,6 +54,11 @@ const ActionCreator = {
 
   gotoMain: () => ({
     type: ActionType.GOTO_MAIN,
+    payload: null,
+  }),
+
+  gotoPreviousPage: () => ({
+    type: ActionType.GOTO_PREVIOUS_PAGE,
     payload: null,
   }),
 };
@@ -105,6 +111,12 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         previousPage: state.currentPage,
         currentPage: PageKind.MAIN,
+      });
+
+    case ActionType.GOTO_PREVIOUS_PAGE:
+      return extend(state, {
+        previousPage: state.currentPage,
+        currentPage: state.previousPage,
       });
   }
 

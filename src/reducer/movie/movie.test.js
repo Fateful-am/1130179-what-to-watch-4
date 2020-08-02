@@ -128,6 +128,17 @@ describe(`Reducer work correctly:`, () => {
         currentPage: PageKind.MAIN,
       });
   });
+
+  it(`reducer should switch to Previous Page`, () => {
+    expect(reducer({
+      previousPage: PageKind.MAIN,
+      currentPage: PageKind.SIGN_IN,
+    }, ActionCreator.gotoPreviousPage()))
+      .toEqual({
+        previousPage: PageKind.SIGN_IN,
+        currentPage: PageKind.MAIN,
+      });
+  });
 });
 
 
@@ -177,6 +188,13 @@ describe(`Action creators work correctly:`, () => {
   it(`Action creator for Goto Main returns correct action`, () => {
     expect(ActionCreator.gotoMain()).toEqual({
       type: ActionType.GOTO_MAIN,
+      payload: null,
+    });
+  });
+
+  it(`Action creator for Goto Previous Page returns correct action`, () => {
+    expect(ActionCreator.gotoPreviousPage()).toEqual({
+      type: ActionType.GOTO_PREVIOUS_PAGE,
       payload: null,
     });
   });
