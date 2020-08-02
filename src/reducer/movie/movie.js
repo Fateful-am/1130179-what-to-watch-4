@@ -19,6 +19,7 @@ const ActionType = {
   SIGN_IN: `SIGN_IN`,
   GOTO_MAIN: `GOTO_MAIN`,
   GOTO_PREVIOUS_PAGE: `GOTO_PREVIOUS_PAGE`,
+  ADD_REVIEW: `ADD_REVIEW`,
 };
 
 const ActionCreator = {
@@ -59,6 +60,11 @@ const ActionCreator = {
 
   gotoPreviousPage: () => ({
     type: ActionType.GOTO_PREVIOUS_PAGE,
+    payload: null,
+  }),
+
+  addReview: () => ({
+    type: ActionType.ADD_REVIEW,
     payload: null,
   }),
 };
@@ -119,6 +125,12 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         previousPage: state.currentPage,
         currentPage: state.previousPage,
+      });
+
+    case ActionType.ADD_REVIEW:
+      return extend(state, {
+        previousPage: state.currentPage,
+        currentPage: PageKind.ADD_REVIEW,
       });
   }
 

@@ -141,6 +141,16 @@ describe(`Reducer work correctly:`, () => {
         currentPage: PageKind.MAIN,
       });
   });
+
+  it(`reducer should switch to Add Review Page`, () => {
+    expect(reducer({
+      currentPage: PageKind.MOVIE_PAGE,
+    }, ActionCreator.addReview()))
+      .toEqual({
+        previousPage: PageKind.MOVIE_PAGE,
+        currentPage: PageKind.ADD_REVIEW,
+      });
+  });
 });
 
 
@@ -197,6 +207,13 @@ describe(`Action creators work correctly:`, () => {
   it(`Action creator for Goto Previous Page returns correct action`, () => {
     expect(ActionCreator.gotoPreviousPage()).toEqual({
       type: ActionType.GOTO_PREVIOUS_PAGE,
+      payload: null,
+    });
+  });
+
+  it(`Action creator for Add Review Page returns correct action`, () => {
+    expect(ActionCreator.addReview()).toEqual({
+      type: ActionType.ADD_REVIEW,
       payload: null,
     });
   });

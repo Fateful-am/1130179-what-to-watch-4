@@ -26,6 +26,7 @@ export const PageKind = {
   MOVIE_PAGE: `moviePage`,
   PLAYER: `player`,
   SIGN_IN: `signIn`,
+  ADD_REVIEW: `addReview`,
 };
 
 export const MoviePageTabNames = {

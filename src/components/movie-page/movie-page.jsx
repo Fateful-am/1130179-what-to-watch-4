@@ -11,8 +11,17 @@ import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
 import {getCurrentMovie} from '../../reducer/data/selectors';
 import UserStatus from '../user-status/user-status.jsx';
 import Logo from '../logo/logo.jsx';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {ActionCreator} from '../../reducer/movie/movie';
+import {AuthorizationStatus} from '../../reducer/user/user';
 
 class MoviePage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._handleAddReviewClick = this._handleAddReviewClick.bind(this);
+
+  }
   _renderCurrentMoviePage() {
     const {movie, activeTab} = this.props;
 
@@ -30,6 +39,28 @@ class MoviePage extends PureComponent {
     if (prevProps.movie.id !== this.props.movie.id) {
       this.props.setDefaultTab();
     }
+  }
+
+  _handleAddReviewClick(evt) {
+    const {onAddReviewClick} = this.props;
+    evt.preventDefault();
+    onAddReviewClick();
+  }
+
+  _renderAddReviewClick() {
+    const {authorizationStatus} = this.props;
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      return (
+        <a
+          href="#"
+          className="btn movie-card__button"
+          onClick={this._handleAddReviewClick}
+        >
+          Add review
+        </a>
+      );
+    }
+    return null;
   }
 
   render() {
@@ -62,7 +93,7 @@ class MoviePage extends PureComponent {
                 </p>
 
                 <MovieCardButtons>
-                  <a href="#" className="btn movie-card__button">Add review</a>
+                  {this._renderAddReviewClick()}
                 </MovieCardButtons>
 
               </div>
@@ -113,17 +144,27 @@ class MoviePage extends PureComponent {
 }
 
 MoviePage.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   movie: MoviePropTypes.movie,
   activeTab: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
+  onAddReviewClick: PropTypes.func.isRequired,
   setDefaultTab: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
   return ({
+    authorizationStatus: getAuthorizationStatus(state),
     movie: getCurrentMovie(state),
   });
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onAddReviewClick() {
+    dispatch(ActionCreator.addReview());
+  },
+
+});
+
 export {MoviePage};
-export default connect(mapStateToProps)(MoviePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
