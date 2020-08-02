@@ -14,13 +14,14 @@ import {getCurrentMovie} from '../../reducer/data/selectors.js';
 import SignIn from '../sign-in/sign-in.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import AddReview from '../add-review/add-review.jsx';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
 
 class App extends PureComponent {
   _stateRender() {
-    const {login, currentPage, movieForPlay} = this.props;
+    const {login, currentPage, movieForPlay, onAddReviewBreadcrumbsBackClick} = this.props;
     switch (currentPage) {
       case PageKind.MAIN:
         return (
@@ -46,6 +47,15 @@ class App extends PureComponent {
           <SignIn
             onSubmit={login}
           />
+        );
+      case PageKind.ADD_REVIEW:
+        return (
+          <AddReview
+            movie={movieForPlay}
+            onBreadcrumbsBackClick={onAddReviewBreadcrumbsBackClick}
+          >
+          </AddReview>
+
         );
     }
 
@@ -91,6 +101,7 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
   }),
   onPlayerExitButtonClick: PropTypes.func.isRequired,
+  onAddReviewBreadcrumbsBackClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -109,6 +120,10 @@ const mapDispatchToProps = (dispatch) => ({
   onPlayerExitButtonClick() {
     dispatch(ActionCreator.exitPlayer());
   },
+
+  onAddReviewBreadcrumbsBackClick() {
+    dispatch(ActionCreator.gotoPreviousPage());
+  }
 });
 
 export {App};
