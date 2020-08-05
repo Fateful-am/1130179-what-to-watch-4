@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {PageKind} from '../../consts';
+import {MoviePropTypes, PageKind} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
@@ -17,6 +17,7 @@ import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation as DataOperation} from '../../reducer/data/data.js';
 import AddReview from '../add-review/add-review.jsx';
 import withAddReview from '../../hocs/with-add-review/with-add-review';
+import {TEST_DATA} from '../../utils/test-data';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
@@ -67,6 +68,7 @@ class App extends PureComponent {
   }
 
   render() {
+    const {onAddReviewBreadcrumbsBackClick, onReviewFormSubmit, movieForDev} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -89,6 +91,13 @@ class App extends PureComponent {
               onSubmit={() => {}}
             />
           </Route>
+          <Route exact path="/dev-review">
+            <AddReviewWrapper
+              movie={movieForDev}
+              onBreadcrumbsBackClick={onAddReviewBreadcrumbsBackClick}
+              onSubmit={onReviewFormSubmit}
+            />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -104,6 +113,7 @@ App.propTypes = {
     previewImage: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }),
+  movieForDev: MoviePropTypes.movie,
   onPlayerExitButtonClick: PropTypes.func.isRequired,
   onAddReviewBreadcrumbsBackClick: PropTypes.func.isRequired,
   onReviewFormSubmit: PropTypes.func.isRequired,
@@ -114,6 +124,7 @@ const mapStateToProps = (state) => {
     authorizationStatus: getAuthorizationStatus(state),
     currentPage: getCurrentPage(state),
     movieForPlay: getCurrentMovie(state),
+    movieForDev: TEST_DATA.promoMovie,
   });
 };
 
