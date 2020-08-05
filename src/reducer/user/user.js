@@ -82,7 +82,7 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(MovieActionCreator.gotoMain());
+        dispatch(MovieActionCreator.gotoPreviousPage());
       });
   },
 };

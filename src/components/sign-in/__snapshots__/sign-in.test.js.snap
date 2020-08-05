@@ -13,6 +13,7 @@ exports[`AuthScreen component render correctly 1`] = `
       <a
         className="logo__link"
         href="#"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -104,6 +105,7 @@ exports[`AuthScreen component render correctly 1`] = `
       <a
         className="logo__link logo__link--light"
         href="#"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"

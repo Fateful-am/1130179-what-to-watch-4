@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {PageKind} from '../../consts';
+import {MoviePropTypes, PageKind} from '../../consts';
 import Main from '../main/main.jsx';
 import MoviePage from '../movie-page/movie-page.jsx';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
@@ -14,13 +14,18 @@ import {getCurrentMovie} from '../../reducer/data/selectors.js';
 import SignIn from '../sign-in/sign-in.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from '../../reducer/data/data.js';
+import AddReview from '../add-review/add-review.jsx';
+import withAddReview from '../../hocs/with-add-review/with-add-review';
+import {TEST_DATA} from '../../utils/test-data';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
+const AddReviewWrapper = withAddReview(AddReview);
 
 class App extends PureComponent {
   _stateRender() {
-    const {login, currentPage, movieForPlay} = this.props;
+    const {login, currentPage, movieForPlay, onAddReviewBreadcrumbsBackClick, onReviewFormSubmit} = this.props;
     switch (currentPage) {
       case PageKind.MAIN:
         return (
@@ -47,12 +52,23 @@ class App extends PureComponent {
             onSubmit={login}
           />
         );
+      case PageKind.ADD_REVIEW:
+        return (
+          <AddReviewWrapper
+            movie={movieForPlay}
+            onBreadcrumbsBackClick={onAddReviewBreadcrumbsBackClick}
+            onSubmit={onReviewFormSubmit}
+          >
+          </AddReviewWrapper>
+
+        );
     }
 
     return null;
   }
 
   render() {
+    const {onAddReviewBreadcrumbsBackClick, onReviewFormSubmit, movieForDev} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -75,6 +91,13 @@ class App extends PureComponent {
               onSubmit={() => {}}
             />
           </Route>
+          <Route exact path="/dev-review">
+            <AddReviewWrapper
+              movie={movieForDev}
+              onBreadcrumbsBackClick={onAddReviewBreadcrumbsBackClick}
+              onSubmit={onReviewFormSubmit}
+            />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -90,7 +113,10 @@ App.propTypes = {
     previewImage: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }),
+  movieForDev: MoviePropTypes.movie,
   onPlayerExitButtonClick: PropTypes.func.isRequired,
+  onAddReviewBreadcrumbsBackClick: PropTypes.func.isRequired,
+  onReviewFormSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -98,6 +124,7 @@ const mapStateToProps = (state) => {
     authorizationStatus: getAuthorizationStatus(state),
     currentPage: getCurrentPage(state),
     movieForPlay: getCurrentMovie(state),
+    movieForDev: TEST_DATA.promoMovie,
   });
 };
 
@@ -108,6 +135,14 @@ const mapDispatchToProps = (dispatch) => ({
 
   onPlayerExitButtonClick() {
     dispatch(ActionCreator.exitPlayer());
+  },
+
+  onAddReviewBreadcrumbsBackClick() {
+    dispatch(ActionCreator.gotoPreviousPage());
+  },
+
+  onReviewFormSubmit(reviewData) {
+    dispatch(DataOperation.addReview(reviewData));
   },
 });
 

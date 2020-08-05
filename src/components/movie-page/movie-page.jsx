@@ -9,8 +9,20 @@ import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
 import {getCurrentMovie} from '../../reducer/data/selectors';
+import UserStatus from '../user-status/user-status.jsx';
+import Logo from '../logo/logo.jsx';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {ActionCreator} from '../../reducer/movie/movie';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {AuthorizationStatus} from '../../reducer/user/user';
 
 class MoviePage extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._handleAddReviewClick = this._handleAddReviewClick.bind(this);
+
+  }
   _renderCurrentMoviePage() {
     const {movie, activeTab} = this.props;
 
@@ -30,6 +42,35 @@ class MoviePage extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    const {movie, onLoadReviews} = this.props;
+    if (movie.reviews.length === 0) {
+      onLoadReviews(movie.id);
+    }
+  }
+
+  _handleAddReviewClick(evt) {
+    const {onAddReviewClick} = this.props;
+    evt.preventDefault();
+    onAddReviewClick();
+  }
+
+  _renderAddReviewClick() {
+    const {authorizationStatus} = this.props;
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      return (
+        <a
+          href="#"
+          className="btn movie-card__button"
+          onClick={this._handleAddReviewClick}
+        >
+          Add review
+        </a>
+      );
+    }
+    return null;
+  }
+
   render() {
     const {movie, activeTab, onTabClick} = this.props;
     const tabs = Object.values(MoviePageTabNames);
@@ -45,19 +86,10 @@ class MoviePage extends PureComponent {
             <h1 className="visually-hidden">WTW</h1>
 
             <header className="page-header movie-card__head">
-              <div className="logo">
-                <a href="#" className="logo__link">
-                  <span className="logo__letter logo__letter--1">W</span>
-                  <span className="logo__letter logo__letter--2">T</span>
-                  <span className="logo__letter logo__letter--3">W</span>
-                </a>
-              </div>
+              <Logo inFooter={false}/>
 
-              <div className="user-block">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </div>
+              <UserStatus/>
+
             </header>
 
             <div className="movie-card__wrap">
@@ -69,7 +101,7 @@ class MoviePage extends PureComponent {
                 </p>
 
                 <MovieCardButtons>
-                  <a href="#" className="btn movie-card__button">Add review</a>
+                  {this._renderAddReviewClick()}
                 </MovieCardButtons>
 
               </div>
@@ -107,13 +139,7 @@ class MoviePage extends PureComponent {
           </section>
 
           <footer className="page-footer">
-            <div className="logo">
-              <a href="#" className="logo__link logo__link--light">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
+            <Logo inFooter={true}/>
 
             <div className="copyright">
               <p>© 2019 What to watch Ltd.</p>
@@ -126,17 +152,31 @@ class MoviePage extends PureComponent {
 }
 
 MoviePage.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   movie: MoviePropTypes.movie,
   activeTab: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
+  onAddReviewClick: PropTypes.func.isRequired,
+  onLoadReviews: PropTypes.func.isRequired,
   setDefaultTab: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
   return ({
+    authorizationStatus: getAuthorizationStatus(state),
     movie: getCurrentMovie(state),
   });
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  onAddReviewClick() {
+    dispatch(ActionCreator.addReview());
+  },
+
+  onLoadReviews(movieId) {
+    dispatch(DataOperation.loadReviews(movieId));
+  }
+});
+
 export {MoviePage};
-export default connect(mapStateToProps)(MoviePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

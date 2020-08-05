@@ -1,5 +1,6 @@
 import {MOVIES} from '../../utils/test-data';
-import {reducer, ActionType, ActionCreator, Operation, convertToLocalMovieData} from './data';
+import {reducer, ActionType, ActionCreator, Operation, convertToLocalMovieData, convertToLocalReviews} from './data';
+import {ActionType as MovieActionType} from '../movie/movie';
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from "../../api.js";
 
@@ -36,6 +37,31 @@ describe(`Data-reducer work correctly:`, () => {
       promoMovieId: 8,
     });
   });
+
+  it(`Reducer should update comments for movie by load comments`, () => {
+    expect(reducer({
+      movies: [{
+        id: 0,
+        reviews: [],
+      }],
+    }, {
+      type: ActionType.LOAD_COMMENTS,
+      payload: {
+        movieId: 0,
+        comments: [{
+          comment: `test`,
+        }]
+      },
+    })).toEqual({
+      movies: [{
+        id: 0,
+        reviews: [{
+          comment: `test`,
+        }],
+      }],
+    });
+  });
+
 });
 
 describe(`Action creators work correctly`, () => {
@@ -50,6 +76,13 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.loadPromo(MOVIES[8])).toEqual({
       type: ActionType.LOAD_PROMO,
       payload: MOVIES[8],
+    });
+  });
+
+  it(`ActionCreator for load comments returns correct action`, ()=>{
+    expect(ActionCreator.loadComments({test: `testData`})).toEqual({
+      type: ActionType.LOAD_COMMENTS,
+      payload: {test: `testData`},
     });
   });
 });
@@ -91,6 +124,43 @@ describe(`Data operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO,
           payload: convertToLocalMovieData(request),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to POST /comments/:film_id`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const addReviewer = Operation.addReview({
+      movieId: 1,
+      rating: 8,
+      comment: `testComment`
+    });
+
+    const response = [{
+      comment: `testComment`,
+      date: `2019-05-08T14:13:56.569Z`,
+      rating: 8,
+      user: {name: `fake`},
+    }];
+
+    apiMock
+      .onPost(`/comments/1`)
+      .reply(200, response);
+
+    return addReviewer(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: {
+            movieId: 1,
+            comments: convertToLocalReviews(response),
+          },
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: MovieActionType.GOTO_PREVIOUS_PAGE,
+          payload: null,
         });
       });
   });

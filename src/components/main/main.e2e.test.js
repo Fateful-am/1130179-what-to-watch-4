@@ -8,7 +8,6 @@ import {TEST_DATA} from '../../utils/test-data';
 import {ALL_GENRES} from '../../consts';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';
-import {AuthorizationStatus} from '../../reducer/user/user';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -23,7 +22,6 @@ const testObject = {
 describe(`Interactive with Main component: `, () => {
   const handleGenreTabClick = jest.fn();
   const handleShowMoreButtonClick = jest.fn();
-  const handleSignInButtonClick = jest.fn();
 
   let store;
   let wrapper;
@@ -32,11 +30,11 @@ describe(`Interactive with Main component: `, () => {
     store = mockStore({
       [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+      [NameSpace.USER]: TEST_DATA.initialStoreUserState,
     });
     wrapper = mount(
         <Provider store={store}>
           <Main
-            authorizationStatus={AuthorizationStatus.NO_AUTH}
             promoMovie={TEST_DATA.promoMovie}
             allGenres={testObject.allGenres}
             activeGenre={ALL_GENRES}
@@ -44,7 +42,6 @@ describe(`Interactive with Main component: `, () => {
             onGenreTabClick={handleGenreTabClick}
             onShowMoreButtonClick={handleShowMoreButtonClick}
             renderedMovieCount={8}
-            onSignInClick={handleSignInButtonClick}
           />
         </Provider>);
   });

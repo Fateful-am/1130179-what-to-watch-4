@@ -1,5 +1,5 @@
 import {reducer, ActionType, ActionCreator} from "./movie.js";
-import {PageKind, MOVIE_LIKE_THIS_COUNT, START_MOVIE_COUNT} from '../../consts';
+import {PageKind, MOVIE_LIKE_THIS_COUNT, START_MOVIE_COUNT, ALL_GENRES} from '../../consts';
 import {TEST_DATA} from '../../utils/test-data';
 
 describe(`Reducer work correctly:`, () => {
@@ -126,6 +126,29 @@ describe(`Reducer work correctly:`, () => {
       .toEqual({
         previousPage: PageKind.SIGN_IN,
         currentPage: PageKind.MAIN,
+        genre: ALL_GENRES,
+        renderedMovieCount: START_MOVIE_COUNT,
+      });
+  });
+
+  it(`reducer should switch to Previous Page`, () => {
+    expect(reducer({
+      previousPage: PageKind.MAIN,
+      currentPage: PageKind.SIGN_IN,
+    }, ActionCreator.gotoPreviousPage()))
+      .toEqual({
+        previousPage: PageKind.SIGN_IN,
+        currentPage: PageKind.MAIN,
+      });
+  });
+
+  it(`reducer should switch to Add Review Page`, () => {
+    expect(reducer({
+      currentPage: PageKind.MOVIE_PAGE,
+    }, ActionCreator.addReview()))
+      .toEqual({
+        previousPage: PageKind.MOVIE_PAGE,
+        currentPage: PageKind.ADD_REVIEW,
       });
   });
 });
@@ -177,6 +200,20 @@ describe(`Action creators work correctly:`, () => {
   it(`Action creator for Goto Main returns correct action`, () => {
     expect(ActionCreator.gotoMain()).toEqual({
       type: ActionType.GOTO_MAIN,
+      payload: null,
+    });
+  });
+
+  it(`Action creator for Goto Previous Page returns correct action`, () => {
+    expect(ActionCreator.gotoPreviousPage()).toEqual({
+      type: ActionType.GOTO_PREVIOUS_PAGE,
+      payload: null,
+    });
+  });
+
+  it(`Action creator for Add Review Page returns correct action`, () => {
+    expect(ActionCreator.addReview()).toEqual({
+      type: ActionType.ADD_REVIEW,
       payload: null,
     });
   });

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render UserStatus with AUTH 1`] = `
+<div
+  className="user-block"
+>
+  <div
+    className="user-block__avatar"
+    onClick={[Function]}
+  >
+    <img
+      alt="User avatar"
+      height="63"
+      src="https://4.react.pages.academy/wtw/static/avatar/8.jpg"
+      width="63"
+    />
+  </div>
+</div>
+`;
+
+exports[`Render UserStatus with NO_AUTH 1`] = `
+<div
+  className="user-block"
+>
+  <a
+    className="user-block__link"
+    href="#"
+    onClick={[Function]}
+  >
+    Sign in
+  </a>
+</div>
+`;

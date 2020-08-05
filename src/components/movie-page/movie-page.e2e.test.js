@@ -7,6 +7,7 @@ import {MoviePage} from './movie-page';
 import {TEST_DATA, testMovieCard} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';
+import {AuthorizationStatus} from '../../reducer/user/user';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -21,15 +22,19 @@ it(`Should all moviePageTabs clicked`, () => {
       currentMovieId: testMovieId,
     }),
     [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+    [NameSpace.USER]: TEST_DATA.initialStoreUserState,
   });
 
   const handleTabClick = jest.fn();
+  const handleAddReviewClick = jest.fn();
   const moviePageScreen = mount(
       <Provider store={store}>
         <MoviePage
+          authorizationStatus={AuthorizationStatus.AUTH}
           activeTab={`Overview`}
           movie={testMovieCard}
           onTabClick={handleTabClick}
+          onAddReviewClick={handleAddReviewClick}
         />
       </Provider>
   );

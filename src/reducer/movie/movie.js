@@ -17,7 +17,9 @@ const ActionType = {
   PLAY_MOVIE: `PLAY_MOVIE`,
   EXIT_PLAYER: `EXIT_PLAYER`,
   SIGN_IN: `SIGN_IN`,
-  GOTO_MAIN: `GOTO_MAIN`
+  GOTO_MAIN: `GOTO_MAIN`,
+  GOTO_PREVIOUS_PAGE: `GOTO_PREVIOUS_PAGE`,
+  ADD_REVIEW: `ADD_REVIEW`,
 };
 
 const ActionCreator = {
@@ -53,6 +55,16 @@ const ActionCreator = {
 
   gotoMain: () => ({
     type: ActionType.GOTO_MAIN,
+    payload: null,
+  }),
+
+  gotoPreviousPage: () => ({
+    type: ActionType.GOTO_PREVIOUS_PAGE,
+    payload: null,
+  }),
+
+  addReview: () => ({
+    type: ActionType.ADD_REVIEW,
     payload: null,
   }),
 };
@@ -105,6 +117,20 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         previousPage: state.currentPage,
         currentPage: PageKind.MAIN,
+        genre: ALL_GENRES,
+        renderedMovieCount: START_MOVIE_COUNT,
+      });
+
+    case ActionType.GOTO_PREVIOUS_PAGE:
+      return extend(state, {
+        previousPage: state.currentPage,
+        currentPage: state.previousPage,
+      });
+
+    case ActionType.ADD_REVIEW:
+      return extend(state, {
+        previousPage: state.currentPage,
+        currentPage: PageKind.ADD_REVIEW,
       });
   }
 
