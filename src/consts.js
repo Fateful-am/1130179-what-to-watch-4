@@ -13,6 +13,15 @@ export const MAX_REVIEW_LENGTH = 400;
 export const REVIEW_STARS_COUNT = 5;
 export const HOST_NAME = `https://4.react.pages.academy`;
 
+export const AppRoute = {
+  MAIN: `/`,
+  SIGN_IN: `/login`,
+  MY_LIST: `/mylist`,
+  FILM: `/films/:id`,
+  ADD_REVIEW: `/films/:id/review`,
+  PLAYER: `/player/:id`,
+};
+
 export const EMPTY_PROMO_MOVIE = {
   backgroundImage: ``,
   title: ``,
