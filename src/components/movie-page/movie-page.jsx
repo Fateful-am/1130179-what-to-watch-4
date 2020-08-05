@@ -44,6 +44,7 @@ class MoviePage extends PureComponent {
 
   componentDidMount() {
     const {movie, onLoadReviews} = this.props;
+    console.log(`sdfgsdf`);
     if (movie.reviews.length === 0) {
       onLoadReviews(movie.id);
     }

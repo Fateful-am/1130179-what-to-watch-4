@@ -1,7 +1,8 @@
 import {createSelector} from 'reselect';
 import NameSpace from '../name-space.js';
-import {ALL_GENRES, PageKind} from '../../consts';
+import {ALL_GENRES, MovieStatus, PageKind} from '../../consts';
 import {getMovies, getPromoMovieId} from '../data/selectors';
+import {getMovieById} from '../../utils/helpers';
 
 const getFilteredGenreMovies = (state) => {
   const activeGenre = getActiveGenre(state);
@@ -48,4 +49,9 @@ export const getMovieIdForPlay = (state) => {
   }
 
   return getCurrentMovieId(state);
+};
+
+export const getIsFavoriteMovie = (state) => {
+  const movieIdForPlay = getMovieIdForPlay(state);
+  return getMovieById(getMovies(state), movieIdForPlay).isFavorite ? MovieStatus.FAVORITE : MovieStatus.NOT_FAVORITE;
 };

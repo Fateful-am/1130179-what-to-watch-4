@@ -38,6 +38,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
   },
   {
     id: 1,
@@ -75,6 +76,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -113,6 +115,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -151,6 +154,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -189,6 +193,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -227,6 +232,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -265,6 +271,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -303,6 +310,7 @@ export const MOVIES = [
         score: 8.0,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -365,6 +373,7 @@ export const MOVIES = [
         score: 7.0,
       },
     ],
+    isFavorite: false,
   },
 ];
 
@@ -428,6 +437,7 @@ const PROMO_MOVIE = {
       score: 7.0,
     },
   ],
+  isFavorite: false,
 };
 
 export const testMovieCard = MOVIES[0];
@@ -487,6 +497,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
     },
     {
       id: 2,
@@ -524,6 +535,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
     },
     {
       id: 4,
@@ -561,6 +573,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
     },
   ],
   dramaMovies: [
@@ -600,6 +613,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -638,6 +652,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -676,6 +691,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -714,6 +730,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -752,6 +769,7 @@ export const TEST_DATA = {
           score: 8.0,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -814,6 +832,7 @@ export const TEST_DATA = {
           score: 7.0,
         },
       ],
+      isFavorite: false,
     },
   ],
   promoMovie: PROMO_MOVIE,

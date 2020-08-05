@@ -82,6 +82,11 @@ class App extends PureComponent {
               onSubmit={login}
             />
           </Route>
+          <Route exact path={AppRoute.FILM} render={()=>{
+            return (<MoviePageWrapped/>);
+          }}>
+
+          </Route>
         </Switch>
       </Router>
     );

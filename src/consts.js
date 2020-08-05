@@ -22,6 +22,11 @@ export const AppRoute = {
   PLAYER: `/player/:id`,
 };
 
+export const MovieStatus = {
+  FAVORITE: 1,
+  NOT_FAVORITE: 0,
+};
+
 export const EMPTY_PROMO_MOVIE = {
   backgroundImage: ``,
   title: ``,
