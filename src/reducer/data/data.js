@@ -118,6 +118,16 @@ const Operation = {
         dispatch(MovieActionCreator.gotoPreviousPage());
       });
   },
+
+  loadReviews: (movieId) => (dispatch, getState, api) => {
+    return api.get(`/comments/${movieId}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadComments({
+          movieId,
+          comments: convertToLocalReviews(response.data),
+        }));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {

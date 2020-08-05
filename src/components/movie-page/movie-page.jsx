@@ -13,6 +13,7 @@ import UserStatus from '../user-status/user-status.jsx';
 import Logo from '../logo/logo.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {ActionCreator} from '../../reducer/movie/movie';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 import {AuthorizationStatus} from '../../reducer/user/user';
 
 class MoviePage extends PureComponent {
@@ -38,6 +39,13 @@ class MoviePage extends PureComponent {
   componentDidUpdate(prevProps) {
     if (prevProps.movie.id !== this.props.movie.id) {
       this.props.setDefaultTab();
+    }
+  }
+
+  componentDidMount() {
+    const {movie, onLoadReviews} = this.props;
+    if (movie.reviews.length === 0) {
+      onLoadReviews(movie.id);
     }
   }
 
@@ -149,6 +157,7 @@ MoviePage.propTypes = {
   activeTab: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
   onAddReviewClick: PropTypes.func.isRequired,
+  onLoadReviews: PropTypes.func.isRequired,
   setDefaultTab: PropTypes.func,
 };
 
@@ -164,6 +173,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.addReview());
   },
 
+  onLoadReviews(movieId) {
+    dispatch(DataOperation.loadReviews(movieId));
+  }
 });
 
 export {MoviePage};
