@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AuthorizationStatus} from '../../reducer/user/user';
+import {AppRoute} from '../../consts';
+import {Link} from 'react-router-dom';
 import {HOST_NAME} from '../../consts';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
 import {ActionCreator} from '../../reducer/movie/movie';
@@ -27,13 +29,13 @@ const UserStatus = (props) => {
     };
 
     return (
-      <a
-        href="#"
+      <Link
+        to={AppRoute.SIGN_IN}
         className="user-block__link"
         onClick={handleLinkClick}
       >
         Sign in
-      </a>
+      </Link>
     );
   };
 

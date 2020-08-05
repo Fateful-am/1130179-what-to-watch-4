@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getCurrentPage} from '../../reducer/movie/selectors';
 import {ActionCreator} from '../../reducer/movie/movie';
-import {PageKind} from '../../consts';
+import {AppRoute, PageKind} from '../../consts';
+import {Link} from 'react-router-dom';
 
 const Logo = (props) => {
   const {inFooter, currentPage, onLogoClick} = props;
@@ -28,13 +29,13 @@ const Logo = (props) => {
     ? <a className={linkClass}>
       {renderLetters()}
     </a>
-    : <a
+    : <Link
       className={linkClass}
-      href="#"
+      to={AppRoute.MAIN}
       onClick={handleLogoClick}
     >
       {renderLetters()}
-    </a>;
+    </Link>;
 
   return (
     <div className="logo">

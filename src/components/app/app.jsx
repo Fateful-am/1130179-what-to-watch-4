@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {MoviePropTypes, PageKind} from '../../consts';
 import Main from '../main/main.jsx';
@@ -17,6 +17,9 @@ import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation as DataOperation} from '../../reducer/data/data.js';
 import AddReview from '../add-review/add-review.jsx';
 import withAddReview from '../../hocs/with-add-review/with-add-review';
+import PrivateRoute from "../private-route/private-route.jsx";
+import history from "../../history.js";
+import {AppRoute} from "../../consts.js";
 import {TEST_DATA} from '../../utils/test-data';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
@@ -47,11 +50,7 @@ class App extends PureComponent {
           />
         );
       case PageKind.SIGN_IN:
-        return (
-          <SignIn
-            onSubmit={login}
-          />
-        );
+        return history.push(AppRoute.SIGN_IN);
       case PageKind.ADD_REVIEW:
         return (
           <AddReviewWrapper
@@ -68,38 +67,23 @@ class App extends PureComponent {
   }
 
   render() {
-    const {onAddReviewBreadcrumbsBackClick, onReviewFormSubmit, movieForDev} = this.props;
+    const {login, onAddReviewBreadcrumbsBackClick, onReviewFormSubmit, movieForDev} = this.props;
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.MAIN}>
             {this._stateRender()}
           </Route>
-          <Route exact path="/dev-film">
-            <MoviePageWrapped/>
-          </Route>
-          <Route exact path="/dev-player">
-            <BigPlayerWrapped
-              videoLink={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}
-              previewImage={`img/player-poster.jpg`}
-              title={`Transpotting`}
-              onExitButtonClick={this.props.onPlayerExitButtonClick}
-            />
-          </Route>
-          <Route exact path="/dev-signIn">
+
+          <Route exact path={AppRoute.SIGN_IN}>
             <SignIn
-              onSubmit={() => {}}
-            />
-          </Route>
-          <Route exact path="/dev-review">
-            <AddReviewWrapper
-              movie={movieForDev}
-              onBreadcrumbsBackClick={onAddReviewBreadcrumbsBackClick}
-              onSubmit={onReviewFormSubmit}
+              onSubmit={login}
             />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
