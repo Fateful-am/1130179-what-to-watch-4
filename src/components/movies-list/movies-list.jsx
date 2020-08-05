@@ -2,12 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card.jsx';
-import {MoviePropTypes} from '../../consts';
+import {AppRoute, MoviePropTypes} from '../../consts';
 import {ActionCreator} from '../../reducer/movie/movie';
 import {getGenreMovies} from '../../reducer/movie/selectors';
+import {Link} from 'react-router-dom';
+import history from '../../history';
 
 function MoviesList(props) {
   const {renderedMovies, onMovieCardClick} = props;
+  const handleMovieCardClick = (id) => () => {
+    history.push(`${AppRoute.FILM}/${id}`);
+  };
+
   return (
     <div className="catalog__movies-list">
       {renderedMovies.map((movie) => {
@@ -19,7 +25,7 @@ function MoviesList(props) {
             genre={movie.genre}
             previewImage={movie.previewImage}
             previewVideoLink={movie.previewVideoLink}
-            onClick={onMovieCardClick}
+            onClick={handleMovieCardClick(movie.id)}
           />
         );
       })}

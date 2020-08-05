@@ -35,11 +35,6 @@ class App extends PureComponent {
           <Main/>
         );
 
-      case PageKind.MOVIE_PAGE:
-        return (
-          <MoviePageWrapped/>
-        );
-
       case PageKind.PLAYER:
         return (
           <BigPlayerWrapped
@@ -82,8 +77,8 @@ class App extends PureComponent {
               onSubmit={login}
             />
           </Route>
-          <Route exact path={AppRoute.FILM} render={()=>{
-            return (<MoviePageWrapped/>);
+          <Route exact path={`${AppRoute.FILM}/:id`} render={(routeProps) => {
+            return (<MoviePageWrapped {...routeProps}/>);
           }}>
 
           </Route>

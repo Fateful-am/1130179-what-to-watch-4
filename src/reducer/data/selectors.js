@@ -11,8 +11,8 @@ export const getPromoMovieId = (state) => {
   return state[NameSpace.DATA].promoMovieId;
 };
 
-export const getCurrentMovie = (state) => {
-  return getMovieById(getMovies(state), getCurrentMovieId(state));
+export const getCurrentMovie = (state, movieId) => {
+  return getMovieById(getMovies(state), movieId);
 };
 
 export const getPromoMovie = (state) => {

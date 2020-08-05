@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
-import {MoviePageTabNames, MoviePropTypes, MoviePageTabClassNames} from '../../consts.js';
+import {MoviePageTabNames, MoviePageTabClassNames} from '../../consts.js';
 import Tabs from '../tabs/tabs.jsx';
 import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
 import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
@@ -19,13 +19,16 @@ import {AuthorizationStatus} from '../../reducer/user/user';
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
+    console.log(this.props);
+    this.movie = this.props.getMovie(this.props.match.params.id);
+    console.log(this.movie);
 
     this._handleAddReviewClick = this._handleAddReviewClick.bind(this);
 
   }
   _renderCurrentMoviePage() {
-    const {movie, activeTab} = this.props;
-
+    const {activeTab} = this.props;
+    const movie = this.movie;
     switch (activeTab) {
       case MoviePageTabNames.DETAILS:
         return <MoviePageDetails movie={movie} />;
@@ -37,15 +40,16 @@ class MoviePage extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.movie.id !== this.props.movie.id) {
-      this.props.setDefaultTab();
-    }
+    // if (prevProps.movie.id !== this.props.movie.id) {
+    //   this.props.setDefaultTab();
+    // }
   }
 
   componentDidMount() {
-    const {movie, onLoadReviews} = this.props;
-    console.log(`sdfgsdf`);
-    if (movie.reviews.length === 0) {
+    const {onLoadReviews} = this.props;
+    const movie = this.movie;
+
+    if (movie.reviews && movie.reviews.length === 0) {
       onLoadReviews(movie.id);
     }
   }
@@ -73,10 +77,13 @@ class MoviePage extends PureComponent {
   }
 
   render() {
-    const {movie, activeTab, onTabClick} = this.props;
+    const {activeTab, onTabClick} = this.props;
     const tabs = Object.values(MoviePageTabNames);
+    const movie = this.movie;
 
     return (
+      <>
+      {movie.genre &&
       <>
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
@@ -147,6 +154,7 @@ class MoviePage extends PureComponent {
             </div>
           </footer>
         </div>
+      </> }
       </>
     );
   }
@@ -154,7 +162,7 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  movie: MoviePropTypes.movie,
+  getMovie: PropTypes.func.isRequired,
   activeTab: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
   onAddReviewClick: PropTypes.func.isRequired,
@@ -165,7 +173,7 @@ MoviePage.propTypes = {
 const mapStateToProps = (state) => {
   return ({
     authorizationStatus: getAuthorizationStatus(state),
-    movie: getCurrentMovie(state),
+    getMovie: (movieId)=> getCurrentMovie(state, movieId),
   });
 };
 
