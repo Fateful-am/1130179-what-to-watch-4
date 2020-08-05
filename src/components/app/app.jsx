@@ -14,14 +14,17 @@ import {getCurrentMovie} from '../../reducer/data/selectors.js';
 import SignIn from '../sign-in/sign-in.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 import AddReview from '../add-review/add-review.jsx';
+import withAddReview from '../../hocs/with-add-review/with-add-review';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
+const AddReviewWrapper = withAddReview(AddReview);
 
 class App extends PureComponent {
   _stateRender() {
-    const {login, currentPage, movieForPlay, onAddReviewBreadcrumbsBackClick} = this.props;
+    const {login, currentPage, movieForPlay, onAddReviewBreadcrumbsBackClick, onReviewFormSubmit} = this.props;
     switch (currentPage) {
       case PageKind.MAIN:
         return (
@@ -50,11 +53,12 @@ class App extends PureComponent {
         );
       case PageKind.ADD_REVIEW:
         return (
-          <AddReview
+          <AddReviewWrapper
             movie={movieForPlay}
             onBreadcrumbsBackClick={onAddReviewBreadcrumbsBackClick}
+            onSubmit={onReviewFormSubmit}
           >
-          </AddReview>
+          </AddReviewWrapper>
 
         );
     }
@@ -102,6 +106,7 @@ App.propTypes = {
   }),
   onPlayerExitButtonClick: PropTypes.func.isRequired,
   onAddReviewBreadcrumbsBackClick: PropTypes.func.isRequired,
+  onReviewFormSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -123,7 +128,11 @@ const mapDispatchToProps = (dispatch) => ({
 
   onAddReviewBreadcrumbsBackClick() {
     dispatch(ActionCreator.gotoPreviousPage());
-  }
+  },
+
+  onReviewFormSubmit(reviewData) {
+    dispatch(DataOperation.addReview(reviewData));
+  },
 });
 
 export {App};

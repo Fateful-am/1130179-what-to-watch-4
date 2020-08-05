@@ -8,6 +8,9 @@ export const MOVIE_REVIEWS_COLUMN_COUNT = 2;
 export const MOVIE_LIKE_THIS_COUNT = 4;
 export const ALL_GENRES = `All genres`;
 export const MAX_GENRE_COUNT = 9;
+export const MIN_REVIEW_LENGTH = 50;
+export const MAX_REVIEW_LENGTH = 400;
+export const REVIEW_STARS_COUNT = 5;
 export const HOST_NAME = `https://4.react.pages.academy`;
 
 export const EMPTY_PROMO_MOVIE = {

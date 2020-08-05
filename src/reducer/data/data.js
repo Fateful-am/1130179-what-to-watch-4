@@ -1,4 +1,5 @@
 import {extend} from '../../utils/helpers.js';
+import {ActionCreator as MovieActionCreator} from '../movie/movie';
 
 const initialState = {
   promoMovieId: -1,
@@ -8,6 +9,7 @@ const initialState = {
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
 };
 
 const ActionCreator = {
@@ -24,6 +26,13 @@ const ActionCreator = {
       payload: movie,
     };
   },
+
+  loadComments: (comments) => {
+    return {
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
+    };
+  },
 };
 
 const getRatingLevel = (score) => {
@@ -38,6 +47,20 @@ const getRatingLevel = (score) => {
   }
   return `Awesome`;
 };
+
+export const convertToLocalReviews = (serverReviews) => {
+  const localReviews = [];
+  serverReviews.forEach((serverReview) => {
+    localReviews.push({
+      text: serverReview[`comment`],
+      author: serverReview[`user`][`name`],
+      date: new Date(serverReview[`date`]),
+      score: serverReview.rating,
+    });
+  });
+  return localReviews;
+};
+
 
 export const convertToLocalMovieData = (serverMovieData) => {
   const score = parseFloat(serverMovieData[`rating`]);
@@ -73,11 +96,26 @@ const Operation = {
         dispatch(ActionCreator.loadMovies(movies));
       });
   },
+
   loadPromo: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
       .then((response) => {
         const promoMovie = convertToLocalMovieData(response.data);
         dispatch(ActionCreator.loadPromo(promoMovie));
+      });
+  },
+
+  addReview: (reviewData) => (dispatch, getState, api) => {
+    return api.post(`/comments/${reviewData.movieId}`, {
+      rating: reviewData.rating,
+      comment: reviewData.comment,
+    })
+      .then((response) => {
+        dispatch(ActionCreator.loadComments({
+          movieId: reviewData.movieId,
+          comments: convertToLocalReviews(response.data),
+        }));
+        dispatch(MovieActionCreator.gotoPreviousPage());
       });
   },
 };
@@ -92,6 +130,21 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_PROMO:
       return extend(state, {
         promoMovieId: action.payload.id,
+      });
+
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        movies: state.movies.reduce((newMovies, currentMovie) => {
+          if (currentMovie.id === action.payload.movieId) {
+            newMovies.push(extend(currentMovie, {
+              reviews: action.payload.comments,
+            }));
+          } else {
+            newMovies.push(currentMovie);
+          }
+
+          return newMovies;
+        }, [])
       });
   }
 
