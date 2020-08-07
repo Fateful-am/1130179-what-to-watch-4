@@ -1,4 +1,4 @@
-import {ALL_GENRES, PageKind, START_MOVIE_COUNT} from '../consts';
+import {ALL_GENRES, START_MOVIE_COUNT} from '../consts';
 import {AuthorizationStatus} from '../reducer/user/user';
 
 export const MOVIES = [
@@ -444,12 +444,9 @@ export const testMovieCard = MOVIES[0];
 
 export const TEST_DATA = {
   initialStoreMovieState: {
-    genre: ALL_GENRES,
-    currentPage: PageKind.MAIN,
-    currentMovieId: -1,
-    previousPage: PageKind.MAIN,
-    previousMovieId: -1,
-    renderedMovieCount: START_MOVIE_COUNT,
+    movieGenre: ALL_GENRES,
+    mainPageGenre: ALL_GENRES,
+    mainPageMovieCardCount: START_MOVIE_COUNT,
   },
   initialStoreDataState: {
     promoMovieId: 8,

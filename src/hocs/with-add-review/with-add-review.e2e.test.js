@@ -1,9 +1,14 @@
 import React from 'react';
-import {configure, mount} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import PropTypes from "prop-types";
 import withAddReview from './with-add-review';
-import {TEST_DATA} from '../../utils/test-data';
+import {MOVIES, TEST_DATA} from '../../utils/test-data';
 import Adapter from 'enzyme-adapter-react-16';
+import configureStore from "redux-mock-store";
+import NameSpace from '../../reducer/name-space';
+import {Provider} from 'react-redux';
+
+const mockStore = configureStore([]);
 
 const EXPECTATION = {
   ALL_DISABLED: {
@@ -23,7 +28,10 @@ const EXPECTATION = {
   },
 };
 
-configure({adapter: new Adapter()});
+Enzyme.configure({
+  adapter: new Adapter(),
+});
+
 
 const MockComponent = (props) => {
   const {children} = props;
@@ -78,16 +86,23 @@ const MockComponentWrapped = withAddReview(MockComponent);
 
 describe(`Check for no submit: `, () => {
 
+  const store = mockStore({
+    [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+  });
+
   let wrapper;
   const onSubmit = jest.fn();
 
   beforeEach(()=> {
     wrapper = mount(
-        <MockComponentWrapped
-          movie={TEST_DATA.promoMovie}
-          onSubmit={onSubmit}
-        />);
-
+        <Provider store={store}>
+          <MockComponentWrapped
+            movies={MOVIES}
+            onSubmit={onSubmit}
+            computedMatch={{params: {id: `8`}}}
+          />
+        </Provider>
+    );
   });
 
   it(`when review length between 50 and 400 and star not checked`, () => {

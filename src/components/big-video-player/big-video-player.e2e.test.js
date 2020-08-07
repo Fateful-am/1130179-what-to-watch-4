@@ -10,6 +10,7 @@ it(`Click by Play, Exit and FullScreen button calls callback`, () => {
   const handleFullScreenButtonClick = jest.fn();
   const handleExitButtonClick = jest.fn();
   const wrapper = shallow(<BigVideoPlayer
+    movieId={1}
     title={`Test Movie`}
     isLoading={false}
     isPlaying={true}

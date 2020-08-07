@@ -1,6 +1,5 @@
 import {MOVIES} from '../../utils/test-data';
 import {reducer, ActionType, ActionCreator, Operation, convertToLocalMovieData, convertToLocalReviews} from './data';
-import {ActionType as MovieActionType} from '../movie/movie';
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from "../../api.js";
 
@@ -150,17 +149,13 @@ describe(`Data operation work correctly`, () => {
 
     return addReviewer(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_COMMENTS,
           payload: {
             movieId: 1,
             comments: convertToLocalReviews(response),
           },
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: MovieActionType.GOTO_PREVIOUS_PAGE,
-          payload: null,
         });
       });
   });

@@ -2,18 +2,20 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import MovieCard from './movie-card';
 import {testMovieCard} from '../../utils/test-data';
+import {Router} from "react-router-dom";
+import history from '../../history';
 
 it(`Render MovieCard`, () => {
   const tree = renderer
     .create(
-        <MovieCard
-          id={testMovieCard.id}
-          title={testMovieCard.title}
-          genre={testMovieCard.genre}
-          previewImage={testMovieCard.previewImage}
-          previewVideoLink={testMovieCard.previewVideoLink}
-          onClick={() => {}}
-        />, {
+        <Router history={history}>
+          <MovieCard
+            movieId={testMovieCard.id}
+            title={testMovieCard.title}
+            previewImage={testMovieCard.previewImage}
+            previewVideoLink={testMovieCard.previewVideoLink}
+          />
+        </Router>, {
           createNodeMock: () => {
             return {};
           }

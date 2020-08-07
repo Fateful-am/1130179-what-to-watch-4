@@ -3,24 +3,29 @@
 exports[`Render MovieCard 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
-  id="mc-0"
   onClick={[Function]}
 >
-  <div
-    className="small-movie-card__image"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+  <a
+    href="/films/0"
+    onClick={[Function]}
   >
-    <video
-      className="player__video"
-    />
-  </div>
+    <div
+      className="small-movie-card__image"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <video
+        className="player__video"
+      />
+    </div>
+  </a>
   <h3
     className="small-movie-card__title"
   >
     <a
       className="small-movie-card__link"
-      href="#"
+      href="/films/0"
+      onClick={[Function]}
     >
       Macbeth
     </a>

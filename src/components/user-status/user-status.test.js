@@ -7,6 +7,8 @@ import NameSpace from '../../reducer/name-space';
 import UserStatus from './user-status';
 import {extend} from '../../utils/helpers';
 import {AuthorizationStatus} from '../../reducer/user/user';
+import {Router} from "react-router-dom";
+import history from '../../history';
 
 const mockStore = configureStore([]);
 
@@ -17,7 +19,9 @@ it(`Render UserStatus with NO_AUTH`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <UserStatus />
+          <Router history={history}>
+            <UserStatus />
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};

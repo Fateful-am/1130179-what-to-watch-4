@@ -4,10 +4,12 @@ import Adapter from 'enzyme-adapter-react-16';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import ConnectedMain, {Main} from './main';
-import {TEST_DATA} from '../../utils/test-data';
+import {MOVIES, TEST_DATA} from '../../utils/test-data';
 import {ALL_GENRES} from '../../consts';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';
+import {Router} from "react-router-dom";
+import history from '../../history';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -34,15 +36,18 @@ describe(`Interactive with Main component: `, () => {
     });
     wrapper = mount(
         <Provider store={store}>
-          <Main
-            promoMovie={TEST_DATA.promoMovie}
-            allGenres={testObject.allGenres}
-            activeGenre={ALL_GENRES}
-            needShowMoreButton={true}
-            onGenreTabClick={handleGenreTabClick}
-            onShowMoreButtonClick={handleShowMoreButtonClick}
-            renderedMovieCount={8}
-          />
+          <Router history={history}>
+            <Main
+              promoMovie={TEST_DATA.promoMovie}
+              allGenres={testObject.allGenres}
+              activeGenre={ALL_GENRES}
+              needShowMoreButton={true}
+              onGenreTabClick={handleGenreTabClick}
+              onShowMoreButtonClick={handleShowMoreButtonClick}
+              mainPageMovieCardCount={8}
+              mainPageMovies={MOVIES}
+            />
+          </Router>
         </Provider>);
   });
 
@@ -86,7 +91,9 @@ describe(`Main component with Redux:`, () => {
     });
     wrapper = mount(
         <Provider store={store}>
-          <ConnectedMain/>
+          <Router history={history}>
+            <ConnectedMain/>
+          </Router>
         </Provider>
     );
   });
@@ -108,11 +115,12 @@ describe(`Main component with Redux:`, () => {
 describe(`Main component with Redux with "Comedy" tab active:`, () => {
   let store;
   let wrapper;
-  const genre = `Comedy`;
+  const mainPageGenre = `Comedy`;
+
   beforeEach(() => {
     store = mockStore({
       [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
-        genre,
+        mainPageGenre,
       }),
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
       [NameSpace.USER]: TEST_DATA.initialStoreUserState,
@@ -120,7 +128,9 @@ describe(`Main component with Redux with "Comedy" tab active:`, () => {
 
     wrapper = mount(
         <Provider store={store}>
-          <ConnectedMain/>
+          <Router history={history}>
+            <ConnectedMain/>
+          </Router>
         </Provider>
     );
   });
@@ -129,7 +139,7 @@ describe(`Main component with Redux with "Comedy" tab active:`, () => {
     const main = wrapper.find(Main);
 
     expect(main.prop(`allGenres`)).toEqual(testObject.allGenres);
-    expect(main.prop(`activeGenre`)).toEqual(genre);
+    expect(main.prop(`activeGenre`)).toEqual(mainPageGenre);
     expect(main.prop(`needShowMoreButton`)).toEqual(false);
   });
 

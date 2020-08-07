@@ -6,6 +6,8 @@ import Main from './main.jsx';
 import {TEST_DATA} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';
+import {Router} from "react-router-dom";
+import history from '../../history';
 
 const mockStore = configureStore([]);
 
@@ -20,7 +22,9 @@ describe(`Render Main component: `, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <Main />
+            <Router history={history}>
+              <Main />
+            </Router>
           </Provider>, {
             createNodeMock: () => {
               return {};
@@ -34,7 +38,7 @@ describe(`Render Main component: `, () => {
   it(`"Comedy" MainScreen`, () => {
     const store = mockStore({
       [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
-        genre: `Comedy`,
+        mainPageGenre: `Comedy`,
       }),
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
       [NameSpace.USER]: TEST_DATA.initialStoreUserState,
@@ -43,7 +47,9 @@ describe(`Render Main component: `, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <Main />
+            <Router history={history}>
+              <Main />
+            </Router>
           </Provider>, {
             createNodeMock: () => {
               return {};
@@ -57,7 +63,7 @@ describe(`Render Main component: `, () => {
   it(`"Drama" MainScreen`, () => {
     const store = mockStore({
       [NameSpace.MOVIE]: extend(TEST_DATA.initialStoreMovieState, {
-        genre: `Drama`,
+        mainPageGenre: `Drama`,
       }),
       [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
       [NameSpace.USER]: TEST_DATA.initialStoreUserState,
@@ -66,7 +72,9 @@ describe(`Render Main component: `, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <Main />
+            <Router history={history}>
+              <Main />
+            </Router>
           </Provider>, {
             createNodeMock: () => {
               return {};
@@ -76,5 +84,4 @@ describe(`Render Main component: `, () => {
 
     expect(tree).toMatchSnapshot();
   });
-
 });

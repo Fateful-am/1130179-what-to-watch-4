@@ -12,8 +12,8 @@ Array [
         className="movie-card__bg"
       >
         <img
-          alt="Macbeth"
-          src="img/macbeth.jpg"
+          alt="The Grand Budapest Hotel"
+          src="img/bg-the-grand-budapest-hotel.jpg"
         />
       </div>
       <h1
@@ -29,7 +29,7 @@ Array [
         >
           <a
             className="logo__link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             <span
@@ -74,7 +74,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Macbeth
+            The Grand Budapest Hotel
           </h2>
           <p
             className="movie-card__meta"
@@ -82,7 +82,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Comedy
+              Drama
             </span>
             <span
               className="movie-card__year"
@@ -93,8 +93,9 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/player/8"
               onClick={[Function]}
               type="button"
             >
@@ -114,7 +115,7 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
               onClick={[Function]}
@@ -135,7 +136,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="#"
+              href="/films/8/review"
               onClick={[Function]}
             >
               Add review
@@ -154,9 +155,9 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="Macbeth poster"
+            alt="The Grand Budapest Hotel poster"
             height="327"
-            src="img/macbeth.jpg"
+            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -231,10 +232,10 @@ Array [
             className="movie-card__text"
           >
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur cum excepturi maiores obcaecati voluptates.Aliquid culpa harum ipsum numquam voluptates!
+              In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
             </p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!
+              Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.
             </p>
             <p
               className="movie-card__director"
@@ -249,7 +250,7 @@ Array [
             >
               <strong>
                 Starring: 
-                Bill Murray, Edward Norton, Jude Law
+                Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
               </strong>
             </p>
           </div>
@@ -273,24 +274,59 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          id="mc-2"
           onClick={[Function]}
         >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+          <a
+            href="/films/0"
+            onClick={[Function]}
           >
-            <video
-              className="player__video"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <video
+                className="player__video"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/films/0"
+              onClick={[Function]}
+            >
+              Macbeth
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
+        >
+          <a
+            href="/films/2"
+            onClick={[Function]}
+          >
+            <div
+              className="small-movie-card__image"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <video
+                className="player__video"
+              />
+            </div>
+          </a>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/films/2"
+              onClick={[Function]}
             >
               We need to talk about Kevin
             </a>
@@ -298,24 +334,29 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          id="mc-4"
           onClick={[Function]}
         >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+          <a
+            href="/films/4"
+            onClick={[Function]}
           >
-            <video
-              className="player__video"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <video
+                className="player__video"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/films/4"
+              onClick={[Function]}
             >
               Moonrise Kingdom
             </a>
@@ -331,7 +372,7 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span
@@ -375,8 +416,8 @@ Array [
         className="movie-card__bg"
       >
         <img
-          alt="Macbeth"
-          src="img/macbeth.jpg"
+          alt="The Grand Budapest Hotel"
+          src="img/bg-the-grand-budapest-hotel.jpg"
         />
       </div>
       <h1
@@ -392,7 +433,7 @@ Array [
         >
           <a
             className="logo__link"
-            href="#"
+            href="/"
             onClick={[Function]}
           >
             <span
@@ -417,7 +458,7 @@ Array [
         >
           <a
             className="user-block__link"
-            href="#"
+            href="/login"
             onClick={[Function]}
           >
             Sign in
@@ -433,7 +474,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Macbeth
+            The Grand Budapest Hotel
           </h2>
           <p
             className="movie-card__meta"
@@ -441,7 +482,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Comedy
+              Drama
             </span>
             <span
               className="movie-card__year"
@@ -452,8 +493,9 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/player/8"
               onClick={[Function]}
               type="button"
             >
@@ -473,7 +515,7 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
               onClick={[Function]}
@@ -492,6 +534,13 @@ Array [
                 My list
               </span>
             </button>
+            <a
+              className="btn movie-card__button"
+              href="/films/8/review"
+              onClick={[Function]}
+            >
+              Add review
+            </a>
           </div>
         </div>
       </div>
@@ -506,9 +555,9 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="Macbeth poster"
+            alt="The Grand Budapest Hotel poster"
             height="327"
-            src="img/macbeth.jpg"
+            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -583,10 +632,10 @@ Array [
             className="movie-card__text"
           >
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.Aspernatur cum excepturi maiores obcaecati voluptates.Aliquid culpa harum ipsum numquam voluptates!
+              In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
             </p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium culpa eaque earum eius ex facilis magni quia tempore, ut vero? Dolores in incidunt ipsa soluta!
+              Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.
             </p>
             <p
               className="movie-card__director"
@@ -601,7 +650,7 @@ Array [
             >
               <strong>
                 Starring: 
-                Bill Murray, Edward Norton, Jude Law
+                Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
               </strong>
             </p>
           </div>
@@ -625,24 +674,59 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          id="mc-2"
           onClick={[Function]}
         >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+          <a
+            href="/films/0"
+            onClick={[Function]}
           >
-            <video
-              className="player__video"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <video
+                className="player__video"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/films/0"
+              onClick={[Function]}
+            >
+              Macbeth
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
+        >
+          <a
+            href="/films/2"
+            onClick={[Function]}
+          >
+            <div
+              className="small-movie-card__image"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <video
+                className="player__video"
+              />
+            </div>
+          </a>
+          <h3
+            className="small-movie-card__title"
+          >
+            <a
+              className="small-movie-card__link"
+              href="/films/2"
+              onClick={[Function]}
             >
               We need to talk about Kevin
             </a>
@@ -650,24 +734,29 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          id="mc-4"
           onClick={[Function]}
         >
-          <div
-            className="small-movie-card__image"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+          <a
+            href="/films/4"
+            onClick={[Function]}
           >
-            <video
-              className="player__video"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <video
+                className="player__video"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="#"
+              href="/films/4"
+              onClick={[Function]}
             >
               Moonrise Kingdom
             </a>
@@ -683,7 +772,7 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span

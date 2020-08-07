@@ -1,10 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {configure, mount} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withBigVideoPlayer from './with-big-video-player';
+import configureStore from 'redux-mock-store';
+import NameSpace from '../../reducer/name-space';
+import {TEST_DATA} from '../../utils/test-data';
+import {Provider} from 'react-redux';
 
-configure({adapter: new Adapter()});
+Enzyme.configure({
+  adapter: new Adapter(),
+});
+
+const mockStore = configureStore([]);
 
 const Player = (props) => {
   const {onPlayButtonClick, onFullScreenButtonClick, onExitButtonClick, children} = props;
@@ -28,14 +36,24 @@ Player.propTypes = {
   ]).isRequired,
 };
 
+const store = mockStore({
+  [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
+});
+
 it(`Checks that HOC's callback turn off video (pause) and then turn on (play)`, () => {
   const PlayerWrapped = withBigVideoPlayer(Player);
-  const wrapper = mount(<PlayerWrapped
-    videoLink={``}
-    previewImage={``}
-    title={``}
-    onExitButtonClick={() => {}}
-  />);
+
+  const wrapper = mount(
+      <Provider store={store}>
+        <PlayerWrapped
+          videoLink={``}
+          previewImage={``}
+          title={``}
+          onExitButtonClick={() => {}}
+          match={{params: {id: `8`}}}
+        />
+      </Provider>
+  );
 
   window.HTMLMediaElement.prototype.pause = () => {};
   window.HTMLMediaElement.prototype.play = () => {};

@@ -40,14 +40,6 @@ export const EMPTY_PROMO_MOVIE = {
   previewVideoLink: ``,
 };
 
-export const PageKind = {
-  MAIN: `main`,
-  MOVIE_PAGE: `moviePage`,
-  PLAYER: `player`,
-  SIGN_IN: `signIn`,
-  ADD_REVIEW: `addReview`,
-};
-
 export const MoviePageTabNames = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
