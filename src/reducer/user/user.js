@@ -1,5 +1,6 @@
 import {extend} from '../../utils/helpers';
-import {ActionCreator as MovieActionCreator} from '../movie/movie';
+import history from '../../history';
+import {AppRoute} from '../../consts';
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -66,8 +67,8 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then((response) => {
-        dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
       })
       .catch((err) => {
         throw err;
@@ -82,7 +83,7 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(MovieActionCreator.gotoPreviousPage());
+        history.push(AppRoute.MAIN);
       });
   },
 };

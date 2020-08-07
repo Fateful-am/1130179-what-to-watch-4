@@ -9,7 +9,7 @@ describe(`Reducer work correctly:`, () => {
   });
 
   it(`reducer should change genre to "Comedy"`, () => {
-    expect(reducer({}, ActionCreator.changeGenre(`Comedy`)))
+    expect(reducer({}, ActionCreator.changeMovieGenre(`Comedy`)))
       .toEqual({
         genre: `Comedy`,
         renderedMovieCount: START_MOVIE_COUNT,
@@ -156,8 +156,8 @@ describe(`Reducer work correctly:`, () => {
 
 describe(`Action creators work correctly:`, () => {
   it(`Action creator for changing genre returns correct action`, () => {
-    expect(ActionCreator.changeGenre(`Comedy`)).toEqual({
-      type: ActionType.CHANGE_GENRE,
+    expect(ActionCreator.changeMovieGenre(`Comedy`)).toEqual({
+      type: ActionType.CHANGE_MOVIE_GENRE,
       payload: `Comedy`,
     });
   });

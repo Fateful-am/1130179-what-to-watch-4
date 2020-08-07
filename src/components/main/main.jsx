@@ -2,27 +2,70 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list.jsx';
-import {GenreTabClassNames} from '../../consts';
+import {GenreTabClassNames, MoviePropTypes} from '../../consts';
 import Tabs from '../tabs/tabs.jsx';
 import {ActionCreator} from '../../reducer/movie/movie';
 import ShowMoreButton from '../show-more-button/show-more-button.jsx';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
-import {getActiveGenre, getNeedShowMoreButton, getRenderedMovieCount} from '../../reducer/movie/selectors';
+import {
+  getNeedShowMoreButton,
+  getMainPageMovieCardCount,
+  getMainPageGenre, getMainPageGenreMovies
+} from '../../reducer/movie/selectors';
 import {getAllGenres, getPromoMovie} from '../../reducer/data/selectors';
 import UserStatus from '../user-status/user-status.jsx';
 import Logo from '../logo/logo.jsx';
 
-const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, renderedMovieCount,
-  onGenreTabClick, onShowMoreButtonClick}) => {
+const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, mainPageMovieCardCount,
+  onGenreTabClick, onShowMoreButtonClick, mainPageMovies}) => {
 
   const handleShowMoreButtonClick = () => {
-    onShowMoreButtonClick(renderedMovieCount);
+    onShowMoreButtonClick(mainPageMovieCardCount);
+  };
+
+  const renderPromo = () => {
+    if (promoMovie === -1) {
+      return (
+        <div className="movie-card__info">
+          <div className="movie-card__poster">
+          </div>
+
+          <div className="movie-card__desc">
+            <h2 className="movie-card__title">Loading</h2>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="movie-card__info">
+        <div className="movie-card__poster">
+          <img src={promoMovie.posterImage}
+            alt={`${promoMovie.title} poster`}
+            width="218" height="327"/>
+        </div>
+
+        <div className="movie-card__desc">
+          <h2 className="movie-card__title">{promoMovie.title}</h2>
+          <p className="movie-card__meta">
+            <span className="movie-card__genre">{promoMovie.genre}</span>
+            <span className="movie-card__year">{promoMovie.released}</span>
+          </p>
+
+          <MovieCardButtons
+            movieId={promoMovie.id}
+          >
+          </MovieCardButtons>
+
+        </div>
+      </div>
+
+    );
   };
 
   return <>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src={promoMovie.backgroundImage} alt={promoMovie.title}/>
+        {promoMovie.id > -1 && <img src={promoMovie.backgroundImage} alt={promoMovie.title}/>}
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -35,24 +78,7 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, renderedM
       </header>
 
       <div className="movie-card__wrap">
-        <div className="movie-card__info">
-          <div className="movie-card__poster">
-            <img src={promoMovie.posterImage}
-              alt={`${promoMovie.title} poster`}
-              width="218" height="327"/>
-          </div>
-
-          <div className="movie-card__desc">
-            <h2 className="movie-card__title">{promoMovie.title}</h2>
-            <p className="movie-card__meta">
-              <span className="movie-card__genre">{promoMovie.genre}</span>
-              <span className="movie-card__year">{promoMovie.released}</span>
-            </p>
-
-            <MovieCardButtons />
-
-          </div>
-        </div>
+        {renderPromo()}
       </div>
     </section>
 
@@ -67,7 +93,10 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, renderedM
           className={GenreTabClassNames}
         />
 
-        <MoviesList />
+        <MoviesList
+          renderedMovies={mainPageMovies}
+        >
+        </MoviesList>
 
         {needShowMoreButton && <ShowMoreButton onClick={handleShowMoreButtonClick}/>}
       </section>
@@ -85,6 +114,7 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, renderedM
 
 Main.propTypes = {
   promoMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
@@ -95,7 +125,8 @@ Main.propTypes = {
   allGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeGenre: PropTypes.string.isRequired,
   needShowMoreButton: PropTypes.bool.isRequired,
-  renderedMovieCount: PropTypes.number.isRequired,
+  mainPageMovieCardCount: PropTypes.number.isRequired,
+  mainPageMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
 
   onGenreTabClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
@@ -105,19 +136,20 @@ const mapStateToProps = (state) => {
   return ({
     promoMovie: getPromoMovie(state),
     allGenres: getAllGenres(state),
-    activeGenre: getActiveGenre(state),
+    activeGenre: getMainPageGenre(state),
     needShowMoreButton: getNeedShowMoreButton(state),
-    renderedMovieCount: getRenderedMovieCount(state),
+    mainPageMovieCardCount: getMainPageMovieCardCount(state),
+    mainPageMovies: getMainPageGenreMovies(state)
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreTabClick(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
+    dispatch(ActionCreator.changeMainPageGenre(genre));
   },
 
-  onShowMoreButtonClick(renderedMovieCount) {
-    dispatch(ActionCreator.showMoreMovies(renderedMovieCount));
+  onShowMoreButtonClick(mainPageMovieCardCount) {
+    dispatch(ActionCreator.showMoreMovies(mainPageMovieCardCount));
   },
 });
 

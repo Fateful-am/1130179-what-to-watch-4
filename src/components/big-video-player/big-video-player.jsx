@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {AppRoute} from '../../consts';
+import {Link} from 'react-router-dom';
 
 const BigVideoPlayer = (props) => {
   const renderPlaySvg = () => {
@@ -44,14 +46,14 @@ const BigVideoPlayer = (props) => {
     );
   };
 
+  const {title, children, progress, timeElapsed, onFullScreenButtonClick, onExitButtonClick, movieId} = props;
 
-  const {title, children, progress, timeElapsed, onFullScreenButtonClick, onExitButtonClick} = props;
-
+  const linkTo = movieId === -1 ? AppRoute.MAIN : `${AppRoute.FILM}/${movieId}`;
   return (
     <div className="player">
       {children}
 
-      <button type="button" className="player__exit" onClick={onExitButtonClick}>Exit</button>
+      <Link to={linkTo} type="button" className="player__exit" onClick={onExitButtonClick}>Exit</Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -80,6 +82,7 @@ const BigVideoPlayer = (props) => {
 };
 
 BigVideoPlayer.propTypes = {
+  movieId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
@@ -92,7 +95,6 @@ BigVideoPlayer.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
-
 };
 
 export default BigVideoPlayer;

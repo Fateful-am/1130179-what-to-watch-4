@@ -6,10 +6,10 @@ import {AppRoute} from '../../consts';
 import {Link} from 'react-router-dom';
 import {HOST_NAME} from '../../consts';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
-import {ActionCreator} from '../../reducer/movie/movie';
+import history from '../../history';
 
 const UserStatus = (props) => {
-  const {authorizationStatus, avatarUrl, onSignInClick} = props;
+  const {authorizationStatus, avatarUrl} = props;
 
   const renderAvatar = (src, onClick) => {
     return (
@@ -22,10 +22,10 @@ const UserStatus = (props) => {
     );
   };
 
-  const renderSignIn = (onClick) => {
+  const renderSignIn = () => {
     const handleLinkClick = (evt) => {
       evt.preventDefault();
-      onClick();
+      history.push(AppRoute.SIGN_IN);
     };
 
     return (
@@ -41,7 +41,7 @@ const UserStatus = (props) => {
 
   const userLoginState = authorizationStatus === AuthorizationStatus.AUTH
     ? renderAvatar(`${HOST_NAME}${avatarUrl}`, ()=>{})
-    : renderSignIn(onSignInClick);
+    : renderSignIn();
 
   return (
     <div className="user-block">
@@ -53,7 +53,6 @@ const UserStatus = (props) => {
 UserStatus.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string,
-  onSignInClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -63,12 +62,5 @@ const mapStateToProps = (state) => {
   });
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSignInClick() {
-    dispatch(ActionCreator.signIn());
-  },
-
-});
-
 export {UserStatus};
-export default connect(mapStateToProps, mapDispatchToProps)(UserStatus);
+export default connect(mapStateToProps)(UserStatus);

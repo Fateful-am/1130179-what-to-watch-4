@@ -2,22 +2,81 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo.jsx';
 import UserStatus from '../user-status/user-status.jsx';
-import {MoviePropTypes} from '../../consts';
+import {AppRoute, MOVIE_NOT_FOUND_MESSAGE, MoviePropTypes} from '../../consts';
+import history from '../../history';
+import {Link} from 'react-router-dom';
 
 const AddReview = (props) => {
-  const {movie, children, onBreadcrumbsBackClick} = props;
+  const {movie, children} = props;
 
   const handleBreadcrumbsBackClick = (evt) => {
     evt.preventDefault();
-    onBreadcrumbsBackClick();
+    history.push(`${AppRoute.FILM}/${movie.id}`);
+  };
+
+  const renderBackGround = () =>{
+    if (movie) {
+      return (
+        <div className="movie-card__bg">
+          <img src={movie.backgroundImage} alt={movie.title}/>
+        </div>
+      );
+    }
+
+    return (
+      <div className="movie-card__bg">
+      </div>
+    );
+  };
+
+  const renderBreadcrumbs = () => {
+    if (movie) {
+      return (
+        <ul className="breadcrumbs__list">
+          <li className="breadcrumbs__item">
+            <Link
+              to={`${AppRoute.FILM}/${movie.id}`}
+              className="breadcrumbs__link"
+              onClick={handleBreadcrumbsBackClick}
+            >
+              {movie.title}
+            </Link>
+          </li>
+          <li className="breadcrumbs__item">
+            <a className="breadcrumbs__link">Add review</a>
+          </li>
+        </ul>
+      );
+    }
+
+    return (
+      <ul className="breadcrumbs__list">
+        <li className="breadcrumbs__item">
+          <a className="breadcrumbs__link">{MOVIE_NOT_FOUND_MESSAGE}</a>
+        </li>
+      </ul>
+    );
+  };
+
+  const renderPoster = () => {
+    if (movie) {
+      return (
+        <div className="movie-card__poster movie-card__poster--small">
+          <img src={movie.posterImage} alt={`${movie.title} poster`} width="218" height="327"/>
+        </div>
+      );
+    }
+
+    return (
+      <div className="movie-card__poster movie-card__poster--small">
+      </div>
+    );
   };
 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
-        <div className="movie-card__bg">
-          <img src={movie.backgroundImage} alt={movie.title}/>
-        </div>
+        {renderBackGround()}
 
         <h1 className="visually-hidden">WTW</h1>
 
@@ -27,29 +86,14 @@ const AddReview = (props) => {
           </Logo>
 
           <nav className="breadcrumbs">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item">
-                <a
-                  href="#"
-                  className="breadcrumbs__link"
-                  onClick={handleBreadcrumbsBackClick}
-                >
-                  {movie.title}
-                </a>
-              </li>
-              <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
-              </li>
-            </ul>
+            {renderBreadcrumbs()}
           </nav>
 
           <UserStatus/>
 
         </header>
 
-        <div className="movie-card__poster movie-card__poster--small">
-          <img src={movie.posterImage} alt={`${movie.title} poster`} width="218" height="327"/>
-        </div>
+        {renderPoster()}
       </div>
 
       <div className="add-review">
@@ -67,7 +111,6 @@ AddReview.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  onBreadcrumbsBackClick: PropTypes.func.isRequired,
 };
 
 export default AddReview;

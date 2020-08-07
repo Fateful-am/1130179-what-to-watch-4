@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/movie/movie';
-import {getIsFavoriteMovie, getMovieIdForPlay} from '../../reducer/movie/selectors';
-import {MovieStatus} from '../../consts';
+import {getIsFavoriteMovie} from '../../reducer/movie/selectors';
+import {AppRoute, MovieStatus} from '../../consts';
 import {Operation as DataOperation} from '../../reducer/data/data';
+import {Link} from 'react-router-dom';
+import history from '../../history';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {AuthorizationStatus} from '../../reducer/user/user';
 
 const MovieCardButtons = (props) => {
-  const {movieIdForPlay, onPlayClick, onMyListClick, movieStatus} = props;
+  const {movieId, onMyListClick, movieStatus} = props;
 
   const getReverseMovieStatus = (status) => {
     switch (status) {
@@ -19,25 +22,33 @@ const MovieCardButtons = (props) => {
   };
 
   const handleMyListClick = (evt) =>{
+    const {authorizationStatus} = props;
     evt.preventDefault();
-    onMyListClick(movieIdForPlay, getReverseMovieStatus(movieStatus));
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      onMyListClick(movieId, getReverseMovieStatus(movieStatus));
+      return;
+    }
+    history.push(AppRoute.SIGN_IN);
   };
 
-  const handlePlayButtonClick = () => {
-    onPlayClick(movieIdForPlay);
+  const handlePlayButtonClick = (evt) => {
+    evt.preventDefault();
+    history.push(`${AppRoute.PLAYER}/${movieId}`);
   };
 
   const myListImg = movieStatus === MovieStatus.FAVORITE ? `#in-list` : `#add`;
   return (
     <div className="movie-card__buttons">
-      <button className="btn btn--play movie-card__button" type="button"
+      <Link to={`${AppRoute.PLAYER}/${movieId}`}
+        className="btn btn--play movie-card__button"
+        type="button"
         onClick={handlePlayButtonClick}
       >
         <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
           <path fillRule="evenodd" clipRule="evenodd" d="M0 0L19 9.5L0 19V0Z" fill="#EEE5B5"/>
         </svg>
         <span>Play</span>
-      </button>
+      </Link>
       <button className="btn btn--list movie-card__button" type="button"
         onClick={handleMyListClick}
       >
@@ -52,30 +63,28 @@ const MovieCardButtons = (props) => {
 };
 
 MovieCardButtons.propTypes = {
-  movieIdForPlay: PropTypes.number.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  movieId: PropTypes.number.isRequired,
   movieStatus: PropTypes.number.isRequired,
-  onPlayClick: PropTypes.func.isRequired,
   onMyListClick: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ])};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const {movieId} = props;
   return ({
-    movieIdForPlay: getMovieIdForPlay(state),
-    movieStatus: getIsFavoriteMovie(state),
+    authorizationStatus: getAuthorizationStatus(state),
+    movieStatus: getIsFavoriteMovie(state, movieId),
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlayClick(movieIdForPlay) {
-    dispatch(ActionCreator.playMovie(movieIdForPlay));
-  },
-
   onMyListClick(movieId, status) {
     dispatch(DataOperation.changeMovieStatus(movieId, status));
   },
 });
+
 export {MovieCardButtons};
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCardButtons);

@@ -23,13 +23,16 @@ const store = createStore(
     )
 );
 
+store.dispatch(UserOperation.checkAuth());
 store.dispatch(DataOperation.loadMovies());
 store.dispatch(DataOperation.loadPromo());
-store.dispatch(UserOperation.checkAuth());
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App/>
-    </Provider>,
-    document.querySelector(`#root`)
-);
+setTimeout(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+
+}, 200);

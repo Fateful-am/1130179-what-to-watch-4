@@ -12,6 +12,7 @@ export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 400;
 export const REVIEW_STARS_COUNT = 5;
 export const HOST_NAME = `https://4.react.pages.academy`;
+export const MOVIE_NOT_FOUND_MESSAGE = `Sorry... Movie not found.`;
 
 export const AppRoute = {
   MAIN: `/`,
@@ -19,7 +20,7 @@ export const AppRoute = {
   MY_LIST: `/mylist`,
   FILM: `/films`,
   ADD_REVIEW: `/films/:id/review`,
-  PLAYER: `/player/:id`,
+  PLAYER: `/player`,
 };
 
 export const MovieStatus = {
@@ -28,6 +29,7 @@ export const MovieStatus = {
 };
 
 export const EMPTY_PROMO_MOVIE = {
+  id: -1,
   backgroundImage: ``,
   title: ``,
   posterImage: ``,
@@ -93,6 +95,6 @@ export const MoviePropTypes = {
       date: PropTypes.instanceOf(Date),
       score: PropTypes.number.isRequired,
     })).isRequired
-  }).isRequired
+  })
 };
 

@@ -6,7 +6,7 @@ export const convertToImageName = (movieName) => {
 };
 
 export const getMovieById = (movies, id) => {
-  const movieIndex = movies.findIndex((movie) => String(movie.id) === id);
+  const movieIndex = movies.findIndex((movie) => String(movie.id) === String(id));
   if (movieIndex > -1) {
     return movies[movieIndex];
   }

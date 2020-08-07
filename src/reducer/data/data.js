@@ -1,5 +1,6 @@
 import {extend} from '../../utils/helpers.js';
-import {ActionCreator as MovieActionCreator} from '../movie/movie';
+import history from '../../history';
+import {AppRoute} from '../../consts';
 
 const initialState = {
   promoMovieId: -1,
@@ -124,7 +125,7 @@ const Operation = {
           movieId: reviewData.movieId,
           comments: convertToLocalReviews(response.data),
         }));
-        dispatch(MovieActionCreator.gotoPreviousPage());
+        history.push(`${AppRoute.FILM}/${reviewData.movieId}`);
       });
   },
 

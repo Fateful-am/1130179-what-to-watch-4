@@ -1,57 +1,50 @@
 import {createSelector} from 'reselect';
 import NameSpace from '../name-space.js';
-import {ALL_GENRES, MovieStatus, PageKind} from '../../consts';
-import {getMovies, getPromoMovieId} from '../data/selectors';
+import {ALL_GENRES, MOVIE_LIKE_THIS_COUNT, MovieStatus} from '../../consts';
+import {getMovies} from '../data/selectors';
 import {getMovieById} from '../../utils/helpers';
 
-const getFilteredGenreMovies = (state) => {
-  const activeGenre = getActiveGenre(state);
-  const currentMovieId = getCurrentMovieId(state);
+const getMainPageFilteredByGenreMovies = (state) => {
+  const mainPageGenre = getMainPageGenre(state);
   return getMovies(state).filter((movie) => {
-    if (activeGenre === ALL_GENRES) {
+    if (mainPageGenre === ALL_GENRES) {
       return true;
     }
-    return movie.genre === activeGenre && movie.id !== currentMovieId;
+    return movie.genre === mainPageGenre;
   });
 };
 
-export const getRenderedMovieCount = (state) => {
-  return state[NameSpace.MOVIE].renderedMovieCount;
+export const getMainPageMovieCardCount = (state) => {
+  return state[NameSpace.MOVIE].mainPageMovieCardCount;
 };
 
-export const getGenreMovies = createSelector(
-    getFilteredGenreMovies,
-    getRenderedMovieCount,
+export const getMainPageGenreMovies = createSelector(
+    getMainPageFilteredByGenreMovies,
+    getMainPageMovieCardCount,
     (genreMovies, movieCount) => {
       return genreMovies.slice(0, movieCount);
     }
 );
 
-export const getCurrentMovieId = (state) => {
-  return state[NameSpace.MOVIE].currentMovieId;
-};
-
-export const getActiveGenre = (state) => {
-  return state[NameSpace.MOVIE].genre;
-};
-
-export const getCurrentPage = (state) => {
-  return state[NameSpace.MOVIE].currentPage;
+export const getMainPageGenre = (state) => {
+  return state[NameSpace.MOVIE].mainPageGenre;
 };
 
 export const getNeedShowMoreButton = (state) => {
-  return getFilteredGenreMovies(state).length > getRenderedMovieCount(state);
+  return getMainPageFilteredByGenreMovies(state).length > getMainPageMovieCardCount(state);
 };
 
-export const getMovieIdForPlay = (state) => {
-  if (getCurrentPage(state) === PageKind.MAIN) {
-    return getPromoMovieId(state);
-  }
-
-  return getCurrentMovieId(state);
+export const getLikeThisMoviesExceptCurrent = (state, movieId) => {
+  const movieGenre = getMovieGenre(state);
+  return getMovies(state).filter((movie) => {
+    return movie.genre === movieGenre && String(movie.id) !== String(movieId);
+  }) .slice(0, MOVIE_LIKE_THIS_COUNT);
 };
 
-export const getIsFavoriteMovie = (state) => {
-  const movieIdForPlay = getMovieIdForPlay(state);
-  return getMovieById(getMovies(state), movieIdForPlay).isFavorite ? MovieStatus.FAVORITE : MovieStatus.NOT_FAVORITE;
+export const getMovieGenre = (state) => {
+  return state[NameSpace.MOVIE].movieGenre;
+};
+
+export const getIsFavoriteMovie = (state, movieId) => {
+  return getMovieById(getMovies(state), movieId).isFavorite ? MovieStatus.FAVORITE : MovieStatus.NOT_FAVORITE;
 };
