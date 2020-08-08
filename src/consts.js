@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 export const START_MOVIE_COUNT = 8;
-export const PROMO_MOCK_INDEX = 8;
 export const PREVIEW_MOVIE_DELAY = 1000;
 export const SHORT_ACTORS_LIST_COUNT = 4;
 export const MOVIE_REVIEWS_COLUMN_COUNT = 2;
@@ -13,6 +12,11 @@ export const MAX_REVIEW_LENGTH = 400;
 export const REVIEW_STARS_COUNT = 5;
 export const HOST_NAME = `https://4.react.pages.academy`;
 export const MOVIE_NOT_FOUND_MESSAGE = `Sorry... Movie not found.`;
+
+export const StoreParam = {
+  PREFIX: `wtw-localstorage`,
+  VERSION: `v1`,
+};
 
 export const AppRoute = {
   MAIN: `/`,

@@ -36,6 +36,7 @@ class App extends PureComponent {
           </Route>
 
           <Route exact path={`${AppRoute.FILM}/:id`}
+
             render={(routeProps) => {
               return (
                 <MoviePageWrapped {...routeProps}/>

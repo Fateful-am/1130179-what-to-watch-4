@@ -1,5 +1,4 @@
-import {extend} from '../../utils/helpers.js';
-import history from '../../history';
+import {extend, pushHistory} from '../../utils/helpers.js';
 import {AppRoute} from '../../consts';
 
 const initialState = {
@@ -125,7 +124,7 @@ const Operation = {
           movieId: reviewData.movieId,
           comments: convertToLocalReviews(response.data),
         }));
-        history.push(`${AppRoute.FILM}/${reviewData.movieId}`);
+        pushHistory(`${AppRoute.FILM}/${reviewData.movieId}`);
       });
   },
 

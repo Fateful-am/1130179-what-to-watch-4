@@ -8,9 +8,11 @@ import {Link} from 'react-router-dom';
 import history from '../../history';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {AuthorizationStatus} from '../../reducer/user/user';
+import {pushHistory} from '../../utils/helpers';
 
 const MovieCardButtons = (props) => {
   const {movieId, onMyListClick, movieStatus} = props;
+  const historyPushUrl = `${AppRoute.PLAYER}/${movieId}`;
 
   const getReverseMovieStatus = (status) => {
     switch (status) {
@@ -33,13 +35,13 @@ const MovieCardButtons = (props) => {
 
   const handlePlayButtonClick = (evt) => {
     evt.preventDefault();
-    history.push(`${AppRoute.PLAYER}/${movieId}`);
+    pushHistory(historyPushUrl);
   };
 
   const myListImg = movieStatus === MovieStatus.FAVORITE ? `#in-list` : `#add`;
   return (
     <div className="movie-card__buttons">
-      <Link to={`${AppRoute.PLAYER}/${movieId}`}
+      <Link to={historyPushUrl}
         className="btn btn--play movie-card__button"
         type="button"
         onClick={handlePlayButtonClick}

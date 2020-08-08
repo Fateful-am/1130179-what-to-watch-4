@@ -20,10 +20,9 @@ import Logo from '../logo/logo.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {ActionCreator} from '../../reducer/movie/movie';
 import {Operation as DataOperation} from '../../reducer/data/data.js';
-import {getMovieById} from '../../utils/helpers';
+import {getMovieById, pushHistory} from '../../utils/helpers';
 import {getLikeThisMoviesExceptCurrent} from '../../reducer/movie/selectors';
 import {Link} from 'react-router-dom';
-import history from '../../history';
 
 class MoviePage extends PureComponent {
   constructor(props) {
@@ -84,15 +83,19 @@ class MoviePage extends PureComponent {
     this._checkMovie();
   }
 
+  _getHistoryPushUrl(movieId) {
+    return AppRoute.ADD_REVIEW.replace(`:id`, movieId);
+  }
+
   _handleAddReviewClick(evt) {
     evt.preventDefault();
-    history.push(AppRoute.ADD_REVIEW.replace(`:id`, this._getMovieId(this.props)));
+    pushHistory(this._getHistoryPushUrl(this._getMovieId(this.props)));
   }
 
   _renderAddReviewClick(movieId) {
     return (
       <Link
-        to={AppRoute.ADD_REVIEW.replace(`:id`, movieId)}
+        to={this._getHistoryPushUrl(movieId)}
         href="#"
         className="btn movie-card__button"
         onClick={this._handleAddReviewClick}

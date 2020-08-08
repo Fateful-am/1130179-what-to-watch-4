@@ -11,13 +11,13 @@ import history from '../../history';
 const UserStatus = (props) => {
   const {authorizationStatus, avatarUrl} = props;
 
-  const renderAvatar = (src, onClick) => {
+  const renderAvatar = (onClick) => {
     return (
       <div
         className="user-block__avatar"
         onClick={onClick}
       >
-        <img src={src} alt="User avatar" width="63" height="63"/>
+        {avatarUrl && <img src={`${HOST_NAME}${avatarUrl}`} alt="User avatar" width="63" height="63"/>}
       </div>
     );
   };
@@ -40,7 +40,7 @@ const UserStatus = (props) => {
   };
 
   const userLoginState = authorizationStatus === AuthorizationStatus.AUTH
-    ? renderAvatar(`${HOST_NAME}${avatarUrl}`, ()=>{})
+    ? renderAvatar(()=>{})
     : renderSignIn();
 
   return (

@@ -50,6 +50,7 @@ it(`Render MoviePage with Overview tab and AUTH`, () => {
     [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
     [NameSpace.USER]: extend(TEST_DATA.initialStoreUserState, {
       authorizationStatus: AuthorizationStatus.AUTH,
+      userData: {avatarUrl: `/wtw/test.jpg`}
     }),
   });
 

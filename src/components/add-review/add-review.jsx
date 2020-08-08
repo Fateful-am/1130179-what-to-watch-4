@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import Logo from '../logo/logo.jsx';
 import UserStatus from '../user-status/user-status.jsx';
 import {AppRoute, MOVIE_NOT_FOUND_MESSAGE, MoviePropTypes} from '../../consts';
-import history from '../../history';
 import {Link} from 'react-router-dom';
+import {pushHistory} from '../../utils/helpers';
 
 const AddReview = (props) => {
   const {movie, children} = props;
 
+  const historyPushUrl = `${AppRoute.FILM}/${movie.id}`;
+
   const handleBreadcrumbsBackClick = (evt) => {
     evt.preventDefault();
-    history.push(`${AppRoute.FILM}/${movie.id}`);
+    pushHistory(historyPushUrl);
   };
 
   const renderBackGround = () =>{
@@ -35,7 +37,7 @@ const AddReview = (props) => {
         <ul className="breadcrumbs__list">
           <li className="breadcrumbs__item">
             <Link
-              to={`${AppRoute.FILM}/${movie.id}`}
+              to={historyPushUrl}
               className="breadcrumbs__link"
               onClick={handleBreadcrumbsBackClick}
             >

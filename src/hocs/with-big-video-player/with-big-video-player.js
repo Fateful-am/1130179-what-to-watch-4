@@ -1,10 +1,9 @@
 import React, {createRef, PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {formatDurationInSeconds, getMovieById} from '../../utils/helpers';
+import {formatDurationInSeconds, getMovieById, pushHistory} from '../../utils/helpers';
 import {AppRoute, MOVIE_NOT_FOUND_MESSAGE, MoviePropTypes} from '../../consts';
 import {getMovies} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
-import history from '../../history';
 
 const withBigVideoPlayer = (Component) => {
   class WithBigAudioPlayer extends PureComponent {
@@ -144,10 +143,10 @@ const withBigVideoPlayer = (Component) => {
 
     _handleExitButtonClick() {
       if (this._movieId === -1) {
-        history.push(AppRoute.MAIN);
+        pushHistory(AppRoute.MAIN);
         return;
       }
-      history.push(`${AppRoute.FILM}/${this._movieId}`);
+      pushHistory(`${AppRoute.FILM}/${this._movieId}`);
     }
 
     render() {

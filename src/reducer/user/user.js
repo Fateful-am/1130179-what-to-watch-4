@@ -1,6 +1,5 @@
-import {extend} from '../../utils/helpers';
+import {extend, wtwLocalStorage} from '../../utils/helpers';
 import history from '../../history';
-import {AppRoute} from '../../consts';
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -69,6 +68,7 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
+        wtwLocalStorage.setAuthStatus(AuthorizationStatus.AUTH);
       })
       .catch((err) => {
         throw err;
@@ -83,7 +83,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-        history.push(AppRoute.MAIN);
+        wtwLocalStorage.setAuthStatus(AuthorizationStatus.AUTH);
+        history.push(wtwLocalStorage.getLastUrl());
       });
   },
 };

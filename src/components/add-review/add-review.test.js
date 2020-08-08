@@ -17,6 +17,7 @@ it(`Render AddReview Page`, () => {
     [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
     [NameSpace.USER]: extend(TEST_DATA.initialStoreUserState, {
       authorizationStatus: AuthorizationStatus.AUTH,
+      userData: {avatarUrl: `/wtw/test.jpg`}
     })
   });
 
