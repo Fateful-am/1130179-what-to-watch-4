@@ -3,8 +3,10 @@ import renderer from 'react-test-renderer';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import MoviesList from './movies-list';
-import {TEST_DATA} from '../../utils/test-data';
+import {MOVIES, TEST_DATA} from '../../utils/test-data';
 import NameSpace from '../../reducer/name-space';
+import {Router} from "react-router-dom";
+import history from '../../history';
 
 const mockStore = configureStore([]);
 
@@ -16,7 +18,9 @@ it(`Render Movies List`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MoviesList />
+          <Router history={history}>
+            <MoviesList renderedMovies={MOVIES.slice(0, 4)} />
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};

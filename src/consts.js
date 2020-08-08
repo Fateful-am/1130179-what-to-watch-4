@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 export const START_MOVIE_COUNT = 8;
-export const PROMO_MOCK_INDEX = 8;
 export const PREVIEW_MOVIE_DELAY = 1000;
 export const SHORT_ACTORS_LIST_COUNT = 4;
 export const MOVIE_REVIEWS_COLUMN_COUNT = 2;
@@ -12,8 +11,29 @@ export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 400;
 export const REVIEW_STARS_COUNT = 5;
 export const HOST_NAME = `https://4.react.pages.academy`;
+export const MOVIE_NOT_FOUND_MESSAGE = `Sorry... Movie not found.`;
+
+export const StoreParam = {
+  PREFIX: `wtw-localstorage`,
+  VERSION: `v1`,
+};
+
+export const AppRoute = {
+  MAIN: `/`,
+  SIGN_IN: `/login`,
+  MY_LIST: `/mylist`,
+  FILM: `/films`,
+  ADD_REVIEW: `/films/:id/review`,
+  PLAYER: `/player`,
+};
+
+export const MovieStatus = {
+  FAVORITE: 1,
+  NOT_FAVORITE: 0,
+};
 
 export const EMPTY_PROMO_MOVIE = {
+  id: -1,
   backgroundImage: ``,
   title: ``,
   posterImage: ``,
@@ -22,14 +42,6 @@ export const EMPTY_PROMO_MOVIE = {
   videoLink: ``,
   previewImage: ``,
   previewVideoLink: ``,
-};
-
-export const PageKind = {
-  MAIN: `main`,
-  MOVIE_PAGE: `moviePage`,
-  PLAYER: `player`,
-  SIGN_IN: `signIn`,
-  ADD_REVIEW: `addReview`,
 };
 
 export const MoviePageTabNames = {
@@ -79,6 +91,6 @@ export const MoviePropTypes = {
       date: PropTypes.instanceOf(Date),
       score: PropTypes.number.isRequired,
     })).isRequired
-  }).isRequired
+  })
 };
 

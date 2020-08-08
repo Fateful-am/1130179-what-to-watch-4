@@ -1,5 +1,4 @@
 import {reducer, ActionCreator, ActionType, AuthorizationStatus, Operation} from './user.js';
-import {ActionType as MovieActionType} from '../movie/movie';
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../api';
 
@@ -92,6 +91,11 @@ describe(`User operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(2);
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.REQUIRED_AUTHORIZATION,
+          payload: AuthorizationStatus.AUTH,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SET_USERDATA,
           payload: {
             id: 1,
@@ -99,11 +103,6 @@ describe(`User operation work correctly`, () => {
             name: `Oliver.conner`,
             avatarUrl: `img/1.png`,
           },
-        });
-
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.REQUIRED_AUTHORIZATION,
-          payload: AuthorizationStatus.AUTH,
         });
       });
   });
@@ -127,7 +126,7 @@ describe(`User operation work correctly`, () => {
 
     return loginChecker(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_USERDATA,
           payload: {
@@ -141,11 +140,6 @@ describe(`User operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.REQUIRED_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
-        });
-
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: MovieActionType.GOTO_PREVIOUS_PAGE,
-          payload: null,
         });
       });
   });

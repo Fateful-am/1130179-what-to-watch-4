@@ -4,8 +4,9 @@ exports[`Render MovieCardButtons 1`] = `
 <div
   className="movie-card__buttons"
 >
-  <button
+  <a
     className="btn btn--play movie-card__button"
+    href="/player/8"
     onClick={[Function]}
     type="button"
   >
@@ -25,7 +26,7 @@ exports[`Render MovieCardButtons 1`] = `
     <span>
       Play
     </span>
-  </button>
+  </a>
   <button
     className="btn btn--list movie-card__button"
     onClick={[Function]}
@@ -51,8 +52,9 @@ exports[`Render MovieCardButtons with AddReviewButton 1`] = `
 <div
   className="movie-card__buttons"
 >
-  <button
+  <a
     className="btn btn--play movie-card__button"
+    href="/player/8"
     onClick={[Function]}
     type="button"
   >
@@ -72,7 +74,7 @@ exports[`Render MovieCardButtons with AddReviewButton 1`] = `
     <span>
       Play
     </span>
-  </button>
+  </a>
   <button
     className="btn btn--list movie-card__button"
     onClick={[Function]}

@@ -2,44 +2,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AuthorizationStatus} from '../../reducer/user/user';
+import {AppRoute} from '../../consts';
+import {Link} from 'react-router-dom';
 import {HOST_NAME} from '../../consts';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
-import {ActionCreator} from '../../reducer/movie/movie';
+import history from '../../history';
 
 const UserStatus = (props) => {
-  const {authorizationStatus, avatarUrl, onSignInClick} = props;
+  const {authorizationStatus, avatarUrl} = props;
 
-  const renderAvatar = (src, onClick) => {
+  const renderAvatar = (onClick) => {
     return (
       <div
         className="user-block__avatar"
         onClick={onClick}
       >
-        <img src={src} alt="User avatar" width="63" height="63"/>
+        {avatarUrl && <img src={`${HOST_NAME}${avatarUrl}`} alt="User avatar" width="63" height="63"/>}
       </div>
     );
   };
 
-  const renderSignIn = (onClick) => {
+  const renderSignIn = () => {
     const handleLinkClick = (evt) => {
       evt.preventDefault();
-      onClick();
+      history.push(AppRoute.SIGN_IN);
     };
 
     return (
-      <a
-        href="#"
+      <Link
+        to={AppRoute.SIGN_IN}
         className="user-block__link"
         onClick={handleLinkClick}
       >
         Sign in
-      </a>
+      </Link>
     );
   };
 
   const userLoginState = authorizationStatus === AuthorizationStatus.AUTH
-    ? renderAvatar(`${HOST_NAME}${avatarUrl}`, ()=>{})
-    : renderSignIn(onSignInClick);
+    ? renderAvatar(()=>{})
+    : renderSignIn();
 
   return (
     <div className="user-block">
@@ -51,7 +53,6 @@ const UserStatus = (props) => {
 UserStatus.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string,
-  onSignInClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -61,12 +62,5 @@ const mapStateToProps = (state) => {
   });
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSignInClick() {
-    dispatch(ActionCreator.signIn());
-  },
-
-});
-
 export {UserStatus};
-export default connect(mapStateToProps, mapDispatchToProps)(UserStatus);
+export default connect(mapStateToProps)(UserStatus);

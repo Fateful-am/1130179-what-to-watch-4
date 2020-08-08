@@ -2,40 +2,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import VideoPlayer from '../video-player/video-player.jsx';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../consts';
+import {pushHistory} from '../../utils/helpers';
 
 const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
 const MovieCard = (props) => {
-  const {id, title, genre, previewImage, previewVideoLink, onClick} = props;
+  const {title, previewImage, previewVideoLink, movieId} = props;
 
+  const historyPushUrl = `${AppRoute.FILM}/${movieId}`;
   const handleClick = (evt) => {
     evt.preventDefault();
-    onClick(id, genre);
+    pushHistory(historyPushUrl);
   };
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      id={`mc-${id}`}
       onClick={handleClick}
     >
-      <VideoPlayerWrapped
-        previewImage={previewImage}
-        previewVideoLink={previewVideoLink}
-      />
+      <Link to={historyPushUrl}>
+        <VideoPlayerWrapped
+          previewImage={previewImage}
+          previewVideoLink={previewVideoLink}
+        />
+      </Link>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="#">{title}</a>
+        <Link
+          to={historyPushUrl}
+          className="small-movie-card__link"
+        >
+          {title}
+        </Link>
       </h3>
     </article>
   );
 };
 
 MovieCard.propTypes = {
-  id: PropTypes.number.isRequired,
+  movieId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
   previewImage: PropTypes.string.isRequired,
   previewVideoLink: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default React.memo(MovieCard);

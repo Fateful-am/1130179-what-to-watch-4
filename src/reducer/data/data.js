@@ -1,5 +1,5 @@
-import {extend} from '../../utils/helpers.js';
-import {ActionCreator as MovieActionCreator} from '../movie/movie';
+import {extend, pushHistory} from '../../utils/helpers.js';
+import {AppRoute} from '../../consts';
 
 const initialState = {
   promoMovieId: -1,
@@ -10,6 +10,7 @@ const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  SET_MOVIE_STATUS: `SET_MOVIE_STATUS`,
 };
 
 const ActionCreator = {
@@ -33,6 +34,13 @@ const ActionCreator = {
       payload: comments,
     };
   },
+
+  setMoviesStatus: (status) => {
+    return {
+      type: ActionType.SET_MOVIE_STATUS,
+      payload: status,
+    };
+  }
 };
 
 const getRatingLevel = (score) => {
@@ -84,6 +92,7 @@ export const convertToLocalMovieData = (serverMovieData) => {
     starring: serverMovieData[`starring`].join(`, `),
     runTime: serverMovieData[`run_time`],
     reviews: [],
+    isFavorite: serverMovieData[`is_favorite`],
   };
 };
 
@@ -115,7 +124,7 @@ const Operation = {
           movieId: reviewData.movieId,
           comments: convertToLocalReviews(response.data),
         }));
-        dispatch(MovieActionCreator.gotoPreviousPage());
+        pushHistory(`${AppRoute.FILM}/${reviewData.movieId}`);
       });
   },
 
@@ -128,6 +137,16 @@ const Operation = {
         }));
       });
   },
+
+  changeMovieStatus: (movieId, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${movieId}/${status}`)
+      .then((response) => {
+        dispatch(ActionCreator.setMoviesStatus([{
+          movieId,
+          status: response.data[`is_favorite`],
+        }]));
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -156,6 +175,24 @@ const reducer = (state = initialState, action) => {
           return newMovies;
         }, [])
       });
+
+    case ActionType.SET_MOVIE_STATUS:
+      return extend(state, {
+        movies: state.movies.reduce((newMovies, currentMovie) => {
+          const movieStatuses = action.payload.filter((movieStatus) => movieStatus.movieId === currentMovie.id);
+
+          if (movieStatuses.length === 1) {
+            newMovies.push(extend(currentMovie, {
+              isFavorite: movieStatuses[0].status,
+            }));
+          } else {
+            newMovies.push(currentMovie);
+          }
+
+          return newMovies;
+        }, [])
+      });
+
   }
 
   return state;

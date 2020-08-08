@@ -1,31 +1,51 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
-import {MoviePageTabNames, MoviePropTypes, MoviePageTabClassNames} from '../../consts.js';
+import {
+  MoviePageTabNames,
+  MoviePageTabClassNames,
+  MoviePropTypes,
+  AppRoute,
+  MOVIE_NOT_FOUND_MESSAGE
+} from '../../consts.js';
 import Tabs from '../tabs/tabs.jsx';
 import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
 import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
 import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
 import MoviesList from '../movies-list/movies-list.jsx';
 import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
-import {getCurrentMovie} from '../../reducer/data/selectors';
+import {getMovies} from '../../reducer/data/selectors';
 import UserStatus from '../user-status/user-status.jsx';
 import Logo from '../logo/logo.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {ActionCreator} from '../../reducer/movie/movie';
 import {Operation as DataOperation} from '../../reducer/data/data.js';
-import {AuthorizationStatus} from '../../reducer/user/user';
+import {getMovieById, pushHistory} from '../../utils/helpers';
+import {getLikeThisMoviesExceptCurrent} from '../../reducer/movie/selectors';
+import {Link} from 'react-router-dom';
 
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
 
+    this._needReviewsLoad = true;
+    this._needMovieLoad = true;
+
     this._handleAddReviewClick = this._handleAddReviewClick.bind(this);
-
   }
-  _renderCurrentMoviePage() {
-    const {movie, activeTab} = this.props;
 
+  _getMovieId(props) {
+    return props.match.params.id;
+  }
+
+  _getCurrentMovie() {
+    const movie = getMovieById(this.props.movies, this._getMovieId(this.props));
+    return movie.id > -1 ? movie : null;
+  }
+
+  _renderCurrentMoviePage() {
+    const {activeTab} = this.props;
+    const movie = this._getCurrentMovie();
     switch (activeTab) {
       case MoviePageTabNames.DETAILS:
         return <MoviePageDetails movie={movie} />;
@@ -36,51 +56,149 @@ class MoviePage extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.movie.id !== this.props.movie.id) {
-      this.props.setDefaultTab();
+  _checkMovie() {
+    const {onLoadReviews, onMovieLoad} = this.props;
+    const movie = this._getCurrentMovie();
+    if (movie) {
+      if (this._needMovieLoad) {
+        onMovieLoad(movie.genre);
+        this._needMovieLoad = false;
+      }
+
+      if (movie.reviews.length === 0 && this._needReviewsLoad) {
+        onLoadReviews(movie.id);
+        this._needReviewsLoad = false;
+      }
     }
   }
-
   componentDidMount() {
-    const {movie, onLoadReviews} = this.props;
-    if (movie.reviews.length === 0) {
-      onLoadReviews(movie.id);
+    this._checkMovie();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this._getMovieId(prevProps) !== this._getMovieId(this.props)) {
+      this.props.setDefaultTab();
     }
+
+    this._checkMovie();
+  }
+
+  _getHistoryPushUrl(movieId) {
+    return AppRoute.ADD_REVIEW.replace(`:id`, movieId);
   }
 
   _handleAddReviewClick(evt) {
-    const {onAddReviewClick} = this.props;
     evt.preventDefault();
-    onAddReviewClick();
+    pushHistory(this._getHistoryPushUrl(this._getMovieId(this.props)));
   }
 
-  _renderAddReviewClick() {
-    const {authorizationStatus} = this.props;
-    if (authorizationStatus === AuthorizationStatus.AUTH) {
-      return (
-        <a
-          href="#"
-          className="btn movie-card__button"
-          onClick={this._handleAddReviewClick}
-        >
+  _renderAddReviewClick(movieId) {
+    return (
+      <Link
+        to={this._getHistoryPushUrl(movieId)}
+        href="#"
+        className="btn movie-card__button"
+        onClick={this._handleAddReviewClick}
+      >
           Add review
-        </a>
+      </Link>
+    );
+  }
+
+  _renderBackgroundAndTitle() {
+    const movie = this._getCurrentMovie();
+    if (movie) {
+      return (
+        <img src={movie.backgroundImage} alt={movie.title}/>
       );
     }
+
     return null;
   }
 
-  render() {
-    const {movie, activeTab, onTabClick} = this.props;
+  _renderMovieCardDesc() {
+    const movie = this._getCurrentMovie();
+    if (movie) {
+      return (
+        <div className="movie-card__desc">
+          <h2 className="movie-card__title">{movie.title}</h2>
+          <p className="movie-card__meta">
+            <span className="movie-card__genre">{movie.genre}</span>
+            <span className="movie-card__year">{movie.released}</span>
+          </p>
+
+          <MovieCardButtons
+            movieId={movie.id}
+          >
+            {this._renderAddReviewClick(movie.id)}
+          </MovieCardButtons>
+        </div>
+      );
+    }
+
+    return (
+      <div className="movie-card__desc">
+        <h2 className="movie-card__title">{MOVIE_NOT_FOUND_MESSAGE}</h2>
+      </div>
+    );
+  }
+
+  _renderMovieCardInfo() {
+    const movie = this._getCurrentMovie();
+    const {activeTab, onTabClick} = this.props;
     const tabs = Object.values(MoviePageTabNames);
 
+    if (movie) {
+      return (
+        <div className="movie-card__info">
+          <div className="movie-card__poster movie-card__poster--big">
+            <img src={movie.posterImage} alt={`${movie.title} poster`} width="218" height="327"/>
+          </div>
+
+          <div className="movie-card__desc">
+            <nav className="movie-nav movie-card__nav">
+              <Tabs
+                activeTab={activeTab}
+                tabs={tabs}
+                className={MoviePageTabClassNames}
+                onTabClick={onTabClick}
+              />
+            </nav>
+            {this._renderCurrentMoviePage()}
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
+  _renderLikeThisSection() {
+    const movie = this._getCurrentMovie();
+    const {likeThisMovies} = this.props;
+    if (movie) {
+      return (
+        <section className="catalog catalog--like-this">
+          <MoviesList
+            renderedMovies={likeThisMovies}
+          >
+            <h2 className="catalog__title">More like this</h2>
+          </MoviesList>
+        </section>
+      );
+    }
+
+    return null;
+
+  }
+
+  render() {
     return (
       <>
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
             <div className="movie-card__bg">
-              <img src={movie.backgroundImage} alt={movie.title}/>
+              {this._renderBackgroundAndTitle()}
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -93,50 +211,17 @@ class MoviePage extends PureComponent {
             </header>
 
             <div className="movie-card__wrap">
-              <div className="movie-card__desc">
-                <h2 className="movie-card__title">{movie.title}</h2>
-                <p className="movie-card__meta">
-                  <span className="movie-card__genre">{movie.genre}</span>
-                  <span className="movie-card__year">{movie.released}</span>
-                </p>
-
-                <MovieCardButtons>
-                  {this._renderAddReviewClick()}
-                </MovieCardButtons>
-
-              </div>
+              {this._renderMovieCardDesc()}
             </div>
           </div>
 
           <div className="movie-card__wrap movie-card__translate-top">
-            <div className="movie-card__info">
-              <div className="movie-card__poster movie-card__poster--big">
-                <img src={movie.posterImage} alt={`${movie.title} poster`} width="218"
-                  height="327"/>
-              </div>
-
-              <div className="movie-card__desc">
-                <nav className="movie-nav movie-card__nav">
-                  <Tabs
-                    activeTab={activeTab}
-                    tabs={tabs}
-                    className={MoviePageTabClassNames}
-                    onTabClick={onTabClick}
-                  />
-                </nav>
-                {this._renderCurrentMoviePage()}
-              </div>
-            </div>
+            {this._renderMovieCardInfo()}
           </div>
         </section>
 
         <div className="page-content">
-          <section className="catalog catalog--like-this">
-            <h2 className="catalog__title">More like this</h2>
-
-            <MoviesList />
-
-          </section>
+          {this._renderLikeThisSection()}
 
           <footer className="page-footer">
             <Logo inFooter={true}/>
@@ -153,24 +238,33 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  movie: MoviePropTypes.movie,
+  movies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
   activeTab: PropTypes.string.isRequired,
+  onMovieLoad: PropTypes.func.isRequired,
   onTabClick: PropTypes.func.isRequired,
-  onAddReviewClick: PropTypes.func.isRequired,
   onLoadReviews: PropTypes.func.isRequired,
   setDefaultTab: PropTypes.func,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  likeThisMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
+
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const {match} = props;
   return ({
     authorizationStatus: getAuthorizationStatus(state),
-    movie: getCurrentMovie(state),
+    movies: getMovies(state),
+    likeThisMovies: getLikeThisMoviesExceptCurrent(state, match.params.id),
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onAddReviewClick() {
-    dispatch(ActionCreator.addReview());
+  onMovieLoad(genre) {
+    dispatch(ActionCreator.changeMovieGenre(genre));
   },
 
   onLoadReviews(movieId) {

@@ -1,16 +1,21 @@
 import moment from 'moment';
-import {EMPTY_PROMO_MOVIE} from '../consts';
+import {EMPTY_PROMO_MOVIE, StoreParam} from '../consts';
+import LocalStorage from './local-storage';
+import history from '../history';
 
-export const convertToImageName = (movieName) => {
-  return movieName.toLowerCase().split(` `).join(`-`).split(`:`).join(``);
-};
+export const wtwLocalStorage = new LocalStorage(`${StoreParam.PREFIX}-${StoreParam.VERSION}`, window.localStorage);
 
 export const getMovieById = (movies, id) => {
-  const movieIndex = movies.findIndex((movie) => movie.id === id);
+  const movieIndex = movies.findIndex((movie) => String(movie.id) === String(id));
   if (movieIndex > -1) {
     return movies[movieIndex];
   }
   return EMPTY_PROMO_MOVIE;
+};
+
+export const pushHistory = (url) => {
+  wtwLocalStorage.setLastUrl(url);
+  history.push(url);
 };
 
 export const formatDurationInMinutes = (duration) => {
@@ -33,26 +38,3 @@ export const getSortedUniqueObjectValues = (arrayOfObjects, key) => {
   return [...new Set(Array.from(arrayOfObjects, (it) => it[key]))]
     .sort();
 };
-
-export const smallMovieCards = [
-  `Fantastic Beasts: The Crimes of Grindelwald`,
-  `Bohemian Rhapsody`,
-  `Macbeth`,
-  `Aviator`,
-  `We need to talk about Kevin`,
-  `What We Do in the Shadows`,
-  `Revenant`,
-  `Johnny English`,
-  `Shutter Island`,
-  `Pulp Fiction`,
-  `No Country for Old Men`,
-  `Snatch`,
-  `Moonrise Kingdom`,
-  `Seven Years in Tibet`,
-  `Midnight Special`,
-  `War of the Worlds`,
-  `Dardjeeling Limited`,
-  `Orlando`,
-  `Mindhunter`,
-  `Midnight Special`
-];

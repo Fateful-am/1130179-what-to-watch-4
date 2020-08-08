@@ -8,8 +8,14 @@ import reducer from './reducer/reducer.js';
 import {Operation as DataOperation} from './reducer/data/data.js';
 import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from './reducer/user/user.js';
 import {createAPI} from './api.js';
+import {wtwLocalStorage} from './utils/helpers';
 
 const onUnauthorized = () => {
+  const localStorageAuthStatus = wtwLocalStorage.getAuthStatus();
+  if (localStorageAuthStatus === AuthorizationStatus.AUTH) {
+    store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+  }
+  wtwLocalStorage.setAuthStatus(AuthorizationStatus.NO_AUTH);
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
 };
 
@@ -23,9 +29,9 @@ const store = createStore(
     )
 );
 
+store.dispatch(UserOperation.checkAuth());
 store.dispatch(DataOperation.loadMovies());
 store.dispatch(DataOperation.loadPromo());
-store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

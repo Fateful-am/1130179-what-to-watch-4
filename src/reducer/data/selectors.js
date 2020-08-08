@@ -1,5 +1,4 @@
 import NameSpace from '../name-space.js';
-import {getCurrentMovieId} from '../movie/selectors';
 import {getMovieById, getSortedUniqueObjectValues} from '../../utils/helpers';
 import {ALL_GENRES, MAX_GENRE_COUNT} from '../../consts';
 
@@ -9,10 +8,6 @@ export const getMovies = (state)=> {
 
 export const getPromoMovieId = (state) => {
   return state[NameSpace.DATA].promoMovieId;
-};
-
-export const getCurrentMovie = (state) => {
-  return getMovieById(getMovies(state), getCurrentMovieId(state));
 };
 
 export const getPromoMovie = (state) => {

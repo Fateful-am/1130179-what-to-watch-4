@@ -1,136 +1,51 @@
 import {extend} from "../../utils/helpers.js";
-import {PageKind, ALL_GENRES, START_MOVIE_COUNT, MOVIE_LIKE_THIS_COUNT} from '../../consts';
+import {ALL_GENRES, START_MOVIE_COUNT} from '../../consts';
 
 const initialState = {
-  genre: ALL_GENRES,
-  currentPage: PageKind.MAIN,
-  currentMovieId: -1,
-  previousPage: PageKind.MAIN,
-  previousMovieId: -1,
-  renderedMovieCount: START_MOVIE_COUNT,
+  movieGenre: ALL_GENRES,
+  mainPageGenre: ALL_GENRES,
+  mainPageMovieCardCount: START_MOVIE_COUNT,
 };
 
 const ActionType = {
-  CHANGE_GENRE: `CHANGE_GENRE`,
-  SHOW_MOVIE_DETAIL: `SHOW_MOVIE_DETAIL`,
+  CHANGE_MOVIE_GENRE: `CHANGE_MOVIE_GENRE`,
+  CHANGE_MAIN_PAGE_GENRE: `CHANGE_MAIN_PAGE_GENRE`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
-  PLAY_MOVIE: `PLAY_MOVIE`,
-  EXIT_PLAYER: `EXIT_PLAYER`,
-  SIGN_IN: `SIGN_IN`,
-  GOTO_MAIN: `GOTO_MAIN`,
-  GOTO_PREVIOUS_PAGE: `GOTO_PREVIOUS_PAGE`,
-  ADD_REVIEW: `ADD_REVIEW`,
 };
 
 const ActionCreator = {
-  changeGenre: (genre) => ({
-    type: ActionType.CHANGE_GENRE,
+  changeMovieGenre: (genre) => ({
+    type: ActionType.CHANGE_MOVIE_GENRE,
     payload: genre,
   }),
 
-  showMovieDetail: (movieId) => ({
-    type: ActionType.SHOW_MOVIE_DETAIL,
-    payload: movieId,
+  changeMainPageGenre: (genre) => ({
+    type: ActionType.CHANGE_MAIN_PAGE_GENRE,
+    payload: genre,
   }),
 
   showMoreMovies: (renderedMovieCount) => ({
     type: ActionType.SHOW_MORE_MOVIES,
     payload: renderedMovieCount + START_MOVIE_COUNT,
   }),
-
-  playMovie: (movieIdForPlay) => ({
-    type: ActionType.PLAY_MOVIE,
-    payload: movieIdForPlay,
-  }),
-
-  exitPlayer: () => ({
-    type: ActionType.EXIT_PLAYER,
-    payload: null,
-  }),
-
-  signIn: () => ({
-    type: ActionType.SIGN_IN,
-    payload: null,
-  }),
-
-  gotoMain: () => ({
-    type: ActionType.GOTO_MAIN,
-    payload: null,
-  }),
-
-  gotoPreviousPage: () => ({
-    type: ActionType.GOTO_PREVIOUS_PAGE,
-    payload: null,
-  }),
-
-  addReview: () => ({
-    type: ActionType.ADD_REVIEW,
-    payload: null,
-  }),
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_GENRE:
+    case ActionType.CHANGE_MOVIE_GENRE:
       return extend(state, {
-        genre: action.payload,
-        renderedMovieCount: START_MOVIE_COUNT,
+        movieGenre: action.payload,
       });
 
-    case ActionType.SHOW_MOVIE_DETAIL:
+    case ActionType.CHANGE_MAIN_PAGE_GENRE:
       return extend(state, {
-        previousPage: state.currentPage,
-        previousMovieId: state.currentMovieId,
-        currentPage: PageKind.MOVIE_PAGE,
-        currentMovieId: action.payload,
-        renderedMovieCount: MOVIE_LIKE_THIS_COUNT,
+        mainPageGenre: action.payload,
+        mainPageMovieCardCount: START_MOVIE_COUNT,
       });
 
     case ActionType.SHOW_MORE_MOVIES:
       return extend(state, {
-        renderedMovieCount: action.payload
-      });
-
-    case ActionType.PLAY_MOVIE:
-      return extend(state, {
-        previousPage: state.currentPage,
-        previousMovieId: state.currentMovieId,
-        currentPage: PageKind.PLAYER,
-        currentMovieId: action.payload,
-      });
-
-    case ActionType.EXIT_PLAYER:
-      return extend(state, {
-        previousPage: state.currentPage,
-        previousMovieId: state.currentMovieId,
-        currentPage: state.previousPage,
-        currentMovieId: state.previousMovieId,
-      });
-
-    case ActionType.SIGN_IN:
-      return extend(state, {
-        previousPage: state.currentPage,
-        currentPage: PageKind.SIGN_IN,
-      });
-
-    case ActionType.GOTO_MAIN:
-      return extend(state, {
-        previousPage: state.currentPage,
-        currentPage: PageKind.MAIN,
-        genre: ALL_GENRES,
-        renderedMovieCount: START_MOVIE_COUNT,
-      });
-
-    case ActionType.GOTO_PREVIOUS_PAGE:
-      return extend(state, {
-        previousPage: state.currentPage,
-        currentPage: state.previousPage,
-      });
-
-    case ActionType.ADD_REVIEW:
-      return extend(state, {
-        previousPage: state.currentPage,
-        currentPage: PageKind.ADD_REVIEW,
+        mainPageMovieCardCount: action.payload
       });
   }
 

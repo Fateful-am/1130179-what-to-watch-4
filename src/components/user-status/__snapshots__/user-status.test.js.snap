@@ -24,7 +24,7 @@ exports[`Render UserStatus with NO_AUTH 1`] = `
 >
   <a
     className="user-block__link"
-    href="#"
+    href="/login"
     onClick={[Function]}
   >
     Sign in

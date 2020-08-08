@@ -28,6 +28,8 @@ exports[`Render AddReview Page 1`] = `
       >
         <a
           className="logo__link"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -57,7 +59,7 @@ exports[`Render AddReview Page 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="#"
+              href="/films/8"
               onClick={[Function]}
             >
               The Grand Budapest Hotel
@@ -84,7 +86,7 @@ exports[`Render AddReview Page 1`] = `
           <img
             alt="User avatar"
             height="63"
-            src="https://4.react.pages.academyundefined"
+            src="https://4.react.pages.academy/wtw/test.jpg"
             width="63"
           />
         </div>

@@ -4,12 +4,15 @@ import withMoviePage from './with-movie-page';
 import {MoviePage} from '../../components/movie-page/movie-page';
 import configureStore from "redux-mock-store";
 
-import {TEST_DATA, testMovieCard} from '../../utils/test-data';
+import {MOVIES, TEST_DATA, testMovieCard} from '../../utils/test-data';
 import {Provider} from 'react-redux';
 import {extend} from '../../utils/helpers';
 import {MOVIE_LIKE_THIS_COUNT} from '../../consts';
 import NameSpace from '../../reducer/name-space';
 import {AuthorizationStatus} from '../../reducer/user/user';
+import {Router} from "react-router-dom";
+import history from '../../history';
+
 
 const mockStore = configureStore([]);
 
@@ -30,13 +33,20 @@ describe(`withMoviePage is rendered correctly:`, () => {
     const MockComponent = () => {
       return (
         <Provider store={store}>
-          <MoviePage
-            authorizationStatus={AuthorizationStatus.AUTH}
-            movie={testMovieCard}
-            activeTab={`Overview`}
-            onTabClick={() => {}}
-            onAddReviewClick={() => {}}
-          />
+          <Router history={history}>
+            <MoviePage
+              authorizationStatus={AuthorizationStatus.AUTH}
+              movie={testMovieCard}
+              activeTab={`Overview`}
+              onTabClick={() => {}}
+              onAddReviewClick={() => {}}
+              onLoadReviews={() => {}}
+              onMovieLoad={() => {}}
+              likeThisMovies={MOVIES.slice(0, 4)}
+              match={{params: {id: `8`}}}
+              movies={MOVIES}
+            />
+          </Router>
         </Provider>
       );
     };
@@ -60,13 +70,20 @@ describe(`withMoviePage is rendered correctly:`, () => {
     const MockComponent = () => {
       return (
         <Provider store={store}>
-          <MoviePage
-            authorizationStatus={AuthorizationStatus.NO_AUTH}
-            movie={testMovieCard}
-            activeTab={`Overview`}
-            onTabClick={() => {}}
-            onAddReviewClick={() => {}}
-          />
+          <Router history={history}>
+            <MoviePage
+              authorizationStatus={AuthorizationStatus.AUTH}
+              movie={testMovieCard}
+              activeTab={`Overview`}
+              onTabClick={() => {}}
+              onAddReviewClick={() => {}}
+              onLoadReviews={() => {}}
+              onMovieLoad={() => {}}
+              likeThisMovies={MOVIES.slice(0, 4)}
+              match={{params: {id: `8`}}}
+              movies={MOVIES}
+            />
+          </Router>
         </Provider>
       );
     };

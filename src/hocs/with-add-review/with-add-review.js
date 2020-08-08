@@ -1,11 +1,17 @@
 import React, {createRef, Fragment, PureComponent} from 'react';
 import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, MoviePropTypes, REVIEW_STARS_COUNT} from '../../consts';
 import PropTypes from 'prop-types';
+import {getMovies} from '../../reducer/data/selectors';
+import {connect} from 'react-redux';
+import {getMovieById} from '../../utils/helpers';
 
 const withAddReview = (Component) => {
   class WithAddReview extends PureComponent {
     constructor(props) {
       super(props);
+
+      this._needMovieLoad = true;
+      this._movieId = -1;
 
       this._handlerReviewTextInput = this._handlerReviewTextInput.bind(this);
       this._handleFormSubmit = this._handleFormSubmit.bind(this);
@@ -24,6 +30,28 @@ const withAddReview = (Component) => {
         enableByReviewLength: false,
         enableByStarsScore: false,
       };
+    }
+
+    _getMovieId() {
+      return this.props.computedMatch.params.id;
+    }
+
+    _getCurrentMovie() {
+      const movie = getMovieById(this.props.movies, this._getMovieId());
+      return movie.id > -1 ? movie : null;
+    }
+
+    _checkMovie() {
+      const movie = this._getCurrentMovie();
+      if (movie && this._needMovieLoad) {
+        this._needMovieLoad = false;
+        this._movieId = movie.id;
+        this.setFormAccessibility(true);
+      }
+
+      if (!movie) {
+        this.setFormAccessibility(false);
+      }
     }
 
     _handleStarChange(evt) {
@@ -52,8 +80,9 @@ const withAddReview = (Component) => {
       });
 
       const reviewText = this._reviewTextRef.current;
+      const movie = this._getCurrentMovie();
       this.props.onSubmit({
-        movieId: this.props.movie.id,
+        movieId: movie.id,
         rating: starRefChecked[0].current.value,
         comment: reviewText.value,
       });
@@ -93,6 +122,8 @@ const withAddReview = (Component) => {
       });
 
       this.setFormAccessibility(true);
+
+      this._checkMovie();
     }
 
     componentWillUnmount() {
@@ -104,16 +135,19 @@ const withAddReview = (Component) => {
     }
 
     componentDidUpdate() {
+      this._checkMovie();
       this._setPostButtonEnable();
     }
 
     _renderStars() {
-      const {movie} = this.props;
+      const movie = this._getCurrentMovie();
       const stars = [];
+      const movieId = movie ? movie.id : `no-id`;
       for (let i = 1; i <= REVIEW_STARS_COUNT; i++) {
         stars.push(
-            <Fragment key={`starKey-${movie.id}-${i}`}>
-              <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} ref={this._starRefs[i - 1]}/>
+            <Fragment key={`starKey-${movieId}-${i}`}>
+              <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i}
+                ref={this._starRefs[i - 1]}/>
               <label className="rating__label" htmlFor={`star-${i}`}>`Rating ${i}`</label>
             </Fragment>
         );
@@ -123,9 +157,11 @@ const withAddReview = (Component) => {
     }
 
     render() {
+      const movie = this._getCurrentMovie();
       return (
         <Component
           {...this.props}
+          movie={movie}
         >
           <form
             action="#" className="add-review__form"
@@ -157,11 +193,22 @@ const withAddReview = (Component) => {
   }
 
   WithAddReview.propTypes = {
-    movie: MoviePropTypes.movie,
+    movies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
+    computedMatch: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
 
-  return WithAddReview;
+  const mapStateToProps = (state) => {
+    return ({
+      movies: getMovies(state),
+    });
+  };
+
+  return connect(mapStateToProps)(WithAddReview);
 };
 
 export default withAddReview;

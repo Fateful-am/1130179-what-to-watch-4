@@ -1,5 +1,5 @@
-import {extend} from '../../utils/helpers';
-import {ActionCreator as MovieActionCreator} from '../movie/movie';
+import {extend, wtwLocalStorage} from '../../utils/helpers';
+import history from '../../history';
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -66,8 +66,9 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then((response) => {
-        dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
+        wtwLocalStorage.setAuthStatus(AuthorizationStatus.AUTH);
       })
       .catch((err) => {
         throw err;
@@ -82,7 +83,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(MovieActionCreator.gotoPreviousPage());
+        wtwLocalStorage.setAuthStatus(AuthorizationStatus.AUTH);
+        history.push(wtwLocalStorage.getLastUrl());
       });
   },
 };

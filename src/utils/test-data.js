@@ -1,4 +1,4 @@
-import {ALL_GENRES, PageKind, START_MOVIE_COUNT} from '../consts';
+import {ALL_GENRES, START_MOVIE_COUNT} from '../consts';
 import {AuthorizationStatus} from '../reducer/user/user';
 
 export const MOVIES = [
@@ -38,6 +38,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: true,
   },
   {
     id: 1,
@@ -75,6 +76,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -113,6 +115,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: true,
 
   },
   {
@@ -151,6 +154,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -189,6 +193,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -227,6 +232,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -265,6 +271,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
+    isFavorite: true,
 
   },
   {
@@ -303,6 +310,7 @@ export const MOVIES = [
         score: 8.0,
       },
     ],
+    isFavorite: false,
 
   },
   {
@@ -365,6 +373,7 @@ export const MOVIES = [
         score: 7.0,
       },
     ],
+    isFavorite: false,
   },
 ];
 
@@ -428,18 +437,16 @@ const PROMO_MOVIE = {
       score: 7.0,
     },
   ],
+  isFavorite: false,
 };
 
 export const testMovieCard = MOVIES[0];
 
 export const TEST_DATA = {
   initialStoreMovieState: {
-    genre: ALL_GENRES,
-    currentPage: PageKind.MAIN,
-    currentMovieId: -1,
-    previousPage: PageKind.MAIN,
-    previousMovieId: -1,
-    renderedMovieCount: START_MOVIE_COUNT,
+    movieGenre: ALL_GENRES,
+    mainPageGenre: ALL_GENRES,
+    mainPageMovieCardCount: START_MOVIE_COUNT,
   },
   initialStoreDataState: {
     promoMovieId: 8,
@@ -487,6 +494,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
     },
     {
       id: 2,
@@ -524,6 +532,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
     },
     {
       id: 4,
@@ -561,6 +570,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
     },
   ],
   dramaMovies: [
@@ -600,6 +610,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -638,6 +649,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -676,6 +688,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -714,6 +727,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
+      isFavorite: true,
 
     },
     {
@@ -752,6 +766,7 @@ export const TEST_DATA = {
           score: 8.0,
         },
       ],
+      isFavorite: false,
 
     },
     {
@@ -814,6 +829,7 @@ export const TEST_DATA = {
           score: 7.0,
         },
       ],
+      isFavorite: false,
     },
   ],
   promoMovie: PROMO_MOVIE,
