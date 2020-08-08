@@ -55,9 +55,13 @@ class App extends PureComponent {
           >
           </Route>
 
-          <Route exact path={AppRoute.MY_LIST}>
-            <MyList/>
-          </Route>
+          <PrivateRoute exact path={AppRoute.MY_LIST}
+            render={() => {
+              return (
+                <MyList/>
+              );
+            }}
+          />
 
           <PrivateRoute exact path={AppRoute.ADD_REVIEW}
             render={(routeProps) => {

@@ -126,7 +126,7 @@ describe(`User operation work correctly`, () => {
 
     return loginChecker(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_USERDATA,
           payload: {
