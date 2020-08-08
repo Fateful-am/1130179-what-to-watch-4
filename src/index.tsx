@@ -1,13 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {createStore, applyMiddleware, compose} from 'redux';
+import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import App from './components/app/app.jsx';
-import reducer from './reducer/reducer.js';
-import {Operation as DataOperation} from './reducer/data/data.js';
-import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from './reducer/user/user.js';
-import {createAPI} from './api.js';
+import App from './components/app/app';
+import reducer from './reducer/reducer';
+import {Operation as DataOperation} from './reducer/data/data';
+import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from './reducer/user/user';
+import {createAPI} from './api';
 import {wtwLocalStorage} from './utils/helpers';
 
 const onUnauthorized = () => {
@@ -24,9 +25,8 @@ const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
-    compose(
-        applyMiddleware(thunk.withExtraArgument(api)),
-        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+  composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument(api))
     )
 );
 
