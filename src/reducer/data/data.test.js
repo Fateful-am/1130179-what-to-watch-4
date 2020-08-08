@@ -84,6 +84,13 @@ describe(`Action creators work correctly`, () => {
       payload: {test: `testData`},
     });
   });
+
+  it(`ActionCreator for load comments returns correct action`, ()=>{
+    expect(ActionCreator.loadComments({test: `testData`})).toEqual({
+      type: ActionType.LOAD_COMMENTS,
+      payload: {test: `testData`},
+    });
+  });
 });
 
 describe(`Data operation work correctly`, () => {
@@ -156,6 +163,72 @@ describe(`Data operation work correctly`, () => {
             movieId: 1,
             comments: convertToLocalReviews(response),
           },
+        });
+      });
+  });
+
+  it(`Should make a correct API call to POST /favorite/:film_id/:status`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const addReviewer = Operation.changeMovieStatus(1, 1);
+
+    const response = {
+      id: 1,
+      [`is_favorite`]: true,
+    };
+
+    apiMock
+      .onPost(`/favorite/1/1`)
+      .reply(200, response);
+
+    return addReviewer(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_MOVIE_STATUS,
+          payload: [{
+            movieId: 1,
+            status: true,
+          }],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to POST /favorite`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const addReviewer = Operation.loadFavorites();
+
+    const response = [
+      {
+        id: 1,
+        [`is_favorite`]: true,
+      },
+      {
+        id: 2,
+        [`is_favorite`]: false,
+      },
+    ];
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, response);
+
+    return addReviewer(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_MOVIE_STATUS,
+          payload: [
+            {
+              movieId: 1,
+              status: true,
+            },
+            {
+              movieId: 2,
+              status: false,
+            },
+          ],
         });
       });
   });
