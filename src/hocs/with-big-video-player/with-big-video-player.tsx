@@ -1,7 +1,6 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {formatDurationInSeconds, getMovieById, pushHistory} from '../../utils/helpers';
-import {AppRoute, MOVIE_NOT_FOUND_MESSAGE, MoviePropTypes} from '../../consts';
+import {AppRoute, MOVIE_NOT_FOUND_MESSAGE} from '../../consts';
 import {getMovies} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
 
@@ -173,15 +172,6 @@ const withBigVideoPlayer = (Component) => {
       );
     }
   }
-
-  WithBigAudioPlayer.propTypes = {
-    movies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-  };
 
   const mapStateToProps = (state) => {
     return ({

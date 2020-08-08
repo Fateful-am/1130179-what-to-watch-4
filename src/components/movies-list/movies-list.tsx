@@ -1,7 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card';
-import {MoviePropTypes} from '../../consts';
 
 function MoviesList(props) {
   const {renderedMovies, children} = props;
@@ -25,14 +23,5 @@ function MoviesList(props) {
     </>
   );
 }
-
-MoviesList.propTypes = {
-  renderedMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-};
-
 
 export default MoviesList;

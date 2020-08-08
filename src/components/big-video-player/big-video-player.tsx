@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {AppRoute} from '../../consts';
 import {Link} from 'react-router-dom';
 
@@ -79,22 +78,6 @@ const BigVideoPlayer = (props) => {
       </div>
     </div>
   );
-};
-
-BigVideoPlayer.propTypes = {
-  movieId: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  onFullScreenButtonClick: PropTypes.func.isRequired,
-  onExitButtonClick: PropTypes.func.isRequired,
-  progress: PropTypes.number.isRequired,
-  timeElapsed: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
 };
 
 export default BigVideoPlayer;

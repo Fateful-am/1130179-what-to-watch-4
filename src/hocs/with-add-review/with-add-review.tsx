@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, MoviePropTypes, REVIEW_STARS_COUNT} from '../../consts';
-import PropTypes from 'prop-types';
+import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, REVIEW_STARS_COUNT} from '../../consts';
 import {getMovies} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
 import {getMovieById} from '../../utils/helpers';
@@ -191,16 +190,6 @@ const withAddReview = (Component) => {
       );
     }
   }
-
-  WithAddReview.propTypes = {
-    movies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
-    computedMatch: PropTypes.shape({
-      params: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-    onSubmit: PropTypes.func.isRequired,
-  };
 
   const mapStateToProps = (state) => {
     return ({

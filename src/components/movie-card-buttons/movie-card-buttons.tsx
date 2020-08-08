@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getIsFavoriteMovie} from '../../reducer/movie/selectors';
 import {AppRoute, MovieStatus} from '../../consts';
@@ -63,16 +62,6 @@ const MovieCardButtons = (props) => {
     </div>
   );
 };
-
-MovieCardButtons.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  movieId: PropTypes.number.isRequired,
-  movieStatus: PropTypes.number.isRequired,
-  onMyListClick: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ])};
 
 const mapStateToProps = (state, props) => {
   const {movieId} = props;

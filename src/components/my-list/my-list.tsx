@@ -1,7 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {MoviePropTypes} from '../../consts';
 import {getFavoriteMovies} from '../../reducer/movie/selectors';
 import Logo from '../logo/logo';
 import UserStatus from '../user-status/user-status';
@@ -34,10 +32,6 @@ function MyList(props) {
     </div>
   );
 }
-
-MyList.propTypes = {
-  favoriteMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
-};
 
 const mapStateToProps = (state) => {
   return ({

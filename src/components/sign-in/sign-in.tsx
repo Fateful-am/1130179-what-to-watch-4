@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from "prop-types";
 import Logo from '../logo/logo';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {AuthorizationStatus, Operation as UserOperation} from '../../reducer/user/user';
@@ -79,11 +78,6 @@ class SignIn extends React.PureComponent {
     );
   }
 }
-
-SignIn.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => {
   return ({

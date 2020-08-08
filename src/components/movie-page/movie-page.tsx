@@ -1,10 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import PropTypes from "prop-types";
 import {
   MoviePageTabNames,
   MoviePageTabClassNames,
-  MoviePropTypes,
   AppRoute,
   MOVIE_NOT_FOUND_MESSAGE
 } from '../../consts';
@@ -235,23 +233,6 @@ class MoviePage extends React.PureComponent {
     );
   }
 }
-
-MoviePage.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  movies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
-  activeTab: PropTypes.string.isRequired,
-  onMovieLoad: PropTypes.func.isRequired,
-  onTabClick: PropTypes.func.isRequired,
-  onLoadReviews: PropTypes.func.isRequired,
-  setDefaultTab: PropTypes.func,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  likeThisMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
-
-};
 
 const mapStateToProps = (state, props) => {
   const {match} = props;

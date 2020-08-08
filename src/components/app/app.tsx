@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main';
@@ -80,10 +79,6 @@ class App extends React.PureComponent {
     );
   }
 }
-
-App.propTypes = {
-  onReviewFormSubmit: PropTypes.func.isRequired,
-};
 
 const mapDispatchToProps = (dispatch) => ({
   onReviewFormSubmit(reviewData) {

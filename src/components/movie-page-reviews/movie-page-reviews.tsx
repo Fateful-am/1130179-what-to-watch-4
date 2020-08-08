@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MOVIE_REVIEWS_COLUMN_COUNT, MoviePropTypes} from '../../consts';
+import {MOVIE_REVIEWS_COLUMN_COUNT} from '../../consts';
 import moment from 'moment';
 
 const MoviePageReviews = ({movie}) => {
@@ -60,7 +60,5 @@ const MoviePageReviews = ({movie}) => {
     </div>
   );
 };
-
-MoviePageReviews.propTypes = MoviePropTypes;
 
 export default MoviePageReviews;

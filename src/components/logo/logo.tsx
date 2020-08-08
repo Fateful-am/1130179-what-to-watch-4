@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {AppRoute} from '../../consts';
 import {Link} from 'react-router-dom';
 import {pushHistory} from '../../utils/helpers';
@@ -28,10 +27,6 @@ const Logo = (props) => {
       </Link>
     </div>
   );
-};
-
-Logo.propTypes = {
-  inFooter: PropTypes.bool.isRequired,
 };
 
 export default Logo;

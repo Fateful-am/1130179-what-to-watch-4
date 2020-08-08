@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from "prop-types";
 import {PREVIEW_MOVIE_DELAY} from '../../consts';
 
 const withVideoPlayer = (Component) => {
@@ -101,13 +100,6 @@ const withVideoPlayer = (Component) => {
       );
     }
   }
-
-  WithVideoPlayer.propTypes = {
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    onPause: PropTypes.func,
-    onPlay: PropTypes.func,
-  };
 
   return WithVideoPlayer;
 };

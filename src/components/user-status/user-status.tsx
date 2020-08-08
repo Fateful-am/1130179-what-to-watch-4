@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AuthorizationStatus} from '../../reducer/user/user';
 import {AppRoute} from '../../consts';
@@ -54,11 +53,6 @@ const UserStatus = (props) => {
       {userLoginState}
     </div>
   );
-};
-
-UserStatus.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string,
 };
 
 const mapStateToProps = (state) => {

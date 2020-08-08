@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SHORT_ACTORS_LIST_COUNT, MoviePropTypes} from '../../consts';
+import {SHORT_ACTORS_LIST_COUNT} from '../../consts';
 
 const MoviePageOverview = ({movie}) => {
   const actors = movie.starring.split(`, `);
@@ -28,7 +28,5 @@ const MoviePageOverview = ({movie}) => {
     </>
   );
 };
-
-MoviePageOverview.propTypes = MoviePropTypes;
 
 export default MoviePageOverview;

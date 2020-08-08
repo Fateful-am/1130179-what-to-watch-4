@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 const Tabs = ({tabs, activeTab, className, onTabClick}) => {
   const handleTabClick = (tab) => (evt) =>{
@@ -23,18 +22,6 @@ const Tabs = ({tabs, activeTab, className, onTabClick}) => {
       })}
     </ul>
   );
-};
-
-Tabs.propTypes = {
-  tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  className: PropTypes.shape({
-    list: PropTypes.string.isRequired,
-    item: PropTypes.string.isRequired,
-    activeItem: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-  }).isRequired,
-  activeTab: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired,
 };
 
 export default Tabs;

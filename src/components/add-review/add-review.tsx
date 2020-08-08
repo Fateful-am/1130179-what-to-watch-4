@@ -1,8 +1,7 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
 import UserStatus from '../user-status/user-status';
-import {AppRoute, MOVIE_NOT_FOUND_MESSAGE, MoviePropTypes} from '../../consts';
+import {AppRoute, MOVIE_NOT_FOUND_MESSAGE} from '../../consts';
 import {Link} from 'react-router-dom';
 import {pushHistory} from '../../utils/helpers';
 
@@ -105,14 +104,6 @@ const AddReview = (props) => {
     </section>
 
   );
-};
-
-AddReview.propTypes = {
-  movie: MoviePropTypes.movie,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
 };
 
 export default AddReview;

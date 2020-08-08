@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 const ShowMoreButton = ({onClick}) =>{
   const handleClick = (evt) => {
@@ -16,10 +15,6 @@ const ShowMoreButton = ({onClick}) =>{
       >Show more</button>
     </div>
   );
-};
-
-ShowMoreButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };
 
 export default ShowMoreButton;

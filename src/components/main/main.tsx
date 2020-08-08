@@ -1,8 +1,7 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MoviesList from '../movies-list/movies-list';
-import {GenreTabClassNames, MoviePropTypes} from '../../consts';
+import {GenreTabClassNames} from '../../consts';
 import Tabs from '../tabs/tabs';
 import {ActionCreator} from '../../reducer/movie/movie';
 import ShowMoreButton from '../show-more-button/show-more-button';
@@ -110,26 +109,6 @@ const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, mainPageM
       </footer>
     </div>
   </>;
-};
-
-Main.propTypes = {
-  promoMovie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-  }),
-  allGenres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  needShowMoreButton: PropTypes.bool.isRequired,
-  mainPageMovieCardCount: PropTypes.number.isRequired,
-  mainPageMovies: PropTypes.arrayOf(MoviePropTypes.movie).isRequired,
-
-  onGenreTabClick: PropTypes.func.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

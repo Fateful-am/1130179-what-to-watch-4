@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {MoviePropTypes} from '../../consts';
 import {formatDurationInMinutes} from '../../utils/helpers';
 
 const MoviePageDetails = ({movie}) => {
@@ -42,7 +41,5 @@ const MoviePageDetails = ({movie}) => {
     </div>
   );
 };
-
-MoviePageDetails.propTypes = MoviePropTypes;
 
 export default MoviePageDetails;

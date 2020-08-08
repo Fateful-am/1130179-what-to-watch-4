@@ -41,9 +41,6 @@ const withMoviePage = (Component) => {
     }
   }
 
-  WithMoviePage.propTypes = {
-  };
-
   return WithMoviePage;
 };
 

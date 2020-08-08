@@ -1,10 +1,9 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import {Route, Redirect} from "react-router-dom";
-import {connect} from "react-redux";
-import {AppRoute} from "../../consts";
-import {AuthorizationStatus} from "../../reducer/user/user";
-import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import * as React from 'react';
+import {Redirect, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {AppRoute} from '../../consts';
+import {AuthorizationStatus} from '../../reducer/user/user';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 
 const PrivateRoute = (props) => {
@@ -17,18 +16,11 @@ const PrivateRoute = (props) => {
         return (
           authorizationStatus === AuthorizationStatus.AUTH
             ? render(props)
-            : <Redirect to={AppRoute.SIGN_IN} />
+            : <Redirect to={AppRoute.SIGN_IN}/>
         );
       }}
     />
   );
-};
-
-PrivateRoute.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import VideoPlayer from '../video-player/video-player';
 import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 import {Link} from 'react-router-dom';
@@ -37,13 +36,6 @@ const MovieCard = (props) => {
       </h3>
     </article>
   );
-};
-
-MovieCard.propTypes = {
-  movieId: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  previewImage: PropTypes.string.isRequired,
-  previewVideoLink: PropTypes.string.isRequired,
 };
 
 export default React.memo(MovieCard);
