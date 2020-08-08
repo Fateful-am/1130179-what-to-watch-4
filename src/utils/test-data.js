@@ -38,7 +38,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
-    isFavorite: false,
+    isFavorite: true,
   },
   {
     id: 1,
@@ -115,7 +115,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
-    isFavorite: false,
+    isFavorite: true,
 
   },
   {
@@ -271,7 +271,7 @@ export const MOVIES = [
         score: 7.2,
       },
     ],
-    isFavorite: false,
+    isFavorite: true,
 
   },
   {
@@ -727,7 +727,7 @@ export const TEST_DATA = {
           score: 7.2,
         },
       ],
-      isFavorite: false,
+      isFavorite: true,
 
     },
     {

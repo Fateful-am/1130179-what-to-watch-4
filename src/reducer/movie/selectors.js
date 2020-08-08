@@ -41,6 +41,12 @@ export const getLikeThisMoviesExceptCurrent = (state, movieId) => {
   }) .slice(0, MOVIE_LIKE_THIS_COUNT);
 };
 
+export const getFavoriteMovies = (state) => {
+  return getMovies(state).filter((movie) => {
+    return movie.isFavorite;
+  });
+};
+
 export const getMovieGenre = (state) => {
   return state[NameSpace.MOVIE].movieGenre;
 };
