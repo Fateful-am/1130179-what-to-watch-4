@@ -7,17 +7,23 @@ import {Link} from 'react-router-dom';
 import {HOST_NAME} from '../../consts';
 import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors';
 import history from '../../history';
+import {pushHistory} from '../../utils/helpers';
 
 const UserStatus = (props) => {
   const {authorizationStatus, avatarUrl} = props;
 
-  const renderAvatar = (onClick) => {
+  const renderAvatar = () => {
+    const handleAvatarClick = (evt) => {
+      evt.preventDefault();
+      pushHistory(AppRoute.MY_LIST);
+    };
+
     return (
       <div
         className="user-block__avatar"
-        onClick={onClick}
+        onClick={handleAvatarClick}
       >
-        {avatarUrl && <img src={`${HOST_NAME}${avatarUrl}`} alt="User avatar" width="63" height="63"/>}
+        {avatarUrl && <Link to={AppRoute.MY_LIST}><img src={`${HOST_NAME}${avatarUrl}`} alt="User avatar" width="63" height="63"/></Link>}
       </div>
     );
   };
@@ -40,7 +46,7 @@ const UserStatus = (props) => {
   };
 
   const userLoginState = authorizationStatus === AuthorizationStatus.AUTH
-    ? renderAvatar(()=>{})
+    ? renderAvatar()
     : renderSignIn();
 
   return (
