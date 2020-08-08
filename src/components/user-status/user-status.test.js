@@ -45,7 +45,9 @@ it(`Render UserStatus with AUTH`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <UserStatus />
+          <Router history={history}>
+            <UserStatus />
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};

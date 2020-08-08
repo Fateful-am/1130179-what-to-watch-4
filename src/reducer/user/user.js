@@ -1,5 +1,7 @@
 import {extend, wtwLocalStorage} from '../../utils/helpers';
 import history from '../../history';
+import {Operation as DataOperation} from '../../reducer/data/data';
+
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -84,6 +86,7 @@ const Operation = {
         dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         wtwLocalStorage.setAuthStatus(AuthorizationStatus.AUTH);
+        dispatch(DataOperation.loadFavorites());
         history.push(wtwLocalStorage.getLastUrl());
       });
   },

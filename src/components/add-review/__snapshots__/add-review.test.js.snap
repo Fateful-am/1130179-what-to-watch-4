@@ -83,12 +83,17 @@ exports[`Render AddReview Page 1`] = `
           className="user-block__avatar"
           onClick={[Function]}
         >
-          <img
-            alt="User avatar"
-            height="63"
-            src="https://4.react.pages.academy/wtw/test.jpg"
-            width="63"
-          />
+          <a
+            href="/mylist"
+            onClick={[Function]}
+          >
+            <img
+              alt="User avatar"
+              height="63"
+              src="https://4.react.pages.academy/wtw/test.jpg"
+              width="63"
+            />
+          </a>
         </div>
       </div>
     </header>

@@ -11,6 +11,7 @@ const ActionType = {
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   SET_MOVIE_STATUS: `SET_MOVIE_STATUS`,
+  LOAD_FAVORITE: `LOAD_FAVORITE`,
 };
 
 const ActionCreator = {
@@ -35,10 +36,10 @@ const ActionCreator = {
     };
   },
 
-  setMoviesStatus: (status) => {
+  setMoviesStatus: (statuses) => {
     return {
       type: ActionType.SET_MOVIE_STATUS,
-      payload: status,
+      payload: statuses,
     };
   }
 };
@@ -146,7 +147,21 @@ const Operation = {
           status: response.data[`is_favorite`],
         }]));
       });
-  }
+  },
+
+  loadFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const movies = response.data;
+        const movieStatuses = movies.map((movie) => {
+          return {
+            movieId: movie.id,
+            status: movie[`is_favorite`],
+          };
+        });
+        dispatch(ActionCreator.setMoviesStatus(movieStatuses));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {

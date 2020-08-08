@@ -15,6 +15,7 @@ const onUnauthorized = () => {
   if (localStorageAuthStatus === AuthorizationStatus.AUTH) {
     store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
   }
+
   wtwLocalStorage.setAuthStatus(AuthorizationStatus.NO_AUTH);
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
 };

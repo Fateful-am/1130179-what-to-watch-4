@@ -9,7 +9,7 @@ import {pushHistory} from '../../utils/helpers';
 const AddReview = (props) => {
   const {movie, children} = props;
 
-  const historyPushUrl = `${AppRoute.FILM}/${movie.id}`;
+  const historyPushUrl = `${AppRoute.FILM}/${movie ? movie.id : ``}`;
 
   const handleBreadcrumbsBackClick = (evt) => {
     evt.preventDefault();

@@ -14,6 +14,7 @@ import withAddReview from '../../hocs/with-add-review/with-add-review';
 import PrivateRoute from "../private-route/private-route.jsx";
 import history from "../../history.js";
 import {AppRoute} from "../../consts.js";
+import MyList from '../my-list/my-list.jsx';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
@@ -53,6 +54,14 @@ class App extends PureComponent {
             }}
           >
           </Route>
+
+          <PrivateRoute exact path={AppRoute.MY_LIST}
+            render={() => {
+              return (
+                <MyList/>
+              );
+            }}
+          />
 
           <PrivateRoute exact path={AppRoute.ADD_REVIEW}
             render={(routeProps) => {
