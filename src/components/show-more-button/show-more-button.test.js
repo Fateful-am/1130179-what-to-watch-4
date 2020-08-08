@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ShowMoreButton from './show-more-button.jsx';
+import ShowMoreButton from './show-more-button.tsx';
 
 it(`"Render "Show more button" component`, () => {
   const tree = renderer

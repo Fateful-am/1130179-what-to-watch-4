@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import Main from './main.jsx';
+import Main from './main.tsx';
 import {TEST_DATA} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';

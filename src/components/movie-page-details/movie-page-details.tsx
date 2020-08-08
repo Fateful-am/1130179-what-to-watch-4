@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {MoviePropTypes} from '../../consts';
-import {formatDurationInMinutes} from '../../utils/helpers.js';
+import {formatDurationInMinutes} from '../../utils/helpers';
 
 const MoviePageDetails = ({movie}) => {
   const renderActorName = (actor, isLast) => {

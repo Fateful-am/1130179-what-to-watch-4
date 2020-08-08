@@ -1,26 +1,26 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Main from '../main/main.jsx';
-import MoviePage from '../movie-page/movie-page.jsx';
+import Main from '../main/main';
+import MoviePage from '../movie-page/movie-page';
 import withMoviePage from '../../hocs/with-movie-page/with-movie-page';
-import BigVideoPlayer from '../big-video-player/big-video-player.jsx';
-import withBigVideoPlayer from '../../hocs/with-big-video-player/with-big-video-player.js';
-import SignIn from '../sign-in/sign-in.jsx';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
-import AddReview from '../add-review/add-review.jsx';
+import BigVideoPlayer from '../big-video-player/big-video-player';
+import withBigVideoPlayer from '../../hocs/with-big-video-player/with-big-video-player';
+import SignIn from '../sign-in/sign-in';
+import {Operation as DataOperation} from '../../reducer/data/data';
+import AddReview from '../add-review/add-review';
 import withAddReview from '../../hocs/with-add-review/with-add-review';
-import PrivateRoute from "../private-route/private-route.jsx";
-import history from "../../history.js";
-import {AppRoute} from "../../consts.js";
-import MyList from '../my-list/my-list.jsx';
+import PrivateRoute from "../private-route/private-route";
+import history from "../../history";
+import {AppRoute} from "../../consts";
+import MyList from '../my-list/my-list';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
 const AddReviewWrapper = withAddReview(AddReview);
 
-class App extends PureComponent {
+class App extends React.PureComponent {
   render() {
     const {onReviewFormSubmit} = this.props;
     return (

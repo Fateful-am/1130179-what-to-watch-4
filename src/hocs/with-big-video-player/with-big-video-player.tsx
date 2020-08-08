@@ -1,4 +1,4 @@
-import React, {createRef, PureComponent} from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {formatDurationInSeconds, getMovieById, pushHistory} from '../../utils/helpers';
 import {AppRoute, MOVIE_NOT_FOUND_MESSAGE, MoviePropTypes} from '../../consts';
@@ -6,11 +6,11 @@ import {getMovies} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
 
 const withBigVideoPlayer = (Component) => {
-  class WithBigAudioPlayer extends PureComponent {
+  class WithBigAudioPlayer extends React.PureComponent {
     constructor(props) {
       super(props);
 
-      this._videoRef = createRef();
+      this._videoRef = React.createRef();
 
       this.state = {
         progress: 0,

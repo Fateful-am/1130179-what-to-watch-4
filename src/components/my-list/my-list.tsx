@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {MoviePropTypes} from '../../consts';
 import {getFavoriteMovies} from '../../reducer/movie/selectors';
-import Logo from '../logo/logo.jsx';
-import UserStatus from '../user-status/user-status.jsx';
-import MoviesList from '../movies-list/movies-list.jsx';
+import Logo from '../logo/logo';
+import UserStatus from '../user-status/user-status';
+import MoviesList from '../movies-list/movies-list';
 
 function MyList(props) {
   const {favoriteMovies} = props;

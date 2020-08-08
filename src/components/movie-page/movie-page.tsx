@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 import {
@@ -7,24 +7,24 @@ import {
   MoviePropTypes,
   AppRoute,
   MOVIE_NOT_FOUND_MESSAGE
-} from '../../consts.js';
-import Tabs from '../tabs/tabs.jsx';
-import MoviePageOverview from '../movie-page-overview/movie-page-overview.jsx';
-import MoviePageDetails from '../movie-page-details/movie-page-details.jsx';
-import MoviePageReviews from '../movie-page-reviews/movie-page-reviews.jsx';
-import MoviesList from '../movies-list/movies-list.jsx';
-import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
+} from '../../consts';
+import Tabs from '../tabs/tabs';
+import MoviePageOverview from '../movie-page-overview/movie-page-overview';
+import MoviePageDetails from '../movie-page-details/movie-page-details';
+import MoviePageReviews from '../movie-page-reviews/movie-page-reviews';
+import MoviesList from '../movies-list/movies-list';
+import MovieCardButtons from '../movie-card-buttons/movie-card-buttons';
 import {getMovies} from '../../reducer/data/selectors';
-import UserStatus from '../user-status/user-status.jsx';
-import Logo from '../logo/logo.jsx';
+import UserStatus from '../user-status/user-status';
+import Logo from '../logo/logo';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {ActionCreator} from '../../reducer/movie/movie';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {Operation as DataOperation} from '../../reducer/data/data';
 import {getMovieById, pushHistory} from '../../utils/helpers';
 import {getLikeThisMoviesExceptCurrent} from '../../reducer/movie/selectors';
 import {Link} from 'react-router-dom';
 
-class MoviePage extends PureComponent {
+class MoviePage extends React.PureComponent {
   constructor(props) {
     super(props);
 

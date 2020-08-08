@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import NameSpace from '../name-space.js';
+import NameSpace from '../name-space';
 import {ALL_GENRES, MOVIE_LIKE_THIS_COUNT, MovieStatus} from '../../consts';
 import {getMovies} from '../data/selectors';
 import {getMovieById} from '../../utils/helpers';

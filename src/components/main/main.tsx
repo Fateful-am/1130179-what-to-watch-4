@@ -1,20 +1,20 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import MoviesList from '../movies-list/movies-list.jsx';
+import MoviesList from '../movies-list/movies-list';
 import {GenreTabClassNames, MoviePropTypes} from '../../consts';
-import Tabs from '../tabs/tabs.jsx';
+import Tabs from '../tabs/tabs';
 import {ActionCreator} from '../../reducer/movie/movie';
-import ShowMoreButton from '../show-more-button/show-more-button.jsx';
-import MovieCardButtons from '../movie-card-buttons/movie-card-buttons.jsx';
+import ShowMoreButton from '../show-more-button/show-more-button';
+import MovieCardButtons from '../movie-card-buttons/movie-card-buttons';
 import {
   getNeedShowMoreButton,
   getMainPageMovieCardCount,
   getMainPageGenre, getMainPageGenreMovies
 } from '../../reducer/movie/selectors';
 import {getAllGenres, getPromoMovie} from '../../reducer/data/selectors';
-import UserStatus from '../user-status/user-status.jsx';
-import Logo from '../logo/logo.jsx';
+import UserStatus from '../user-status/user-status';
+import Logo from '../logo/logo';
 
 const Main = ({promoMovie, allGenres, activeGenre, needShowMoreButton, mainPageMovieCardCount,
   onGenreTabClick, onShowMoreButtonClick, mainPageMovies}) => {

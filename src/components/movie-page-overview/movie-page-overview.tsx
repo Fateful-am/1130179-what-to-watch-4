@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {SHORT_ACTORS_LIST_COUNT, MoviePropTypes} from '../../consts';
 
 const MoviePageOverview = ({movie}) => {

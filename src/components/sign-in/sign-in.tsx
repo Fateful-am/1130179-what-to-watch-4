@@ -1,18 +1,18 @@
-import React, {PureComponent, createRef} from 'react';
+import * as React from 'react';
 import PropTypes from "prop-types";
-import Logo from '../logo/logo.jsx';
+import Logo from '../logo/logo';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {AuthorizationStatus, Operation as UserOperation} from '../../reducer/user/user';
 import {connect} from 'react-redux';
 import {AppRoute} from '../../consts';
 import {Redirect} from 'react-router-dom';
 
-class SignIn extends PureComponent {
+class SignIn extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.loginRef = createRef();
-    this.passwordRef = createRef();
+    this.loginRef = React.createRef();
+    this.passwordRef = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }

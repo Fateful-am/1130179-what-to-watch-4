@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import MovieCard from '../movie-card/movie-card.jsx';
+import MovieCard from '../movie-card/movie-card';
 import {MoviePropTypes} from '../../consts';
 
 function MoviesList(props) {

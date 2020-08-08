@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {MOVIE_REVIEWS_COLUMN_COUNT, MoviePropTypes} from '../../consts';
 import moment from 'moment';
 

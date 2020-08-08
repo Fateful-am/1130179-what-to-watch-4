@@ -1,9 +1,9 @@
-import React, {createRef, PureComponent} from 'react';
+import * as React from 'react';
 import PropTypes from "prop-types";
 import {PREVIEW_MOVIE_DELAY} from '../../consts';
 
 const withVideoPlayer = (Component) => {
-  class WithVideoPlayer extends PureComponent {
+  class WithVideoPlayer extends React.PureComponent {
     constructor(props) {
       super(props);
 
@@ -11,7 +11,7 @@ const withVideoPlayer = (Component) => {
       this._handleLeave = this._handleLeave.bind(this);
       this._handleHover = this._handleHover.bind(this);
 
-      this._videoRef = createRef();
+      this._videoRef = React.createRef();
 
       this.state = {
         isPlaying: false,

@@ -1,4 +1,4 @@
-import React, {createRef, Fragment, PureComponent} from 'react';
+import * as React from 'react';
 import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, MoviePropTypes, REVIEW_STARS_COUNT} from '../../consts';
 import PropTypes from 'prop-types';
 import {getMovies} from '../../reducer/data/selectors';
@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {getMovieById} from '../../utils/helpers';
 
 const withAddReview = (Component) => {
-  class WithAddReview extends PureComponent {
+  class WithAddReview extends React.PureComponent {
     constructor(props) {
       super(props);
 
@@ -17,13 +17,13 @@ const withAddReview = (Component) => {
       this._handleFormSubmit = this._handleFormSubmit.bind(this);
       this._handleStarChange = this._handleStarChange.bind(this);
 
-      this._reviewTextRef = createRef();
-      this._formRef = createRef();
-      this._postButtonRef = createRef();
+      this._reviewTextRef = React.createRef();
+      this._formRef = React.createRef();
+      this._postButtonRef = React.createRef();
       this._starRefs = [];
 
       for (let i = 1; i <= REVIEW_STARS_COUNT; i++) {
-        this._starRefs.push(createRef());
+        this._starRefs.push(React.createRef());
       }
 
       this.state = {
