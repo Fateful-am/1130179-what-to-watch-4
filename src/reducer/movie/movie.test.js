@@ -1,4 +1,4 @@
-import {reducer, ActionType, ActionCreator} from "./movie.js";
+import {reducer, ActionType, ActionCreator} from "./movie";
 import {TEST_DATA} from '../../utils/test-data';
 import {START_MOVIE_COUNT} from '../../consts';
 
