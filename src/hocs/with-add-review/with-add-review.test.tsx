@@ -3,15 +3,15 @@ import * as renderer from 'react-test-renderer';
 import withAddReview from './with-add-review';
 import {TEST_DATA} from '../../utils/test-data';
 import configureStore from 'redux-mock-store';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {configure} from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import NameSpace from '../../reducer/name-space';
 import {Provider} from 'react-redux';
 import {noop} from '../../utils/helpers';
 
 const mockStore = configureStore([]);
 
-Enzyme.configure({
+configure({
   adapter: new Adapter(),
 });
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Enzyme, {mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {configure, mount} from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import ConnectedMain, {Main} from './main';
@@ -11,7 +11,7 @@ import NameSpace from '../../reducer/name-space';
 import {Router} from 'react-router-dom';
 import history from '../../history';
 
-Enzyme.configure({
+configure({
   adapter: new Adapter(),
 });
 

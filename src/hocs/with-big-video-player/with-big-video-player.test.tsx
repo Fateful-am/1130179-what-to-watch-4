@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import withBigVideoPlayer from './with-big-video-player';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {configure} from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import NameSpace from '../../reducer/name-space';
 import {TEST_DATA} from '../../utils/test-data';
@@ -13,7 +13,7 @@ interface Props {
   children: React.ReactNode | React.ReactNode[];
 }
 
-Enzyme.configure({
+configure({
   adapter: new Adapter(),
 });
 

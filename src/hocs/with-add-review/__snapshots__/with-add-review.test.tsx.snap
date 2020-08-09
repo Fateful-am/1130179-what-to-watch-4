@@ -5,6 +5,7 @@ exports[`withAddReview is rendered correctly 1`] = `
   <form
     action="#"
     className="add-review__form"
+    onSubmit={[Function]}
   >
     <div
       className="rating"
@@ -13,9 +14,11 @@ exports[`withAddReview is rendered correctly 1`] = `
         className="rating__stars"
       >
         <input
+          checked={false}
           className="rating__input"
           id="star-1"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={1}
         />
@@ -28,9 +31,11 @@ exports[`withAddReview is rendered correctly 1`] = `
           \`
         </label>
         <input
+          checked={false}
           className="rating__input"
           id="star-2"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={2}
         />
@@ -43,9 +48,11 @@ exports[`withAddReview is rendered correctly 1`] = `
           \`
         </label>
         <input
+          checked={false}
           className="rating__input"
           id="star-3"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={3}
         />
@@ -58,9 +65,11 @@ exports[`withAddReview is rendered correctly 1`] = `
           \`
         </label>
         <input
+          checked={false}
           className="rating__input"
           id="star-4"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={4}
         />
@@ -73,9 +82,11 @@ exports[`withAddReview is rendered correctly 1`] = `
           \`
         </label>
         <input
+          checked={false}
           className="rating__input"
           id="star-5"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value={5}
         />
@@ -96,6 +107,8 @@ exports[`withAddReview is rendered correctly 1`] = `
         className="add-review__textarea"
         id="review-text"
         name="review-text"
+        onClick={[Function]}
+        onInput={[Function]}
         placeholder="Review text"
       />
       <div
