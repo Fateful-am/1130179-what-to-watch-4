@@ -1,4 +1,4 @@
-import {extend, pushHistory} from '../../utils/helpers.js';
+import {extend, pushHistory} from '../../utils/helpers';
 import {AppRoute} from '../../consts';
 
 const initialState = {

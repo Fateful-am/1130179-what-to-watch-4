@@ -1,0 +1,26 @@
+export interface MoviePropTypes {
+  id: number,
+  title: string,
+  genre: string,
+  released: number,
+  posterImage: string,
+  videoLink: string,
+  previewVideoLink: string,
+  previewImage: string,
+  backgroundImage: string,
+  rating: {
+    score: number,
+    level: string,
+    count: number,
+  },
+  descriptions: string[],
+  director: string,
+  starring: string,
+  runTime: number,
+  reviews: {
+    text: string,
+    author: string,
+    date: Date,
+    score: number,
+  }[],
+}

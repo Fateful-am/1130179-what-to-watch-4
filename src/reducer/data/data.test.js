@@ -1,7 +1,7 @@
 import {MOVIES} from '../../utils/test-data';
 import {reducer, ActionType, ActionCreator, Operation, convertToLocalMovieData, convertToLocalReviews} from './data';
 import MockAdapter from 'axios-mock-adapter';
-import {createAPI} from "../../api.js";
+import {createAPI} from "../../api";
 
 const api = createAPI(() => {});
 

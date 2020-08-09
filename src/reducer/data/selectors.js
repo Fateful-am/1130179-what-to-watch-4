@@ -1,4 +1,4 @@
-import NameSpace from '../name-space.js';
+import NameSpace from '../name-space';
 import {getMovieById, getSortedUniqueObjectValues} from '../../utils/helpers';
 import {ALL_GENRES, MAX_GENRE_COUNT} from '../../consts';
 

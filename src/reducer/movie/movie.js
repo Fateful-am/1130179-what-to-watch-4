@@ -1,4 +1,4 @@
-import {extend} from "../../utils/helpers.js";
+import {extend} from "../../utils/helpers";
 import {ALL_GENRES, START_MOVIE_COUNT} from '../../consts';
 
 const initialState = {
