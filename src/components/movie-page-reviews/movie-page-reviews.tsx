@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {MOVIE_REVIEWS_COLUMN_COUNT} from '../../consts';
-import moment from 'moment';
+import * as moment from 'moment';
 import {MoviePropTypes} from '../../types';
 
 interface Props {

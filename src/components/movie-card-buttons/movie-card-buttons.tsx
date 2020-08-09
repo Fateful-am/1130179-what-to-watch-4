@@ -14,7 +14,7 @@ interface Props {
   movieId: number,
   movieStatus: number,
   onMyListClick: (movieId: number, status: number) => void,
-  children: React.ReactNode | React.ReactNode[],,
+  children: React.ReactNode | React.ReactNode[],
 }
 
 const MovieCardButtons: React.FunctionComponent<Props> = (props: Props) => {

@@ -18,6 +18,7 @@ interface Props {
 interface State {
   enableByReviewLength: boolean,
   enableByStarsScore: boolean,
+  starIndex: number,
 }
 
 const withAddReview = (Component) => {
@@ -51,6 +52,7 @@ const withAddReview = (Component) => {
       this.state = {
         enableByReviewLength: false,
         enableByStarsScore: false,
+        starIndex: -1,
       };
     }
 
@@ -78,6 +80,9 @@ const withAddReview = (Component) => {
 
     _handleStarChange(evt) {
       evt.preventDefault();
+      this.setState({
+        starIndex: parseInt(evt.target.value),
+      });
       const {enableByStarsScore} = this.state;
       if (!enableByStarsScore) {
         this.setState({enableByStarsScore: true});
@@ -113,20 +118,25 @@ const withAddReview = (Component) => {
     }
 
     _setPostButtonEnable() {
-      const {enableByReviewLength, enableByStarsScore} = this.state;
-      this.postButtonRef.current.disabled = !(enableByReviewLength && enableByStarsScore);
+      if (this.postButtonRef.current) {
+        const {enableByReviewLength, enableByStarsScore} = this.state;
+        this.postButtonRef.current.disabled = !(enableByReviewLength && enableByStarsScore);
+      }
     }
 
     setFormAccessibility(accessible) {
-      const elements: HTMLFormControlsCollection = this.formRef.current.elements;
-      if (elements) {
-        for (let i = 0; i < elements.length; ++i) {
-          elements[i].disabled = !accessible;
+      if (this.formRef.current) {
+        const elements = this.formRef.current.elements;
+        if (elements) {
+          for (let i = 0; i < elements.length; ++i) {
+            const element = elements.item(i) as HTMLInputElement;
+            element.disabled = !accessible;
+          }
         }
-      }
 
-      if (accessible) {
-        this._setPostButtonEnable();
+        if (accessible) {
+          this._setPostButtonEnable();
+        }
       }
     }
 
@@ -136,13 +146,6 @@ const withAddReview = (Component) => {
       textArea.oninput = this._handlerReviewTextInput;
       textArea.onclick = this._handlerReviewTextInput;
 
-      const form = this.formRef.current;
-      form.onsubmit = this._handleFormSubmit;
-
-      this.starRefs.forEach((star) => {
-        star.current.onchange = this._handleStarChange;
-      });
-
       this.setFormAccessibility(true);
 
       this._checkMovie();
@@ -150,10 +153,6 @@ const withAddReview = (Component) => {
 
     componentWillUnmount() {
       this.reviewTextRef.current.oninput = null;
-      this.formRef.current.onsubmit = null;
-      this.starRefs.forEach((star) => {
-        star.current.onchange = null;
-      });
     }
 
     componentDidUpdate() {
@@ -166,14 +165,18 @@ const withAddReview = (Component) => {
       const stars = [];
       const movieId = movie ? movie.id : `no-id`;
       for (let i = 1; i <= REVIEW_STARS_COUNT; i++) {
+        const checked = i === this.state.starIndex;
         stars.push(
             <React.Fragment key={`starKey-${movieId}-${i}`}>
-              <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i}
+              <input className="rating__input" onChange={this._handleStarChange} checked={checked} id={`star-${i}`} type="radio" name="rating" value={i}
                 ref={this.starRefs[i - 1]}/>
               <label className="rating__label" htmlFor={`star-${i}`}>`Rating ${i}`</label>
             </React.Fragment>
         );
       }
+
+      this._checkMovie();
+      this._setPostButtonEnable();
 
       return stars;
     }
@@ -187,6 +190,7 @@ const withAddReview = (Component) => {
         >
           <form
             action="#" className="add-review__form"
+            onSubmit={this._handleFormSubmit}
             ref={this.formRef}
           >
             <div className="rating">
@@ -197,6 +201,7 @@ const withAddReview = (Component) => {
 
             <div className="add-review__text">
               <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
+                        onInput={this._handlerReviewTextInput} onClick={this._handlerReviewTextInput}
                 ref={this.reviewTextRef}
               />
               <div className="add-review__submit">

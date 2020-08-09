@@ -1,9 +1,13 @@
 import * as React from 'react';
 import {PREVIEW_MOVIE_DELAY} from '../../consts';
+import {Subtract} from "utility-types";
 
 interface Props {
   previewImage: string,
   previewVideoLink: string,
+}
+
+interface InjectingProps {
   onPause: () => void,
   onPlay: () => void,
 }
@@ -13,7 +17,10 @@ interface State {
 }
 
 const withVideoPlayer = (Component) => {
-  class WithVideoPlayer extends React.PureComponent<Props, State> {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Props & Subtract<P, InjectingProps>;
+
+  class WithVideoPlayer extends React.PureComponent<T, State> {
     private videoRef: React.RefObject<HTMLVideoElement>;
 
     constructor(props) {
