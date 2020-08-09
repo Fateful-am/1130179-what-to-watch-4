@@ -3,7 +3,7 @@ import {SHORT_ACTORS_LIST_COUNT} from '../../consts';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  movie: MoviePropTypes
+  movie: MoviePropTypes;
 }
 
 const MoviePageOverview: React.FunctionComponent<Props> = (props: Props) => {

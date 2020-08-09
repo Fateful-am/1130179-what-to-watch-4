@@ -6,22 +6,22 @@ import {connect} from 'react-redux';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  movies: MoviePropTypes[],
+  movies: MoviePropTypes[];
   match: {
     params: {
-      id: string,
-    }
-  }
+      id: string;
+    };
+  };
 }
 
 interface State {
-  progress: number,
-  duration: number,
-  isLoading: boolean,
-  isPlaying: boolean,
-  videoLink: string,
-  previewImage: string,
-  title: string,
+  progress: number;
+  duration: number;
+  isLoading: boolean;
+  isPlaying: boolean;
+  videoLink: string;
+  previewImage: string;
+  title: string;
 }
 
 const withBigVideoPlayer = (Component) => {

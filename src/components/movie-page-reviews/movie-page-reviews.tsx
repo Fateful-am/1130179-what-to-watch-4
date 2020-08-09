@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  movie: MoviePropTypes
+  movie: MoviePropTypes;
 }
 
 const MoviePageReviews: React.FunctionComponent<Props> = (props: Props) => {

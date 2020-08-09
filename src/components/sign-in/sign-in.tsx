@@ -7,8 +7,8 @@ import {AppRoute} from '../../consts';
 import {Redirect} from 'react-router-dom';
 
 interface Props {
-  authorizationStatus: string,
-  onSubmit: (submitInfo: {email: string, password: string}) => void,
+  authorizationStatus: string;
+  onSubmit: (submitInfo: {email: string; password: string}) => void;
 }
 
 class SignIn extends React.PureComponent<Props, {}> {

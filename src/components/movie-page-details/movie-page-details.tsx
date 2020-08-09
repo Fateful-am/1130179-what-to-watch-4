@@ -3,7 +3,7 @@ import {formatDurationInMinutes} from '../../utils/helpers';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  movie: MoviePropTypes
+  movie: MoviePropTypes;
 }
 
 const MoviePageDetails: React.FunctionComponent<Props> = (props: Props) => {

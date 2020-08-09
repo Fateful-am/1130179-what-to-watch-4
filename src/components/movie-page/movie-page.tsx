@@ -24,19 +24,19 @@ import {Link} from 'react-router-dom';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  authorizationStatus: string,
-  movies: MoviePropTypes[],
-  activeTab: string,
-  onMovieLoad: (genre: string) => void,
-  onTabClick: () => void,
-  onLoadReviews: (movieId: number) => void,
-  setDefaultTab?: () => void,
+  authorizationStatus: string;
+  movies: MoviePropTypes[];
+  activeTab: string;
+  onMovieLoad: (genre: string) => void;
+  onTabClick: () => void;
+  onLoadReviews: (movieId: number) => void;
+  setDefaultTab?: () => void;
   match: {
     params: {
-      id: string,
-    }
-  }
-  likeThisMovies: MoviePropTypes[],
+      id: string;
+    };
+  };
+  likeThisMovies: MoviePropTypes[];
 }
 
 class MoviePage extends React.PureComponent<Props, {}> {

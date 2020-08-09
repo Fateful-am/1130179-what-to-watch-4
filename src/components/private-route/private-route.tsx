@@ -6,9 +6,9 @@ import {AuthorizationStatus} from '../../reducer/user/user';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 type Props = RouteProps & {
-  authorizationStatus: string,
-  exact: boolean,
-  path: string,
+  authorizationStatus: string;
+  exact: boolean;
+  path: string;
   render: () => React.ReactNode;
 }
 

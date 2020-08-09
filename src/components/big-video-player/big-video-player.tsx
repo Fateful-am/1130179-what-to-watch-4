@@ -3,16 +3,16 @@ import {AppRoute} from '../../consts';
 import {Link} from 'react-router-dom';
 
 interface Props {
-  movieId: number,
-  title: string,
-  isLoading: boolean,
-  isPlaying: boolean,
-  onPlayButtonClick: () => void,
-  onFullScreenButtonClick: () => void,
-  onExitButtonClick: () => void,
-  progress: number,
-  timeElapsed: string,
-  children: React.ReactNode | React.ReactNode[],
+  movieId: number;
+  title: string;
+  isLoading: boolean;
+  isPlaying: boolean;
+  onPlayButtonClick: () => void;
+  onFullScreenButtonClick: () => void;
+  onExitButtonClick: () => void;
+  progress: number;
+  timeElapsed: string;
+  children: React.ReactNode | React.ReactNode[];
 }
 
 const BigVideoPlayer: React.FunctionComponent<Props> = (props: Props) => {

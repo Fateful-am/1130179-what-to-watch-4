@@ -6,19 +6,19 @@ import {getMovieById} from '../../utils/helpers';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  movies: MoviePropTypes[],
+  movies: MoviePropTypes[];
   computedMatch: {
     params: {
-      id: string,
-    },
-  },
-  onSubmit: (submitObject: {movieId: number, rating: string, comment: string}) => void,
+      id: string;
+    };
+  };
+  onSubmit: (submitObject: {movieId: number; rating: string; comment: string}) => void;
 }
 
 interface State {
-  enableByReviewLength: boolean,
-  enableByStarsScore: boolean,
-  starIndex: number,
+  enableByReviewLength: boolean;
+  enableByStarsScore: boolean;
+  starIndex: number;
 }
 
 const withAddReview = (Component) => {
@@ -79,9 +79,8 @@ const withAddReview = (Component) => {
     }
 
     _handleStarChange(evt) {
-      evt.preventDefault();
       this.setState({
-        starIndex: parseInt(evt.target.value),
+        starIndex: parseInt(evt.target.value, 10),
       });
       const {enableByStarsScore} = this.state;
       if (!enableByStarsScore) {
@@ -201,7 +200,7 @@ const withAddReview = (Component) => {
 
             <div className="add-review__text">
               <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
-                        onInput={this._handlerReviewTextInput} onClick={this._handlerReviewTextInput}
+                onInput={this._handlerReviewTextInput} onClick={this._handlerReviewTextInput}
                 ref={this.reviewTextRef}
               />
               <div className="add-review__submit">

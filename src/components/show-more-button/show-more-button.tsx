@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 interface Props {
-  onClick: () => void,
+  onClick: () => void;
 }
 
 const ShowMoreButton: React.FunctionComponent<Props> = (props: Props) =>{
-  const {onClick} = props
+  const {onClick} = props;
   const handleClick = (evt) => {
     evt.preventDefault();
     onClick();

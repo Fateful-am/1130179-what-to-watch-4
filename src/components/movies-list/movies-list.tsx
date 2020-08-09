@@ -3,8 +3,8 @@ import MovieCard from '../movie-card/movie-card';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  renderedMovies: MoviePropTypes[],
-  children?: React.ReactNode | React.ReactNode[],
+  renderedMovies: MoviePropTypes[];
+  children?: React.ReactNode | React.ReactNode[];
 }
 
 const MoviesList: React.FunctionComponent<Props> = (props: Props) => {
@@ -28,6 +28,6 @@ const MoviesList: React.FunctionComponent<Props> = (props: Props) => {
       </div>
     </>
   );
-}
+};
 
 export default MoviesList;

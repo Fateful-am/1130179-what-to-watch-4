@@ -8,10 +8,10 @@ import {pushHistory} from '../../utils/helpers';
 const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
 
 interface Props {
-  movieId: number,
-  title: string,
-  previewImage: string,
-  previewVideoLink: string,
+  movieId: number;
+  title: string;
+  previewImage: string;
+  previewVideoLink: string;
 }
 
 const MovieCard: React.FunctionComponent<Props> = (props: Props) => {

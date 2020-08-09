@@ -9,8 +9,8 @@ import history from '../../history';
 import {pushHistory} from '../../utils/helpers';
 
 interface Props {
-  authorizationStatus: string,
-  avatarUrl?: string,
+  authorizationStatus: string;
+  avatarUrl?: string;
 }
 
 const UserStatus: React.FunctionComponent<Props> = (props: Props) => {

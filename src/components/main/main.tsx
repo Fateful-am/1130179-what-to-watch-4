@@ -19,22 +19,22 @@ import {MoviePropTypes} from '../../types';
 
 interface Props {
   promoMovie: {
-    id: number,
-    genre: string,
-    title: string,
-    posterImage: string,
-    previewVideoLink: string,
-    backgroundImage: string,
-    released: number,
-  },
-  allGenres: string[],
-  activeGenre: string,
-  needShowMoreButton: boolean,
-  mainPageMovieCardCount: number,
-  mainPageMovies: MoviePropTypes[],
+    id: number;
+    genre: string;
+    title: string;
+    posterImage: string;
+    previewVideoLink: string;
+    backgroundImage: string;
+    released: number;
+  };
+  allGenres: string[];
+  activeGenre: string;
+  needShowMoreButton: boolean;
+  mainPageMovieCardCount: number;
+  mainPageMovies: MoviePropTypes[];
 
-  onGenreTabClick: () => void,
-  onShowMoreButtonClick: (mainPageMovieCardCount: number) => void,
+  onGenreTabClick: () => void;
+  onShowMoreButtonClick: (mainPageMovieCardCount: number) => void;
 }
 
 const Main: React.FunctionComponent<Props> = (props: Props) => {
@@ -63,8 +63,8 @@ const Main: React.FunctionComponent<Props> = (props: Props) => {
       <div className="movie-card__info">
         <div className="movie-card__poster">
           <img src={promoMovie.posterImage}
-               alt={`${promoMovie.title} poster`}
-               width="218" height="327"/>
+            alt={`${promoMovie.title} poster`}
+            width="218" height="327"/>
         </div>
 
         <div className="movie-card__desc">

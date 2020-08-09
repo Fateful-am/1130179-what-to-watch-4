@@ -10,11 +10,11 @@ import {AuthorizationStatus} from '../../reducer/user/user';
 import {pushHistory} from '../../utils/helpers';
 
 interface Props {
-  authorizationStatus: string,
-  movieId: number,
-  movieStatus: number,
-  onMyListClick: (movieId: number, status: number) => void,
-  children: React.ReactNode | React.ReactNode[],
+  authorizationStatus: string;
+  movieId: number;
+  movieStatus: number;
+  onMyListClick: (movieId: number, status: number) => void;
+  children: React.ReactNode | React.ReactNode[];
 }
 
 const MovieCardButtons: React.FunctionComponent<Props> = (props: Props) => {

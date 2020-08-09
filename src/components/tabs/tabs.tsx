@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 interface Props {
-  tabs: string[],
+  tabs: string[];
   className: {
-    list: string,
-    item: string,
-    activeItem: string,
-    link: string,
-  },
-  activeTab: string,
-  onTabClick: (tab: string) => void,
+    list: string;
+    item: string;
+    activeItem: string;
+    link: string;
+  };
+  activeTab: string;
+  onTabClick: (tab: string) => void;
 }
 
 const Tabs: React.FunctionComponent<Props> = (props: Props) => {

@@ -7,7 +7,7 @@ import MoviesList from '../movies-list/movies-list';
 import {MoviePropTypes} from '../../types';
 
 interface Props {
-  favoriteMovies: MoviePropTypes[],
+  favoriteMovies: MoviePropTypes[];
 }
 
 const MyList: React.FunctionComponent<Props> = (props: Props) => {
@@ -36,7 +36,7 @@ const MyList: React.FunctionComponent<Props> = (props: Props) => {
       </footer>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return ({

@@ -3,17 +3,17 @@ import {PREVIEW_MOVIE_DELAY} from '../../consts';
 import {Subtract} from "utility-types";
 
 interface Props {
-  previewImage: string,
-  previewVideoLink: string,
+  previewImage: string;
+  previewVideoLink: string;
 }
 
 interface InjectingProps {
-  onPause: () => void,
-  onPlay: () => void,
+  onPause: () => void;
+  onPlay: () => void;
 }
 
 interface State {
-  isPlaying: boolean,
+  isPlaying: boolean;
 }
 
 const withVideoPlayer = (Component) => {
