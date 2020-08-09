@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {PREVIEW_MOVIE_DELAY} from '../../consts';
-import {Subtract} from "utility-types";
+import {Subtract} from 'utility-types';
 
 interface Props {
   previewImage: string;

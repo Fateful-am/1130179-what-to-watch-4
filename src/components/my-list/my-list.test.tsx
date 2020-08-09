@@ -1,11 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import NameSpace from '../../reducer/name-space';
 import {TEST_DATA} from '../../utils/test-data';
 import MyList from './my-list';
-import {Router} from "react-router-dom";
+import {Router} from 'react-router-dom';
 import history from '../../history';
 import {extend} from '../../utils/helpers';
 import {AuthorizationStatus} from '../../reducer/user/user';

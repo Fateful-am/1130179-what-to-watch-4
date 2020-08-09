@@ -1,12 +1,13 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import {TEST_DATA} from '../../utils/test-data';
 import NameSpace from '../../reducer/name-space';
 import SignIn from './sign-in';
-import {Router} from "react-router-dom";
+import {Router} from 'react-router-dom';
 import history from '../../history';
+import {noop} from '../../utils/helpers';
 
 const mockStore = configureStore([]);
 
@@ -20,7 +21,7 @@ it(`AuthScreen component render correctly`, () => {
         <Provider store={store}>
           <Router history={history}>
             <SignIn
-              onSubmit={()=> {}}
+              onSubmit={noop}
             />
           </Router>
         </Provider>, {

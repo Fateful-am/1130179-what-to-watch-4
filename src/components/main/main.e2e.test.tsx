@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import ConnectedMain, {Main} from './main';
 import {MOVIES, TEST_DATA} from '../../utils/test-data';
 import {ALL_GENRES} from '../../consts';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';
-import {Router} from "react-router-dom";
+import {Router} from 'react-router-dom';
 import history from '../../history';
 
 Enzyme.configure({

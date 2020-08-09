@@ -1,14 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import {MoviePage} from './movie-page';
 import {MOVIES, TEST_DATA} from '../../utils/test-data';
 import NameSpace from '../../reducer/name-space';
 import {AuthorizationStatus} from '../../reducer/user/user';
-import {Router} from "react-router-dom";
+import {Router} from 'react-router-dom';
 import history from '../../history';
+import {noop} from '../../utils/helpers';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -24,7 +25,6 @@ it(`Should all moviePageTabs clicked`, () => {
   });
 
   const handleTabClick = jest.fn();
-  const handleAddReviewClick = jest.fn();
   const moviePageScreen = mount(
       <Provider store={store}>
         <Router history={history}>
@@ -32,11 +32,10 @@ it(`Should all moviePageTabs clicked`, () => {
             authorizationStatus={AuthorizationStatus.AUTH}
             movies={MOVIES}
             activeTab={`Overview`}
-            onMovieLoad={()=>{}}
-            onLoadReviews={()=>{}}
+            onMovieLoad={noop}
+            onLoadReviews={noop}
             onTabClick={handleTabClick}
             likeThisMovies={MOVIES.slice(0, 4)}
-            onAddReviewClick={handleAddReviewClick}
             match={{params: {id: `8`}}}
           />
         </Router>

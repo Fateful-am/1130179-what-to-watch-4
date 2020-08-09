@@ -1,14 +1,15 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import MoviePage from './movie-page';
 import {TEST_DATA} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';
 import {AuthorizationStatus} from '../../reducer/user/user';
-import {Router} from "react-router-dom";
+import {Router} from 'react-router-dom';
 import history from '../../history';
+import {noop} from '../../utils/helpers';
 
 const mockStore = configureStore([]);
 
@@ -27,7 +28,7 @@ it(`Render MoviePage with Overview tab and NO-AUTH`, () => {
           <Router history={history}>
             <MoviePage
               activeTab={`Overview`}
-              onTabClick={()=>{}}
+              onTabClick={noop}
               match={{params: {id: `8`}}}
             />
           </Router>
@@ -60,7 +61,7 @@ it(`Render MoviePage with Overview tab and AUTH`, () => {
           <Router history={history}>
             <MoviePage
               activeTab={`Overview`}
-              onTabClick={()=>{}}
+              onTabClick={noop}
               match={{params: {id: `8`}}}
             />
           </Router>

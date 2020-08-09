@@ -1,13 +1,13 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import PropTypes from "prop-types";
-import withAddReview from './with-add-review.tsx';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import withAddReview from './with-add-review';
 import {TEST_DATA} from '../../utils/test-data';
 import configureStore from 'redux-mock-store';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import NameSpace from '../../reducer/name-space';
 import {Provider} from 'react-redux';
+import {noop} from '../../utils/helpers';
 
 const mockStore = configureStore([]);
 
@@ -15,7 +15,11 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const MockComponent = (props) => {
+interface Props {
+  children: React.ReactNode | React.ReactNode[];
+}
+
+const MockComponent: React.FunctionComponent<Props> = (props: Props) => {
   const {children} = props;
 
   return (
@@ -23,13 +27,6 @@ const MockComponent = (props) => {
       {children}
     </div>
   );
-};
-
-MockComponent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
 };
 
 const store = mockStore({
@@ -43,7 +40,7 @@ it(`withAddReview is rendered correctly`, () => {
     <Provider store={store}>
       <MockComponentWrapped
         movie={TEST_DATA.promoMovie}
-        onSubmit={() => {}}
+        onSubmit={noop}
         computedMatch={{params: {id: `8`}}}
       />
     </Provider>

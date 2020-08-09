@@ -1,12 +1,13 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import ShowMoreButton from './show-more-button.tsx';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import ShowMoreButton from './show-more-button';
+import {noop} from '../../utils/helpers';
 
 it(`"Render "Show more button" component`, () => {
   const tree = renderer
     .create(
         <ShowMoreButton
-          onClick={() => {}}
+          onClick={noop}
         />
     )
     .toJSON();

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import {Router} from "react-router-dom";
-import configureStore from "redux-mock-store";
+import * as renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import {Router} from 'react-router-dom';
+import configureStore from 'redux-mock-store';
 import AddReview from './add-review';
 import {TEST_DATA} from '../../utils/test-data';
 import NameSpace from '../../reducer/name-space';
@@ -27,7 +27,6 @@ it(`Render AddReview Page`, () => {
           <Router history={history}>
             <AddReview
               movie={TEST_DATA.promoMovie}
-              onBreadcrumbsBackClick={()=>{}}
             >
             </AddReview>
           </Router>

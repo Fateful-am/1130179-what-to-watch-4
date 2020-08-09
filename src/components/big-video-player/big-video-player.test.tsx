@@ -1,8 +1,9 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Router} from "react-router-dom";
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import {Router} from 'react-router-dom';
 import BigVideoPlayer from './big-video-player';
 import history from '../../history';
+import {noop} from '../../utils/helpers';
 
 it(`Render BigVideoPlayer`, () => {
   const tree = renderer
@@ -13,9 +14,9 @@ it(`Render BigVideoPlayer`, () => {
             title={`Test Movie`}
             isLoading={false}
             isPlaying={true}
-            onPlayButtonClick={()=>{}}
-            onFullScreenButtonClick={()=>{}}
-            onExitButtonClick={()=>{}}
+            onPlayButtonClick={noop}
+            onFullScreenButtonClick={noop}
+            onExitButtonClick={noop}
             progress={0}
             timeElapsed={`30:23`}
           >

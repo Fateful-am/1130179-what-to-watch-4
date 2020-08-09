@@ -1,13 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import PropTypes from "prop-types";
-import withBigVideoPlayer from './with-big-video-player.tsx';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import withBigVideoPlayer from './with-big-video-player';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import NameSpace from '../../reducer/name-space';
 import {TEST_DATA} from '../../utils/test-data';
 import {Provider} from 'react-redux';
+import {noop} from '../../utils/helpers';
+
+interface Props {
+  children: React.ReactNode | React.ReactNode[];
+}
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -15,7 +19,7 @@ Enzyme.configure({
 
 const mockStore = configureStore([]);
 
-const MockComponent = (props) => {
+const MockComponent: React.FunctionComponent<Props> = (props: Props) => {
   const {children} = props;
 
   return (
@@ -23,13 +27,6 @@ const MockComponent = (props) => {
       {children}
     </div>
   );
-};
-
-MockComponent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
 };
 
 const store = mockStore({
@@ -45,7 +42,7 @@ it(`withBigVideoPlayer is rendered correctly`, () => {
         videoLink={``}
         previewImage={``}
         title={``}
-        onExitButtonClick={() => {}}
+        onExitButtonClick={noop}
         match={{params: {id: `8`}}}
       />
     </Provider>

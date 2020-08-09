@@ -8,7 +8,7 @@ import {MoviePropTypes} from '../../types';
 
 interface Props {
   movie: MoviePropTypes;
-  children: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode | React.ReactNode[];
 }
 
 const AddReview: React.FunctionComponent<Props> = (props: Props) => {

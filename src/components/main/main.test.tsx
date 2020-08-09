@@ -1,12 +1,12 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import Main from './main.tsx';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
+import Main from './main';
 import {TEST_DATA} from '../../utils/test-data';
 import {extend} from '../../utils/helpers';
 import NameSpace from '../../reducer/name-space';
-import {Router} from "react-router-dom";
+import {Router} from 'react-router-dom';
 import history from '../../history';
 
 const mockStore = configureStore([]);

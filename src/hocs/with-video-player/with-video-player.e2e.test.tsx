@@ -1,12 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {configure, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import withVideoPlayer from './with-video-player.tsx';
+import * as React from 'react';
+import {configure, mount} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import withVideoPlayer from './with-video-player';
+
+interface Props {
+  onMouseHover: () => void;
+  onMouseLeave: () => void;
+  children: React.ReactNode | React.ReactNode[];
+}
 
 configure({adapter: new Adapter()});
 
-const Player = (props) => {
+const Player: React.FunctionComponent<Props> = (props: Props) => {
   const {onMouseHover, onMouseLeave, children} = props;
   return (
     <div
@@ -18,15 +23,6 @@ const Player = (props) => {
   );
 };
 
-Player.propTypes = {
-  onMouseHover: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-};
-
 it(`Has working hooks after 1 sec after mouse hover`, (done) => {
   const PlayerWrapped = withVideoPlayer(Player);
   const wrapper = mount(
@@ -36,7 +32,7 @@ it(`Has working hooks after 1 sec after mouse hover`, (done) => {
       />
   );
 
-  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.play = () => Promise.resolve();
 
   const {_videoRef} = wrapper.instance();
 

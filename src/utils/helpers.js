@@ -3,6 +3,10 @@ import {EMPTY_PROMO_MOVIE, StoreParam} from '../consts';
 import LocalStorage from './local-storage';
 import history from '../history';
 
+export const noop = () => {
+  // do nothing
+};
+
 export const wtwLocalStorage = new LocalStorage(`${StoreParam.PREFIX}-${StoreParam.VERSION}`, window.localStorage);
 
 export const getMovieById = (movies, id) => {

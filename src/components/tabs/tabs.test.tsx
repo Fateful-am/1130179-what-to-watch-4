@@ -1,6 +1,7 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import Tabs from './tabs';
+import {noop} from '../../utils/helpers';
 
 describe(`Tabs component for MoviePage render correctly:`, () => {
   const mockClassNames = {
@@ -17,7 +18,7 @@ describe(`Tabs component for MoviePage render correctly:`, () => {
           tabs={[`Overview`, `Details`, `Reviews`]}
           className={mockClassNames}
           activeTab={`Overview`}
-          onTabClick={()=>{}}
+          onTabClick={noop}
         />
     )
     .toJSON();
@@ -32,7 +33,7 @@ describe(`Tabs component for MoviePage render correctly:`, () => {
             tabs={[`Overview`, `Details`, `Reviews`]}
             className={mockClassNames}
             activeTab={`Details`}
-            onTabClick={()=>{}}
+            onTabClick={noop}
           />
       )
       .toJSON();
@@ -47,7 +48,7 @@ describe(`Tabs component for MoviePage render correctly:`, () => {
             tabs={[`Overview`, `Details`, `Reviews`]}
             className={mockClassNames}
             activeTab={`Reviews`}
-            onTabClick={()=>{}}
+            onTabClick={noop}
           />
       )
       .toJSON();
@@ -71,7 +72,7 @@ describe(`Tabs component for Main render correctly:`, () => {
             tabs={[`All genres`, `Comedy`, `Drama`]}
             className={mockClassNames}
             activeTab={`All genres`}
-            onTabClick={()=>{}}
+            onTabClick={noop}
           />
       )
       .toJSON();
@@ -86,7 +87,7 @@ describe(`Tabs component for Main render correctly:`, () => {
             tabs={[`All genres`, `Comedy`, `Drama`]}
             className={mockClassNames}
             activeTab={`Comedy`}
-            onTabClick={()=>{}}
+            onTabClick={noop}
           />
       )
       .toJSON();
@@ -101,7 +102,7 @@ describe(`Tabs component for Main render correctly:`, () => {
             tabs={[`All genres`, `Comedy`, `Drama`]}
             className={mockClassNames}
             activeTab={`Drama`}
-            onTabClick={()=>{}}
+            onTabClick={noop}
           />
       )
       .toJSON();

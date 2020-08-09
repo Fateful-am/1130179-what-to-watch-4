@@ -10,9 +10,9 @@ import SignIn from '../sign-in/sign-in';
 import {Operation as DataOperation} from '../../reducer/data/data';
 import AddReview from '../add-review/add-review';
 import withAddReview from '../../hocs/with-add-review/with-add-review';
-import PrivateRoute from "../private-route/private-route";
-import history from "../../history";
-import {AppRoute} from "../../consts";
+import PrivateRoute from '../private-route/private-route';
+import history from '../../history';
+import {AppRoute} from '../../consts';
 import MyList from '../my-list/my-list';
 
 const MoviePageWrapped = withMoviePage(MoviePage);
