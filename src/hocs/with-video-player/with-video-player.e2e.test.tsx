@@ -34,9 +34,9 @@ it(`Has working hooks after 1 sec after mouse hover`, (done) => {
 
   window.HTMLMediaElement.prototype.play = () => Promise.resolve();
 
-  const {_videoRef} = wrapper.instance();
+  const {videoRef} = wrapper.instance();
 
-  jest.spyOn(_videoRef.current, `play`);
+  jest.spyOn(videoRef.current, `play`);
 
   wrapper.instance().componentDidMount();
 
@@ -44,7 +44,7 @@ it(`Has working hooks after 1 sec after mouse hover`, (done) => {
   videoContainer.simulate(`mouseenter`);
 
   setTimeout(() => {
-    expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
+    expect(videoRef.current.play).toHaveBeenCalledTimes(1);
 
     done();
   }, 1000);

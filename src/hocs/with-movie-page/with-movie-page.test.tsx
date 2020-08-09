@@ -52,9 +52,7 @@ describe(`withMoviePage is rendered correctly:`, () => {
     const MockComponentWrapped = withMoviePage(MockComponent);
 
     const tree = renderer.create((
-      <MockComponentWrapped
-        setDefaultTab={noop}
-      />
+      <MockComponentWrapped/>
     ), {
       createNodeMock() {
         return {};
@@ -88,7 +86,6 @@ describe(`withMoviePage is rendered correctly:`, () => {
 
     const tree = renderer.create((
       <MockComponentWrapped
-        setDefaultTab={noop}
       />
     ), {
       createNodeMock() {
