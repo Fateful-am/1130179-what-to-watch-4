@@ -1,9 +1,14 @@
 import * as React from 'react';
 import {MOVIE_REVIEWS_COLUMN_COUNT} from '../../consts';
 import moment from 'moment';
+import {MoviePropTypes} from '../../types';
 
-const MoviePageReviews = ({movie}) => {
+interface Props {
+  movie: MoviePropTypes
+}
 
+const MoviePageReviews: React.FunctionComponent<Props> = (props: Props) => {
+  const {movie} = props;
   const renderColumns = (columns) => {
     return (
       columns.map((column, i) => {

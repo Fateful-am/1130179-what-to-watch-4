@@ -6,7 +6,15 @@ import {AppRoute} from '../../consts';
 import {pushHistory} from '../../utils/helpers';
 
 const VideoPlayerWrapped = withVideoPlayer(VideoPlayer);
-const MovieCard = (props) => {
+
+interface Props {
+  movieId: number,
+  title: string,
+  previewImage: string,
+  previewVideoLink: string,
+}
+
+const MovieCard: React.FunctionComponent<Props> = (props: Props) => {
   const {title, previewImage, previewVideoLink, movieId} = props;
 
   const historyPushUrl = `${AppRoute.FILM}/${movieId}`;

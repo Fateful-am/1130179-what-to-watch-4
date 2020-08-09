@@ -2,7 +2,20 @@ import * as React from 'react';
 import {AppRoute} from '../../consts';
 import {Link} from 'react-router-dom';
 
-const BigVideoPlayer = (props) => {
+interface Props {
+  movieId: number,
+  title: string,
+  isLoading: boolean,
+  isPlaying: boolean,
+  onPlayButtonClick: () => void,
+  onFullScreenButtonClick: () => void,
+  onExitButtonClick: () => void,
+  progress: number,
+  timeElapsed: string,
+  children: React.ReactNode | React.ReactNode[],
+}
+
+const BigVideoPlayer: React.FunctionComponent<Props> = (props: Props) => {
   const renderPlaySvg = () => {
     return (
       <svg width="19" height="19" viewBox="0 0 19 19" fill="none">

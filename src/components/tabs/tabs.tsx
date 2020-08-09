@@ -1,6 +1,19 @@
 import * as React from 'react';
 
-const Tabs = ({tabs, activeTab, className, onTabClick}) => {
+interface Props {
+  tabs: string[],
+  className: {
+    list: string,
+    item: string,
+    activeItem: string,
+    link: string,
+  },
+  activeTab: string,
+  onTabClick: (tab: string) => void,
+}
+
+const Tabs: React.FunctionComponent<Props> = (props: Props) => {
+  const {tabs, activeTab, className, onTabClick} = props;
   const handleTabClick = (tab) => (evt) =>{
     evt.preventDefault();
     onTabClick(tab);

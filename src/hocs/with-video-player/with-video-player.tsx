@@ -1,8 +1,21 @@
 import * as React from 'react';
 import {PREVIEW_MOVIE_DELAY} from '../../consts';
 
+interface Props {
+  previewImage: string,
+  previewVideoLink: string,
+  onPause: () => void,
+  onPlay: () => void,
+}
+
+interface State {
+  isPlaying: boolean,
+}
+
 const withVideoPlayer = (Component) => {
-  class WithVideoPlayer extends React.PureComponent {
+  class WithVideoPlayer extends React.PureComponent<Props, State> {
+    private videoRef: React.RefObject<HTMLVideoElement>;
+
     constructor(props) {
       super(props);
 
@@ -10,7 +23,7 @@ const withVideoPlayer = (Component) => {
       this._handleLeave = this._handleLeave.bind(this);
       this._handleHover = this._handleHover.bind(this);
 
-      this._videoRef = React.createRef();
+      this.videoRef = React.createRef();
 
       this.state = {
         isPlaying: false,
@@ -18,7 +31,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentDidMount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.muted = true;
       video.width = 280;
@@ -40,7 +53,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentWillUnmount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.onplay = null;
       video.onabort = null;
@@ -48,7 +61,7 @@ const withVideoPlayer = (Component) => {
     }
 
     _playMovie() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       const {isPlaying} = this.state;
 
       if (isPlaying) {
@@ -61,7 +74,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentDidUpdate() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       const {isPlaying} = this.state;
 
       if (isPlaying) {
@@ -94,7 +107,7 @@ const withVideoPlayer = (Component) => {
         >
           <video
             className="player__video"
-            ref={this._videoRef}
+            ref={this.videoRef}
           />
         </Component>
       );

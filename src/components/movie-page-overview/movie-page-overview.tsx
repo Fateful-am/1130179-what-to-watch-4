@@ -1,7 +1,13 @@
 import * as React from 'react';
 import {SHORT_ACTORS_LIST_COUNT} from '../../consts';
+import {MoviePropTypes} from '../../types';
 
-const MoviePageOverview = ({movie}) => {
+interface Props {
+  movie: MoviePropTypes
+}
+
+const MoviePageOverview: React.FunctionComponent<Props> = (props: Props) => {
+  const {movie} = props;
   const actors = movie.starring.split(`, `);
   const shortActors = actors.length > SHORT_ACTORS_LIST_COUNT ? `${actors.slice(0, SHORT_ACTORS_LIST_COUNT).join(`, `)} and other` : movie.starring;
 

@@ -4,8 +4,14 @@ import UserStatus from '../user-status/user-status';
 import {AppRoute, MOVIE_NOT_FOUND_MESSAGE} from '../../consts';
 import {Link} from 'react-router-dom';
 import {pushHistory} from '../../utils/helpers';
+import {MoviePropTypes} from '../../types';
 
-const AddReview = (props) => {
+interface Props {
+  movie: MoviePropTypes,
+  children: React.ReactNode | React.ReactNode[],
+}
+
+const AddReview: React.FunctionComponent<Props> = (props: Props) => {
   const {movie, children} = props;
 
   const historyPushUrl = `${AppRoute.FILM}/${movie ? movie.id : ``}`;

@@ -6,7 +6,15 @@ import {connect} from 'react-redux';
 import {AppRoute} from '../../consts';
 import {Redirect} from 'react-router-dom';
 
-class SignIn extends React.PureComponent {
+interface Props {
+  authorizationStatus: string,
+  onSubmit: (submitInfo: {email: string, password: string}) => void,
+}
+
+class SignIn extends React.PureComponent<Props, {}> {
+  private loginRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
 

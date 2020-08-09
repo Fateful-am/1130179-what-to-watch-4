@@ -1,6 +1,13 @@
 import * as React from 'react';
+import {ReactNode} from 'react';
 
-const VideoPlayer = (props)=> {
+interface Props {
+  onMouseHover: () => void,
+  onMouseLeave: () => void,
+  children: ReactNode,
+}
+
+const VideoPlayer: React.FunctionComponent<Props> = (props: Props) => {
   const {onMouseHover, onMouseLeave, children} = props;
 
   return (

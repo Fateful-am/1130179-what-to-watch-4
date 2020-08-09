@@ -21,13 +21,33 @@ import {Operation as DataOperation} from '../../reducer/data/data';
 import {getMovieById, pushHistory} from '../../utils/helpers';
 import {getLikeThisMoviesExceptCurrent} from '../../reducer/movie/selectors';
 import {Link} from 'react-router-dom';
+import {MoviePropTypes} from '../../types';
 
-class MoviePage extends React.PureComponent {
+interface Props {
+  authorizationStatus: string,
+  movies: MoviePropTypes[],
+  activeTab: string,
+  onMovieLoad: (genre: string) => void,
+  onTabClick: () => void,
+  onLoadReviews: (movieId: number) => void,
+  setDefaultTab?: () => void,
+  match: {
+    params: {
+      id: string,
+    }
+  }
+  likeThisMovies: MoviePropTypes[],
+}
+
+class MoviePage extends React.PureComponent<Props, {}> {
+  private needReviewsLoad: boolean;
+  private needMovieLoad: boolean;
+
   constructor(props) {
     super(props);
 
-    this._needReviewsLoad = true;
-    this._needMovieLoad = true;
+    this.needReviewsLoad = true;
+    this.needMovieLoad = true;
 
     this._handleAddReviewClick = this._handleAddReviewClick.bind(this);
   }
@@ -58,14 +78,14 @@ class MoviePage extends React.PureComponent {
     const {onLoadReviews, onMovieLoad} = this.props;
     const movie = this._getCurrentMovie();
     if (movie) {
-      if (this._needMovieLoad) {
+      if (this.needMovieLoad) {
         onMovieLoad(movie.genre);
-        this._needMovieLoad = false;
+        this.needMovieLoad = false;
       }
 
-      if (movie.reviews.length === 0 && this._needReviewsLoad) {
+      if (movie.reviews.length === 0 && this.needReviewsLoad) {
         onLoadReviews(movie.id);
-        this._needReviewsLoad = false;
+        this.needReviewsLoad = false;
       }
     }
   }
@@ -144,7 +164,7 @@ class MoviePage extends React.PureComponent {
   _renderMovieCardInfo() {
     const movie = this._getCurrentMovie();
     const {activeTab, onTabClick} = this.props;
-    const tabs = Object.values(MoviePageTabNames);
+    const tabs: string[] = Object.values(MoviePageTabNames);
 
     if (movie) {
       return (

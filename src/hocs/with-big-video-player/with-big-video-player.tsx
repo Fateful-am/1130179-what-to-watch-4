@@ -3,13 +3,37 @@ import {formatDurationInSeconds, getMovieById, pushHistory} from '../../utils/he
 import {AppRoute, MOVIE_NOT_FOUND_MESSAGE} from '../../consts';
 import {getMovies} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
+import {MoviePropTypes} from '../../types';
+
+interface Props {
+  movies: MoviePropTypes[],
+  match: {
+    params: {
+      id: string,
+    }
+  }
+}
+
+interface State {
+  progress: number,
+  duration: number,
+  isLoading: boolean,
+  isPlaying: boolean,
+  videoLink: string,
+  previewImage: string,
+  title: string,
+}
 
 const withBigVideoPlayer = (Component) => {
-  class WithBigAudioPlayer extends React.PureComponent {
+  class WithBigAudioPlayer extends React.PureComponent<Props, State> {
+    private needMovieLoad: boolean;
+    private movieId: number;
+    private videoRef: React.RefObject<HTMLVideoElement>;
+
     constructor(props) {
       super(props);
 
-      this._videoRef = React.createRef();
+      this.videoRef = React.createRef();
 
       this.state = {
         progress: 0,
@@ -21,8 +45,8 @@ const withBigVideoPlayer = (Component) => {
         title: MOVIE_NOT_FOUND_MESSAGE
       };
 
-      this._needMovieLoad = true;
-      this._movieId = -1;
+      this.needMovieLoad = true;
+      this.movieId = -1;
 
       this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
       this._switchToFullScreen = this._switchToFullScreen.bind(this);
@@ -31,7 +55,7 @@ const withBigVideoPlayer = (Component) => {
 
     componentDidMount() {
       const {videoLink, previewImage} = this.state;
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.src = videoLink;
       video.poster = previewImage;
@@ -80,18 +104,18 @@ const withBigVideoPlayer = (Component) => {
     }
 
     _checkMovie() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       const movie = this._getCurrentMovie();
-      if (movie && this._needMovieLoad) {
+      if (movie && this.needMovieLoad) {
         video.src = movie.videoLink;
         video.poster = movie.previewImage;
         this.setState({
           title: movie.title,
           isPlaying: true,
         });
-        this._needMovieLoad = false;
-        this._movieId = movie.id;
+        this.needMovieLoad = false;
+        this.movieId = movie.id;
       }
     }
 
@@ -105,11 +129,11 @@ const withBigVideoPlayer = (Component) => {
     }
 
     componentDidUpdate(prevProps, prevState) {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       this._checkMovie();
 
-      if (!this._needMovieLoad) {
+      if (!this.needMovieLoad) {
         if (prevState.isPlaying !== this.state.isPlaying && !this.state.isLoading) {
           if (this.state.isPlaying) {
             video.play();
@@ -121,7 +145,7 @@ const withBigVideoPlayer = (Component) => {
     }
 
     componentWillUnmount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.oncanplaythrough = null;
       video.onplay = null;
@@ -136,16 +160,16 @@ const withBigVideoPlayer = (Component) => {
     }
 
     _switchToFullScreen() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       video.requestFullscreen();
     }
 
     _handleExitButtonClick() {
-      if (this._movieId === -1) {
+      if (this.movieId === -1) {
         pushHistory(AppRoute.MAIN);
         return;
       }
-      pushHistory(`${AppRoute.FILM}/${this._movieId}`);
+      pushHistory(`${AppRoute.FILM}/${this.movieId}`);
     }
 
     render() {
@@ -154,7 +178,7 @@ const withBigVideoPlayer = (Component) => {
       return (
         <Component
           {...this.props}
-          movieId={this._movieId}
+          movieId={this.movieId}
           isLoading={isLoading}
           isPlaying={isPlaying}
           progress={progress}
@@ -166,7 +190,7 @@ const withBigVideoPlayer = (Component) => {
         >
           <video
             className="player__video"
-            ref={this._videoRef}
+            ref={this.videoRef}
           />
         </Component>
       );

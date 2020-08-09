@@ -1,7 +1,13 @@
 import * as React from 'react';
 import MovieCard from '../movie-card/movie-card';
+import {MoviePropTypes} from '../../types';
 
-function MoviesList(props) {
+interface Props {
+  renderedMovies: MoviePropTypes[],
+  children?: React.ReactNode | React.ReactNode[],
+}
+
+const MoviesList: React.FunctionComponent<Props> = (props: Props) => {
   const {renderedMovies, children} = props;
 
   return (

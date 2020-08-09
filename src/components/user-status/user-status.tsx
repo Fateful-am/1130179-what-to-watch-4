@@ -8,7 +8,12 @@ import {getAuthorizationStatus, getUserData} from '../../reducer/user/selectors'
 import history from '../../history';
 import {pushHistory} from '../../utils/helpers';
 
-const UserStatus = (props) => {
+interface Props {
+  authorizationStatus: string,
+  avatarUrl?: string,
+}
+
+const UserStatus: React.FunctionComponent<Props> = (props: Props) => {
   const {authorizationStatus, avatarUrl} = props;
 
   const renderAvatar = () => {

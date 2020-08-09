@@ -1,8 +1,15 @@
-import React, {PureComponent} from "react";
+import * as React from 'react';
 import {MoviePageTabNames} from '../../consts';
 
+interface Props {
+}
+
+interface State {
+  activeTab: string,
+}
+
 const withMoviePage = (Component) => {
-  class WithMoviePage extends PureComponent {
+  class WithMoviePage extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 

@@ -4,8 +4,13 @@ import {getFavoriteMovies} from '../../reducer/movie/selectors';
 import Logo from '../logo/logo';
 import UserStatus from '../user-status/user-status';
 import MoviesList from '../movies-list/movies-list';
+import {MoviePropTypes} from '../../types';
 
-function MyList(props) {
+interface Props {
+  favoriteMovies: MoviePropTypes[],
+}
+
+const MyList: React.FunctionComponent<Props> = (props: Props) => {
   const {favoriteMovies} = props;
   return (
     <div className="user-page">

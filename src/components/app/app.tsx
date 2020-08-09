@@ -19,7 +19,11 @@ const MoviePageWrapped = withMoviePage(MoviePage);
 const BigPlayerWrapped = withBigVideoPlayer(BigVideoPlayer);
 const AddReviewWrapper = withAddReview(AddReview);
 
-class App extends React.PureComponent {
+interface Props {
+  onReviewFormSubmit: (reviewData: {movieId: number, rating: number, comment: string}) => void;
+}
+
+class App extends React.PureComponent<Props, {}> {
   render() {
     const {onReviewFormSubmit} = this.props;
     return (

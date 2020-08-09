@@ -1,7 +1,13 @@
 import * as React from 'react';
 import {formatDurationInMinutes} from '../../utils/helpers';
+import {MoviePropTypes} from '../../types';
 
-const MoviePageDetails = ({movie}) => {
+interface Props {
+  movie: MoviePropTypes
+}
+
+const MoviePageDetails: React.FunctionComponent<Props> = (props: Props) => {
+  const {movie} = props;
   const renderActorName = (actor, isLast) => {
     if (isLast) {
       return <>{actor}</>;

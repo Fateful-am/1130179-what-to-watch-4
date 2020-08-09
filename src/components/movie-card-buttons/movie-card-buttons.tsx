@@ -9,7 +9,15 @@ import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {AuthorizationStatus} from '../../reducer/user/user';
 import {pushHistory} from '../../utils/helpers';
 
-const MovieCardButtons = (props) => {
+interface Props {
+  authorizationStatus: string,
+  movieId: number,
+  movieStatus: number,
+  onMyListClick: (movieId: number, status: number) => void,
+  children: React.ReactNode | React.ReactNode[],,
+}
+
+const MovieCardButtons: React.FunctionComponent<Props> = (props: Props) => {
   const {movieId, onMyListClick, movieStatus} = props;
   const historyPushUrl = `${AppRoute.PLAYER}/${movieId}`;
 

@@ -3,7 +3,11 @@ import {AppRoute} from '../../consts';
 import {Link} from 'react-router-dom';
 import {pushHistory} from '../../utils/helpers';
 
-const Logo = (props) => {
+interface Props {
+  inFooter: boolean,
+};
+
+const Logo: React.FunctionComponent<Props> = (props: Props) => {
   const {inFooter} = props;
   const historyPushUrl = AppRoute.MAIN;
 

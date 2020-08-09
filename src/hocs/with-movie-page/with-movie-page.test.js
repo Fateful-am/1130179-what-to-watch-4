@@ -1,6 +1,6 @@
 import * as React from "react";
 import renderer from "react-test-renderer";
-import withMoviePage from './with-movie-page';
+import withMoviePage from './with-movie-page.tsx';
 import {MoviePage} from '../../components/movie-page/movie-page';
 import configureStore from "redux-mock-store";
 
