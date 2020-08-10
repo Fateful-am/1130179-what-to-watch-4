@@ -11,6 +11,10 @@ export const getAuthorizationStatus = (state) => {
     : state[NAME_SPACE].authorizationStatus;
 };
 
+export const getLoginErrorMessage = (state) => {
+  return state[NAME_SPACE].loginErrorMessage;
+};
+
 export const getUserData = (state) => {
   return state[NAME_SPACE].userData;
 };

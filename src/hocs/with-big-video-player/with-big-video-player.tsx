@@ -49,7 +49,7 @@ const withBigVideoPlayer = (Component) => {
       this.movieId = -1;
 
       this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
-      this._switchToFullScreen = this._switchToFullScreen.bind(this);
+      this._handleFullScreenButtonClick = this._handleFullScreenButtonClick.bind(this);
       this._handleExitButtonClick = this._handleExitButtonClick.bind(this);
     }
 
@@ -103,31 +103,6 @@ const withBigVideoPlayer = (Component) => {
       this._checkMovie();
     }
 
-    _checkMovie() {
-      const video = this.videoRef.current;
-
-      const movie = this._getCurrentMovie();
-      if (movie && this.needMovieLoad) {
-        video.src = movie.videoLink;
-        video.poster = movie.previewImage;
-        this.setState({
-          title: movie.title,
-          isPlaying: true,
-        });
-        this.needMovieLoad = false;
-        this.movieId = movie.id;
-      }
-    }
-
-    _getMovieId() {
-      return this.props.match.params.id;
-    }
-
-    _getCurrentMovie() {
-      const movie = getMovieById(this.props.movies, this._getMovieId());
-      return movie.id > -1 ? movie : null;
-    }
-
     componentDidUpdate(prevProps, prevState) {
       const video = this.videoRef.current;
 
@@ -154,12 +129,37 @@ const withBigVideoPlayer = (Component) => {
       video.src = ``;
     }
 
+    _checkMovie() {
+      const video = this.videoRef.current;
+
+      const movie = this._getCurrentMovie();
+      if (movie && this.needMovieLoad) {
+        video.src = movie.videoLink;
+        video.poster = movie.previewImage;
+        this.setState({
+          title: movie.title,
+          isPlaying: true,
+        });
+        this.needMovieLoad = false;
+        this.movieId = movie.id;
+      }
+    }
+
+    _getMovieId() {
+      return this.props.match.params.id;
+    }
+
+    _getCurrentMovie() {
+      const movie = getMovieById(this.props.movies, this._getMovieId());
+      return movie.id > -1 ? movie : null;
+    }
+
     _handlePlayButtonClick() {
       const {isPlaying} = this.state;
       this.setState({isPlaying: !isPlaying});
     }
 
-    _switchToFullScreen() {
+    _handleFullScreenButtonClick() {
       const video = this.videoRef.current;
       video.requestFullscreen();
     }
@@ -185,7 +185,7 @@ const withBigVideoPlayer = (Component) => {
           title={title}
           timeElapsed={formatDurationInSeconds(duration - currentTime)}
           onPlayButtonClick={this._handlePlayButtonClick}
-          onFullScreenButtonClick={this._switchToFullScreen}
+          onFullScreenButtonClick={this._handleFullScreenButtonClick}
           onExitButtonClick={this._handleExitButtonClick}
         >
           <video

@@ -456,6 +456,10 @@ export const TEST_DATA = {
     authorizationStatus: AuthorizationStatus.NO_AUTH,
     userData: {},
   },
+  authStoreUserState: {
+    authorizationStatus: AuthorizationStatus.AUTH,
+    userData: {},
+  },
 
   comedyMovies: [
     {

@@ -59,6 +59,17 @@ const withVideoPlayer = (Component) => {
       };
     }
 
+    componentDidUpdate() {
+      const video = this.videoRef.current;
+      const {isPlaying} = this.state;
+
+      if (isPlaying) {
+        setTimeout(this._playMovie, PREVIEW_MOVIE_DELAY);
+      } else {
+        video.src = ``;
+      }
+    }
+
     componentWillUnmount() {
       const video = this.videoRef.current;
 
@@ -77,17 +88,6 @@ const withVideoPlayer = (Component) => {
           video.src = previewVideoLink;
           video.play();
         }
-      }
-    }
-
-    componentDidUpdate() {
-      const video = this.videoRef.current;
-      const {isPlaying} = this.state;
-
-      if (isPlaying) {
-        setTimeout(this._playMovie, PREVIEW_MOVIE_DELAY);
-      } else {
-        video.src = ``;
       }
     }
 

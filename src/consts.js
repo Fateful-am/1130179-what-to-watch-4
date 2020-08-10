@@ -13,6 +13,12 @@ export const REVIEW_STARS_COUNT = 5;
 export const HOST_NAME = `https://4.react.pages.academy`;
 export const MOVIE_NOT_FOUND_MESSAGE = `Sorry... Movie not found.`;
 
+export const Review = {
+  MIN_LENGTH: 50,
+  MAX_LENGTH: 400,
+  STARS_COUNT: 5,
+};
+
 export const StoreParam = {
   PREFIX: `wtw-localstorage`,
   VERSION: `v1`,

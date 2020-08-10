@@ -11,11 +11,13 @@ const AuthorizationStatus = {
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   userData: {},
+  loginErrorMessage: ``,
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_USERDATA: `SET_USERDATA`,
+  SET_LOGIN_ERROR_MESSAGE: `SET_LOGIN_ERROR_MESSAGE`,
 };
 
 const ActionCreator = {
@@ -31,10 +33,17 @@ const ActionCreator = {
       type: ActionType.SET_USERDATA,
       payload: userData,
     };
-  }
+  },
+
+  setLoginErrorMessage: (errorMessage) => {
+    return {
+      type: ActionType.SET_LOGIN_ERROR_MESSAGE,
+      payload: errorMessage,
+    };
+  },
 };
 
-const convertToLocalUserData = (serverUserData) => {
+export const convertToLocalUserData = (serverUserData) => {
   if (serverUserData) {
     return {
       id: serverUserData[`id`],
@@ -58,6 +67,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_USERDATA:
       return extend(state, {
         userData: action.payload,
+      });
+
+    case ActionType.SET_LOGIN_ERROR_MESSAGE:
+      return extend(state, {
+        loginErrorMessage: action.payload,
       });
   }
 
@@ -86,8 +100,12 @@ const Operation = {
         dispatch(ActionCreator.setUserData(convertToLocalUserData(response.data)));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         wtwLocalStorage.setAuthStatus(AuthorizationStatus.AUTH);
+        dispatch(ActionCreator.setLoginErrorMessage(``));
         dispatch(DataOperation.loadFavorites());
         history.push(wtwLocalStorage.getLastUrl());
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.setLoginErrorMessage(err.response.data.error));
       });
   },
 };

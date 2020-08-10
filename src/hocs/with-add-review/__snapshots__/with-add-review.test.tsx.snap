@@ -82,7 +82,7 @@ exports[`withAddReview is rendered correctly 1`] = `
           \`
         </label>
         <input
-          checked={false}
+          checked={true}
           className="rating__input"
           id="star-5"
           name="rating"

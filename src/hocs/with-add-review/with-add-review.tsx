@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH, REVIEW_STARS_COUNT} from '../../consts';
+import {Review} from '../../consts';
 import {getMovies} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
 import {getMovieById} from '../../utils/helpers';
@@ -45,15 +45,35 @@ const withAddReview = (Component) => {
       this.postButtonRef = React.createRef();
       this.starRefs = [];
 
-      for (let i = 1; i <= REVIEW_STARS_COUNT; i++) {
+      for (let i = 1; i <= Review.STARS_COUNT; i++) {
         this.starRefs.push(React.createRef());
       }
 
       this.state = {
         enableByReviewLength: false,
         enableByStarsScore: false,
-        starIndex: -1,
+        starIndex: Review.STARS_COUNT,
       };
+    }
+
+    componentDidMount() {
+      const textArea = this.reviewTextRef.current;
+
+      textArea.oninput = this._handlerReviewTextInput;
+      textArea.onclick = this._handlerReviewTextInput;
+
+      this._setFormAccessibility(true);
+
+      this._checkMovie();
+    }
+
+    componentDidUpdate() {
+      this._checkMovie();
+      this._setPostButtonEnable();
+    }
+
+    componentWillUnmount() {
+      this.reviewTextRef.current.oninput = null;
     }
 
     _getMovieId() {
@@ -70,11 +90,11 @@ const withAddReview = (Component) => {
       if (movie && this.needMovieLoad) {
         this.needMovieLoad = false;
         this.movieId = movie.id;
-        this.setFormAccessibility(true);
+        this._setFormAccessibility(true);
       }
 
       if (!movie) {
-        this.setFormAccessibility(false);
+        this._setFormAccessibility(false);
       }
     }
 
@@ -91,7 +111,7 @@ const withAddReview = (Component) => {
     _handlerReviewTextInput(evt) {
       evt.preventDefault();
       const reviewText = this.reviewTextRef.current;
-      const enableByReviewLength = reviewText.value.length >= MIN_REVIEW_LENGTH && reviewText.value.length <= MAX_REVIEW_LENGTH;
+      const enableByReviewLength = reviewText.value.length >= Review.MIN_LENGTH && reviewText.value.length <= Review.MAX_LENGTH;
       this.setState({enableByReviewLength});
     }
 
@@ -113,7 +133,7 @@ const withAddReview = (Component) => {
         comment: reviewText.value,
       });
 
-      this.setFormAccessibility(false);
+      this._setFormAccessibility(false);
     }
 
     _setPostButtonEnable() {
@@ -123,7 +143,7 @@ const withAddReview = (Component) => {
       }
     }
 
-    setFormAccessibility(accessible) {
+    _setFormAccessibility(accessible) {
       if (this.formRef.current) {
         const elements = this.formRef.current.elements;
         if (elements) {
@@ -139,31 +159,11 @@ const withAddReview = (Component) => {
       }
     }
 
-    componentDidMount() {
-      const textArea = this.reviewTextRef.current;
-
-      textArea.oninput = this._handlerReviewTextInput;
-      textArea.onclick = this._handlerReviewTextInput;
-
-      this.setFormAccessibility(true);
-
-      this._checkMovie();
-    }
-
-    componentWillUnmount() {
-      this.reviewTextRef.current.oninput = null;
-    }
-
-    componentDidUpdate() {
-      this._checkMovie();
-      this._setPostButtonEnable();
-    }
-
     _renderStars() {
       const movie = this._getCurrentMovie();
       const stars = [];
       const movieId = movie ? movie.id : `no-id`;
-      for (let i = 1; i <= REVIEW_STARS_COUNT; i++) {
+      for (let i = 1; i <= Review.STARS_COUNT; i++) {
         const checked = i === this.state.starIndex;
         stars.push(
             <React.Fragment key={`starKey-${movieId}-${i}`}>

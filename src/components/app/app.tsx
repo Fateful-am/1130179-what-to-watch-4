@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Router, Route, Switch} from 'react-router-dom';
+import {Route, Router, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main';
 import MoviePage from '../movie-page/movie-page';
@@ -23,66 +23,64 @@ interface Props {
   onReviewFormSubmit: (reviewData: {movieId: number; rating: number; comment: string}) => void;
 }
 
-class App extends React.PureComponent<Props, {}> {
-  render() {
-    const {onReviewFormSubmit} = this.props;
-    return (
-      <Router
-        history={history}
-      >
-        <Switch>
-          <Route exact path={AppRoute.MAIN}>
-            <Main/>
-          </Route>
+const App: React.FunctionComponent<Props> = (props: Props) => {
+  const {onReviewFormSubmit} = props;
 
-          <Route exact path={AppRoute.SIGN_IN}>
-            <SignIn/>
-          </Route>
+  return (
+    <Router
+      history={history}
+    >
+      <Switch>
+        <Route exact path={AppRoute.MAIN}>
+          <Main/>
+        </Route>
 
-          <Route exact path={`${AppRoute.FILM}/:id`}
+        <Route exact path={AppRoute.SIGN_IN}>
+          <SignIn/>
+        </Route>
 
-            render={(routeProps) => {
-              return (
-                <MoviePageWrapped {...routeProps}/>
-              );
-            }}
-          >
-          </Route>
+        <Route exact path={`${AppRoute.FILM}/:id`}
+          render={(routeProps) => {
+            return (
+              <MoviePageWrapped {...routeProps}/>
+            );
+          }}
+        >
+        </Route>
 
-          <Route exact path={`${AppRoute.PLAYER}/:id`}
-            render={(routeProps) => {
-              return (
-                <BigPlayerWrapped {...routeProps}/>
-              );
-            }}
-          >
-          </Route>
+        <Route exact path={`${AppRoute.PLAYER}/:id`}
+          render={(routeProps) => {
+            return (
+              <BigPlayerWrapped {...routeProps}/>
+            );
+          }}
+        >
+        </Route>
 
-          <PrivateRoute exact path={AppRoute.MY_LIST}
-            render={() => {
-              return (
-                <MyList/>
-              );
-            }}
-          />
+        <PrivateRoute exact path={AppRoute.MY_LIST}
+          render={() => {
+            return (
+              <MyList/>
+            );
+          }}
+        />
 
-          <PrivateRoute exact path={AppRoute.ADD_REVIEW}
-            render={(routeProps) => {
-              return (
-                <AddReviewWrapper
-                  {...routeProps}
-                  onSubmit={onReviewFormSubmit}
-                >
-                </AddReviewWrapper>
-              );
-            }}
-          />
+        <PrivateRoute exact path={AppRoute.ADD_REVIEW}
+          render={(routeProps) => {
+            return (
+              <AddReviewWrapper
+                {...routeProps}
+                onSubmit={onReviewFormSubmit}
+              >
+              </AddReviewWrapper>
+            );
+          }}
+        />
 
-        </Switch>
-      </Router>
-    );
-  }
-}
+      </Switch>
+    </Router>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onReviewFormSubmit(reviewData) {

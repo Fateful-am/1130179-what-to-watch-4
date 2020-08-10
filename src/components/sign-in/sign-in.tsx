@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Logo from '../logo/logo';
-import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {getAuthorizationStatus, getLoginErrorMessage} from '../../reducer/user/selectors';
 import {AuthorizationStatus, Operation as UserOperation} from '../../reducer/user/user';
 import {connect} from 'react-redux';
 import {AppRoute} from '../../consts';
@@ -8,6 +8,7 @@ import {Redirect} from 'react-router-dom';
 
 interface Props {
   authorizationStatus: string;
+  loginErrorMessage: string;
   onSubmit: (submitInfo: {email: string; password: string}) => void;
 }
 
@@ -35,8 +36,16 @@ class SignIn extends React.PureComponent<Props, {}> {
     });
   }
 
+  _renderErrorMessage(message) {
+    return (
+      <div className="sign-in__message">
+        <p>{message}</p>
+      </div>
+    );
+  }
+
   render() {
-    const {authorizationStatus} = this.props;
+    const {authorizationStatus, loginErrorMessage} = this.props;
     return (
       authorizationStatus === AuthorizationStatus.AUTH
         ? <Redirect to={AppRoute.MAIN} />
@@ -53,6 +62,7 @@ class SignIn extends React.PureComponent<Props, {}> {
               className="sign-in__form"
               onSubmit={this.handleSubmit}
             >
+              {loginErrorMessage && this._renderErrorMessage(loginErrorMessage)}
               <div className="sign-in__fields">
                 <div className="sign-in__field">
                   <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
@@ -90,6 +100,7 @@ class SignIn extends React.PureComponent<Props, {}> {
 const mapStateToProps = (state) => {
   return ({
     authorizationStatus: getAuthorizationStatus(state),
+    loginErrorMessage: getLoginErrorMessage(state),
   });
 };
 

@@ -39,10 +39,16 @@ describe(`Data-reducer work correctly:`, () => {
 
   it(`Reducer should update comments for movie by load comments`, () => {
     expect(reducer({
-      movies: [{
-        id: 0,
-        reviews: [],
-      }],
+      movies: [
+        {
+          id: 0,
+          reviews: [],
+        },
+        {
+          id: 1,
+          reviews: [],
+        },
+      ],
     }, {
       type: ActionType.LOAD_COMMENTS,
       payload: {
@@ -52,15 +58,66 @@ describe(`Data-reducer work correctly:`, () => {
         }]
       },
     })).toEqual({
-      movies: [{
-        id: 0,
-        reviews: [{
-          comment: `test`,
-        }],
-      }],
+      movies: [
+        {
+          id: 0,
+          reviews: [{
+            comment: `test`,
+          }],
+        },
+        {
+          id: 1,
+          reviews: [],
+        }
+      ],
     });
   });
 
+  it(`Reducer should update isFavorite by load movies status`, () => {
+    expect(reducer({
+      movies: [
+        {
+          id: 1,
+          isFavorite: false,
+        },
+        {
+          id: 2,
+          isFavorite: false,
+        },
+        {
+          id: 3,
+          isFavorite: false,
+        }
+      ],
+    }, {
+      type: ActionType.SET_MOVIE_STATUS,
+      payload: [
+        {
+          movieId: 1,
+          status: true,
+        },
+        {
+          movieId: 3,
+          status: true,
+        },
+      ],
+    })).toEqual({
+      movies: [
+        {
+          id: 1,
+          isFavorite: true,
+        },
+        {
+          id: 2,
+          isFavorite: false,
+        },
+        {
+          id: 3,
+          isFavorite: true,
+        },
+      ],
+    });
+  });
 });
 
 describe(`Action creators work correctly`, () => {
@@ -84,13 +141,6 @@ describe(`Action creators work correctly`, () => {
       payload: {test: `testData`},
     });
   });
-
-  it(`ActionCreator for load comments returns correct action`, ()=>{
-    expect(ActionCreator.loadComments({test: `testData`})).toEqual({
-      type: ActionType.LOAD_COMMENTS,
-      payload: {test: `testData`},
-    });
-  });
 });
 
 describe(`Data operation work correctly`, () => {
@@ -98,18 +148,27 @@ describe(`Data operation work correctly`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const moviesLoader = Operation.loadMovies();
-    const request = {starring: []};
+    const response = [
+      {starring: [`Black`], rating: 1},
+      {starring: [`Black`], rating: 4},
+      {starring: [`Black`], rating: 7},
+      {starring: [`Black`], rating: 9},
+    ];
+    const payload = response.map((movieObject) => {
+      return convertToLocalMovieData(movieObject);
+    });
 
     apiMock
       .onGet(`/films`)
-      .reply(200, [request]);
+      .reply(200, response);
 
     return moviesLoader(dispatch, () => {}, api)
       .then(() => {
+
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_MOVIES,
-          payload: [convertToLocalMovieData(request)],
+          payload,
         });
       });
   });
@@ -130,6 +189,36 @@ describe(`Data operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO,
           payload: convertToLocalMovieData(request),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/:id`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const promoLoader = Operation.loadReviews(1);
+    const response = [
+      {
+        comment: `comment`,
+        user: {name: `userName`},
+        date: `2019-05-08T14:13:56.569Z`,
+        rating: 9,
+      }
+    ];
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, response);
+
+    return promoLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: {
+            movieId: 1,
+            comments: convertToLocalReviews(response)
+          },
         });
       });
   });
@@ -231,5 +320,11 @@ describe(`Data operation work correctly`, () => {
           ],
         });
       });
+  });
+});
+
+describe(`Check getRatingLevel for work correctly`, () => {
+  it(`return Bad Status`, () => {
+
   });
 });

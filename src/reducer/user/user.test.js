@@ -3,49 +3,83 @@ import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../api';
 
 const api = createAPI(() => {});
-
-it(`Reducer without additional parameters should return initial state`, () => {
-  expect(reducer(void 0, {})).toEqual({
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
-    userData: {},
-  });
-});
-
-it(`Reducer should change authorizationStatus by a given value`, () => {
-  expect(reducer({
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
-  }, {
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: AuthorizationStatus.AUTH,
-  })).toEqual({
-    authorizationStatus: AuthorizationStatus.AUTH,
+describe(`Data-reducer for user work correctly:`, () => {
+  it(`Reducer without additional parameters should return initial state`, () => {
+    expect(reducer(void 0, {})).toEqual({
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      userData: {},
+      loginErrorMessage: ``,
+    });
   });
 
-  expect(reducer({
-    authorizationStatus: AuthorizationStatus.AUTH,
-  }, {
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: AuthorizationStatus.NO_AUTH,
-  })).toEqual({
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
+  it(`Reducer should change authorizationStatus by a given value`, () => {
+    expect(reducer({
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    }, {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: AuthorizationStatus.AUTH,
+    })).toEqual({
+      authorizationStatus: AuthorizationStatus.AUTH,
+    });
+
+    expect(reducer({
+      authorizationStatus: AuthorizationStatus.AUTH,
+    }, {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: AuthorizationStatus.NO_AUTH,
+    })).toEqual({
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    });
+
+    expect(reducer({
+      authorizationStatus: AuthorizationStatus.AUTH,
+    }, {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: AuthorizationStatus.AUTH,
+    })).toEqual({
+      authorizationStatus: AuthorizationStatus.AUTH,
+    });
+
+    expect(reducer({
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    }, {
+      type: ActionType.REQUIRED_AUTHORIZATION,
+      payload: AuthorizationStatus.NO_AUTH,
+    })).toEqual({
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    });
   });
 
-  expect(reducer({
-    authorizationStatus: AuthorizationStatus.AUTH,
-  }, {
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: AuthorizationStatus.AUTH,
-  })).toEqual({
-    authorizationStatus: AuthorizationStatus.AUTH,
+  it(`Reducer should change user data`, () => {
+    expect(reducer({
+      userData: {}
+    }, {
+      type: ActionType.SET_USERDATA,
+      payload: {
+        id: 1,
+        email: `test@test.com`,
+        name: `User name`,
+        avatarUrl: `/wtw/image.jpg`,
+      }
+    })).toEqual({
+      userData: {
+        id: 1,
+        email: `test@test.com`,
+        name: `User name`,
+        avatarUrl: `/wtw/image.jpg`,
+      },
+    });
   });
 
-  expect(reducer({
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
-  }, {
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: AuthorizationStatus.NO_AUTH,
-  })).toEqual({
-    authorizationStatus: AuthorizationStatus.NO_AUTH,
+  it(`Reducer should change loginErrorMessage`, () => {
+    expect(reducer({
+      loginErrorMessage: ``,
+    }, {
+      type: ActionType.SET_LOGIN_ERROR_MESSAGE,
+      payload: `someError`,
+    })).toEqual({
+      loginErrorMessage: `someError`,
+    });
   });
 });
 
@@ -66,6 +100,13 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.setUserData({some: `data`})).toEqual({
       type: ActionType.SET_USERDATA,
       payload: {some: `data`},
+    });
+  });
+
+  it(`Action creator for set loginErrorMessage returns correct action`, () => {
+    expect(ActionCreator.setLoginErrorMessage(`someError`)).toEqual({
+      type: ActionType.SET_LOGIN_ERROR_MESSAGE,
+      payload: `someError`,
     });
   });
 
@@ -126,7 +167,7 @@ describe(`User operation work correctly`, () => {
 
     return loginChecker(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(4);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_USERDATA,
           payload: {
@@ -141,6 +182,36 @@ describe(`User operation work correctly`, () => {
           type: ActionType.REQUIRED_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });
+
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.SET_LOGIN_ERROR_MESSAGE,
+          payload: ``,
+        });
       });
   });
+
+  it(`Should make a correct API catch to POST /login`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const loginChecker = Operation.login({
+      email: ``,
+      password: `password`,
+    });
+
+    apiMock
+      .onPost(`/login`)
+      .reply(400, {
+        error: `someError`,
+      });
+
+    return loginChecker(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_LOGIN_ERROR_MESSAGE,
+          payload: `someError`,
+        });
+      });
+  });
+
 });
