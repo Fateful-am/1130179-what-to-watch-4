@@ -1,38 +1,31 @@
 import * as React from 'react';
 import {configure, mount} from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
-import NameSpace from '../../reducer/name-space';
-import {TEST_DATA} from '../../utils/test-data';
 import {Router} from 'react-router-dom';
 import history from '../../history';
-import SignIn from "./sign-in";
+import {SignIn} from "./sign-in";
 
 configure({
   adapter: new Adapter(),
 });
 
-const mockStore = configureStore([]);
 
 describe(`Interactive with Sig-in component: `, () => {
-  let store;
+
   let wrapper;
+  const onSubmit = jest.fn();
 
   beforeEach(() => {
-    store = mockStore({
-      [NameSpace.MOVIE]: TEST_DATA.initialStoreMovieState,
-      [NameSpace.DATA]: TEST_DATA.initialStoreDataState,
-      [NameSpace.USER]: TEST_DATA.initialStoreUserState,
 
-    });
     wrapper = mount(
-        <Provider store={store}>
-          <Router history={history}>
-            <SignIn
-            />
-          </Router>
-        </Provider>);
+        <Router history={history}>
+          <SignIn
+            authorizationStatus={`Auth`}
+            loginErrorMessage={``}
+            onSubmit={onSubmit}
+          />
+        </Router>
+    );
   });
 
   it(`should Sign-in button be pressed`, () => {
@@ -44,5 +37,6 @@ describe(`Interactive with Sig-in component: `, () => {
     });
 
     expect(formSendPrevention).toHaveBeenCalledTimes(1);
+    expect(onSubmit).toHaveBeenCalledTimes(1);
   });
 });

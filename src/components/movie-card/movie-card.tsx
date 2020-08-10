@@ -12,6 +12,7 @@ interface Props {
   title: string;
   previewImage: string;
   previewVideoLink: string;
+  children?: {};
 }
 
 const MovieCard: React.FunctionComponent<Props> = (props: Props) => {
