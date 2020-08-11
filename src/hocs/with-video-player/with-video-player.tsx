@@ -26,7 +26,7 @@ const withVideoPlayer = (Component) => {
     constructor(props) {
       super(props);
 
-      this._playMovie = this._playMovie.bind(this);
+      this._handlePlayMovie = this._handlePlayMovie.bind(this);
       this._handleLeave = this._handleLeave.bind(this);
       this._handleHover = this._handleHover.bind(this);
 
@@ -64,7 +64,7 @@ const withVideoPlayer = (Component) => {
       const {isPlaying} = this.state;
 
       if (isPlaying) {
-        setTimeout(this._playMovie, PREVIEW_MOVIE_DELAY);
+        setTimeout(this._handlePlayMovie, PREVIEW_MOVIE_DELAY);
       } else {
         video.src = ``;
       }
@@ -78,7 +78,7 @@ const withVideoPlayer = (Component) => {
       video.src = ``;
     }
 
-    _playMovie() {
+    _handlePlayMovie() {
       const video = this.videoRef.current;
       const {isPlaying} = this.state;
 

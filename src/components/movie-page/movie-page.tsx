@@ -96,6 +96,7 @@ class MoviePage extends React.PureComponent<Props, {}> {
   componentDidUpdate(prevProps) {
     if (this._getMovieId(prevProps) !== this._getMovieId(this.props)) {
       this.props.setDefaultTab();
+      this.needReviewsLoad = true;
     }
 
     this._checkMovie();

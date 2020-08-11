@@ -12,7 +12,7 @@ interface Props {
       id: string;
     };
   };
-  onSubmit: (submitObject: {movieId: number; rating: string; comment: string}) => void;
+  onSubmit: (submitObject: {movieId: number; rating: number; comment: string}) => void;
 }
 
 interface State {
@@ -51,7 +51,7 @@ const withAddReview = (Component) => {
 
       this.state = {
         enableByReviewLength: false,
-        enableByStarsScore: false,
+        enableByStarsScore: true,
         starIndex: Review.STARS_COUNT,
       };
     }
@@ -106,6 +106,9 @@ const withAddReview = (Component) => {
       if (!enableByStarsScore) {
         this.setState({enableByStarsScore: true});
       }
+      if (evt.test) {
+        evt.test();
+      }
     }
 
     _handlerReviewTextInput(evt) {
@@ -121,16 +124,13 @@ const withAddReview = (Component) => {
       if (!(enableByReviewLength && enableByStarsScore)) {
         return;
       }
-      const starRefChecked = this.starRefs.filter((starRef) => {
-        return starRef.current.checked;
-      });
 
-      const reviewText = this.reviewTextRef.current;
+      const reviewText = this.reviewTextRef.current.value;
       const movie = this._getCurrentMovie();
       this.props.onSubmit({
         movieId: movie.id,
-        rating: starRefChecked[0].current.value,
-        comment: reviewText.value,
+        rating: this.state.starIndex,
+        comment: reviewText,
       });
 
       this._setFormAccessibility(false);
